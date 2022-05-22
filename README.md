@@ -97,6 +97,9 @@
     <a href="https://jestjs.io/">
         <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" />
     </a>
+    <a href="https://cypress.io/">
+        <img src="https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e" alt="Cypress" />
+    </a>
 </details>
 
 <details>

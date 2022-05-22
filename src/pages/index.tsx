@@ -1,6 +1,9 @@
+// TS
 import type { NextPage } from "next";
+// Next
 import Head from "next/head";
 import Image from "next/image";
+// Stylesheet
 import styles from "@/styles/Home.module.scss";
 
 const Home: NextPage = () => {
