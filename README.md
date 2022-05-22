@@ -1,34 +1,266 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+
+<!-- Title -->
+
+<h1>Minroll</h1>
+
+<!-- Badges -->
+
+<p>
+    <a href="">
+        <img src="https://img.shields.io/github/last-commit/czhangy/minroll" alt="last update" />
+    </a>
+    <a href="https://github.com/czhangy/minroll/stargazers">
+        <img src="https://img.shields.io/github/stars/czhangy/minroll" alt="stars" />
+    </a>
+    <a href="https://github.com/czhangy/minroll/issues/">
+        <img src="https://img.shields.io/github/issues/czhangy/minroll" alt="open issues" />
+</p>
+<h4>
+    <a href="https://github.com/czhangy/minroll">Documentation</a>
+    <span> · </span>
+    <a href="https://github.com/czhangy/vickydelk/minroll/">Report Bug</a>
+</h4>
+
+</div>
+
+<br />
+
+<!-- Table of Contents -->
+
+# Table of Contents
+
+-   [About the Project](#about-the-project)
+    -   [Tech Stack](#tech-stack)
+    -   [Features](#features)
+    -   [Color Reference](#color-reference)
+    -   [Environment Variables](#environment-variables)
+-   [Getting Started](#getting-started)
+    -   [Prerequisites](#prerequisites)
+    -   [Run Locally](#run-locally)
+-   [Usage](#usage)
+-   [Roadmap](#roadmap)
+-   [License](#license)
+-   [Contact](#contact)
+-   [Acknowledgements](#acknowledgements)
+
+<!-- About the Project -->
+
+## About the Project
+
+<!-- Tech Stack -->
+
+### Tech Stack
+
+<details>
+    <summary>Client</summary>
+    <br />
+    <a href="https://reactjs.org/">
+        <img src="https://img.shields.io/badge/reactjs-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="ReactJS" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://img.shields.io/badge/NextJS-black?style=for-the-badge&logo=next.js&logoColor=white" alt="NextJS" />
+    </a>
+    <a href="https://www.typescriptlang.org">
+        <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    </a>
+    <a href="https://sass-lang.com/">
+        <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" alt="SASS" />
+    </a>
+</details>
+
+<details>
+    <summary>Server</summary>
+    <br />
+    <a href="https://nextjs.org/">
+        <img src="https://img.shields.io/badge/NextJS-black?style=for-the-badge&logo=next.js&logoColor=white" alt="NextJS" />
+    </a>
+    <a href="https://www.typescriptlang.org">
+        <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    </a>
+    <a href="https://www.prisma.io/">
+        <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="Prisma" />
+    </a>
+</details>
+
+<details>
+    <summary>Database</summary>
+    <br />
+    <a href="https://www.postgresql.org/">
+        <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="Postgres" />
+    </a>
+</details>
+
+<details>
+    <summary>Testing</summary>
+    <br />
+    <a href="https://jestjs.io/">
+        <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" />
+    </a>
+</details>
+
+<details>
+    <summary>Deployment</summary>
+    <br />
+    <a href="https://www.vercel.com/">
+        <img src="https://img.shields.io/badge/-vercel-black?logo=vercel&logoColor=white&style=for-the-badge" alt="Vercel" />
+    </a>
+</details>
+
+<!-- Color Reference -->
+
+### Color Reference
+
+| Color            | Hex     |
+| ---------------- | ------- |
+| Main Color       | #222529 |
+| Accent Color     | #006BFF |
+| Background Color | #0E1011 |
+| Text Color       | #FFFFFF |
+
+<!-- Env Variables -->
+
+### Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file
+
+-   ???
+
+<!-- Getting Started -->
 
 ## Getting Started
 
-First, run the development server:
+<!-- Prerequisites -->
+
+### Prerequisites
+
+This project uses NPM as a package manager
+
+<!-- Run Locally -->
+
+### Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/czhangy/minroll.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install dependencies
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Start the application
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm run dev
+```
 
-## Learn More
+<!-- Roadmap -->
 
-To learn more about Next.js, take a look at the following resources:
+## Roadmap
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [ ] Build out Nav
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    -   [ ] Navbar with router links
+    -   [ ] Footer with social links
+    -   [ ] Nav menu for mobile displays
 
-## Deploy on Vercel
+-   [ ] Build Home Page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    -   [ ] Welcome text
+    -   [ ] Link to login page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   [ ] Build Build Sheet Component
+
+    -   [ ] Gear section
+    -   [ ] Skills section
+    -   [ ] Passives section
+    -   [ ] Kanai's Cube section
+    -   [ ] Gem sockets
+
+-   [ ] Build GET API routes
+
+    -   [ ] Fetch gear by class
+    -   [ ] Fetch skills by class
+    -   [ ] Fetch passives by class
+
+-   [ ] Build Builds Page
+
+    -   [ ] Main page with list of builds
+
+        -   [ ] Sortable by class/set
+        -   [ ] Pagination
+
+    -   [ ] Specific build page accessed by ID
+
+        -   [ ] Build sheet
+        -   [ ] Tier ranking
+
+-   [ ] Build Tiers Page
+
+    -   [ ] List with links to individual builds
+
+-   [ ] Build Planner Page
+
+    -   [ ] Class selection
+    -   [ ] Gear selection
+    -   [ ] Skill selection
+    -   [ ] Passives selection
+    -   [ ] Cube selection
+    -   [ ] Changes display on build
+    -   [ ] Save functionality
+    -   [ ] Load previous build functionality
+
+-   [ ] Build Login Page
+
+    -   [ ] Login form
+    -   [ ] Register form
+
+-   [ ] Build Profile Page
+
+    -   [ ] Display username
+    -   [ ] List of saved builds
+
+        -   [ ] Update functionality
+        -   [ ] Delete functionality
+
+-   [ ] Build other API routes
+
+    -   [ ] Auth routes
+    -   [ ] POST route for builds
+    -   [ ] PUT route for builds
+    -   [ ] DELETE route for builds
+
+-   [ ] Build About Page
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!-- Contact -->
+
+## Contact
+
+#### Charles Zhang:
+
+<a href="https://www.linkedin.com/in/charles-zhang-14746519b/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+</a>
+<a href="https://twitter.com/czhangy_">
+    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter" />
+</a>
+<a href="https://czhangy.io">
+    <img src="https://img.shields.io/badge/-personal%20site-darkgrey?logo=code-review&logoColor=white&style=for-the-badge" alt="Personal Site" />
+</a>
+
+<!-- Acknowledgments -->
+
+## Acknowledgements
+
+-   [Awesome README](https://github.com/matiassingers/awesome-readme)
+-   [Shields.io](https://shields.io/)
+-   [Maxroll](https://maxroll.gg/)
+-   [Battle.net](https://develop.battle.net/documentation/diablo-3/game-data-apis)
