@@ -6,12 +6,14 @@
 #app {
     background: constants.$bg-color;
     color: white;
+    overflow-x: hidden;
 }
 
 html,
 body {
     padding: 0;
     margin: 0;
+    background: constants.$main-color;
 }
 
 a {

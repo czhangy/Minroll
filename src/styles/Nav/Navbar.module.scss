@@ -42,17 +42,6 @@
                 display: block;
                 text-align: center;
             }
-
-            #menu-button {
-                padding: 24px 0;
-                display: none;
-
-                .menu-icon-line {
-                    height: 2px;
-                    background: constants.$accent-color;
-                    width: 30px;
-                }
-            }
         }
     }
 }
@@ -71,12 +60,6 @@
 
 @media screen and (max-width: constants.$mobile) {
     #navbar > #navbar-container > #nav {
-        .nav-link {
-            display: none;
-        }
-
-        #menu-button {
-            display: block;
-        }
+        display: none;
     }
 }

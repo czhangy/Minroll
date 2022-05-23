@@ -3,13 +3,17 @@ import styles from "@/styles/Nav/Navbar.module.scss";
 // Next
 import Link from "next/link";
 import Image from "next/image";
+// React
+import { useMediaQuery } from "react-responsive";
+// Local component
+import NavMenu from "@/components/Nav/NavMenu";
 
 const Navbar = () => {
     return (
         <div id={styles.navbar}>
             <div id={styles["navbar-container"]}>
                 <Link href="/">
-                    <a id={styles.logo}>
+                    <a id={styles.logo} data-testid="home-link">
                         <div id={styles["logo-container"]}>
                             <Image
                                 src="/images/logo.webp"
@@ -34,12 +38,8 @@ const Navbar = () => {
                     <Link href="/login">
                         <a className={styles["nav-link"]}>LOGIN</a>
                     </Link>
-                    <button id={styles["menu-button"]}>
-                        <hr className={styles["menu-icon-line"]} />
-                        <hr className={styles["menu-icon-line"]} />
-                        <hr className={styles["menu-icon-line"]} />
-                    </button>
                 </nav>
+                <NavMenu />
             </div>
         </div>
     );

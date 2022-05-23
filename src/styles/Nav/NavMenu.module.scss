@@ -1,0 +1,60 @@
+@use "@/styles/constants";
+
+#menu-button {
+    margin: 24px 0;
+
+    .menu-icon-line {
+        height: 2px;
+        background: constants.$accent-color;
+        width: 30px;
+    }
+}
+
+#nav-menu-overlay {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background: rgba(black, 0.7);
+
+    #nav-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        background: constants.$main-color;
+        padding: 32px 0;
+
+        .nav-link {
+            color: constants.$accent-color;
+            display: block;
+            padding: 32px 0;
+            padding-right: 64px;
+            padding-left: 128px;
+            font-size: 1.2rem;
+            font-family: constants.$header-font;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+    }
+}
+
+#nav-menu-overlay.open {
+    display: block;
+}
+
+@media (hover: hover) {
+    #nav-menu-overlay > #nav-menu > .nav-link:hover {
+        background: lighten(constants.$main-color, 15);
+    }
+}
+
+@media screen and (min-width: constants.$mobile) {
+    #menu-button {
+        display: none;
+    }
+}
