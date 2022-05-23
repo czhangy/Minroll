@@ -154,16 +154,16 @@ Start the application
 
 ## Roadmap
 
--   [ ] Build out Nav
+-   [x] Build out Nav
 
     -   [x] Navbar with router links
     -   [x] Footer with social links
     -   [x] Nav menu for mobile displays
 
--   [ ] Build Home Page
+-   [x] Build Home Page
 
-    -   [ ] Welcome text
-    -   [ ] Link to login page
+    -   [x] Welcome text
+    -   [x] Link to login page
 
 -   [ ] Build Build Sheet Component
 
