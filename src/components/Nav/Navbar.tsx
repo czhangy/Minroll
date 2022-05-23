@@ -33,6 +33,9 @@ const Navbar = () => {
                     <Link href="/planner">
                         <a className={styles["nav-link"]}>PLANNER</a>
                     </Link>
+                    <Link href="/about">
+                        <a className={styles["nav-link"]}>ABOUT</a>
+                    </Link>
                     <Link href="/login">
                         <a className={styles["nav-link"]}>LOGIN</a>
                     </Link>

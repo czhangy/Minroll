@@ -1,0 +1,62 @@
+@use "@/styles/constants";
+
+#home {
+    height: calc(100vh - constants.$navbar-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url("/images/home-bg.jpg");
+    object-fit: cover;
+    background-position: center;
+
+    #home-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        #home-text {
+            font-family: constants.$header-font;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 2rem;
+            text-align: right;
+            margin-right: 32px;
+
+            #site-title {
+                font-family: constants.$title-font;
+                color: constants.$accent-color;
+                font-weight: normal;
+                line-height: 2rem;
+            }
+        }
+
+        #get-started {
+            padding: 16px 32px;
+            background: constants.$accent-color;
+            font-family: constants.$header-font;
+            font-weight: bold;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+    }
+}
+
+@media (hover: hover) {
+    #home > #home-container > #get-started:hover {
+        background: constants.$accent-color-hover;
+    }
+}
+
+@media screen and (max-width: constants.$tablet) {
+    #home > #home-container {
+        flex-direction: column;
+
+        #home-text {
+            text-align: center;
+            margin-right: 0;
+            margin-bottom: 32px;
+        }
+    }
+}

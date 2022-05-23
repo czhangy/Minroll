@@ -49,7 +49,7 @@
 
 @media (hover: hover) {
     #nav-menu-overlay > #nav-menu > .nav-link:hover {
-        background: lighten(constants.$main-color, 15);
+        background: constants.$main-color-hover;
     }
 }
 
