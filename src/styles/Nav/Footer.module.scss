@@ -1,0 +1,52 @@
+@use "@/styles/constants";
+
+#footer {
+    background: constants.$main-color;
+    padding: 0 32px;
+
+    #footer-container {
+        max-width: constants.$max-container;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0;
+
+        #credits {
+            display: flex;
+            align-items: center;
+
+            #profile-pic {
+                border-radius: 50%;
+                overflow: hidden;
+                height: 80px;
+            }
+
+            #credits-text {
+                margin-left: 16px;
+                font-family: constants.$main-font;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        #socials {
+            padding-right: 32px;
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #footer > #footer-container {
+        flex-direction: column-reverse;
+
+        #socials {
+            padding-right: 0;
+            margin-bottom: 32px;
+        }
+    }
+}
