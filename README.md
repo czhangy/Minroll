@@ -92,17 +92,6 @@
 </details>
 
 <details>
-    <summary>Testing</summary>
-    <br />
-    <a href="https://jestjs.io/">
-        <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" />
-    </a>
-    <a href="https://cypress.io/">
-        <img src="https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e" alt="Cypress" />
-    </a>
-</details>
-
-<details>
     <summary>Deployment</summary>
     <br />
     <a href="https://www.vercel.com/">
@@ -167,9 +156,9 @@ Start the application
 
 -   [ ] Build out Nav
 
-    -   [ ] Navbar with router links
-    -   [ ] Footer with social links
-    -   [ ] Nav menu for mobile displays
+    -   [x] Navbar with router links
+    -   [x] Footer with social links
+    -   [x] Nav menu for mobile displays
 
 -   [ ] Build Home Page
 

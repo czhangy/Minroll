@@ -3,8 +3,6 @@ import styles from "@/styles/Nav/Navbar.module.scss";
 // Next
 import Link from "next/link";
 import Image from "next/image";
-// React
-import { useMediaQuery } from "react-responsive";
 // Local component
 import NavMenu from "@/components/Nav/NavMenu";
 
