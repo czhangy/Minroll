@@ -1,5 +1,13 @@
 @use "@/styles/constants";
 
+// Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700&family=Poppins:wght@400;700&family=Bungee&display=swap");
+
+#app {
+    background: constants.$bg-color;
+    color: white;
+}
+
 html,
 body {
     padding: 0;
@@ -15,6 +23,16 @@ a {
     box-sizing: border-box;
 }
 
-#app {
-    background: constants.$bg-color;
+p {
+    margin: 0;
+}
+
+hr {
+    border: none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }

@@ -1,0 +1,82 @@
+@use "@/styles/constants";
+
+#navbar {
+    background: constants.$main-color;
+    padding: 0 32px;
+
+    #navbar-container {
+        max-width: constants.$max-container;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #logo {
+            display: flex;
+            align-items: center;
+
+            #logo-container {
+                transform: rotate(180deg);
+            }
+
+            #logo-text {
+                font-family: constants.$title-font;
+                color: constants.$accent-color;
+                font-size: 2rem;
+                letter-spacing: 2px;
+                margin-left: 8px;
+            }
+        }
+
+        #nav {
+            display: flex;
+
+            .nav-link {
+                color: constants.$accent-color;
+                font-size: 1.2rem;
+                font-family: constants.$header-font;
+                font-weight: bold;
+                letter-spacing: 1px;
+                padding: 32px 0;
+                width: 125px;
+                display: block;
+                text-align: center;
+            }
+
+            #menu-button {
+                padding: 24px 0;
+                display: none;
+
+                .menu-icon-line {
+                    height: 2px;
+                    background: constants.$accent-color;
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    #navbar > #navbar-container > #nav > .nav-link:hover {
+        background: lighten(constants.$main-color, 15);
+    }
+}
+
+@media screen and (max-width: constants.$tablet) {
+    #navbar > #navbar-container > #logo > #logo-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #navbar > #navbar-container > #nav {
+        .nav-link {
+            display: none;
+        }
+
+        #menu-button {
+            display: block;
+        }
+    }
+}
