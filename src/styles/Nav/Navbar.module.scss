@@ -3,7 +3,7 @@
 #navbar {
     background: constants.$main-color;
     padding: 0 32px;
-    height: 100px;
+    height: constants.$navbar-height;
 
     #navbar-container {
         max-width: constants.$max-container;
@@ -11,6 +11,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height: 100%;
 
         #logo {
             display: flex;
@@ -31,6 +32,7 @@
 
         #nav {
             display: flex;
+            height: 100%;
 
             .nav-link {
                 color: constants.$accent-color;
@@ -38,10 +40,11 @@
                 font-family: constants.$header-font;
                 font-weight: bold;
                 letter-spacing: 1px;
-                padding: 32px 0;
+                height: 100%;
                 width: 125px;
                 display: block;
                 text-align: center;
+                line-height: constants.$navbar-height;
             }
         }
     }
@@ -49,7 +52,7 @@
 
 @media (hover: hover) {
     #navbar > #navbar-container > #nav > .nav-link:hover {
-        background: lighten(constants.$main-color, 15);
+        background: constants.$main-color-hover;
     }
 }
 

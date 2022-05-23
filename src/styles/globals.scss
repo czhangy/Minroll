@@ -9,6 +9,19 @@
     overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: constants.$bg-color;
+}
+
+::-webkit-scrollbar-thumb {
+    background: constants.$accent-color;
+    height: 20px;
+}
+
 html,
 body {
     padding: 0;
