@@ -1,0 +1,92 @@
+@use "@/styles/constants";
+
+#auth {
+    height: calc(100vh - constants.$navbar-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url("/images/home-bg.jpg");
+    object-fit: cover;
+    background-position: center;
+
+    #auth-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: constants.$main-color;
+        max-height: 75%;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 20px;
+        padding: 16px 0;
+        overflow-y: scroll;
+
+        #form-header {
+            font-family: constants.$header-font;
+            color: constants.$accent-color;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .form-input {
+            width: 80%;
+            font-family: constants.$main-font;
+            background: constants.$bg-color;
+            font-size: 1.5rem;
+            padding: 8px 16px;
+            color: white;
+            margin-bottom: 3rem;
+
+            &:focus {
+                outline: none;
+                border: 2px solid constants.$accent-color;
+                padding: 6px 14px;
+            }
+        }
+
+        #submit-button {
+            padding: 16px 32px;
+            font-family: constants.$header-font;
+            color: white;
+            background: constants.$accent-color;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
+        .active {
+            cursor: pointer;
+        }
+
+        #nav-links {
+            color: constants.$accent-color;
+            font-family: constants.$header-font;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+
+            .nav-link {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (hover: hover) {
+    #auth > #auth-form {
+        #submit-button.active:hover {
+            background: constants.$accent-color-hover;
+        }
+
+        #nav-links .nav-link:hover {
+            text-decoration: underline;
+        }
+    }
+}

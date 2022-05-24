@@ -8,11 +8,8 @@ import Link from "next/link";
 const NavMenu = () => {
     // Menu state
     const [isOpen, setIsOpen] = useState(false);
-    const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-        (event.target as HTMLButtonElement).focus();
-        setIsOpen(true);
-    };
-    const closeMenu = () => setTimeout(() => setIsOpen(false), 50);
+    const openMenu = () => setIsOpen(true);
+    const closeMenu = () => setIsOpen(false);
 
     return (
         <>
@@ -20,7 +17,6 @@ const NavMenu = () => {
                 id={styles["menu-button"]}
                 data-testid="menu-button"
                 onClick={openMenu}
-                onBlur={closeMenu}
             >
                 <hr className={styles["menu-icon-line"]} />
                 <hr className={styles["menu-icon-line"]} />
@@ -29,6 +25,7 @@ const NavMenu = () => {
             <div
                 id={styles["nav-menu-overlay"]}
                 className={`${isOpen ? styles.open : ""}`}
+                onClick={closeMenu}
             >
                 <nav id={styles["nav-menu"]}>
                     <Link href="/builds">

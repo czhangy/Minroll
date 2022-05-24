@@ -6,11 +6,13 @@ import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
-const Login = () => {
+const Register = () => {
     // Form state
     const [formData, setFormData] = useState({
+        email: "",
         username: "",
         password: "",
+        confirmPassword: "",
     });
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
@@ -22,13 +24,15 @@ const Login = () => {
     };
     const clearForm = () => {
         setFormData({
+            email: "",
             username: "",
             password: "",
+            confirmPassword: "",
         });
     };
 
-    // Submit login form handler
-    const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    // Submit register form handler
+    const submitRegister = (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent page refresh on click
         e.preventDefault();
         console.log(formData);
@@ -39,10 +43,18 @@ const Login = () => {
     return (
         <div id={styles.auth}>
             <Head>
-                <title>Log In to Minroll</title>
+                <title>Register to Minroll</title>
             </Head>
-            <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
-                <h2 id={styles["form-header"]}>LOGIN</h2>
+            <form id={styles["auth-form"]} onSubmit={(e) => submitRegister(e)}>
+                <h2 id={styles["form-header"]}>REGISTER</h2>
+                <input
+                    className={styles["form-input"]}
+                    placeholder="Email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={updateForm}
+                />
                 <input
                     className={styles["form-input"]}
                     placeholder="Username"
@@ -61,21 +73,23 @@ const Login = () => {
                     autoComplete="current-password"
                 />
                 <input
-                    id={styles["submit-button"]}
-                    type="submit"
-                    value="LOGIN"
-                    className={styles.active}
+                    className={styles["form-input"]}
+                    placeholder="Confirm Password"
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={updateForm}
+                    autoComplete="current-password"
                 />
-                <div
-                    id={styles["nav-links"]}
-                    style={{ justifyContent: "space-evenly" }}
-                >
-                    <Link href="/register">
-                        <a className={styles["nav-link"]}>REGISTER</a>
-                    </Link>
-                    |
-                    <Link href="/login/forgot">
-                        <a className={styles["nav-link"]}>FORGOT PASSWORD</a>
+                <input
+                    id={styles["submit-button"]}
+                    className={styles.active}
+                    type="submit"
+                    value="REGISTER"
+                />
+                <div id={styles["nav-links"]}>
+                    <Link href="/login">
+                        <a className={styles["nav-link"]}>GO TO LOGIN</a>
                     </Link>
                 </div>
             </form>
@@ -83,4 +97,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
