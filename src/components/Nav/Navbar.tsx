@@ -6,7 +6,7 @@ import Image from "next/image";
 // Local component
 import NavMenu from "@/components/Nav/NavMenu";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     return (
         <div id={styles.navbar}>
             <div id={styles["navbar-container"]}>

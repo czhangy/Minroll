@@ -5,12 +5,14 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
+// TS
+import { NextPage } from "next";
 
-const Forgot = () => {
+const Forgot: NextPage = () => {
     // Form state
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState<string>("");
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
+        const newValue: string = e.target.value;
         setEmail(newValue);
     };
     const clearForm = () => setEmail("");
@@ -21,8 +23,7 @@ const Forgot = () => {
         e.preventDefault();
         console.log(email);
         // Change button text and disable
-        let button: HTMLInputElement;
-        button = document.getElementById(
+        const button: HTMLInputElement = document.getElementById(
             styles["submit-button"]
         ) as HTMLInputElement;
         button.value = "SENT!";

@@ -5,16 +5,19 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
+// TS
+import { NextPage } from "next";
+import LoginData from "@/models/LoginData";
 
-const Login = () => {
+const Login: NextPage = () => {
     // Form state
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<LoginData>({
         username: "",
         password: "",
     });
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        const field = e.target.name;
+        const newValue: string = e.target.value;
+        const field: string = e.target.name;
         setFormData({
             ...formData,
             [field]: newValue,

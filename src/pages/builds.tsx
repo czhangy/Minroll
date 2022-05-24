@@ -1,7 +1,9 @@
 // Stylesheet
 import styles from "@/styles/Builds/Builds.module.scss";
+// TS
+import { NextPage } from "next";
 
-const Builds = () => {
+const Builds: NextPage = () => {
     return <div>builds</div>;
 };
 

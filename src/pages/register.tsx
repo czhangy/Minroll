@@ -5,18 +5,23 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
+// Axios
+import axios from "axios";
+// TS
+import { NextPage } from "next";
+import RegisterData from "@/models/RegisterData";
 
-const Register = () => {
+const Register: NextPage = () => {
     // Form state
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<RegisterData>({
         email: "",
         username: "",
         password: "",
         confirmPassword: "",
     });
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        const field = e.target.name;
+        const newValue: string = e.target.value;
+        const field: string = e.target.name;
         setFormData({
             ...formData,
             [field]: newValue,
@@ -35,9 +40,14 @@ const Register = () => {
     const submitRegister = (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent page refresh on click
         e.preventDefault();
-        console.log(formData);
-        // Clear form after submission
-        clearForm();
+        // Send POST request
+        axios
+            .post("/api/users", formData)
+            .then(() => {
+                // Clear form after successful
+                clearForm();
+            })
+            .catch((error) => console.error(error));
     };
 
     return (
