@@ -116,7 +116,7 @@
 
 To run this project, you will need to add the following environment variables to your `.env` file
 
--   ???
+-   `DATABASE_URL`
 
 <!-- Getting Started -->
 
@@ -208,8 +208,11 @@ Start the application
 
 -   [ ] Build Login Page
 
-    -   [ ] Login form
-    -   [ ] Register form
+    -   [x] Login form
+    -   [x] Register form
+    -   [x] Forgot password form
+    -   [ ] Change password form
+    -   [ ] Email sending using EmailJS
 
 -   [ ] Build Profile Page
 
