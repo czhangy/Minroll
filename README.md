@@ -208,8 +208,11 @@ Start the application
 
 -   [ ] Build Login Page
 
-    -   [ ] Login form
-    -   [ ] Register form
+    -   [x] Login form
+    -   [x] Register form
+    -   [x] Forgot password form
+    -   [ ] Change password form
+    -   [ ] Email sending using EmailJS
 
 -   [ ] Build Profile Page
 
