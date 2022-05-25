@@ -10,7 +10,7 @@ export default async function handler(
 ) {
     // For password hashing
     const bcrypt = require("bcrypt");
-    // Handle POST /api/users
+    // Handle POST /api/register
     if (req.method === "POST") {
         const { email, username, password } = req.body;
         // Create account
@@ -29,19 +29,19 @@ export default async function handler(
                 if (e.code === "P2002") {
                     // Duplicate username
                     if (e.message.includes("username"))
-                        res.status(400).send({
+                        res.status(460).send({
                             success: false,
                             message: "Duplicate username",
                         });
                     // Duplicate email
                     else if (e.message.includes("email"))
-                        res.status(401).send({
+                        res.status(461).send({
                             success: false,
                             message: "Duplicate email",
                         });
-                }
-            }
+                } else res.status(400).send({ success: false });
+            } else res.status(400).send({ success: false });
         }
-        // Invalid method
+        // Handle invalid methods
     } else res.status(405).send({ success: false });
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 // Axios
 import axios from "axios";
 // TS
@@ -13,6 +14,9 @@ import RegisterData from "@/models/RegisterData";
 import RegisterErrors from "@/models/RegisterErrors";
 
 const Register: NextPage = () => {
+    // Init router for reroute on register
+    const router = useRouter();
+
     // Form state
     const [formData, setFormData] = useState<RegisterData>({
         email: "",
@@ -26,14 +30,6 @@ const Register: NextPage = () => {
         setFormData({
             ...formData,
             [field]: newValue,
-        });
-    };
-    const clearForm = () => {
-        setFormData({
-            email: "",
-            username: "",
-            password: "",
-            confirmPassword: "",
         });
     };
 
@@ -99,17 +95,15 @@ const Register: NextPage = () => {
         if (validateForm())
             // Send POST request
             axios
-                .post("/api/users", formData)
-                .then(() => {
-                    // Clear form after successful
-                    clearForm();
-                })
+                .post("/api/register", formData)
+                // Reroute to /login on success
+                .then(() => router.push("/login"))
                 .catch((error) => {
                     const errorCode: number = error.response.status;
                     // Handle server errors
-                    if (errorCode === 400)
+                    if (errorCode === 460)
                         updateError("email", error.response.data.message);
-                    else if (errorCode === 401)
+                    else if (errorCode === 461)
                         updateError("username", error.response.data.message);
                     else {
                         updateError(
