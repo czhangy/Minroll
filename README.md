@@ -19,7 +19,7 @@
 <h4>
     <a href="https://github.com/czhangy/minroll">Documentation</a>
     <span> · </span>
-    <a href="https://github.com/czhangy/vickydelk/minroll/">Report Bug</a>
+    <a href="https://github.com/czhangy/minroll/">Report Bug</a>
 </h4>
 
 </div>
