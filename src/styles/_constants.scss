@@ -1,7 +1,7 @@
 // Color scheme
-$main-color: #111111;
+$main-color: #1b1b1b;
 $accent-color: #006bff;
-$bg-color: #383838;
+$bg-color: #292929;
 $main-color-hover: lighten($main-color, 10);
 $accent-color-hover: darken($accent-color, 10);
 
@@ -13,6 +13,9 @@ $title-font: "Bungee", sans-serif;
 // Sizing
 $max-container: 1400px;
 $navbar-height: 100px;
+
+// Utility
+$outline: 0 0 3px #000;
 
 // Breakpoints
 $mobile: 767px;

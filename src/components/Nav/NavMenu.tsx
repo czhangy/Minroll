@@ -4,8 +4,15 @@ import styles from "@/styles/Nav/NavMenu.module.scss";
 import { useState } from "react";
 // Next
 import Link from "next/link";
+// React Context
+import { useAuth } from "@/contexts/AuthContext";
+// TS
+import AuthContext from "@/models/AuthContext";
 
 const NavMenu: React.FC = () => {
+    // Get user
+    const { user } = useAuth() as AuthContext;
+
     // Menu state
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const openMenu = () => setIsOpen(true);
@@ -40,9 +47,17 @@ const NavMenu: React.FC = () => {
                     <Link href="/about">
                         <a className={styles["nav-link"]}>ABOUT</a>
                     </Link>
-                    <Link href="/login">
-                        <a className={styles["nav-link"]}>LOGIN</a>
-                    </Link>
+                    {user ? (
+                        <Link href="/profile">
+                            <a className={styles["nav-link"]}>PROFILE</a>
+                        </Link>
+                    ) : (
+                        <Link href={user ? "/profile" : "/login"}>
+                            <a className={styles["nav-link"]}>
+                                {user ? "PROFILE" : "LOGIN"}
+                            </a>
+                        </Link>
+                    )}
                 </nav>
             </div>
         </>

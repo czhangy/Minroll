@@ -1,1 +1,100 @@
 @use "@/styles/constants";
+
+#profile {
+    min-height: calc(100vh - constants.$navbar-height);
+
+    #profile-header {
+        background-image: linear-gradient(
+                rgba(0, 0, 0, 0.8),
+                rgba(0, 0, 0, 0.8)
+            ),
+            url("/images/home-bg.jpg");
+        object-fit: cover;
+        background-position: center;
+        padding: 128px 32px;
+        padding-bottom: 32px;
+
+        #header-container {
+            max-width: constants.$max-container;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            #username {
+                font-family: constants.$main-font;
+                font-size: 3rem;
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+
+            #logout-button {
+                background: constants.$accent-color;
+                padding: 8px 24px;
+                font-family: constants.$header-font;
+                font-size: 2rem;
+                color: white;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+        }
+    }
+
+    #profile-content {
+        padding: 32px;
+        background: constants.$bg-color;
+
+        #content-container {
+            max-width: constants.$max-container;
+            margin: 0 auto;
+            background: constants.$main-color;
+            padding: 32px;
+            box-shadow: constants.$outline;
+
+            #content-header {
+                font-weight: bold;
+                font-family: constants.$header-font;
+                font-size: 2rem;
+                border-bottom: 2px solid white;
+                padding-bottom: 8px;
+            }
+
+            #builds-list {
+                margin-top: 1.5rem;
+
+                .placeholder {
+                    width: 100%;
+                    background: green;
+                    height: 200px;
+                    margin-bottom: 16px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    #profile > #profile-header > #header-container > #logout-button:hover {
+        background: constants.$accent-color-hover;
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #profile > #profile-header {
+        padding-bottom: 16px;
+
+        #header-container {
+            #username {
+                font-size: 2rem;
+            }
+
+            #logout-button {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

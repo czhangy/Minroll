@@ -214,12 +214,14 @@ Start the application
 
 -   [ ] Build Profile Page
 
-    -   [ ] Display username
-    -   [ ] Logout button
+    -   [x] Display username
+    -   [x] Logout button
     -   [ ] List of saved builds
 
         -   [ ] Update functionality
         -   [ ] Delete functionality
+
+    -   [ ] Redirect on unauthorized
 
 -   [ ] Build other API routes
 
