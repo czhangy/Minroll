@@ -5,8 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 // Local component
 import NavMenu from "@/components/Nav/NavMenu";
+// React Context
+import { useAuth } from "@/contexts/AuthContext";
+// TS
+import AuthContext from "@/models/AuthContext";
 
 const Navbar: React.FC = () => {
+    const { user } = useAuth() as AuthContext;
     return (
         <div id={styles.navbar}>
             <div id={styles["navbar-container"]}>
@@ -36,9 +41,17 @@ const Navbar: React.FC = () => {
                     <Link href="/about">
                         <a className={styles["nav-link"]}>ABOUT</a>
                     </Link>
-                    <Link href="/login">
-                        <a className={styles["nav-link"]}>LOGIN</a>
-                    </Link>
+                    {user ? (
+                        <Link href="/profile">
+                            <a className={styles["nav-link"]}>PROFILE</a>
+                        </Link>
+                    ) : (
+                        <Link href={user ? "/profile" : "/login"}>
+                            <a className={styles["nav-link"]}>
+                                {user ? "PROFILE" : "LOGIN"}
+                            </a>
+                        </Link>
+                    )}
                 </nav>
                 <NavMenu />
             </div>

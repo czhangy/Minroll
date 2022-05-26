@@ -10,16 +10,19 @@ import { useRouter } from "next/router";
 import { NextPage } from "next";
 import LoginData from "@/models/LoginData";
 import LoginErrors from "@/models/LoginErrors";
+import User from "@/models/User";
 // Axios
 import axios from "axios";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
+// TS
+import AuthContext from "@/models/AuthContext";
 
 const Login: NextPage = () => {
     // Set up router for redirect
     const router = useRouter();
     // Set up context for login
-    const { loginUser } = useAuth();
+    const { loginUser } = useAuth() as AuthContext;
 
     // Form state
     const [formData, setFormData] = useState<LoginData>({
@@ -57,13 +60,14 @@ const Login: NextPage = () => {
             .then((response) => {
                 console.log(response);
                 // Build fetched user
-                const currentUser = {
+                const currentUser: User = {
                     id: response.data.id,
                     username: response.data.username,
                     builds: response.data.builds,
                 };
                 // Set context
                 loginUser(currentUser);
+                // Direct to profile on login
                 router.push("/profile");
             })
             .catch((error) => {

@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Auth/Auth.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";

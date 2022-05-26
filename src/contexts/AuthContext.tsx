@@ -1,25 +1,36 @@
 // React
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 // TS
 import AuthContext from "@/models/AuthContext";
 import User from "@/models/User";
+import { Context } from "react";
 
-const defaultValue = {
-    user: null,
-    loginUser: () => void 0,
-    logoutUser: () => void 0,
-};
-const AuthContext = createContext<AuthContext>(defaultValue);
+// Set default context
+const AuthContext: Context<AuthContext | null> =
+    createContext<AuthContext | null>(null);
 
 type Props = {
     value: User | null;
     children: any;
 };
 
-export const AuthProvider: React.FC<Props> = ({ value, children }: Props) => {
+export const AuthProvider: React.FC<Props> = ({ value, children }) => {
+    // Define global state
     const [user, setUser] = useState<User | null>(value);
-    const loginUser = (user: User) => setUser(user);
-    const logoutUser = () => setUser(null);
+    const loginUser = (user: User) => {
+        setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
+    };
+    const logoutUser = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+    };
+
+    // Pull user from local storage if possible
+    useEffect(() => {
+        if (typeof window !== "undefined")
+            setUser(JSON.parse(localStorage.getItem("user") as string) || null);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, loginUser, logoutUser }}>

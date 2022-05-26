@@ -210,6 +210,7 @@ Start the application
 
     -   [x] Login form
     -   [x] Register form
+    -   [ ] Redirect from `/login` and `/register` when logged in
 
 -   [ ] Build Profile Page
 
