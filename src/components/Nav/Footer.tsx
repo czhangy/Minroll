@@ -4,7 +4,7 @@ import styles from "@/styles/Nav/Footer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <div id={styles.footer}>
             <div id={styles["footer-container"]}>

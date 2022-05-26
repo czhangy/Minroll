@@ -5,9 +5,9 @@ import { useState } from "react";
 // Next
 import Link from "next/link";
 
-const NavMenu = () => {
+const NavMenu: React.FC = () => {
     // Menu state
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const openMenu = () => setIsOpen(true);
     const closeMenu = () => setIsOpen(false);
 

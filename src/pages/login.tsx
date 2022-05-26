@@ -5,25 +5,49 @@ import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+// TS
+import { NextPage } from "next";
+import LoginData from "@/models/LoginData";
+import LoginErrors from "@/models/LoginErrors";
+import User from "@/models/User";
+// Axios
+import axios from "axios";
+// React Context
+import { useAuth } from "@/contexts/AuthContext";
+// TS
+import AuthContext from "@/models/AuthContext";
 
-const Login = () => {
+const Login: NextPage = () => {
+    // Set up router for redirect
+    const router = useRouter();
+    // Set up context for login
+    const { loginUser } = useAuth() as AuthContext;
+
     // Form state
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<LoginData>({
         username: "",
         password: "",
     });
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        const field = e.target.name;
+        const newValue: string = e.target.value;
+        const field: string = e.target.name;
         setFormData({
             ...formData,
             [field]: newValue,
         });
     };
-    const clearForm = () => {
-        setFormData({
-            username: "",
-            password: "",
+
+    // Error state
+    const [formErrors, setFormErrors] = useState<LoginErrors>({
+        username: false,
+        password: false,
+        form: false,
+    });
+    const updateError = (field: string, value: string) => {
+        setFormErrors({
+            ...formErrors,
+            [field]: value,
         });
     };
 
@@ -31,9 +55,36 @@ const Login = () => {
     const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent page refresh on click
         e.preventDefault();
-        console.log(formData);
-        // Clear form after submission
-        clearForm();
+        axios
+            .post("/api/login", formData)
+            .then((response) => {
+                console.log(response);
+                // Build fetched user
+                const currentUser: User = {
+                    id: response.data.id,
+                    username: response.data.username,
+                    builds: response.data.builds,
+                };
+                // Set context
+                loginUser(currentUser);
+                // Direct to profile on login
+                router.push("/profile");
+            })
+            .catch((error) => {
+                const errorCode: number = error.response.status;
+                // Handle server errors
+                if (errorCode === 462)
+                    updateError("username", error.response.data.message);
+                else if (errorCode === 463)
+                    updateError("password", error.response.data.message);
+                else {
+                    updateError(
+                        "form",
+                        "Something went wrong, try again later"
+                    );
+                }
+                console.log(error);
+            });
     };
 
     return (
@@ -44,15 +95,26 @@ const Login = () => {
             <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
                 <h2 id={styles["form-header"]}>LOGIN</h2>
                 <input
-                    className={styles["form-input"]}
+                    className={`${styles["form-input"]} ${
+                        formErrors.username ? styles["error-input"] : ""
+                    }`}
                     placeholder="Username"
                     name="username"
                     value={formData.username}
                     onChange={updateForm}
                     autoComplete="username"
                 />
+                {formErrors.username ? (
+                    <p className={styles["error-text"]}>
+                        {formErrors.username}
+                    </p>
+                ) : (
+                    ""
+                )}
                 <input
-                    className={styles["form-input"]}
+                    className={`${styles["form-input"]} ${
+                        formErrors.password ? styles["error-input"] : ""
+                    }`}
                     placeholder="Password"
                     type="password"
                     name="password"
@@ -60,22 +122,34 @@ const Login = () => {
                     onChange={updateForm}
                     autoComplete="current-password"
                 />
+                {formErrors.password ? (
+                    <p className={styles["error-text"]}>
+                        {formErrors.password}
+                    </p>
+                ) : (
+                    ""
+                )}
                 <input
                     id={styles["submit-button"]}
                     type="submit"
                     value="LOGIN"
                     className={styles.active}
                 />
-                <div
-                    id={styles["nav-links"]}
-                    style={{ justifyContent: "space-evenly" }}
-                >
+                {formErrors.form ? (
+                    <p
+                        className={styles["error-text"]}
+                        style={{ textAlign: "center" }}
+                    >
+                        {formErrors.form}
+                    </p>
+                ) : (
+                    ""
+                )}
+                <div id={styles["nav-links"]}>
                     <Link href="/register">
-                        <a className={styles["nav-link"]}>REGISTER</a>
-                    </Link>
-                    |
-                    <Link href="/login/forgot">
-                        <a className={styles["nav-link"]}>FORGOT PASSWORD</a>
+                        <a className={styles["nav-link"]}>
+                            REGISTER FOR AN ACCOUNT
+                        </a>
                     </Link>
                 </div>
             </form>

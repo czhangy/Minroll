@@ -206,17 +206,16 @@ Start the application
     -   [ ] Save functionality
     -   [ ] Load previous build functionality
 
--   [ ] Build Login Page
+-   [x] Build Auth Pages
 
     -   [x] Login form
     -   [x] Register form
-    -   [x] Forgot password form
-    -   [ ] Change password form
-    -   [ ] Email sending using EmailJS
+    -   [ ] Redirect from `/login` and `/register` when logged in
 
 -   [ ] Build Profile Page
 
     -   [ ] Display username
+    -   [ ] Logout button
     -   [ ] List of saved builds
 
         -   [ ] Update functionality
@@ -224,7 +223,7 @@ Start the application
 
 -   [ ] Build other API routes
 
-    -   [ ] Auth routes
+    -   [x] Auth routes
     -   [ ] POST route for builds
     -   [ ] PUT route for builds
     -   [ ] DELETE route for builds
