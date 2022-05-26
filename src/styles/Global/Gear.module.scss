@@ -1,0 +1,11 @@
+@use "@/styles/constants";
+
+#gear {
+    height: 500px;
+    width: 350px;
+    background-image: url("/images/gear-bg.jpg");
+    background-size: contain;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
