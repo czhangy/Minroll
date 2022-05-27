@@ -117,6 +117,8 @@
 To run this project, you will need to add the following environment variables to your `.env` file
 
 -   `DATABASE_URL`
+-   `BNET_ID`
+-   `BNET_SECRET`
 
 <!-- Getting Started -->
 
@@ -259,4 +261,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 -   [Awesome README](https://github.com/matiassingers/awesome-readme)
 -   [Shields.io](https://shields.io/)
 -   [Maxroll](https://maxroll.gg/)
--   [Battle.net](https://develop.battle.net/documentation/diablo-3/game-data-apis)
+-   [Battle.net API](https://develop.battle.net/documentation/diablo-3/game-data-apis)
+-   [BlizzAPI](https://blizzapi.lukem.net/)

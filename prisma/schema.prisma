@@ -24,3 +24,13 @@ model Build {
     user   User   @relation(fields: [userId], references: [id])
     userId String
 }
+
+model Gear {
+    id          String @id @default(cuid())
+    name        String @unique
+    category    String
+    rarity      String
+    effect      String
+    description String
+    src         String
+}
