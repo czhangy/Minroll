@@ -16,17 +16,22 @@ export default async function handler(
         }
         // Handle POST /api/gear
     } else if (req.method === "POST") {
-        const { name, category, rarity, effect, description, src } = req.body;
-        const result = await prisma.gear.create({
-            data: {
-                name: name,
-                category: category,
-                rarity: rarity,
-                effect: effect,
-                description: description,
-                src: src,
-            },
-        });
-        res.json(result);
+        try {
+            const { name, category, rarity, effect, description, src } =
+                req.body;
+            const result = await prisma.gear.create({
+                data: {
+                    name: name,
+                    category: category,
+                    rarity: rarity,
+                    effect: effect,
+                    description: description,
+                    src: src,
+                },
+            });
+            res.json(result);
+        } catch (err) {
+            res.status(400).send({ success: false, message: err });
+        }
     } else res.status(405).send({ success: false });
 }
