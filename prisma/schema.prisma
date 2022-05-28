@@ -25,12 +25,25 @@ model Build {
     userId String
 }
 
+model Set {
+    id      String  @id @default(cuid())
+    name    String  @unique
+    twoPc   String
+    threePc String?
+    fourPc  String?
+    sixPc   String?
+    items   Gear[]
+}
+
 model Gear {
-    id          String @id @default(cuid())
-    name        String @unique
-    category    String
-    rarity      String
-    effect      String
+    id          String  @id @default(cuid())
+    name        String  @unique
+    slot        String  @default("two-hand")
+    category    String  @default("bow")
+    rarity      String  @default("legendary")
+    set         Set?    @relation(fields: [setId], references: [id])
+    setId       String?
+    effect      String?
     description String
     src         String
 }

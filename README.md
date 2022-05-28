@@ -167,6 +167,10 @@ Start the application
     -   [x] Welcome text
     -   [x] Link to login page
 
+-   [ ] Collect data
+
+    -   [ ] Gather all gear data/assets
+
 -   [ ] Build Build Sheet Component
 
     -   [ ] Gear section
