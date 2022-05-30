@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "db": "npx prisma db push && npx prisma studio"
     },
     "dependencies": {
         "@prisma/client": "^3.14.0",

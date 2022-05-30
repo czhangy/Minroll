@@ -19,27 +19,26 @@ model User {
 }
 
 model Build {
-    id     String @id @default(cuid())
-    name   String
-    user   User   @relation(fields: [userId], references: [id])
-    userId String
+    id          String @id @default(cuid())
+    name        String
+    class       String
+    description String
+    user        User   @relation(fields: [userId], references: [id])
+    userId      String
 }
 
 model Set {
-    id      String  @id @default(cuid())
-    name    String  @unique
-    twoPc   String
-    threePc String?
-    fourPc  String?
-    sixPc   String?
+    id      String   @id @default(cuid())
+    name    String   @unique
+    bonuses String[]
     items   Gear[]
 }
 
 model Gear {
     id          String  @id @default(cuid())
     name        String  @unique
-    slot        String  @default("two-hand")
-    category    String  @default("bow")
+    slot        String
+    category    String
     rarity      String  @default("legendary")
     set         Set?    @relation(fields: [setId], references: [id])
     setId       String?
