@@ -1,0 +1,18 @@
+@use "@/styles/constants";
+
+#cube {
+    display: flex;
+    justify-content: space-evenly;
+
+    .cube-button {
+        height: 64px;
+        width: 64px;
+        border: 2px solid constants.$accent-color;
+    }
+}
+
+@media (hover: hover) {
+    #cube > .cube-button:hover {
+        box-shadow: constants.$glow;
+    }
+}

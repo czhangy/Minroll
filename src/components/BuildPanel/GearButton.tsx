@@ -1,8 +1,8 @@
 // Stylesheet
-import styles from "@/styles/Global/GearButton.module.scss";
-import axios from "axios";
+import styles from "@/styles/BuildPanel/Gear.module.scss";
 import { SyntheticEvent } from "react";
 // Axios
+import axios from "axios";
 
 type Props = {
     type: string;

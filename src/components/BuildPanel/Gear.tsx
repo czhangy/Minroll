@@ -1,7 +1,7 @@
 // Stylesheet
-import styles from "@/styles/Global/Gear.module.scss";
+import styles from "@/styles/BuildPanel/Gear.module.scss";
 // Global components
-import GearButton from "@/components/Global/GearButton";
+import GearButton from "@/components/BuildPanel/GearButton";
 // React
 import { useState } from "react";
 

@@ -1,0 +1,7 @@
+@use "@/styles/constants";
+
+#build-panel {
+    padding: 32px;
+    background: constants.$main-color;
+    box-shadow: constants.$outline;
+}
