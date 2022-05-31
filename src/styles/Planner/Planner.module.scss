@@ -1,9 +1,20 @@
 @use "@/styles/constants";
 
 #planner {
-    min-height: calc(100vh - constants.$navbar-height);
+    height: calc(100vh - constants.$navbar-height);
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: constants.$max-container;
+    padding: 32px;
+
+    #planner-build {
+        height: 100%;
+        margin-right: 32px;
+    }
+
+    #planner-content {
+        background: constants.$main-color;
+        box-shadow: outline;
+    }
 }
