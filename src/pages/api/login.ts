@@ -19,6 +19,7 @@ export default async function handler(
                     username: username,
                 },
             });
+            console.log(result);
             // User not found
             if (result === null)
                 res.status(462).send({

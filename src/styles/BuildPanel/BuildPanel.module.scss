@@ -3,5 +3,10 @@
 #build-panel {
     padding: 32px;
     background: constants.$main-color;
-    box-shadow: constants.$outline;
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #build-panel {
+        padding: 16px;
+    }
 }

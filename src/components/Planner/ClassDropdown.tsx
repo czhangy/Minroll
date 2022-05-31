@@ -8,9 +8,10 @@ import { useState } from "react";
 
 type Props = {
     onSelect: (newClass: string) => void;
+    error: boolean | string;
 };
 
-const ClassDropdown = ({ onSelect }: Props) => {
+const ClassDropdown = ({ onSelect, error }: Props) => {
     // Dropdown state
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const openDropdown = (e: SyntheticEvent) => {
@@ -43,6 +44,17 @@ const ClassDropdown = ({ onSelect }: Props) => {
             .join(" ");
     };
 
+    // All classes
+    const classSlugs = [
+        "barbarian",
+        "crusader",
+        "demon-hunter",
+        "monk",
+        "necromancer",
+        "witch-doctor",
+        "wizard",
+    ];
+
     return (
         <button
             id={styles["class-dropdown"]}
@@ -54,7 +66,7 @@ const ClassDropdown = ({ onSelect }: Props) => {
                     <Image
                         src={`/icons/${curClass}.webp`}
                         alt=""
-                        height={30}
+                        height={25}
                         width={30}
                     />
                     <p id={styles["dropdown-text"]}>
@@ -79,90 +91,24 @@ const ClassDropdown = ({ onSelect }: Props) => {
                 id={styles["dropdown-options"]}
                 className={dropdownOpen ? styles.show : ""}
             >
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("barbarian")}
-                >
-                    <Image
-                        src="/icons/barbarian.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Barbarian</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("crusader")}
-                >
-                    <Image
-                        src="/icons/crusader.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Crusader</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("demon-hunter")}
-                >
-                    <Image
-                        src="/icons/demon-hunter.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Demon Hunter</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("monk")}
-                >
-                    <Image
-                        src="/icons/monk.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Monk</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("necromancer")}
-                >
-                    <Image
-                        src="/icons/necromancer.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Necromancer</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("witch-doctor")}
-                >
-                    <Image
-                        src="/icons/witch-doctor.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Witch Doctor</p>
-                </li>
-                <li
-                    className={styles["dropdown-option"]}
-                    onClick={() => selectClass("wizard")}
-                >
-                    <Image
-                        src="/icons/wizard.webp"
-                        alt=""
-                        height={30}
-                        width={30}
-                    />
-                    <p className={styles["option-text"]}>Wizard</p>
-                </li>
+                {classSlugs.map((className) => {
+                    return (
+                        <li
+                            className={styles["dropdown-option"]}
+                            onClick={() => selectClass(className)}
+                        >
+                            <Image
+                                src={`/icons/${className}.webp`}
+                                alt=""
+                                height={30}
+                                width={30}
+                            />
+                            <p className={styles["option-text"]}>
+                                {formatClassName(className)}
+                            </p>
+                        </li>
+                    );
+                })}
             </ul>
         </button>
     );

@@ -2,7 +2,10 @@
 import Build from "@/models/Build";
 
 export default interface User {
-    id: string;
+    id?: string;
+    email?: string;
     username: string;
-    builds: Build[];
+    password?: string;
+    confirmPassword?: string;
+    builds?: Build[];
 }

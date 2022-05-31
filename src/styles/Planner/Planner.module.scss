@@ -1,7 +1,6 @@
 @use "@/styles/constants";
 
 #planner {
-    height: calc(100vh - constants.$navbar-height);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,11 +9,48 @@
 
     #planner-build {
         height: 100%;
-        margin-right: 32px;
+
+        #build-footer {
+            margin-top: 8px;
+            display: flex;
+
+            #build-name {
+                background: constants.$main-color;
+                font-family: constants.$main-font;
+                font-size: 1.3rem;
+                padding: 8px 16px;
+                color: white;
+                margin-right: 8px;
+                width: 70%;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                    border: 2px solid constants.$accent-color;
+                    padding: 6px 14px;
+                }
+            }
+
+            #save-button {
+                font-family: constants.$header-font;
+                font-weight: bold;
+                letter-spacing: 2px;
+                color: white;
+                background: constants.$accent-color;
+                width: calc(30% - 8px);
+                font-size: 1.1rem;
+            }
+        }
     }
 
     #planner-content {
         background: constants.$main-color;
         box-shadow: outline;
+    }
+}
+
+@media (hover: hover) {
+    #planner > #planner-build > #build-footer > #save-button:hover {
+        background: constants.$accent-color-hover;
     }
 }

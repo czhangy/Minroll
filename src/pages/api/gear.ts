@@ -1,5 +1,6 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/lib/prisma";
 
 export default async function handler(
     req: NextApiRequest,
@@ -8,6 +9,15 @@ export default async function handler(
     // Handle GET /api/gear
     if (req.method === "GET") {
         try {
+            const q = await prisma.set.findUnique({
+                where: {
+                    name: "Embodiment of the Marauder",
+                },
+                include: {
+                    items: true,
+                },
+            });
+            res.json(q);
         } catch (err) {
             res.status(400).send({ success: false, message: err });
         }
