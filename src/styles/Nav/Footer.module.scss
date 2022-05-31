@@ -41,6 +41,12 @@
     }
 }
 
+@media (hover: hover) {
+    #footer > #footer-container > #credits > #credits-text > #site-link:hover {
+        color: constants.$accent-color-hover;
+    }
+}
+
 @media screen and (max-width: constants.$mobile) {
     #footer > #footer-container {
         flex-direction: column-reverse;

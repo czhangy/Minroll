@@ -8,10 +8,13 @@ import { SyntheticEvent } from "react";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import ClassDropdown from "@/components/Planner/ClassDropdown";
+import DescriptionPage from "@/components/Planner/DescriptionPage";
 // React
 import { useState } from "react";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
+// Next
+import Head from "next/head";
 
 const Planner: NextPage = () => {
     // Get user
@@ -36,11 +39,27 @@ const Planner: NextPage = () => {
             class: newClass,
         });
     };
+    const updateDescription = (e: SyntheticEvent) => {
+        const newDescription: string = (e.target as HTMLTextAreaElement).value;
+        setBuild({
+            ...build,
+            description: newDescription,
+        });
+    };
 
     // Page state
     const [page, setPage] = useState<number>(0);
     const goToPage = (newPage: number) => {
         setPage(newPage);
+    };
+    const renderPage = () => {
+        if (page === 2)
+            return (
+                <DescriptionPage
+                    value={build.description as string}
+                    onChange={updateDescription}
+                />
+            );
     };
 
     // Handle submission
@@ -65,6 +84,9 @@ const Planner: NextPage = () => {
 
     return (
         <div id={styles.planner}>
+            <Head>
+                <title>Develop Your Build</title>
+            </Head>
             <div id={styles["planner-build"]}>
                 <ClassDropdown onSelect={selectClass} />
                 <BuildPanel />
@@ -95,6 +117,7 @@ const Planner: NextPage = () => {
                         );
                     })}
                 </nav>
+                {renderPage()}
             </div>
         </div>
     );

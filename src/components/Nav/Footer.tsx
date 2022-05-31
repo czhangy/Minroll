@@ -20,7 +20,9 @@ const Footer: React.FC = () => {
                     <p id={styles["credits-text"]}>
                         Developed by
                         <br />
-                        Charles Zhang
+                        <Link href="https://czhangy.io">
+                            <a id={styles["site-link"]}>Charles Zhang</a>
+                        </Link>
                     </p>
                 </div>
                 <div id={styles.socials}>

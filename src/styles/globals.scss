@@ -52,8 +52,18 @@ button {
     cursor: pointer;
 }
 
-input {
+input,
+textarea {
     border: none;
+    padding: 8px 16px;
+    font-family: constants.$main-font;
+    color: white;
+
+    &:focus {
+        outline: none;
+        padding: 6px 14px;
+        border: 2px solid constants.$accent-color;
+    }
 }
 
 h2,
