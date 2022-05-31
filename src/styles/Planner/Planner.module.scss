@@ -3,12 +3,13 @@
 #planner {
     display: flex;
     justify-content: center;
-    align-items: center;
     max-width: constants.$max-container;
     padding: 32px;
 
     #planner-build {
         height: 100%;
+        margin-right: 8px;
+        width: 414px;
 
         #build-footer {
             margin-top: 8px;
@@ -44,13 +45,56 @@
     }
 
     #planner-content {
-        background: constants.$main-color;
-        box-shadow: outline;
+        height: 100%;
+        width: calc(100% - 414px);
+
+        #content-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .nav-button {
+                width: calc((100% - 16px) / 3);
+                background: constants.$main-color;
+                color: white;
+                font-size: 1.3rem;
+                font-family: constants.$main-font;
+                padding: 8px 16px;
+            }
+
+            .active {
+                background: constants.$accent-color;
+            }
+        }
     }
 }
 
 @media (hover: hover) {
-    #planner > #planner-build > #build-footer > #save-button:hover {
-        background: constants.$accent-color-hover;
+    #planner {
+        #planner-build > #build-footer > #save-button:hover {
+            background: constants.$accent-color-hover;
+        }
+
+        #planner-content > #content-nav {
+            .nav-button:hover {
+                background: constants.$main-color-hover;
+            }
+
+            .active:hover {
+                background: constants.$accent-color;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #planner {
+        flex-direction: column;
+        align-items: center;
+
+        #planner-build {
+            width: 382px;
+            margin-right: 0;
+        }
     }
 }

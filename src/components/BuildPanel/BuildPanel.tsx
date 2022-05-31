@@ -6,7 +6,7 @@ import Skills from "@/components/BuildPanel/Skills";
 import Passives from "@/components/BuildPanel/Passives";
 import Cube from "@/components/BuildPanel/Cube";
 
-const BuildPanel = () => {
+const BuildPanel: React.FC = () => {
     return (
         <div id={styles["build-panel"]}>
             <Gear />

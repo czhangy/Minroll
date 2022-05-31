@@ -2,7 +2,7 @@
 import styles from "@/styles/BuildPanel/Passives.module.scss";
 // Local components
 
-const Passives = () => {
+const Passives: React.FC = () => {
     return (
         <div id={styles.passives}>
             <button className={styles["passive-button"]} />

@@ -5,7 +5,6 @@ import { NextPage } from "next";
 import Build from "@/models/Build";
 import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
-import BuildErrors from "@/models/BuildErrors";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import ClassDropdown from "@/components/Planner/ClassDropdown";
@@ -38,22 +37,36 @@ const Planner: NextPage = () => {
         });
     };
 
-    // Handle submission
-    const saveBuild = () => {
-        console.log(build);
+    // Page state
+    const [page, setPage] = useState<number>(0);
+    const goToPage = (newPage: number) => {
+        setPage(newPage);
     };
 
-    // Error state
-    const [errors, setErrors] = useState<BuildErrors>({
-        name: false,
-        class: false,
-        submit: false,
-    });
+    // Handle submission
+    const saveBuild = () => {
+        if (validateBuild()) console.log(build);
+    };
+    const validateBuild: () => boolean = () => {
+        let newErrors = {
+            name: false,
+            class: false,
+            submit: false,
+        };
+        // Build name
+        if (build.name.length === 0) newErrors.name = true;
+        // Class selected
+        if (!build.class) newErrors.class = true;
+        return Object.values(newErrors).every((error) => !error);
+    };
+
+    // Page names
+    const pageNames = ["Gear", "Skills", "Description"];
 
     return (
         <div id={styles.planner}>
             <div id={styles["planner-build"]}>
-                <ClassDropdown onSelect={selectClass} error={errors.class} />
+                <ClassDropdown onSelect={selectClass} />
                 <BuildPanel />
                 <div id={styles["build-footer"]}>
                     <input
@@ -67,7 +80,22 @@ const Planner: NextPage = () => {
                     </button>
                 </div>
             </div>
-            <div id={styles["planner-content"]}></div>
+            <div id={styles["planner-content"]}>
+                <nav id={styles["content-nav"]}>
+                    {pageNames.map((name, i) => {
+                        return (
+                            <button
+                                className={`${styles["nav-button"]} ${
+                                    page === i ? styles.active : ""
+                                }`}
+                                onClick={() => goToPage(i)}
+                            >
+                                {name}
+                            </button>
+                        );
+                    })}
+                </nav>
+            </div>
         </div>
     );
 };

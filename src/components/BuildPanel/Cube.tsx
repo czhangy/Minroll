@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/BuildPanel/Cube.module.scss";
 
-const Skills = () => {
+const Cube: React.FC = () => {
     return (
         <div id={styles.cube}>
             <button className={styles["cube-button"]} />
@@ -11,4 +11,4 @@ const Skills = () => {
     );
 };
 
-export default Skills;
+export default Cube;

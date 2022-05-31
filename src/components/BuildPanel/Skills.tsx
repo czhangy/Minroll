@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/BuildPanel/Skills.module.scss";
 
-const Skills = () => {
+const Skills: React.FC = () => {
     return (
         <div id={styles.skills}>
             <button className={styles["skill-button"]} />

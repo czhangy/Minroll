@@ -47,6 +47,7 @@
         width: 100%;
         box-shadow: constants.$outline;
         z-index: 99;
+        background: constants.$main-color;
 
         .dropdown-option {
             background: constants.$main-color;

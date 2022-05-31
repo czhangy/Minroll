@@ -7,7 +7,6 @@ import axios from "axios";
 
 type Props = {
     type: string;
-    inSlot: any;
 };
 
 const GearButton: React.FC<Props> = ({ type }: Props) => {

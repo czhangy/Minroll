@@ -8,14 +8,14 @@ import { useState } from "react";
 
 type Props = {
     onSelect: (newClass: string) => void;
-    error: boolean | string;
 };
 
-const ClassDropdown = ({ onSelect, error }: Props) => {
+const ClassDropdown = ({ onSelect }: Props) => {
     // Dropdown state
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
+        (e.target as HTMLButtonElement).classList.remove(styles["error"]);
         setDropdownOpen(true);
     };
     const closeDropdown = () => {
@@ -91,10 +91,11 @@ const ClassDropdown = ({ onSelect, error }: Props) => {
                 id={styles["dropdown-options"]}
                 className={dropdownOpen ? styles.show : ""}
             >
-                {classSlugs.map((className) => {
+                {classSlugs.map((className, i) => {
                     return (
                         <li
                             className={styles["dropdown-option"]}
+                            key={i}
                             onClick={() => selectClass(className)}
                         >
                             <Image
