@@ -1,0 +1,38 @@
+@use "@/styles/constants";
+
+.dropdown {
+    position: relative;
+    background: constants.$main-color;
+    width: 100%;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+
+    .dropdown-selection {
+        display: flex;
+    }
+
+    .dropdown-text {
+        color: white;
+        font-family: constants.$main-font;
+        font-size: 1.3rem;
+        text-align: left;
+        margin-left: 16px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    .dropdown-icon {
+        transition: transform 0.2s ease;
+        height: 20px;
+        width: 20px;
+    }
+
+    .rotated {
+        transform: rotate(180deg);
+    }
+}

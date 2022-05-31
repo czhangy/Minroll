@@ -2,9 +2,12 @@
 import styles from "@/styles/Planner/ClassDropdown.module.scss";
 // Next
 import Image from "next/image";
-import { SyntheticEvent } from "react";
 // React
 import { useState } from "react";
+// Local components
+import Dropdown from "@/components/Planner/Dropdown";
+// TS
+import { SyntheticEvent } from "react";
 
 type Props = {
     onSelect: (newClass: string) => void;
@@ -15,7 +18,6 @@ const ClassDropdown = ({ onSelect }: Props) => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
-        (e.target as HTMLButtonElement).classList.remove(styles["error"]);
         setDropdownOpen(true);
     };
     const closeDropdown = () => {
@@ -29,13 +31,17 @@ const ClassDropdown = ({ onSelect }: Props) => {
     const selectClass = (newClass: string) => {
         // Set dropdown and close
         setCurClass(newClass);
-        document.getElementById(styles["class-dropdown"])?.blur();
+        if (document.activeElement !== document.body)
+            (document.activeElement as HTMLElement).blur();
         // Pass new class to Planner
         onSelect(newClass);
     };
 
     // Name formatting => remove hyphens and capitalize words
-    const formatClassName = (name: string) => {
+    const formatClassName: (name: string | null) => string | null = (
+        name: string | null
+    ) => {
+        if (!name) return null;
         const words = name.replace(/-/g, " ").split(" ");
         return words
             .map((word) => {
@@ -45,7 +51,7 @@ const ClassDropdown = ({ onSelect }: Props) => {
     };
 
     // All classes
-    const classSlugs = [
+    const classNames = [
         "barbarian",
         "crusader",
         "demon-hunter",
@@ -56,45 +62,21 @@ const ClassDropdown = ({ onSelect }: Props) => {
     ];
 
     return (
-        <button
-            id={styles["class-dropdown"]}
-            onClick={openDropdown}
-            onBlur={closeDropdown}
+        <Dropdown
+            open={dropdownOpen}
+            value={formatClassName(curClass)}
+            src={`/icons/${curClass}.webp`}
+            onOpen={openDropdown}
+            onClose={closeDropdown}
         >
-            {curClass ? (
-                <div id={styles["dropdown-class"]}>
-                    <Image
-                        src={`/icons/${curClass}.webp`}
-                        alt=""
-                        height={25}
-                        width={30}
-                    />
-                    <p id={styles["dropdown-text"]}>
-                        {formatClassName(curClass)}
-                    </p>
-                </div>
-            ) : (
-                <p id={styles["dropdown-text"]}>Select a class...</p>
-            )}
-            <div
-                id={styles["dropdown-icon"]}
-                className={dropdownOpen ? styles.rotated : ""}
-            >
-                <Image
-                    src="/icons/chevron-down.svg"
-                    alt=""
-                    height={20}
-                    width={20}
-                />
-            </div>
             <ul
-                id={styles["dropdown-options"]}
+                id={styles["class-options"]}
                 className={dropdownOpen ? styles.show : ""}
             >
-                {classSlugs.map((className, i) => {
+                {classNames.map((className, i) => {
                     return (
                         <li
-                            className={styles["dropdown-option"]}
+                            className={styles["class-option"]}
                             key={i}
                             onClick={() => selectClass(className)}
                         >
@@ -104,14 +86,14 @@ const ClassDropdown = ({ onSelect }: Props) => {
                                 height={30}
                                 width={30}
                             />
-                            <p className={styles["option-text"]}>
+                            <p className={styles["class-text"]}>
                                 {formatClassName(className)}
                             </p>
                         </li>
                     );
                 })}
             </ul>
-        </button>
+        </Dropdown>
     );
 };
 
