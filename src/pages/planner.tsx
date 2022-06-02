@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import Build from "@/models/Build";
 import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
+import Gear from "@/models/Gear";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -34,10 +35,10 @@ const Planner: NextPage = () => {
             name: (e.target as HTMLInputElement).value,
         });
     };
-    const selectClass = (newClass: string) => {
+    const selectClass = (newClass: string | Gear) => {
         setBuild({
             ...build,
-            class: newClass,
+            class: newClass as string,
         });
     };
     const updateDescription = (e: SyntheticEvent) => {
@@ -105,6 +106,7 @@ const Planner: NextPage = () => {
                     content={classNames}
                     placeholder="Select a class..."
                     hasIcon={true}
+                    isSearchable={false}
                     onSelect={selectClass}
                 />
                 <BuildPanel />

@@ -4,14 +4,16 @@ import styles from "@/styles/Planner/Dropdown.module.scss";
 import { useState } from "react";
 // TS
 import { SyntheticEvent } from "react";
+import Gear from "@/models/Gear";
 // Next
 import Image from "next/image";
 
 type Props = {
-    content: string[];
-    onSelect: (value: string) => void;
+    content: string[] | Gear[];
+    onSelect: (value: string | Gear) => void;
     hasIcon: boolean;
     placeholder: string;
+    isSearchable: boolean;
 };
 
 const Dropdown: React.FC<Props> = (props: Props) => {
@@ -24,19 +26,23 @@ const Dropdown: React.FC<Props> = (props: Props) => {
     const closeDropdown = () => {
         setTimeout(() => {
             setOpen(false);
-        }, 50);
+        }, 120);
     };
 
     // Value state
     const [selectedValue, setSelectedValue] = useState<string | null>(null);
-    const selectValue = (value: string) => {
-        // Set dropdown and close
-        setSelectedValue(value);
-        if (document.activeElement !== document.body)
-            (document.activeElement as HTMLElement).blur();
+    const selectValue = (value: string | Gear) => {
+        // Set dropdown value
+        if (props.isSearchable) setSearchedValue((value as Gear).name);
+        else setSelectedValue(value as string);
         // Pass to parent
         props.onSelect(value);
     };
+
+    // Searchable value state
+    const [searchedValue, setSearchedValue] = useState<string>("");
+    const updateValue = (e: SyntheticEvent) =>
+        setSearchedValue((e.target as HTMLInputElement).value);
 
     // Name formatting => remove hyphens and capitalize words
     const formatValue: (value: string | null) => string | null = (
@@ -51,73 +57,121 @@ const Dropdown: React.FC<Props> = (props: Props) => {
             .join(" ");
     };
 
+    // Generate list options
+    const getDropdownOptions = () => {
+        // Handle Gear
+        if (false && props.isSearchable) {
+            return (props.content as Gear[]).map((value, i) => {
+                return (
+                    <li
+                        className={styles["dropdown-option"]}
+                        key={i}
+                        onClick={() => selectValue(value)}
+                    >
+                        {props.hasIcon ? (
+                            <Image
+                                src={value.src}
+                                alt=""
+                                height={30}
+                                width={30}
+                            />
+                        ) : (
+                            ""
+                        )}
+                        <p className={styles["option-text"]}>
+                            {formatValue(value.name)}
+                        </p>
+                    </li>
+                );
+            });
+            // Handle strings
+        } else
+            return (props.content as string[]).map((value, i) => {
+                return (
+                    <li
+                        className={styles["dropdown-option"]}
+                        key={i}
+                        onClick={() => selectValue(value)}
+                    >
+                        {props.hasIcon ? (
+                            <Image
+                                src={`/icons/${value}.webp`}
+                                alt=""
+                                height={30}
+                                width={30}
+                            />
+                        ) : (
+                            ""
+                        )}
+                        <p className={styles["option-text"]}>
+                            {formatValue(value)}
+                        </p>
+                    </li>
+                );
+            });
+    };
+
     return (
-        <button
-            className={styles.dropdown}
-            onClick={openDropdown}
-            onBlur={closeDropdown}
-        >
-            {selectedValue ? (
-                <div className={styles["dropdown-selection"]}>
-                    {props.hasIcon ? (
-                        <Image
-                            src={`/icons/${selectedValue}.webp`}
-                            alt=""
-                            height={25}
-                            width={30}
-                        />
-                    ) : (
-                        ""
-                    )}
-                    <p className={styles["dropdown-text"]}>
-                        {formatValue(selectedValue)}
-                    </p>
-                </div>
-            ) : (
-                <p className={styles["dropdown-text"]}>{props.placeholder}</p>
-            )}
-            <div
-                className={`${styles["dropdown-icon"]} ${
-                    open ? styles.rotated : ""
-                }`}
-            >
-                <Image
-                    src="/icons/chevron-down.svg"
-                    alt=""
-                    height={20}
-                    width={20}
+        <div className={styles.dropdown}>
+            {props.isSearchable ? (
+                <input
+                    className={styles["dropdown-input"]}
+                    placeholder={props.placeholder}
+                    disabled={props.content.length === 0}
+                    value={searchedValue}
+                    onChange={updateValue}
+                    onClick={openDropdown}
+                    onBlur={closeDropdown}
                 />
-            </div>
-            <ul
-                className={`${styles["dropdown-options"]} ${
-                    open ? styles.show : ""
-                }`}
-            >
-                {props.content.map((value, i) => {
-                    return (
-                        <li
-                            className={styles["dropdown-option"]}
-                            key={i}
-                            onClick={() => selectValue(value)}
-                        >
+            ) : (
+                <button
+                    className={styles["dropdown-button"]}
+                    onClick={openDropdown}
+                    onBlur={closeDropdown}
+                >
+                    {selectedValue ? (
+                        <div className={styles["dropdown-selection"]}>
                             {props.hasIcon ? (
                                 <Image
-                                    src={`/icons/${value}.webp`}
+                                    src={`/icons/${selectedValue}.webp`}
                                     alt=""
-                                    height={30}
+                                    height={25}
                                     width={30}
                                 />
                             ) : (
                                 ""
                             )}
-                            <p className={styles["option-text"]}>
-                                {formatValue(value)}
+                            <p className={styles["dropdown-text"]}>
+                                {formatValue(selectedValue)}
                             </p>
-                        </li>
-                    );
-                })}
+                        </div>
+                    ) : (
+                        <p className={styles["dropdown-text"]}>
+                            {props.placeholder}
+                        </p>
+                    )}
+                    <div
+                        className={`${styles["dropdown-icon"]} ${
+                            open ? styles.rotated : ""
+                        }`}
+                    >
+                        <Image
+                            src="/icons/chevron-down.svg"
+                            alt=""
+                            height={20}
+                            width={20}
+                        />
+                    </div>
+                </button>
+            )}
+            <ul
+                className={`${styles["dropdown-options"]} ${
+                    open ? styles.show : ""
+                }`}
+            >
+                {getDropdownOptions()}
             </ul>
-        </button>
+        </div>
     );
 };
 
