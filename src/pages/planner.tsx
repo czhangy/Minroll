@@ -7,7 +7,8 @@ import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
-import ClassDropdown from "@/components/Planner/ClassDropdown";
+import Dropdown from "@/components/Planner/Dropdown";
+import GearPage from "@/components/Planner/GearPage";
 import DescriptionPage from "@/components/Planner/DescriptionPage";
 // React
 import { useState } from "react";
@@ -53,6 +54,7 @@ const Planner: NextPage = () => {
         setPage(newPage);
     };
     const renderPage = () => {
+        if (page === 0) return <GearPage className={build.class} />;
         if (page === 2)
             return (
                 <DescriptionPage
@@ -82,13 +84,29 @@ const Planner: NextPage = () => {
     // Page names
     const pageNames = ["Gear", "Skills", "Description"];
 
+    // All classes
+    const classNames = [
+        "barbarian",
+        "crusader",
+        "demon-hunter",
+        "monk",
+        "necromancer",
+        "witch-doctor",
+        "wizard",
+    ];
+
     return (
         <div id={styles.planner}>
             <Head>
                 <title>Develop Your Build</title>
             </Head>
             <div id={styles["planner-build"]}>
-                <ClassDropdown onSelect={selectClass} />
+                <Dropdown
+                    content={classNames}
+                    placeholder="Select a class..."
+                    hasIcon={true}
+                    onSelect={selectClass}
+                />
                 <BuildPanel />
                 <div id={styles["build-footer"]}>
                     <input
@@ -111,6 +129,7 @@ const Planner: NextPage = () => {
                                     page === i ? styles.active : ""
                                 }`}
                                 onClick={() => goToPage(i)}
+                                key={i}
                             >
                                 {name}
                             </button>

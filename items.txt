@@ -1,0 +1,16 @@
+Exclusives
+Barb => Mighty belt/weapon
+Crus => crus shields, flails
+DH => hand cbows, cloaks, quivers
+Monk => spirit stones, daibo, fist
+Wiz => sources, wands, wiz hats
+WD => voodoo, mojo, cere knives
+necro => Phyla, scythes
+
+No gos
+Barb => staves, bows, cbows
+Crus => staves, bows, cbows
+DH => two-handed
+Monk => bows, cbows
+Necro => polearms, bows, cbows
+WD => polearms

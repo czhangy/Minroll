@@ -1,36 +1,80 @@
 // Stylesheet
 import styles from "@/styles/Planner/Dropdown.module.scss";
-// Next
-import Image from "next/image";
+// React
+import { useState } from "react";
 // TS
 import { SyntheticEvent } from "react";
+// Next
+import Image from "next/image";
 
 type Props = {
-    children: JSX.Element;
-    open: boolean;
-    value: string | null;
-    src: string | null;
-    onOpen: (e: SyntheticEvent) => void;
-    onClose: () => void;
+    content: string[];
+    onSelect: (value: string) => void;
+    hasIcon: boolean;
+    placeholder: string;
 };
 
-const Dropdown: React.FC<Props> = ({
-    children,
-    open,
-    value,
-    src,
-    onOpen,
-    onClose,
-}: Props) => {
+const Dropdown: React.FC<Props> = (props: Props) => {
+    // Dropdown state
+    const [open, setOpen] = useState<boolean>(false);
+    const openDropdown = (e: SyntheticEvent) => {
+        (e.target as HTMLButtonElement).focus();
+        setOpen(true);
+    };
+    const closeDropdown = () => {
+        setTimeout(() => {
+            setOpen(false);
+        }, 50);
+    };
+
+    // Value state
+    const [selectedValue, setSelectedValue] = useState<string | null>(null);
+    const selectValue = (value: string) => {
+        // Set dropdown and close
+        setSelectedValue(value);
+        if (document.activeElement !== document.body)
+            (document.activeElement as HTMLElement).blur();
+        // Pass to parent
+        props.onSelect(value);
+    };
+
+    // Name formatting => remove hyphens and capitalize words
+    const formatValue: (value: string | null) => string | null = (
+        value: string | null
+    ) => {
+        if (!value) return null;
+        const words = value.replace(/-/g, " ").split(" ");
+        return words
+            .map((word) => {
+                return word[0].toUpperCase() + word.substring(1);
+            })
+            .join(" ");
+    };
+
     return (
-        <button className={styles.dropdown} onClick={onOpen} onBlur={onClose}>
-            {value && src ? (
+        <button
+            className={styles.dropdown}
+            onClick={openDropdown}
+            onBlur={closeDropdown}
+        >
+            {selectedValue ? (
                 <div className={styles["dropdown-selection"]}>
-                    <Image src={src} alt="" height={25} width={30} />
-                    <p className={styles["dropdown-text"]}>{value}</p>
+                    {props.hasIcon ? (
+                        <Image
+                            src={`/icons/${selectedValue}.webp`}
+                            alt=""
+                            height={25}
+                            width={30}
+                        />
+                    ) : (
+                        ""
+                    )}
+                    <p className={styles["dropdown-text"]}>
+                        {formatValue(selectedValue)}
+                    </p>
                 </div>
             ) : (
-                <p className={styles["dropdown-text"]}>Select a class...</p>
+                <p className={styles["dropdown-text"]}>{props.placeholder}</p>
             )}
             <div
                 className={`${styles["dropdown-icon"]} ${
@@ -44,7 +88,35 @@ const Dropdown: React.FC<Props> = ({
                     width={20}
                 />
             </div>
-            {children}
+            <ul
+                className={`${styles["dropdown-options"]} ${
+                    open ? styles.show : ""
+                }`}
+            >
+                {props.content.map((value, i) => {
+                    return (
+                        <li
+                            className={styles["dropdown-option"]}
+                            key={i}
+                            onClick={() => selectValue(value)}
+                        >
+                            {props.hasIcon ? (
+                                <Image
+                                    src={`/icons/${value}.webp`}
+                                    alt=""
+                                    height={30}
+                                    width={30}
+                                />
+                            ) : (
+                                ""
+                            )}
+                            <p className={styles["option-text"]}>
+                                {formatValue(value)}
+                            </p>
+                        </li>
+                    );
+                })}
+            </ul>
         </button>
     );
 };
