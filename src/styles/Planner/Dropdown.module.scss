@@ -72,13 +72,19 @@
             cursor: pointer;
             padding: 0 16px;
 
+            .option-image {
+                margin-right: 16px;
+                height: 30px;
+                width: 30px;
+                position: relative;
+            }
+
             .option-text {
                 color: white;
                 font-family: constants.$main-font;
                 font-size: 1.3rem;
                 text-align: left;
                 padding: 12px 0;
-                margin-left: 16px;
             }
         }
     }

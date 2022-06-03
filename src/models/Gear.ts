@@ -3,15 +3,15 @@ import Set from "@/models/Set";
 import Build from "@/models/Build";
 
 export default interface Gear {
-    id: string;
+    id?: string;
     name: string;
     slot: string;
-    category: string;
+    category?: string;
     rarity: string;
-    set: Set;
-    setId: string;
-    effect: string;
-    description: string;
+    set?: Set;
+    setId?: string;
+    effect?: string;
+    description?: string;
     src: string;
-    builds: Build[];
+    builds?: Build[];
 }

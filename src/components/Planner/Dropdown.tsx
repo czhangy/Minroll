@@ -10,7 +10,7 @@ import Image from "next/image";
 
 type Props = {
     content: string[] | Gear[];
-    onSelect: (value: string | Gear) => void;
+    onSelect: (slot: string | Gear) => void;
     hasIcon: boolean;
     placeholder: string;
     isSearchable: boolean;
@@ -60,7 +60,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
     // Generate list options
     const getDropdownOptions = () => {
         // Handle Gear
-        if (false && props.isSearchable) {
+        if (props.isSearchable) {
             return (props.content as Gear[]).map((value, i) => {
                 return (
                     <li
@@ -69,18 +69,18 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                         onClick={() => selectValue(value)}
                     >
                         {props.hasIcon ? (
-                            <Image
-                                src={value.src}
-                                alt=""
-                                height={30}
-                                width={30}
-                            />
+                            <div className={styles["option-image"]}>
+                                <Image
+                                    src={value.src}
+                                    alt=""
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </div>
                         ) : (
                             ""
                         )}
-                        <p className={styles["option-text"]}>
-                            {formatValue(value.name)}
-                        </p>
+                        <p className={styles["option-text"]}>{value.name}</p>
                     </li>
                 );
             });
@@ -94,12 +94,14 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                         onClick={() => selectValue(value)}
                     >
                         {props.hasIcon ? (
-                            <Image
-                                src={`/icons/${value}.webp`}
-                                alt=""
-                                height={30}
-                                width={30}
-                            />
+                            <div className={styles["option-image"]}>
+                                <Image
+                                    src={`/icons/${value}.webp`}
+                                    alt=""
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </div>
                         ) : (
                             ""
                         )}
