@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Planner/Dropdown.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // TS
 import { SyntheticEvent } from "react";
 import Gear from "@/models/Gear";
@@ -10,7 +10,7 @@ import Image from "next/image";
 
 type Props = {
     content: string[] | Gear[];
-    onSelect: (slot: string | Gear) => void;
+    onSelect: (slot: any) => void;
     hasIcon: boolean;
     placeholder: string;
     isSearchable: boolean;
@@ -44,6 +44,19 @@ const Dropdown: React.FC<Props> = (props: Props) => {
     const updateValue = (e: SyntheticEvent) =>
         setSearchedValue((e.target as HTMLInputElement).value);
 
+    // Update content on search
+    const [filteredContent, setFilteredContent] = useState<Gear[]>([]);
+    useEffect(() => {
+        if (props.isSearchable)
+            setFilteredContent(
+                (props.content as Gear[]).filter((item: Gear) =>
+                    item.name
+                        .toLowerCase()
+                        .includes(searchedValue.toLowerCase())
+                )
+            );
+    }, [props.content, searchedValue]);
+
     // Name formatting => remove hyphens and capitalize words
     const formatValue: (value: string | null) => string | null = (
         value: string | null
@@ -61,7 +74,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
     const getDropdownOptions = () => {
         // Handle Gear
         if (props.isSearchable) {
-            return (props.content as Gear[]).map((value, i) => {
+            return filteredContent.map((value, i) => {
                 return (
                     <li
                         className={styles["dropdown-option"]}

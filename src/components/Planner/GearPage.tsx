@@ -16,14 +16,17 @@ type Props = {
 const GearPage: React.FC<Props> = ({ className }: Props) => {
     // Hold gear slot state
     const [slot, setSlot] = useState<string | null>(null);
-    const selectValue = (slot: string | Gear) => {
-        // Handle slot selection
-        if (typeof slot === "string") setSlot(slot);
-        // Handle gear selection
-        else console.log("Should send data to BuildSheet");
-    };
 
-    // Fetch all items matching class + slot
+    // Hold gear state => gear master list based on class
+    const [gearList, setGearList] = useState<Gear[]>([]);
+    // Hold build gear state => gear that goes in slots
+    const [buildGearList, setBuildGearList] = useState<Gear[]>([]);
+    // Hold cube gear state
+    const [cubeWeaponList, setCubeWeaponList] = useState<Gear[]>([]);
+    const [cubeArmorList, setCubeArmorList] = useState<Gear[]>([]);
+    const [cubeJewelryList, setCubeJewelryList] = useState<Gear[]>([]);
+
+    // Fetch all items matching class => refresh on class change
     useEffect(() => {
         if (className !== "")
             axios
@@ -32,8 +35,57 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
                 .catch((error) => console.log(error));
     }, [className]);
 
-    // Hold gear state
-    const [gearList, setGearList] = useState<Gear[]>([]);
+    // Filter by slot => refresh on slot/class change
+    useEffect(() => {
+        if (slot)
+            setBuildGearList(
+                gearList.filter((item) => {
+                    if (slot === "main-hand")
+                        return (
+                            item.slot === "one-hand" || item.slot === "two-hand"
+                        );
+                    else if (slot === "off-hand")
+                        return item.slot === slot || item.slot === "one-hand";
+                    else if (slot === "left-finger" || slot === "right-finger")
+                        return item.slot === "finger";
+                    else return item.slot === slot;
+                })
+            );
+    }, [slot, gearList]);
+
+    // Update cube lists on master list change
+    useEffect(() => {
+        const cubeGearList = gearList.filter((item) => item.effect);
+        const weaponCategories = ["one-hand", "two-hand", "off-hand"];
+        const armorCategories = [
+            "head",
+            "shoulders",
+            "torso",
+            "hands",
+            "wrists",
+            "waist",
+            "legs",
+            "feet",
+        ];
+        const jewelryCategories = ["neck", "finger"];
+        setCubeWeaponList(
+            cubeGearList.filter((item) => weaponCategories.includes(item.slot))
+        );
+        setCubeArmorList(
+            cubeGearList.filter((item) => armorCategories.includes(item.slot))
+        );
+        setCubeJewelryList(
+            cubeGearList.filter((item) => jewelryCategories.includes(item.slot))
+        );
+    }, [gearList]);
+
+    // Send data to Planner
+    const selectGear = (gear: Gear) => {
+        console.log("Should send data to BuildSheet");
+    };
+    const selectCube = (gear: Gear) => {
+        console.log("Should send data to BuildSheet");
+    };
 
     // All slots
     const slots = [
@@ -59,7 +111,7 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
                 <div className={styles["gear-dropdown"]}>
                     <Dropdown
                         content={slots}
-                        onSelect={selectValue}
+                        onSelect={setSlot}
                         hasIcon={false}
                         isSearchable={false}
                         placeholder="Select a slot..."
@@ -67,8 +119,8 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <Dropdown
-                        content={gearList}
-                        onSelect={selectValue}
+                        content={buildGearList}
+                        onSelect={selectGear}
                         hasIcon={true}
                         isSearchable={true}
                         placeholder="Select an item..."
@@ -77,10 +129,10 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
             </div>
             <div className={styles["gear-container"]}>
                 <h3 className={styles["gear-header"]}>Cube Selection</h3>
-                {/* <div className={styles["gear-dropdown"]}>
+                <div className={styles["gear-dropdown"]}>
                     <Dropdown
-                        content={slots}
-                        onSelect={selectSlot}
+                        content={cubeWeaponList}
+                        onSelect={selectCube}
                         hasIcon={true}
                         isSearchable={true}
                         placeholder="Select a weapon item..."
@@ -88,8 +140,8 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <Dropdown
-                        content={slots}
-                        onSelect={selectSlot}
+                        content={cubeArmorList}
+                        onSelect={selectCube}
                         hasIcon={true}
                         isSearchable={true}
                         placeholder="Select an armor item..."
@@ -97,13 +149,13 @@ const GearPage: React.FC<Props> = ({ className }: Props) => {
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <Dropdown
-                        content={slots}
-                        onSelect={selectSlot}
+                        content={cubeJewelryList}
+                        onSelect={selectCube}
                         hasIcon={true}
                         isSearchable={true}
                         placeholder="Select a jewelry item..."
                     />
-                </div> */}
+                </div>
             </div>
         </div>
     );

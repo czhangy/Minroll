@@ -10,7 +10,7 @@ export default interface Gear {
     rarity: string;
     set?: Set;
     setId?: string;
-    effect?: string;
+    effect: string;
     description?: string;
     src: string;
     builds?: Build[];

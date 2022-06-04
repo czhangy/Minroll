@@ -64,6 +64,8 @@
         box-shadow: constants.$outline;
         z-index: 99;
         background: constants.$main-color;
+        max-height: 200px;
+        overflow-y: scroll;
 
         .dropdown-option {
             background: constants.$main-color;

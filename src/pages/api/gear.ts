@@ -87,6 +87,7 @@ const getGearByClass = async (className: string) => {
             name: true,
             slot: true,
             rarity: true,
+            effect: true,
             src: true,
         },
         // Sort A -> Z
@@ -94,7 +95,6 @@ const getGearByClass = async (className: string) => {
             name: "asc",
         },
     });
-    console.log(gear);
     // Handle DH 2-handed edge-cases
     if (className === "demon-hunter")
         gear = gear.filter((item) => item.slot !== "two-hand");

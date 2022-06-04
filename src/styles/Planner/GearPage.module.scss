@@ -7,11 +7,15 @@
     padding: 32px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 
     .gear-container {
         background: constants.$bg-color;
         padding: 32px;
+        margin-bottom: 32px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
 
         .gear-header {
             font-size: 1.5rem;
