@@ -13,11 +13,12 @@ type Props = {
     onSelect: (slot: any) => void;
     hasIcon: boolean;
     placeholder: string;
+    value?: string | null;
     isSearchable: boolean;
 };
 
 const Dropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown state
+    // Dropdown control
     const [open, setOpen] = useState<boolean>(false);
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
@@ -29,7 +30,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
         }, 120);
     };
 
-    // Value state
+    // Dropdown selected value state
     const [selectedValue, setSelectedValue] = useState<string | null>(null);
     const selectValue = (value: string | Gear) => {
         // Set dropdown value
@@ -39,12 +40,12 @@ const Dropdown: React.FC<Props> = (props: Props) => {
         props.onSelect(value);
     };
 
-    // Searchable value state
+    // Input field display state
     const [searchedValue, setSearchedValue] = useState<string>("");
     const updateValue = (e: SyntheticEvent) =>
         setSearchedValue((e.target as HTMLInputElement).value);
 
-    // Update content on search
+    // Filter content by search
     const [filteredContent, setFilteredContent] = useState<Gear[]>([]);
     useEffect(() => {
         if (props.isSearchable)
@@ -56,6 +57,12 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                 )
             );
     }, [props.content, searchedValue]);
+
+    // Clear/revert input on class/slot change
+    useEffect(() => {
+        if (props.isSearchable)
+            setSearchedValue(props.value ? props.value : "");
+    }, [props.content]);
 
     // Name formatting => remove hyphens and capitalize words
     const formatValue: (value: string | null) => string | null = (
@@ -133,6 +140,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                     className={styles["dropdown-input"]}
                     placeholder={props.placeholder}
                     disabled={props.content.length === 0}
+                    spellCheck={false}
                     value={searchedValue}
                     onChange={updateValue}
                     onClick={openDropdown}

@@ -167,21 +167,21 @@ Start the application
     -   [x] Welcome text
     -   [x] Link to login page
 
--   [ ] Collect data
+-   [x] Collect data
 
-    -   [ ] Gather all gear data/assets
+    -   [x] Gather all gear data/assets
 
 -   [ ] Build Build Sheet Component
 
-    -   [ ] Gear section
+    -   [x] Gear section
     -   [ ] Skills section
     -   [ ] Passives section
-    -   [ ] Kanai's Cube section
+    -   [x] Kanai's Cube section
     -   [ ] Gem sockets
 
 -   [ ] Build GET API routes
 
-    -   [ ] Fetch gear by class
+    -   [x] Fetch gear by class
     -   [ ] Fetch skills by class
     -   [ ] Fetch passives by class
 
@@ -203,14 +203,15 @@ Start the application
 
 -   [ ] Build Planner Page
 
-    -   [ ] Class selection
-    -   [ ] Gear selection
+    -   [x] Class selection
+    -   [x] Gear selection
     -   [ ] Skill selection
     -   [ ] Passives selection
-    -   [ ] Cube selection
+    -   [x] Cube selection
+    -   [ ] Gem selection
     -   [ ] Changes display on build
     -   [ ] Save functionality
-    -   [ ] Load previous build functionality
+    -   [ ] Edit previous build functionality
 
 -   [x] Build Auth Pages
 

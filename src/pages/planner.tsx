@@ -27,18 +27,55 @@ const Planner: NextPage = () => {
         name: "",
         class: "",
         description: "",
-        gear: [],
+        gear: {
+            head: null,
+            shoulders: null,
+            torso: null,
+            hands: null,
+            wrists: null,
+            waist: null,
+            legs: null,
+            feet: null,
+            neck: null,
+            "left-finger": null,
+            "right-finger": null,
+            "main-hand": null,
+            "off-hand": null,
+        },
+        cube: {
+            weapon: null,
+            armor: null,
+            jewelry: null,
+        },
     });
+    const selectClass = (newClass: string | Gear) => {
+        setBuild({
+            ...build,
+            class: newClass as string,
+        });
+    };
     const nameBuild = (e: SyntheticEvent) => {
         setBuild({
             ...build,
             name: (e.target as HTMLInputElement).value,
         });
     };
-    const selectClass = (newClass: string | Gear) => {
+    const selectGear = (slot: string, item: Gear) => {
         setBuild({
             ...build,
-            class: newClass as string,
+            gear: {
+                ...build.gear,
+                [slot]: item,
+            },
+        });
+    };
+    const selectCube = (slot: string, item: Gear) => {
+        setBuild({
+            ...build,
+            cube: {
+                ...build.cube,
+                [slot]: item,
+            },
         });
     };
     const updateDescription = (e: SyntheticEvent) => {
@@ -55,7 +92,16 @@ const Planner: NextPage = () => {
         setPage(newPage);
     };
     const renderPage = () => {
-        if (page === 0) return <GearPage className={build.class} />;
+        if (page === 0)
+            return (
+                <GearPage
+                    className={build.class}
+                    gear={build.gear}
+                    cube={build.cube}
+                    onGearSelect={selectGear}
+                    onCubeSelect={selectCube}
+                />
+            );
         if (page === 2)
             return (
                 <DescriptionPage
@@ -109,7 +155,7 @@ const Planner: NextPage = () => {
                     isSearchable={false}
                     onSelect={selectClass}
                 />
-                <BuildPanel />
+                <BuildPanel gear={build.gear} cube={build.cube} />
                 <div id={styles["build-footer"]}>
                     <input
                         id={styles["build-name"]}

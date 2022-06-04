@@ -1,13 +1,15 @@
 // TS
 import User from "@/models/User";
-import Gear from "@/models/Gear";
+import BuildGear from "@/models/BuildGear";
+import BuildCube from "@/models/BuildCube";
 
 export default interface Build {
     id?: string;
     name: string;
     class: string;
     description?: string;
-    gear: Gear[];
+    gear: BuildGear;
+    cube: BuildCube;
     User?: User;
     userId?: string | null;
 }
