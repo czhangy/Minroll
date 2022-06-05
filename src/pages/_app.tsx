@@ -2,7 +2,7 @@
 import "@/styles/globals.scss";
 // TS
 import type { AppProps } from "next/app";
-import CurrentUser from "@/models/User";
+import CurrentUser from "@/models/CurrentUser";
 // Nav components
 import Navbar from "@/components/Nav/Navbar";
 import Footer from "@/components/Nav/Footer";
