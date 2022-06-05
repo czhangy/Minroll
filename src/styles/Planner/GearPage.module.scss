@@ -31,4 +31,13 @@
             }
         }
     }
+
+    #gear-loading {
+        font-family: constants.$header-font;
+        font-size: 2rem;
+        color: constants.$accent-color;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+    }
 }

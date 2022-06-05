@@ -39,12 +39,20 @@ const GearPage: React.FC<Props> = ({
     const [cubeJewelryList, setCubeJewelryList] = useState<Gear[]>([]);
 
     // Fetch all items matching class => refresh on class change
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     useEffect(() => {
+        setIsLoading(true);
         if (className !== "")
             axios
                 .get("/api/gear", { params: { className: className } })
-                .then((response) => setGearList(response.data))
-                .catch((error) => console.log(error));
+                .then((response) => {
+                    setGearList(response.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setIsLoading(false);
+                });
     }, [className]);
 
     // Filter by slot => refresh on slot/class change
@@ -171,6 +179,7 @@ const GearPage: React.FC<Props> = ({
                     />
                 </div>
             </div>
+            {isLoading ? <div id={styles["gear-loading"]}>Loading...</div> : ""}
         </div>
     );
 };
