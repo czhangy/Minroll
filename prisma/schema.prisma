@@ -15,7 +15,7 @@ model User {
     email    String  @unique
     username String  @unique
     password String
-    builds   Build[]
+    builds   String[]
 }
 
 model Build {
@@ -23,8 +23,8 @@ model Build {
     name        String
     class       String
     description String
-    gear        Gear[]
-    user        User   @relation(fields: [userId], references: [id])
+    gear        String[]
+    cube        String[]
     userId      String
 }
 
@@ -49,6 +49,5 @@ model Gear {
     effect      String?
     description String
     src         String
-    builds      Build[]
     classes     String[]
 }

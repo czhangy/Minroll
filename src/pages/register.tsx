@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 // TS
 import { NextPage } from "next";
-import User from "@/models/User";
+import NewUser from "@/models/NewUser";
 import AuthErrors from "@/models/AuthErrors";
 
 const Register: NextPage = () => {
@@ -18,7 +18,7 @@ const Register: NextPage = () => {
     const router = useRouter();
 
     // Form state
-    const [formData, setFormData] = useState<User>({
+    const [formData, setFormData] = useState<NewUser>({
         email: "",
         username: "",
         password: "",

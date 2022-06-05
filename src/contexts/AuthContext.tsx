@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 // TS
 import AuthContext from "@/models/AuthContext";
-import User from "@/models/User";
+import CurrentUser from "@/models/CurrentUser";
 import { Context } from "react";
 
 // Set default context
@@ -10,14 +10,14 @@ const AuthContext: Context<AuthContext | null> =
     createContext<AuthContext | null>(null);
 
 type Props = {
-    value: User | null;
+    value: CurrentUser | null;
     children: any;
 };
 
 export const AuthProvider: React.FC<Props> = ({ value, children }) => {
     // Define global state
-    const [user, setUser] = useState<User | null>(value);
-    const loginUser = (user: User) => {
+    const [user, setUser] = useState<CurrentUser | null>(value);
+    const loginUser = (user: CurrentUser) => {
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user));
     };

@@ -2,6 +2,8 @@
 import prisma from "@/lib/prisma";
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import LoginUser from "@/models/LoginUser";
+import CurrentUser from "@/models/CurrentUser";
 
 export default async function handler(
     req: NextApiRequest,
@@ -11,15 +13,20 @@ export default async function handler(
     const bcrypt = require("bcrypt");
     // Handle POST /api/login
     if (req.method === "POST") {
-        const { username, password } = req.body;
+        const { username, password }: LoginUser = req.body;
         try {
             // Get user by username
-            const result = await prisma.user.findUnique({
+            const result: CurrentUser | null = await prisma.user.findUnique({
                 where: {
                     username: username,
                 },
+                select: {
+                    id: true,
+                    username: true,
+                    password: true,
+                    builds: true,
+                },
             });
-            console.log(result);
             // User not found
             if (result === null)
                 res.status(462).send({
@@ -28,10 +35,12 @@ export default async function handler(
                 });
             // Check for password match
             else {
-                if (bcrypt.compareSync(password, result.password))
+                if (bcrypt.compareSync(password, result.password)) {
+                    // Don't send password to client
+                    delete result.password;
                     res.json(result);
-                // Wrong password
-                else
+                    // Wrong password
+                } else
                     res.status(463).send({
                         success: false,
                         message: "Incorrect password",

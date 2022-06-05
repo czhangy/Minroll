@@ -2,7 +2,7 @@
 import "@/styles/globals.scss";
 // TS
 import type { AppProps } from "next/app";
-import User from "@/models/User";
+import CurrentUser from "@/models/User";
 // Nav components
 import Navbar from "@/components/Nav/Navbar";
 import Footer from "@/components/Nav/Footer";
@@ -10,7 +10,7 @@ import Footer from "@/components/Nav/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
-    let user: User | null = null;
+    let user: CurrentUser | null = null;
 
     return (
         <AuthProvider value={user}>

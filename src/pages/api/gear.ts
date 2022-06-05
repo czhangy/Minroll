@@ -82,15 +82,6 @@ const getGearByClass = async (className: string) => {
                 },
             ],
         },
-        // Strip out fields
-        select: {
-            name: true,
-            slot: true,
-            rarity: true,
-            effect: true,
-            category: true,
-            src: true,
-        },
         // Sort A -> Z
         orderBy: {
             name: "asc",

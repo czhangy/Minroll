@@ -1,8 +1,8 @@
 // TS
-import User from "@/models/User";
+import CurrentUser from "@/models/CurrentUser";
 
 export default interface AuthContext {
-    user: User | null;
+    user: CurrentUser | null;
     loginUser: any;
     logoutUser: any;
 }
