@@ -4,13 +4,25 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
+    min-height: calc(100vh - constants.$navbar-height);
     max-width: constants.$max-container;
     padding: 32px;
     margin: 0 auto;
+    width: 100%;
+
+    #planner-error {
+        display: none;
+        font-family: constants.$header-font;
+        font-size: 2rem;
+        color: constants.$accent-color;
+        font-weight: bold;
+        text-align: center;
+    }
 
     #planner-build {
         height: 100%;
         margin-right: 8px;
+        min-width: 414px;
         width: 414px;
 
         #build-footer {
@@ -85,14 +97,19 @@
     }
 }
 
-@media screen and (max-width: constants.$mobile) {
+@media screen and (max-width: constants.$tablet) {
     #planner {
-        flex-direction: column;
         align-items: center;
+        #planner-error {
+            display: block;
+        }
 
         #planner-build {
-            width: 382px;
-            margin-right: 0;
+            display: none;
+        }
+
+        #planner-content {
+            display: none;
         }
     }
 }
