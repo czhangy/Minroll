@@ -1,0 +1,43 @@
+@use "@/styles/constants";
+
+#gear-page {
+    width: 100%;
+    background: constants.$main-color;
+    flex-grow: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+
+    .gear-container {
+        background: constants.$bg-color;
+        padding: 32px;
+        margin-bottom: 32px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .gear-header {
+            font-size: 1.5rem;
+            font-family: constants.$header-font;
+            margin-bottom: 1rem;
+        }
+
+        .gear-dropdown {
+            margin-bottom: 1rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    #gear-loading {
+        font-family: constants.$header-font;
+        font-size: 2rem;
+        color: constants.$accent-color;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+    }
+}

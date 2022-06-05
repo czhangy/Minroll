@@ -1,0 +1,22 @@
+@use "@/styles/constants";
+
+#description-page {
+    width: 100%;
+    background: constants.$main-color;
+    flex-grow: 1;
+    padding: 32px;
+
+    #description-input {
+        resize: none;
+        padding: 8px 16px;
+        height: 100%;
+        width: 100%;
+        background: constants.$bg-color;
+        font-size: 1.3rem;
+
+        &:focus {
+            outline: none;
+            padding: 6px 14px;
+        }
+    }
+}

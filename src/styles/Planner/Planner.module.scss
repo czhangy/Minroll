@@ -1,0 +1,115 @@
+@use "@/styles/constants";
+
+#planner {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: calc(100vh - constants.$navbar-height);
+    max-width: constants.$max-container;
+    padding: 32px;
+    margin: 0 auto;
+    width: 100%;
+
+    #planner-error {
+        display: none;
+        font-family: constants.$header-font;
+        font-size: 2rem;
+        color: constants.$accent-color;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #planner-build {
+        height: 100%;
+        margin-right: 8px;
+        min-width: 414px;
+        width: 414px;
+
+        #build-footer {
+            margin-top: 8px;
+            display: flex;
+
+            #build-name {
+                background: constants.$main-color;
+                font-size: 1.3rem;
+                margin-right: 8px;
+                width: 70%;
+
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+
+            #save-button {
+                font-family: constants.$header-font;
+                font-weight: bold;
+                letter-spacing: 2px;
+                color: white;
+                background: constants.$accent-color;
+                width: calc(30% - 8px);
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    #planner-content {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 414px);
+
+        #content-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+
+            .nav-button {
+                width: calc((100% - 16px) / 3);
+                background: constants.$main-color;
+                color: white;
+                font-size: 1.17rem;
+                font-family: constants.$header-font;
+                padding: 8px 16px;
+            }
+
+            .active {
+                background: constants.$accent-color;
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    #planner {
+        #planner-build > #build-footer > #save-button:hover {
+            background: constants.$accent-color-hover;
+        }
+
+        #planner-content > #content-nav {
+            .nav-button:hover {
+                background: constants.$main-color-hover;
+            }
+
+            .active:hover {
+                background: constants.$accent-color;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: constants.$tablet) {
+    #planner {
+        align-items: center;
+        #planner-error {
+            display: block;
+        }
+
+        #planner-build {
+            display: none;
+        }
+
+        #planner-content {
+            display: none;
+        }
+    }
+}

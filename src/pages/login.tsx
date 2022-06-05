@@ -8,15 +8,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 // TS
 import { NextPage } from "next";
-import LoginData from "@/models/LoginData";
-import LoginErrors from "@/models/LoginErrors";
-import User from "@/models/User";
+import AuthErrors from "@/models/AuthErrors";
+import LoginUser from "@/models/LoginUser";
+import CurrentUser from "@/models/CurrentUser";
+import AuthContext from "@/models/AuthContext";
 // Axios
 import axios from "axios";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
-// TS
-import AuthContext from "@/models/AuthContext";
 
 const Login: NextPage = () => {
     // Set up router for redirect
@@ -25,7 +24,7 @@ const Login: NextPage = () => {
     const { loginUser } = useAuth() as AuthContext;
 
     // Form state
-    const [formData, setFormData] = useState<LoginData>({
+    const [formData, setFormData] = useState<LoginUser>({
         username: "",
         password: "",
     });
@@ -39,7 +38,7 @@ const Login: NextPage = () => {
     };
 
     // Error state
-    const [formErrors, setFormErrors] = useState<LoginErrors>({
+    const [formErrors, setFormErrors] = useState<AuthErrors>({
         username: false,
         password: false,
         form: false,
@@ -60,7 +59,7 @@ const Login: NextPage = () => {
             .then((response) => {
                 console.log(response);
                 // Build fetched user
-                const currentUser: User = {
+                const currentUser: CurrentUser = {
                     id: response.data.id,
                     username: response.data.username,
                     builds: response.data.builds,

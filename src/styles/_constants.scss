@@ -4,6 +4,8 @@ $accent-color: #006bff;
 $bg-color: #292929;
 $main-color-hover: lighten($main-color, 10);
 $accent-color-hover: darken($accent-color, 10);
+$legendary-color: #ff6c33;
+$set-color: #00ff7f;
 
 // Fonts
 $main-font: "Archivo Narrow", sans-serif;
@@ -16,6 +18,7 @@ $navbar-height: 100px;
 
 // Utility
 $outline: 0 0 3px #000;
+$glow: 0 0 15px $accent-color;
 
 // Breakpoints
 $mobile: 767px;

@@ -1,0 +1,12 @@
+@use "@/styles/constants";
+
+#build-panel {
+    padding: 32px;
+    background: constants.$main-color;
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #build-panel {
+        padding: 16px;
+    }
+}

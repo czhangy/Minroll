@@ -1,0 +1,19 @@
+@use "@/styles/constants";
+
+#skills {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+
+    .skill-button {
+        height: 55px;
+        width: 55px;
+        border: 1px solid constants.$accent-color;
+    }
+}
+
+@media (hover: hover) {
+    #skills > .skill-button:hover {
+        box-shadow: constants.$glow;
+    }
+}

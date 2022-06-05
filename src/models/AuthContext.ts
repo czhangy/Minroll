@@ -1,8 +1,8 @@
-import User from "@/models/User";
-import { Dispatch } from "react";
+// TS
+import CurrentUser from "@/models/CurrentUser";
 
 export default interface AuthContext {
-    user: User | null;
+    user: CurrentUser | null;
     loginUser: any;
     logoutUser: any;
 }

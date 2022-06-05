@@ -3,11 +3,12 @@ import styles from "@/styles/Profile/Profile.module.scss";
 // TS
 import { NextPage } from "next";
 import AuthContext from "@/models/AuthContext";
-import User from "@/models/User";
+import CurrentUser from "@/models/CurrentUser";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
 // Next
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Profile: NextPage = () => {
     // Grab user
@@ -23,9 +24,14 @@ const Profile: NextPage = () => {
 
     return (
         <div id={styles.profile}>
+            <Head>
+                <title>Your Minroll Profile</title>
+            </Head>
             <div id={styles["profile-header"]}>
                 <div id={styles["header-container"]}>
-                    <h2 id={styles.username}>{(user as User)?.username}</h2>
+                    <h2 id={styles.username}>
+                        {(user as CurrentUser)?.username}
+                    </h2>
                     <button id={styles["logout-button"]} onClick={onLogout}>
                         Log Out
                     </button>

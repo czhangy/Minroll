@@ -117,6 +117,8 @@
 To run this project, you will need to add the following environment variables to your `.env` file
 
 -   `DATABASE_URL`
+-   `BNET_ID`
+-   `BNET_SECRET`
 
 <!-- Getting Started -->
 
@@ -165,17 +167,21 @@ Start the application
     -   [x] Welcome text
     -   [x] Link to login page
 
+-   [x] Collect data
+
+    -   [x] Gather all gear data/assets
+
 -   [ ] Build Build Sheet Component
 
-    -   [ ] Gear section
+    -   [x] Gear section
     -   [ ] Skills section
     -   [ ] Passives section
-    -   [ ] Kanai's Cube section
+    -   [x] Kanai's Cube section
     -   [ ] Gem sockets
 
 -   [ ] Build GET API routes
 
-    -   [ ] Fetch gear by class
+    -   [x] Fetch gear by class
     -   [ ] Fetch skills by class
     -   [ ] Fetch passives by class
 
@@ -197,14 +203,15 @@ Start the application
 
 -   [ ] Build Planner Page
 
-    -   [ ] Class selection
-    -   [ ] Gear selection
+    -   [x] Class selection
+    -   [x] Gear selection
     -   [ ] Skill selection
     -   [ ] Passives selection
-    -   [ ] Cube selection
+    -   [x] Cube selection
+    -   [ ] Gem selection
     -   [ ] Changes display on build
     -   [ ] Save functionality
-    -   [ ] Load previous build functionality
+    -   [ ] Edit previous build functionality
 
 -   [x] Build Auth Pages
 
@@ -259,4 +266,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 -   [Awesome README](https://github.com/matiassingers/awesome-readme)
 -   [Shields.io](https://shields.io/)
 -   [Maxroll](https://maxroll.gg/)
--   [Battle.net](https://develop.battle.net/documentation/diablo-3/game-data-apis)
+-   [Battle.net API](https://develop.battle.net/documentation/diablo-3/game-data-apis)
+-   [BlizzAPI](https://blizzapi.lukem.net/)

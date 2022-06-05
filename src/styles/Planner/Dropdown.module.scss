@@ -1,0 +1,105 @@
+@use "@/styles/constants";
+
+.dropdown {
+    position: relative;
+
+    .dropdown-button {
+        background: constants.$main-color;
+        width: 100%;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+
+        &:focus {
+            border: 2px solid constants.$accent-color;
+            padding: 6px 14px;
+        }
+
+        .dropdown-selection {
+            display: flex;
+        }
+
+        .dropdown-text {
+            color: white;
+            font-family: constants.$main-font;
+            font-size: 1.3rem;
+            text-align: left;
+            margin-left: 16px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        .dropdown-icon {
+            transition: transform 0.2s ease;
+            height: 20px;
+            width: 20px;
+        }
+
+        .rotated {
+            transform: rotate(180deg);
+        }
+    }
+
+    .dropdown-input {
+        background: constants.$main-color;
+        width: 100%;
+        color: white;
+        font-family: constants.$main-font;
+        font-size: 1.3rem;
+    }
+
+    .dropdown-options {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s ease;
+        transform: translateY(-10px);
+        width: 100%;
+        box-shadow: constants.$outline;
+        z-index: 99;
+        background: constants.$main-color;
+        max-height: 200px;
+        overflow-y: scroll;
+
+        .dropdown-option {
+            background: constants.$main-color;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0 16px;
+
+            .option-image {
+                margin-right: 16px;
+                height: 30px;
+                width: 30px;
+                position: relative;
+            }
+
+            .option-text {
+                color: white;
+                font-family: constants.$main-font;
+                font-size: 1.3rem;
+                text-align: left;
+                padding: 12px 0;
+            }
+        }
+    }
+
+    .show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+@media (hover: hover) {
+    .dropdown > .dropdown-options > .dropdown-option:hover {
+        background: constants.$main-color-hover;
+    }
+}

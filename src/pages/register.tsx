@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Auth/Auth.module.scss";
 // React
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
@@ -10,15 +10,15 @@ import { useRouter } from "next/router";
 import axios from "axios";
 // TS
 import { NextPage } from "next";
-import RegisterData from "@/models/RegisterData";
-import RegisterErrors from "@/models/RegisterErrors";
+import NewUser from "@/models/NewUser";
+import AuthErrors from "@/models/AuthErrors";
 
 const Register: NextPage = () => {
     // Init router for reroute on register
     const router = useRouter();
 
     // Form state
-    const [formData, setFormData] = useState<RegisterData>({
+    const [formData, setFormData] = useState<NewUser>({
         email: "",
         username: "",
         password: "",
@@ -34,7 +34,7 @@ const Register: NextPage = () => {
     };
 
     // Error state
-    const [formErrors, setFormErrors] = useState<RegisterErrors>({
+    const [formErrors, setFormErrors] = useState<AuthErrors>({
         email: false,
         username: false,
         password: false,
@@ -47,7 +47,7 @@ const Register: NextPage = () => {
             [field]: value,
         });
     };
-    const updateErrors = (errors: RegisterErrors) => {
+    const updateErrors = (errors: AuthErrors) => {
         setFormErrors(errors);
     };
     const clearErrors = () => {
@@ -64,7 +64,7 @@ const Register: NextPage = () => {
     const validateForm: () => boolean = () => {
         // Reset errors
         clearErrors();
-        let errors: RegisterErrors = {
+        let errors: AuthErrors = {
             email: false,
             username: false,
             password: false,
@@ -72,12 +72,13 @@ const Register: NextPage = () => {
             form: false,
         };
         // Email length
-        if (formData.email.length === 0) errors.email = "Email must be valid";
+        if ((formData.email as string).length === 0)
+            errors.email = "Email must be valid";
         // Username length
         if (formData.username.length > 16 || formData.username.length < 4)
             errors.username = "Usernames must be 4 to 16 characters long";
         // Password length
-        if (formData.password.length < 8)
+        if ((formData.password as string).length < 8)
             errors.password = "Passwords must be at least 8 characters long";
         // Confirm password consistency
         if (formData.password !== formData.confirmPassword)

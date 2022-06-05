@@ -1,7 +1,7 @@
 @use "@/styles/constants";
 
 #home {
-    height: calc(100vh - constants.$navbar-height);
+    min-height: calc(100vh - constants.$navbar-height);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,6 +9,7 @@
         url("/images/home-bg.jpg");
     object-fit: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     #home-container {
         display: flex;

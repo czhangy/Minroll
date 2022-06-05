@@ -1,0 +1,158 @@
+@use "@/styles/constants";
+
+#gear {
+    height: 500px;
+    width: 350px;
+    background-image: url("/images/gear-bg.jpg");
+    background-size: contain;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    box-shadow: constants.$outline;
+
+    .gear-slot {
+        position: absolute;
+        display: flex;
+        align-items: center;
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .legendary {
+        background-color: rgba(constants.$legendary-color, 0.2);
+        box-shadow: 0 0 5px 1px constants.$legendary-color;
+    }
+
+    .set {
+        background-color: rgba(constants.$set-color, 0.2);
+        box-shadow: 0 0 5px 1px constants.$set-color;
+    }
+
+    #head {
+        top: 9px;
+        left: 137px;
+        height: 72px;
+        width: 73px;
+
+        .image-container {
+            height: 160%;
+        }
+    }
+
+    #shoulders {
+        top: 35px;
+        left: 40px;
+        height: 98px;
+        width: 72px;
+
+        .image-container {
+            height: 120%;
+        }
+    }
+
+    #neck {
+        top: 60px;
+        right: 55px;
+        height: 60px;
+        width: 58px;
+    }
+
+    #torso {
+        top: 90px;
+        left: 129px;
+        height: 129px;
+        width: 90px;
+
+        .image-container {
+            height: 110%;
+        }
+    }
+
+    #hands {
+        top: 153px;
+        left: 10px;
+        height: 97px;
+        width: 71px;
+
+        .image-container {
+            height: 130%;
+        }
+    }
+
+    #wrists {
+        top: 153px;
+        right: 13px;
+        height: 97px;
+        width: 71px;
+
+        .image-container {
+            height: 130%;
+        }
+    }
+
+    #waist {
+        top: 231px;
+        left: 129px;
+        height: 32px;
+        width: 90px;
+
+        .image-container {
+            height: 220%;
+        }
+    }
+
+    #left-finger {
+        top: 272px;
+        left: 24px;
+        height: 42px;
+        width: 42px;
+    }
+
+    #legs {
+        top: 276px;
+        left: 139px;
+        height: 97px;
+        width: 70px;
+
+        .image-container {
+            height: 150%;
+            width: 120%;
+        }
+    }
+
+    #right-finger {
+        top: 272px;
+        right: 27px;
+        height: 42px;
+        width: 42px;
+    }
+
+    #main-hand {
+        top: 336px;
+        left: 10px;
+        height: 146px;
+        width: 70px;
+    }
+
+    #feet {
+        top: 387px;
+        left: 139px;
+        height: 95px;
+        width: 69px;
+
+        .image-container {
+            height: 130%;
+        }
+    }
+
+    #off-hand {
+        top: 336px;
+        right: 13px;
+        height: 146px;
+        width: 70px;
+    }
+}

@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import NewUser from "@/models/NewUser";
 
 export default async function handler(
     req: NextApiRequest,
@@ -12,7 +13,7 @@ export default async function handler(
     const bcrypt = require("bcrypt");
     // Handle POST /api/register
     if (req.method === "POST") {
-        const { email, username, password } = req.body;
+        const { email, username, password }: NewUser = req.body;
         // Create account
         try {
             const result = await prisma.user.create({

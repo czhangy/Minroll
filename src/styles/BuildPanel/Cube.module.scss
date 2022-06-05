@@ -1,0 +1,24 @@
+@use "@/styles/constants";
+
+#cube {
+    display: flex;
+    justify-content: space-evenly;
+
+    .cube-slot {
+        height: 64px;
+        width: 64px;
+        border: 1px solid constants.$accent-color;
+
+        .image-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .legendary {
+        background-color: rgba(constants.$legendary-color, 0.2);
+        box-shadow: 0 0 5px 1px constants.$legendary-color;
+        border: none;
+    }
+}

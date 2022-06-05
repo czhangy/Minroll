@@ -4,12 +4,14 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
-        "start": "next start"
+        "build": "npx prisma db push && next build",
+        "start": "next start",
+        "db": "npx prisma db push && npx prisma studio"
     },
     "dependencies": {
         "@prisma/client": "^3.14.0",
         "bcrypt": "^5.0.1",
+        "blizzapi": "^2.1.1",
         "next": "12.1.6",
         "react": "18.1.0",
         "react-dom": "18.1.0",
