@@ -41,8 +41,8 @@ const GearPage: React.FC<Props> = ({
     // Fetch all items matching class => refresh on class change
     const [isLoading, setIsLoading] = useState<boolean>(false);
     useEffect(() => {
-        setIsLoading(true);
-        if (className !== "")
+        if (className !== "") {
+            setIsLoading(true);
             axios
                 .get("/api/gear", { params: { className: className } })
                 .then((response) => {
@@ -53,6 +53,7 @@ const GearPage: React.FC<Props> = ({
                     console.log(error);
                     setIsLoading(false);
                 });
+        }
     }, [className]);
 
     // Filter by slot => refresh on slot/class change
