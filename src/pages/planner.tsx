@@ -12,7 +12,7 @@ import Dropdown from "@/components/Planner/Dropdown";
 import GearPage from "@/components/Planner/GearPage";
 import DescriptionPage from "@/components/Planner/DescriptionPage";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
 // Next
@@ -23,7 +23,7 @@ const Planner: NextPage = () => {
     const { user } = useAuth() as AuthContext;
 
     // Build state
-    const [build, setBuild] = useState<Build>({
+    const defaultBuild: Build = {
         name: "",
         class: "",
         description: "",
@@ -47,7 +47,9 @@ const Planner: NextPage = () => {
             armor: null,
             jewelry: null,
         },
-    });
+    };
+
+    const [build, setBuild] = useState<Build>(defaultBuild);
     const selectClass = (newClass: string | Gear) => {
         setBuild({
             ...build,
@@ -85,6 +87,11 @@ const Planner: NextPage = () => {
             description: newDescription,
         });
     };
+
+    // Clear build on class
+    useEffect(() => {
+        setBuild(defaultBuild);
+    }, [build.class]);
 
     // Page state
     const [page, setPage] = useState<number>(0);
