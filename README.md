@@ -209,7 +209,7 @@ Start the application
     -   [ ] Passives selection
     -   [x] Cube selection
     -   [ ] Gem selection
-    -   [ ] Changes display on build
+    -   [x] Changes display on build
     -   [ ] Save functionality
     -   [ ] Edit previous build functionality
 

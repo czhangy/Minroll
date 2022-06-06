@@ -10,6 +10,7 @@ import Gear from "@/models/Gear";
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
 import GearPage from "@/components/Planner/GearPage";
+import SkillsPage from "@/components/Planner/SkillsPage";
 import DescriptionPage from "@/components/Planner/DescriptionPage";
 // React
 import { useState, useEffect } from "react";
@@ -109,6 +110,7 @@ const Planner: NextPage = () => {
                     onCubeSelect={selectCube}
                 />
             );
+        if (page === 1) return <SkillsPage className={build.class} />;
         if (page === 2)
             return (
                 <DescriptionPage
@@ -165,7 +167,6 @@ const Planner: NextPage = () => {
                     content={classNames}
                     placeholder="Select a class..."
                     hasIcon={true}
-                    isSearchable={false}
                     onSelect={selectClass}
                 />
                 <BuildPanel gear={build.gear} cube={build.cube} />

@@ -4,6 +4,7 @@ import styles from "@/styles/Planner/GearPage.module.scss";
 import { useState, useEffect } from "react";
 // Local components
 import Dropdown from "@/components/Planner/Dropdown";
+import GearDropdown from "@/components/Planner/GearDropdown";
 // TS
 import Gear from "@/models/Gear";
 import BuildGear from "@/models/BuildGear";
@@ -130,18 +131,15 @@ const GearPage: React.FC<Props> = ({
                         content={slots}
                         onSelect={setSlot}
                         hasIcon={false}
-                        isSearchable={false}
                         placeholder="Select a slot..."
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
-                    <Dropdown
-                        content={buildGearList}
+                    <GearDropdown
+                        gear={buildGearList}
                         onSelect={selectGear}
-                        hasIcon={true}
-                        isSearchable={true}
                         placeholder="Select an item..."
-                        value={
+                        savedValue={
                             slot ? gear[slot as keyof BuildGear]?.name : null
                         }
                     />
@@ -150,33 +148,27 @@ const GearPage: React.FC<Props> = ({
             <div className={styles["gear-container"]}>
                 <h3 className={styles["gear-header"]}>Cube Selection</h3>
                 <div className={styles["gear-dropdown"]}>
-                    <Dropdown
-                        content={cubeWeaponList}
+                    <GearDropdown
+                        gear={cubeWeaponList}
                         onSelect={(item) => selectCube("weapon", item)}
-                        hasIcon={true}
-                        isSearchable={true}
                         placeholder="Select a weapon item..."
-                        value={cube["weapon"]?.name}
+                        savedValue={cube["weapon"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
-                    <Dropdown
-                        content={cubeArmorList}
+                    <GearDropdown
+                        gear={cubeArmorList}
                         onSelect={(item) => selectCube("armor", item)}
-                        hasIcon={true}
-                        isSearchable={true}
                         placeholder="Select an armor item..."
-                        value={cube["armor"]?.name}
+                        savedValue={cube["armor"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
-                    <Dropdown
-                        content={cubeJewelryList}
+                    <GearDropdown
+                        gear={cubeJewelryList}
                         onSelect={(item) => selectCube("jewelry", item)}
-                        hasIcon={true}
-                        isSearchable={true}
                         placeholder="Select a jewelry item..."
-                        value={cube["jewelry"]?.name}
+                        savedValue={cube["jewelry"]?.name}
                     />
                 </div>
             </div>
