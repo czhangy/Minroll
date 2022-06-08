@@ -1,8 +1,31 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import Rune from "@/models/Rune";
 import Skill from "@/models/Skill";
 // BlizzAPI
 import { BlizzAPI, RegionIdOrName } from "blizzapi";
+
+const getRunesBySkill = async (className: string, skillName: string) => {
+    // Init BAPI
+    const api = new BlizzAPI({
+        region: "us" as RegionIdOrName,
+        clientId: process.env.BNET_ID as string,
+        clientSecret: process.env.BNET_SECRET as string,
+    });
+    // Fetch runes
+    let runes: any = await api.query(
+        `/d3/data/hero/${className}/skill/${skillName}`
+    );
+    runes = runes.runes;
+    runes = runes.map((rune: any) => {
+        return {
+            name: rune.name,
+            type: rune.type,
+            description: rune.description,
+        };
+    });
+    return runes;
+};
 
 const getSkillsByClass = async (className: string) => {
     // Init BAPI
@@ -31,15 +54,24 @@ export default async function handler(
     // Handle GET /api/skills
     if (req.method === "GET") {
         try {
-            if (req.query.className) {
+            if (req.query.skillName && req.query.className) {
+                // Get all runes for a specific skill
+                const runes: Rune[] = await getRunesBySkill(
+                    req.query.className as string,
+                    req.query.skillName as string
+                );
+                res.json(runes);
+            } else if (req.query.className) {
                 // Get all skills for a specific class
                 const skills: Skill[] = await getSkillsByClass(
                     req.query.className as string
                 );
                 res.json(skills);
-                // Get specific skill by name
             } else {
-                console.log("Get by name");
+                res.status(400).send({
+                    success: false,
+                    message: "Invalid request",
+                });
             }
         } catch (err) {
             res.status(400).send({ success: false, message: err });
