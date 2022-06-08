@@ -92,14 +92,14 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
                             key={i}
                             onClick={() => selectRune(rune)}
                         >
-                            {/* <div className={styles["rune-icon"]}>
+                            <div className={styles["rune-icon"]}>
                                 <Image
-                                    src={`http://media.blizzard.com/d3/icons/skills/42/${skill.icon}.png`}
+                                    src={`/icons/rune-${rune.type}.webp`}
                                     alt=""
                                     layout="fill"
                                     objectFit="contain"
                                 />
-                            </div> */}
+                            </div>
                             <p className={styles["rune-name"]}>{rune.name}</p>
                         </li>
                     );
