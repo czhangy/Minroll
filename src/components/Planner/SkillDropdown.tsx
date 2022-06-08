@@ -28,12 +28,10 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     };
 
     // Search bar display state
-    const [searchedValue, setSearchedValue] = useState<string>("");
-    const updateValue = (e: SyntheticEvent) =>
-        setSearchedValue((e.target as HTMLInputElement).value);
+    const [searchedSkill, setSearchedSkill] = useState<string>("");
     const selectSkill = (skill: Skill) => {
         // Set dropdown value
-        setSearchedValue(formatSlug(skill.slug));
+        setSearchedSkill(formatSlug(skill.slug));
         // Pass to parent
         props.onSelect(skill);
     };
@@ -45,10 +43,10 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
             props.skills.filter((skill: Skill) =>
                 formatSlug(skill.slug)
                     .toLowerCase()
-                    .includes(searchedValue.toLowerCase())
+                    .includes(searchedSkill.toLowerCase())
             )
         );
-    }, [props.skills, searchedValue]);
+    }, [props.skills, searchedSkill]);
 
     // Name formatting => remove hyphens and capitalize words
     const formatSlug: (slug: string) => string = (slug: string) => {
@@ -60,6 +58,11 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
             .join(" ");
     };
 
+    // Clear input on class change
+    useEffect(() => {
+        setSearchedSkill("");
+    }, [props.skills]);
+
     return (
         <div className={styles["skill-dropdown"]}>
             <input
@@ -67,8 +70,8 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                 placeholder={props.placeholder}
                 disabled={props.skills.length === 0}
                 spellCheck={false}
-                value={searchedValue}
-                onChange={updateValue}
+                value={searchedSkill}
+                onChange={(e) => setSearchedSkill(e.target.value)}
                 onClick={openDropdown}
                 onBlur={closeDropdown}
             />
@@ -86,7 +89,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                         >
                             <div className={styles["skill-icon"]}>
                                 <Image
-                                    src={skill.icon}
+                                    src={`http://media.blizzard.com/d3/icons/skills/42/${skill.icon}.png`}
                                     alt=""
                                     layout="fill"
                                     objectFit="contain"

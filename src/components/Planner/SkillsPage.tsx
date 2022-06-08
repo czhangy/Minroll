@@ -1,22 +1,16 @@
 // Stylesheet
 import styles from "@/styles/Planner/SkillsPage.module.scss";
-// React
-import { useEffect } from "react";
-// Axios
-import axios from "axios";
 // Local component
 import SkillDropdown from "@/components/Planner/SkillDropdown";
+// TS
+import Skill from "@/models/Skill";
 
 type Props = {
-    className: string;
+    skills: Skill[];
+    onSkillSelect: (ind: number, skill: Skill) => void;
 };
 
-const SkillsPage: React.FC<Props> = ({ className }: Props) => {
-    useEffect(() => {
-        if (className !== "")
-            axios.get("/api/skills", { params: { className: className } });
-    }, [className]);
-
+const SkillsPage: React.FC<Props> = ({ skills, onSkillSelect }: Props) => {
     const t = () => {};
 
     return (
@@ -25,9 +19,9 @@ const SkillsPage: React.FC<Props> = ({ className }: Props) => {
                 <h3 className={styles["skills-header"]}>Skills Selection</h3>
                 <div className={styles["gear-dropdown"]}>
                     <SkillDropdown
-                        skills={[]}
+                        skills={skills}
                         placeholder="Select a skill..."
-                        onSelect={t}
+                        onSelect={(skill) => onSkillSelect(0, skill)}
                     />
                 </div>
             </div>

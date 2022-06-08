@@ -7,7 +7,7 @@ const nextConfig = {
         includePaths: [path.join(__dirname, "styles")],
     },
     images: {
-        domains: ["static.wikia.nocookie.net"],
+        domains: ["static.wikia.nocookie.net", "media.blizzard.com"],
     },
 };
 

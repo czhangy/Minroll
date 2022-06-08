@@ -12,7 +12,7 @@ type Props = {
     gear: Gear[];
     placeholder: string;
     onSelect: (item: Gear) => void;
-    savedValue: string | null | undefined;
+    savedItem: string | null | undefined;
 };
 
 const GearDropdown: React.FC<Props> = (props: Props) => {
@@ -29,12 +29,10 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     };
 
     // Search bar display state
-    const [searchedValue, setSearchedValue] = useState<string>("");
-    const updateValue = (e: SyntheticEvent) =>
-        setSearchedValue((e.target as HTMLInputElement).value);
+    const [searchedItem, setSearchedItem] = useState<string>("");
     const selectItem = (item: Gear) => {
         // Set dropdown value
-        setSearchedValue(item.name);
+        setSearchedItem(item.name);
         // Pass to parent
         props.onSelect(item);
     };
@@ -44,14 +42,14 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         setFilteredGear(
             props.gear.filter((item: Gear) =>
-                item.name.toLowerCase().includes(searchedValue.toLowerCase())
+                item.name.toLowerCase().includes(searchedItem.toLowerCase())
             )
         );
-    }, [props.gear, searchedValue]);
+    }, [props.gear, searchedItem]);
 
     // Clear/revert input on class/slot change
     useEffect(() => {
-        setSearchedValue(props.savedValue ? props.savedValue : "");
+        setSearchedItem(props.savedItem ? props.savedItem : "");
     }, [props.gear]);
 
     return (
@@ -61,8 +59,8 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
                 placeholder={props.placeholder}
                 disabled={props.gear.length === 0}
                 spellCheck={false}
-                value={searchedValue}
-                onChange={updateValue}
+                value={searchedItem}
+                onChange={(e) => setSearchedItem(e.target.value)}
                 onClick={openDropdown}
                 onBlur={closeDropdown}
             />

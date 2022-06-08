@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import Build from "@/models/Build";
 import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
+import Skill from "@/models/Skill";
 import Gear from "@/models/Gear";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
@@ -18,6 +19,8 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 // Next
 import Head from "next/head";
+// Axios
+import axios from "axios";
 
 const Planner: NextPage = () => {
     // Get user
@@ -48,13 +51,13 @@ const Planner: NextPage = () => {
             armor: null,
             jewelry: null,
         },
+        skills: new Array(6).fill(null),
     };
-
     const [build, setBuild] = useState<Build>(defaultBuild);
-    const selectClass = (newClass: string | Gear) => {
+    const selectClass = (newClass: string) => {
         setBuild({
             ...build,
-            class: newClass as string,
+            class: newClass,
         });
     };
     const nameBuild = (e: SyntheticEvent) => {
@@ -81,6 +84,17 @@ const Planner: NextPage = () => {
             },
         });
     };
+    const selectSkill = (ind: number, skill: Skill) => {
+        const newSkills = [
+            ...build.skills.slice(0, ind),
+            skill,
+            ...build.skills.slice(ind + 1, 6),
+        ];
+        setBuild({
+            ...build,
+            skills: newSkills,
+        });
+    };
     const updateDescription = (e: SyntheticEvent) => {
         const newDescription: string = (e.target as HTMLTextAreaElement).value;
         setBuild({
@@ -89,9 +103,35 @@ const Planner: NextPage = () => {
         });
     };
 
-    // Clear build on class
+    // Page state
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    // Class data
+    const [gear, setGear] = useState<Gear[]>([]);
+    const [skills, setSkills] = useState<Skill[]>([]);
+
+    // Clear build on class and refetch data
     useEffect(() => {
-        setBuild(defaultBuild);
+        setBuild({
+            ...defaultBuild,
+            class: build.class,
+        });
+        if (build.class !== "") {
+            setIsLoading(true);
+            axios
+                .get("/api/gear", { params: { className: build.class } })
+                .then((response) => {
+                    setGear(response.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setIsLoading(false);
+                });
+            axios
+                .get("/api/skills", { params: { className: build.class } })
+                .then((response) => setSkills(response.data));
+        }
     }, [build.class]);
 
     // Page state
@@ -103,14 +143,16 @@ const Planner: NextPage = () => {
         if (page === 0)
             return (
                 <GearPage
-                    className={build.class}
-                    gear={build.gear}
-                    cube={build.cube}
+                    gearList={gear}
+                    savedGear={build.gear}
+                    savedCube={build.cube}
                     onGearSelect={selectGear}
                     onCubeSelect={selectCube}
+                    isLoading={isLoading}
                 />
             );
-        if (page === 1) return <SkillsPage className={build.class} />;
+        if (page === 1)
+            return <SkillsPage skills={skills} onSkillSelect={selectSkill} />;
         if (page === 2)
             return (
                 <DescriptionPage
@@ -139,7 +181,6 @@ const Planner: NextPage = () => {
 
     // Page names
     const pageNames = ["Gear", "Skills", "Description"];
-
     // All classes
     const classNames = [
         "barbarian",
@@ -169,7 +210,11 @@ const Planner: NextPage = () => {
                     hasIcon={true}
                     onSelect={selectClass}
                 />
-                <BuildPanel gear={build.gear} cube={build.cube} />
+                <BuildPanel
+                    gear={build.gear}
+                    skills={build.skills}
+                    cube={build.cube}
+                />
                 <div id={styles["build-footer"]}>
                     <input
                         id={styles["build-name"]}

@@ -1,5 +1,6 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import Skill from "@/models/Skill";
 // BlizzAPI
 import { BlizzAPI, RegionIdOrName } from "blizzapi";
 
@@ -10,7 +11,6 @@ const getSkillsByClass = async (className: string) => {
         clientId: process.env.BNET_ID as string,
         clientSecret: process.env.BNET_SECRET as string,
     });
-    console.log(className);
     // Fetch skills
     let skills: any = await api.query(`/d3/data/hero/${className}`);
     skills = skills.skills.active;
@@ -21,7 +21,6 @@ const getSkillsByClass = async (className: string) => {
             description: skill.description,
         };
     });
-    console.log(skills);
     return skills;
 };
 
@@ -34,7 +33,7 @@ export default async function handler(
         try {
             if (req.query.className) {
                 // Get all skills for a specific class
-                const skills = await getSkillsByClass(
+                const skills: Skill[] = await getSkillsByClass(
                     req.query.className as string
                 );
                 res.json(skills);

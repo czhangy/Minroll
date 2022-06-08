@@ -9,59 +9,31 @@ import GearDropdown from "@/components/Planner/GearDropdown";
 import Gear from "@/models/Gear";
 import BuildGear from "@/models/BuildGear";
 import BuildCube from "@/models/BuildCube";
-// Axios
-import axios from "axios";
 
 type Props = {
-    className: string;
-    gear: BuildGear;
-    cube: BuildCube;
+    gearList: Gear[];
+    savedGear: BuildGear;
+    savedCube: BuildCube;
     onGearSelect: (slot: string, item: Gear) => void;
     onCubeSelect: (slot: string, item: Gear) => void;
+    isLoading: boolean;
 };
 
-const GearPage: React.FC<Props> = ({
-    className,
-    gear,
-    cube,
-    onGearSelect,
-    onCubeSelect,
-}: Props) => {
+const GearPage: React.FC<Props> = (props: Props) => {
     // Hold gear slot state
     const [slot, setSlot] = useState<string | null>(null);
-
-    // Hold gear state => gear master list based on class
-    const [gearList, setGearList] = useState<Gear[]>([]);
     // Hold build gear state => gear that goes in slots
-    const [buildGearList, setBuildGearList] = useState<Gear[]>([]);
+    const [filteredGearList, setFilteredGearList] = useState<Gear[]>([]);
     // Hold cube gear state
     const [cubeWeaponList, setCubeWeaponList] = useState<Gear[]>([]);
     const [cubeArmorList, setCubeArmorList] = useState<Gear[]>([]);
     const [cubeJewelryList, setCubeJewelryList] = useState<Gear[]>([]);
 
-    // Fetch all items matching class => refresh on class change
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    useEffect(() => {
-        if (className !== "") {
-            setIsLoading(true);
-            axios
-                .get("/api/gear", { params: { className: className } })
-                .then((response) => {
-                    setGearList(response.data);
-                    setIsLoading(false);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setIsLoading(false);
-                });
-        }
-    }, [className]);
-
-    // Filter by slot => refresh on slot/class change
+    // Filter gear by slot
     useEffect(() => {
         if (slot)
-            setBuildGearList(
-                gearList.filter((item) => {
+            setFilteredGearList(
+                props.gearList.filter((item) => {
                     if (slot === "main-hand")
                         return (
                             item.slot === "one-hand" || item.slot === "two-hand"
@@ -73,11 +45,11 @@ const GearPage: React.FC<Props> = ({
                     else return item.slot === slot;
                 })
             );
-    }, [slot, gearList]);
+    }, [slot, props.gearList]);
 
     // Update cube lists on master list change
     useEffect(() => {
-        const cubeGearList = gearList.filter((item) => item.effect);
+        const cubeGearList = props.gearList.filter((item) => item.effect);
         const weaponCategories = ["one-hand", "two-hand", "off-hand"];
         const armorCategories = [
             "head",
@@ -99,11 +71,7 @@ const GearPage: React.FC<Props> = ({
         setCubeJewelryList(
             cubeGearList.filter((item) => jewelryCategories.includes(item.slot))
         );
-    }, [gearList]);
-
-    // Send data to Planner
-    const selectGear = (gear: Gear) => onGearSelect(slot as string, gear);
-    const selectCube = (slot: string, gear: Gear) => onCubeSelect(slot, gear);
+    }, [props.gearList]);
 
     // All slots
     const slots = [
@@ -136,11 +104,15 @@ const GearPage: React.FC<Props> = ({
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
-                        gear={buildGearList}
-                        onSelect={selectGear}
+                        gear={filteredGearList}
+                        onSelect={(item) =>
+                            props.onGearSelect(slot as string, item)
+                        }
                         placeholder="Select an item..."
                         savedValue={
-                            slot ? gear[slot as keyof BuildGear]?.name : null
+                            slot
+                                ? props.savedGear[slot as keyof BuildGear]?.name
+                                : null
                         }
                     />
                 </div>
@@ -150,29 +122,33 @@ const GearPage: React.FC<Props> = ({
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gear={cubeWeaponList}
-                        onSelect={(item) => selectCube("weapon", item)}
+                        onSelect={(item) => props.onCubeSelect("weapon", item)}
                         placeholder="Select a weapon item..."
-                        savedValue={cube["weapon"]?.name}
+                        savedValue={props.savedCube["weapon"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gear={cubeArmorList}
-                        onSelect={(item) => selectCube("armor", item)}
+                        onSelect={(item) => props.onCubeSelect("armor", item)}
                         placeholder="Select an armor item..."
-                        savedValue={cube["armor"]?.name}
+                        savedValue={props.savedCube["armor"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gear={cubeJewelryList}
-                        onSelect={(item) => selectCube("jewelry", item)}
+                        onSelect={(item) => props.onCubeSelect("jewelry", item)}
                         placeholder="Select a jewelry item..."
-                        savedValue={cube["jewelry"]?.name}
+                        savedValue={props.savedCube["jewelry"]?.name}
                     />
                 </div>
             </div>
-            {isLoading ? <div id={styles["gear-loading"]}>Loading...</div> : ""}
+            {props.isLoading ? (
+                <div id={styles["gear-loading"]}>Loading...</div>
+            ) : (
+                ""
+            )}
         </div>
     );
 };
