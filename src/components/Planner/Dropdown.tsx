@@ -12,6 +12,7 @@ type Props = {
     onSelect: (value: string) => void;
     hasIcon: boolean;
     placeholder: string;
+    isLoading?: boolean;
 };
 
 const Dropdown: React.FC<Props> = (props: Props) => {
@@ -52,6 +53,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                 className={styles["dropdown-button"]}
                 onClick={openDropdown}
                 onBlur={closeDropdown}
+                disabled={props.isLoading}
             >
                 {selectedValue ? (
                     <div className={styles["dropdown-selection"]}>
@@ -80,10 +82,14 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                     }`}
                 >
                     <Image
-                        src="/icons/chevron-down.svg"
+                        src={
+                            props.isLoading
+                                ? "/icons/loading.gif"
+                                : "/icons/chevron-down.svg"
+                        }
                         alt=""
-                        height={20}
-                        width={20}
+                        layout="fill"
+                        objectFit="contain"
                     />
                 </div>
             </button>

@@ -119,20 +119,17 @@ const Planner: NextPage = () => {
         if (build.class !== "") {
             setIsLoading(true);
             // Fetch gear
-            axios
+            const gear: Promise<void> = axios
                 .get("/api/gear", { params: { className: build.class } })
-                .then((response) => {
-                    setGear(response.data);
-                    setIsLoading(false);
-                })
+                .then((response) => setGear(response.data))
                 .catch((error) => console.log(error));
             // Fetch skills
-            axios
+            const skills: Promise<void> = axios
                 .get("/api/skills", { params: { className: build.class } })
-                .then((response) => {
-                    setSkills(response.data);
-                    setIsLoading(false);
-                });
+                .then((response) => setSkills(response.data))
+                .catch((error) => console.log(error));
+            // Loading complete
+            Promise.all([gear, skills]).then(() => setIsLoading(false));
         }
     }, [build.class]);
 
@@ -150,7 +147,6 @@ const Planner: NextPage = () => {
                     savedCube={build.cube}
                     onGearSelect={selectGear}
                     onCubeSelect={selectCube}
-                    isLoading={isLoading}
                 />
             );
         if (page === 1)
@@ -217,6 +213,7 @@ const Planner: NextPage = () => {
                     placeholder="Select a class..."
                     hasIcon={true}
                     onSelect={selectClass}
+                    isLoading={isLoading}
                 />
                 <BuildPanel
                     gear={build.gear}

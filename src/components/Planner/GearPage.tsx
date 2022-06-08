@@ -16,7 +16,6 @@ type Props = {
     savedCube: BuildCube;
     onGearSelect: (slot: string, item: Gear) => void;
     onCubeSelect: (slot: string, item: Gear) => void;
-    isLoading: boolean;
 };
 
 const GearPage: React.FC<Props> = (props: Props) => {
@@ -144,11 +143,6 @@ const GearPage: React.FC<Props> = (props: Props) => {
                     />
                 </div>
             </div>
-            {props.isLoading ? (
-                <div id={styles["gear-loading"]}>Loading...</div>
-            ) : (
-                ""
-            )}
         </div>
     );
 };
