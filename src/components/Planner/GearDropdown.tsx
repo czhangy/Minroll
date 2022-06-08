@@ -64,6 +64,18 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
                 onClick={openDropdown}
                 onBlur={closeDropdown}
             />
+            {props.gearList.length === 0 ? (
+                <div className={styles["disabled-icon"]}>
+                    <Image
+                        src="/icons/lock.svg"
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+            ) : (
+                ""
+            )}
             <ul
                 className={`${styles["gear-options"]} ${
                     open ? styles.show : ""

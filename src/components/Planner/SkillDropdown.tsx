@@ -76,6 +76,18 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                 onClick={openDropdown}
                 onBlur={closeDropdown}
             />
+            {props.skillList.length === 0 ? (
+                <div className={styles["disabled-icon"]}>
+                    <Image
+                        src="/icons/lock.svg"
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </div>
+            ) : (
+                ""
+            )}
             <ul
                 className={`${styles["skill-options"]} ${
                     open ? styles.show : ""

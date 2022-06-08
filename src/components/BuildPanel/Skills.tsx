@@ -12,8 +12,8 @@ type Props = {
 const Skills: React.FC<Props> = ({ skills }: Props) => {
     return (
         <div id={styles.skills}>
-            {skills.map((skill) => (
-                <SkillSlot skill={skill} />
+            {skills.map((skill: Skill | null, i: number) => (
+                <SkillSlot skill={skill} key={i} />
             ))}
         </div>
     );
