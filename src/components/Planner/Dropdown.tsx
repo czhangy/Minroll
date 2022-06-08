@@ -72,7 +72,9 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                         </p>
                     </div>
                 ) : (
-                    <p className={styles["dropdown-text"]}>
+                    <p
+                        className={`${styles["dropdown-text"]} ${styles.placeholder}`}
+                    >
                         {props.placeholder}
                     </p>
                 )}
@@ -93,7 +95,6 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                     />
                 </div>
             </button>
-
             <ul
                 className={`${styles["dropdown-options"]} ${
                     open ? styles.show : ""
