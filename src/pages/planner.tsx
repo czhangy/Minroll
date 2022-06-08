@@ -118,19 +118,21 @@ const Planner: NextPage = () => {
         });
         if (build.class !== "") {
             setIsLoading(true);
+            // Fetch gear
             axios
                 .get("/api/gear", { params: { className: build.class } })
                 .then((response) => {
                     setGear(response.data);
                     setIsLoading(false);
                 })
-                .catch((error) => {
-                    console.log(error);
-                    setIsLoading(false);
-                });
+                .catch((error) => console.log(error));
+            // Fetch skills
             axios
                 .get("/api/skills", { params: { className: build.class } })
-                .then((response) => setSkills(response.data));
+                .then((response) => {
+                    setSkills(response.data);
+                    setIsLoading(false);
+                });
         }
     }, [build.class]);
 
@@ -152,7 +154,13 @@ const Planner: NextPage = () => {
                 />
             );
         if (page === 1)
-            return <SkillsPage skills={skills} onSkillSelect={selectSkill} />;
+            return (
+                <SkillsPage
+                    skillList={skills}
+                    savedSkills={build.skills}
+                    onSkillSelect={selectSkill}
+                />
+            );
         if (page === 2)
             return (
                 <DescriptionPage

@@ -104,12 +104,12 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
-                        gear={filteredGearList}
+                        gearList={filteredGearList}
                         onSelect={(item) =>
                             props.onGearSelect(slot as string, item)
                         }
                         placeholder="Select an item..."
-                        savedValue={
+                        savedItem={
                             slot
                                 ? props.savedGear[slot as keyof BuildGear]?.name
                                 : null
@@ -121,26 +121,26 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 <h3 className={styles["gear-header"]}>Cube Selection</h3>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
-                        gear={cubeWeaponList}
+                        gearList={cubeWeaponList}
                         onSelect={(item) => props.onCubeSelect("weapon", item)}
                         placeholder="Select a weapon item..."
-                        savedValue={props.savedCube["weapon"]?.name}
+                        savedItem={props.savedCube["weapon"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
-                        gear={cubeArmorList}
+                        gearList={cubeArmorList}
                         onSelect={(item) => props.onCubeSelect("armor", item)}
                         placeholder="Select an armor item..."
-                        savedValue={props.savedCube["armor"]?.name}
+                        savedItem={props.savedCube["armor"]?.name}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
-                        gear={cubeJewelryList}
+                        gearList={cubeJewelryList}
                         onSelect={(item) => props.onCubeSelect("jewelry", item)}
                         placeholder="Select a jewelry item..."
-                        savedValue={props.savedCube["jewelry"]?.name}
+                        savedItem={props.savedCube["jewelry"]?.name}
                     />
                 </div>
             </div>

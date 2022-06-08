@@ -9,9 +9,10 @@ import Skill from "@/models/Skill";
 import Image from "next/image";
 
 type Props = {
-    skills: Skill[];
+    skillList: Skill[];
     placeholder: string;
     onSelect: (item: Skill) => void;
+    savedSkill: string | null;
 };
 
 const SkillDropdown: React.FC<Props> = (props: Props) => {
@@ -40,13 +41,13 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);
     useEffect(() => {
         setFilteredSkills(
-            props.skills.filter((skill: Skill) =>
+            props.skillList.filter((skill: Skill) =>
                 formatSlug(skill.slug)
                     .toLowerCase()
                     .includes(searchedSkill.toLowerCase())
             )
         );
-    }, [props.skills, searchedSkill]);
+    }, [props.skillList, searchedSkill]);
 
     // Name formatting => remove hyphens and capitalize words
     const formatSlug: (slug: string) => string = (slug: string) => {
@@ -58,17 +59,17 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
             .join(" ");
     };
 
-    // Clear input on class change
+    // Clear input on class/page change
     useEffect(() => {
-        setSearchedSkill("");
-    }, [props.skills]);
+        setSearchedSkill(props.savedSkill ? formatSlug(props.savedSkill) : "");
+    }, [props.skillList]);
 
     return (
         <div className={styles["skill-dropdown"]}>
             <input
                 className={styles["skill-input"]}
                 placeholder={props.placeholder}
-                disabled={props.skills.length === 0}
+                disabled={props.skillList.length === 0}
                 spellCheck={false}
                 value={searchedSkill}
                 onChange={(e) => setSearchedSkill(e.target.value)}

@@ -9,7 +9,7 @@ import Gear from "@/models/Gear";
 import Image from "next/image";
 
 type Props = {
-    gear: Gear[];
+    gearList: Gear[];
     placeholder: string;
     onSelect: (item: Gear) => void;
     savedItem: string | null | undefined;
@@ -41,23 +41,23 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
     useEffect(() => {
         setFilteredGear(
-            props.gear.filter((item: Gear) =>
+            props.gearList.filter((item: Gear) =>
                 item.name.toLowerCase().includes(searchedItem.toLowerCase())
             )
         );
-    }, [props.gear, searchedItem]);
+    }, [props.gearList, searchedItem]);
 
     // Clear/revert input on class/slot change
     useEffect(() => {
         setSearchedItem(props.savedItem ? props.savedItem : "");
-    }, [props.gear]);
+    }, [props.gearList]);
 
     return (
         <div className={styles["gear-dropdown"]}>
             <input
                 className={styles["gear-input"]}
                 placeholder={props.placeholder}
-                disabled={props.gear.length === 0}
+                disabled={props.gearList.length === 0}
                 spellCheck={false}
                 value={searchedItem}
                 onChange={(e) => setSearchedItem(e.target.value)}
