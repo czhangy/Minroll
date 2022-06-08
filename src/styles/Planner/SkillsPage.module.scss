@@ -33,3 +33,7 @@
         }
     }
 }
+
+#skills-page::-webkit-scrollbar-track {
+    background: constants.$main-color;
+}

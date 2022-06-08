@@ -12,7 +12,7 @@ type Props = {
     skillList: Skill[];
     placeholder: string;
     onSelect: (item: Skill) => void;
-    savedSkill: string | null;
+    savedSkill: string | undefined;
 };
 
 const SkillDropdown: React.FC<Props> = (props: Props) => {
