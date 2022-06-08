@@ -98,3 +98,9 @@
         pointer-events: auto;
     }
 }
+
+@media (hover: hover) {
+    .rune-dropdown > .rune-options > .rune-option:hover {
+        background: constants.$main-color-hover;
+    }
+}

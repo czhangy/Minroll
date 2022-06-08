@@ -7,6 +7,7 @@ import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
 import Skill from "@/models/Skill";
 import Gear from "@/models/Gear";
+import Rune from "@/models/Rune";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -85,9 +86,22 @@ const Planner: NextPage = () => {
         });
     };
     const selectSkill = (ind: number, skill: Skill) => {
-        const newSkills = [
+        const newSkills: Array<Skill | null> = [
             ...build.skills.slice(0, ind),
             skill,
+            ...build.skills.slice(ind + 1, 6),
+        ];
+        setBuild({
+            ...build,
+            skills: newSkills,
+        });
+    };
+    const selectRune = (ind: number, rune: Rune) => {
+        let newSkill: Skill = build.skills[ind] as Skill;
+        newSkill.rune = rune;
+        const newSkills: Array<Skill | null> = [
+            ...build.skills.slice(0, ind),
+            newSkill,
             ...build.skills.slice(ind + 1, 6),
         ];
         setBuild({
@@ -152,9 +166,11 @@ const Planner: NextPage = () => {
         if (page === 1)
             return (
                 <SkillsPage
+                    className={build.class}
                     skillList={skills}
                     savedSkills={build.skills}
                     onSkillSelect={selectSkill}
+                    onRuneSelect={selectRune}
                 />
             );
         if (page === 2)

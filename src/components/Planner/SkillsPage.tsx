@@ -8,8 +8,11 @@ import Skill from "@/models/Skill";
 import Rune from "@/models/Rune";
 // React
 import { useState } from "react";
+// Axios
+import axios from "axios";
 
 type Props = {
+    className: string;
     skillList: Skill[];
     savedSkills: Array<Skill | null>;
     onSkillSelect: (ind: number, skill: Skill) => void;
@@ -27,6 +30,24 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
         [],
     ]);
 
+    // Fetch runes when a skill is selected
+    const selectSkill = (ind: number, skill: Skill) => {
+        // Fetch runes and set state
+        axios
+            .get("/api/skills", {
+                params: { className: props.className, skillName: skill.slug },
+            })
+            .then((response) =>
+                setRuneLists([
+                    ...runeLists.slice(0, ind),
+                    response.data,
+                    ...runeLists.slice(ind + 1, 6),
+                ])
+            );
+        // Pass to planner
+        props.onSkillSelect(ind, skill);
+    };
+
     return (
         <div id={styles["skills-page"]}>
             <div className={styles["skills-container"]}>
@@ -35,9 +56,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                     <SkillDropdown
                         skillList={props.skillList}
                         placeholder="Select a skill..."
-                        onSelect={(skill: Skill) =>
-                            props.onSkillSelect(0, skill)
-                        }
+                        onSelect={(skill: Skill) => selectSkill(0, skill)}
                         savedSkill={props.savedSkills[0]?.slug}
                     />
                 </div>
