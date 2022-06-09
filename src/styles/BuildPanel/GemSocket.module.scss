@@ -1,0 +1,16 @@
+@use "@/styles/constants";
+
+.gem-socket {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    border: 3px solid constants.$accent-color;
+    border-radius: 50%;
+
+    .image-container {
+        position: relative;
+        transform: translateX(-15%) translateY(-15%);
+        width: 150%;
+        height: 150%;
+    }
+}

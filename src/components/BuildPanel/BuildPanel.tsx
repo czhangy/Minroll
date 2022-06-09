@@ -9,12 +9,14 @@ import Cube from "@/components/BuildPanel/Cube";
 import BuildGear from "@/models/BuildGear";
 import BuildCube from "@/models/BuildCube";
 import Skill from "@/models/Skill";
+import Gem from "@/models/Gem";
 
 type Props = {
     gear: BuildGear;
     skills: Array<Skill | null>;
     passives: Array<Skill | null>;
     cube: BuildCube;
+    gems: Array<Gem | null>;
 };
 
 const BuildPanel: React.FC<Props> = ({
@@ -22,10 +24,11 @@ const BuildPanel: React.FC<Props> = ({
     skills,
     passives,
     cube,
+    gems,
 }: Props) => {
     return (
         <div id={styles["build-panel"]}>
-            <Gear gear={gear} />
+            <Gear gear={gear} gems={gems} />
             <Skills skills={skills} />
             <Passives passives={passives} />
             <Cube cube={cube} />
