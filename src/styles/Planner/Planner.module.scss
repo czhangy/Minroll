@@ -3,7 +3,7 @@
 #planner {
     display: flex;
     justify-content: center;
-    height: 963px;
+    height: 955px;
     max-width: constants.$max-container;
     padding: 32px;
     margin: 0 auto;
@@ -19,7 +19,7 @@
     }
 
     #planner-build {
-        height: 899px;
+        height: 100%;
         margin-right: 8px;
         min-width: 414px;
         width: 414px;
@@ -54,6 +54,7 @@
     #planner-content {
         display: flex;
         flex-direction: column;
+        height: 100%;
         width: calc(100% - 414px);
 
         #content-nav {

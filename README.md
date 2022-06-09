@@ -177,13 +177,15 @@ Start the application
     -   [x] Skills section
     -   [x] Passives section
     -   [x] Kanai's Cube section
-    -   [ ] Gem sockets
+    -   [x] Gem sockets
+    -   [ ] Hoverable for data
 
 -   [x] Build GET API routes
 
     -   [x] Fetch gear by class
     -   [x] Fetch skills by class
     -   [x] Fetch passives by class
+    -   [x] Fetch gems
 
 -   [ ] Build Builds Page
 
@@ -208,7 +210,7 @@ Start the application
     -   [x] Skill selection
     -   [x] Passives selection
     -   [x] Cube selection
-    -   [ ] Gem selection
+    -   [x] Gem selection
     -   [x] Changes display on build
     -   [ ] Save functionality
     -   [ ] Edit previous build functionality
