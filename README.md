@@ -179,11 +179,11 @@ Start the application
     -   [x] Kanai's Cube section
     -   [ ] Gem sockets
 
--   [ ] Build GET API routes
+-   [x] Build GET API routes
 
     -   [x] Fetch gear by class
-    -   [ ] Fetch skills by class
-    -   [ ] Fetch passives by class
+    -   [x] Fetch skills by class
+    -   [x] Fetch passives by class
 
 -   [ ] Build Builds Page
 
