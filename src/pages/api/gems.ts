@@ -7,7 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    // Handle GET /api/passives
+    // Handle GET /api/gems
     if (req.method === "GET") {
         try {
             if (req.query.className) {
@@ -17,20 +17,21 @@ export default async function handler(
                     clientId: process.env.BNET_ID as string,
                     clientSecret: process.env.BNET_SECRET as string,
                 });
-                // Fetch passives
-                let passives: any = await api.query(
-                    `/d3/data/hero/${req.query.className}`
+                // Fetch gems
+                let gems: any = await api.query(
+                    `/d3/data/item-type/upgradeablejewel`
                 );
-                passives = passives.skills.passive;
-                passives = passives.map((passive: any) => {
+                gems = gems.filter((gem: any) => {
+                    gem.slug !== "whisper-of-atonement";
+                });
+                gems = gems.map((gem: any) => {
                     return {
-                        name: passive.name,
-                        slug: passive.slug,
-                        icon: passive.icon,
-                        description: passive.description,
+                        name: gem.name,
+                        slug: gem.slug,
+                        icon: gem.icon,
                     };
                 });
-                res.json(passives);
+                res.json(gems);
             } else {
                 res.status(400).send({
                     success: false,

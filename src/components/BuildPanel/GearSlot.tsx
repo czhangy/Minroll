@@ -4,6 +4,8 @@ import styles from "@/styles/BuildPanel/Gear.module.scss";
 import Gear from "@/models/Gear";
 // Next
 import Image from "next/image";
+// Local component
+import GemSocket from "@/components/BuildPanel/GemSocket";
 
 type Props = {
     type: string;
@@ -11,6 +13,7 @@ type Props = {
 };
 
 const GearSlot: React.FC<Props> = ({ type, gear }: Props) => {
+    const sockets: String[] = ["left-finger", "right-finger", "neck"];
     return (
         <div
             id={styles[type]}
@@ -30,6 +33,7 @@ const GearSlot: React.FC<Props> = ({ type, gear }: Props) => {
             ) : (
                 ""
             )}
+            {sockets.includes(type) ? <GemSocket gem={null} /> : ""}
         </div>
     );
 };
