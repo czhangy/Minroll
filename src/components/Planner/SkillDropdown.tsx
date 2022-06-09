@@ -32,7 +32,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     const [searchedSkill, setSearchedSkill] = useState<string>("");
     const selectSkill = (skill: Skill) => {
         // Set dropdown value
-        setSearchedSkill(formatSlug(skill.slug));
+        setSearchedSkill(skill.name);
         // Pass to parent
         props.onSelect(skill);
     };
@@ -42,9 +42,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         setFilteredSkills(
             props.skillList.filter((skill: Skill) =>
-                formatSlug(skill.slug)
-                    .toLowerCase()
-                    .includes(searchedSkill.toLowerCase())
+                skill.name.toLowerCase().includes(searchedSkill.toLowerCase())
             )
         );
     }, [props.skillList, searchedSkill]);
@@ -108,9 +106,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                                     objectFit="contain"
                                 />
                             </div>
-                            <p className={styles["skill-name"]}>
-                                {formatSlug(skill.slug)}
-                            </p>
+                            <p className={styles["skill-name"]}>{skill.name}</p>
                         </li>
                     );
                 })}

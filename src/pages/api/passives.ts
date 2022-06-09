@@ -24,6 +24,7 @@ export default async function handler(
                 passives = passives.skills.passive;
                 passives = passives.map((passive: any) => {
                     return {
+                        name: passive.name,
                         slug: passive.slug,
                         icon: passive.icon,
                         description: passive.description,

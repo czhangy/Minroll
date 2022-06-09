@@ -10,9 +10,12 @@ import Rune from "@/models/Rune";
 type Props = {
     skillList: Skill[];
     runeLists: Rune[][];
+    passiveList: Skill[];
     savedSkills: Array<Skill | null>;
+    savedPassives: Array<Skill | null>;
     onSkillSelect: (ind: number, skill: Skill) => void;
     onRuneSelect: (ind: number, rune: Rune) => void;
+    onPassiveSelect: (ind: number, passive: Skill) => void;
 };
 
 const SkillsPage: React.FC<Props> = (props: Props) => {
@@ -30,7 +33,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                     onSelect={(skill: Skill) =>
                                         props.onSkillSelect(i, skill)
                                     }
-                                    savedSkill={props.savedSkills[i]?.slug}
+                                    savedSkill={props.savedSkills[i]?.name}
                                 />
                             </div>
                             <div className={styles["rune-dropdown"]}>
@@ -49,6 +52,22 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
             </div>
             <div className={styles["skills-container"]}>
                 <h3 className={styles["skills-header"]}>Passives Selection</h3>
+                {[...Array(4)].map((_, i: number) => {
+                    return (
+                        <div className={styles.skill} key={i}>
+                            <div className={styles["skill-dropdown"]}>
+                                <SkillDropdown
+                                    skillList={props.passiveList}
+                                    placeholder="Select a passive..."
+                                    onSelect={(passive: Skill) =>
+                                        props.onPassiveSelect(i, passive)
+                                    }
+                                    savedSkill={props.savedPassives[i]?.name}
+                                />
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

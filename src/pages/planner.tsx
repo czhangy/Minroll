@@ -53,6 +53,7 @@ const Planner: NextPage = () => {
             jewelry: null,
         },
         skills: new Array(6).fill(null),
+        passives: new Array(4).fill(null),
     };
     const defaultRuneLists: Rune[][] = [[], [], [], [], [], []];
     const [build, setBuild] = useState<Build>(defaultBuild);
@@ -124,6 +125,18 @@ const Planner: NextPage = () => {
             skills: newSkills,
         });
     };
+    const selectPassive = (ind: number, passive: Skill) => {
+        // Set state of passives
+        const newPassives: Array<Skill | null> = [
+            ...build.passives.slice(0, ind),
+            passive,
+            ...build.passives.slice(ind + 1, 6),
+        ];
+        setBuild({
+            ...build,
+            passives: newPassives,
+        });
+    };
     const updateDescription = (e: SyntheticEvent) => {
         const newDescription: string = (e.target as HTMLTextAreaElement).value;
         setBuild({
@@ -136,8 +149,9 @@ const Planner: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Class data
-    const [gear, setGear] = useState<Gear[]>([]);
-    const [skills, setSkills] = useState<Skill[]>([]);
+    const [gearList, setGearList] = useState<Gear[]>([]);
+    const [skillList, setSkillList] = useState<Skill[]>([]);
+    const [passiveList, setPassiveList] = useState<Skill[]>([]);
 
     // Clear build on class and refetch data
     useEffect(() => {
@@ -151,15 +165,22 @@ const Planner: NextPage = () => {
             // Fetch gear
             const gear: Promise<void> = axios
                 .get("/api/gear", { params: { className: build.class } })
-                .then((response) => setGear(response.data))
+                .then((response) => setGearList(response.data))
                 .catch((error) => console.log(error));
             // Fetch skills
             const skills: Promise<void> = axios
                 .get("/api/skills", { params: { className: build.class } })
-                .then((response) => setSkills(response.data))
+                .then((response) => setSkillList(response.data))
+                .catch((error) => console.log(error));
+            // Fetch passives
+            const passives: Promise<void> = axios
+                .get("/api/passives", { params: { className: build.class } })
+                .then((response) => setPassiveList(response.data))
                 .catch((error) => console.log(error));
             // Loading complete
-            Promise.all([gear, skills]).then(() => setIsLoading(false));
+            Promise.all([gear, skills, passives]).then(() =>
+                setIsLoading(false)
+            );
         }
     }, [build.class]);
 
@@ -172,7 +193,7 @@ const Planner: NextPage = () => {
         if (page === 0)
             return (
                 <GearPage
-                    gearList={gear}
+                    gearList={gearList}
                     savedGear={build.gear}
                     savedCube={build.cube}
                     onGearSelect={selectGear}
@@ -182,11 +203,14 @@ const Planner: NextPage = () => {
         if (page === 1)
             return (
                 <SkillsPage
-                    skillList={skills}
+                    skillList={skillList}
                     runeLists={runeLists}
+                    passiveList={passiveList}
                     savedSkills={build.skills}
+                    savedPassives={build.passives}
                     onSkillSelect={selectSkill}
                     onRuneSelect={selectRune}
+                    onPassiveSelect={selectPassive}
                 />
             );
         if (page === 2)
@@ -249,8 +273,9 @@ const Planner: NextPage = () => {
                 />
                 <BuildPanel
                     gear={build.gear}
-                    skills={build.skills}
                     cube={build.cube}
+                    skills={build.skills}
+                    passives={build.passives}
                 />
                 <div id={styles["build-footer"]}>
                     <input

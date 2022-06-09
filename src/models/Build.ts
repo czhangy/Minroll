@@ -11,5 +11,6 @@ export default interface Build {
     gear: BuildGear;
     cube: BuildCube;
     skills: Array<Skill | null>;
+    passives: Array<Skill | null>;
     userId?: string | null;
 }

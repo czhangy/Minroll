@@ -39,6 +39,7 @@ const getSkillsByClass = async (className: string) => {
     skills = skills.skills.active;
     skills = skills.map((skill: any) => {
         return {
+            name: skill.name,
             slug: skill.slug,
             icon: skill.icon,
             description: skill.description,

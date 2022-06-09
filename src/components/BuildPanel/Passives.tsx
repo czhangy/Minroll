@@ -1,14 +1,20 @@
 // Stylesheet
 import styles from "@/styles/BuildPanel/Passives.module.scss";
+// TS
+import Skill from "@/models/Skill";
 // Local components
+import PassiveSlot from "@/components/BuildPanel/PassiveSlot";
 
-const Passives: React.FC = () => {
+type Props = {
+    passives: Array<Skill | null>;
+};
+
+const Passives: React.FC<Props> = ({ passives }: Props) => {
     return (
         <div id={styles.passives}>
-            <button className={styles["passive-button"]} />
-            <button className={styles["passive-button"]} />
-            <button className={styles["passive-button"]} />
-            <button className={styles["passive-button"]} />
+            {passives.map((passive: Skill | null, i: number) => (
+                <PassiveSlot passive={passive} key={i} />
+            ))}
         </div>
     );
 };

@@ -13,15 +13,21 @@ import Skill from "@/models/Skill";
 type Props = {
     gear: BuildGear;
     skills: Array<Skill | null>;
+    passives: Array<Skill | null>;
     cube: BuildCube;
 };
 
-const BuildPanel: React.FC<Props> = ({ gear, skills, cube }: Props) => {
+const BuildPanel: React.FC<Props> = ({
+    gear,
+    skills,
+    passives,
+    cube,
+}: Props) => {
     return (
         <div id={styles["build-panel"]}>
             <Gear gear={gear} />
             <Skills skills={skills} />
-            <Passives />
+            <Passives passives={passives} />
             <Cube cube={cube} />
         </div>
     );
