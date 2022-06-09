@@ -7,6 +7,7 @@ import AuthContext from "@/models/AuthContext";
 import { SyntheticEvent } from "react";
 import Skill from "@/models/Skill";
 import Gear from "@/models/Gear";
+import Gem from "@/models/Gem";
 import Rune from "@/models/Rune";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
@@ -54,6 +55,7 @@ const Planner: NextPage = () => {
         },
         skills: new Array(6).fill(null),
         passives: new Array(4).fill(null),
+        gems: new Array(3).fill(null),
     };
     const defaultRuneLists: Rune[][] = [[], [], [], [], [], []];
     const [build, setBuild] = useState<Build>(defaultBuild);
@@ -130,11 +132,23 @@ const Planner: NextPage = () => {
         const newPassives: Array<Skill | null> = [
             ...build.passives.slice(0, ind),
             passive,
-            ...build.passives.slice(ind + 1, 6),
+            ...build.passives.slice(ind + 1, 4),
         ];
         setBuild({
             ...build,
             passives: newPassives,
+        });
+    };
+    const selectGem = (ind: number, gem: Gem) => {
+        // Set state of gems
+        const newGems: Array<Gem | null> = [
+            ...build.gems.slice(0, ind),
+            gem,
+            ...build.gems.slice(ind + 1, 3),
+        ];
+        setBuild({
+            ...build,
+            gems: newGems,
         });
     };
     const updateDescription = (e: SyntheticEvent) => {
@@ -152,6 +166,15 @@ const Planner: NextPage = () => {
     const [gearList, setGearList] = useState<Gear[]>([]);
     const [skillList, setSkillList] = useState<Skill[]>([]);
     const [passiveList, setPassiveList] = useState<Skill[]>([]);
+    const [gemList, setGemList] = useState<Skill[]>([]);
+
+    // Fetch gems at beginning
+    useEffect(() => {
+        axios
+            .get("/api/gems")
+            .then((response) => setGemList(response.data))
+            .catch((error) => console.log(error));
+    }, []);
 
     // Clear build on class and refetch data
     useEffect(() => {
@@ -194,10 +217,13 @@ const Planner: NextPage = () => {
             return (
                 <GearPage
                     gearList={gearList}
+                    gemList={gemList}
                     savedGear={build.gear}
                     savedCube={build.cube}
+                    savedGems={build.gems}
                     onGearSelect={selectGear}
                     onCubeSelect={selectCube}
+                    onGemSelect={selectGem}
                 />
             );
         if (page === 1)
@@ -276,6 +302,7 @@ const Planner: NextPage = () => {
                     cube={build.cube}
                     skills={build.skills}
                     passives={build.passives}
+                    gems={build.gems}
                 />
                 <div id={styles["build-footer"]}>
                     <input

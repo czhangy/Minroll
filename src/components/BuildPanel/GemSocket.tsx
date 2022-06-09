@@ -6,7 +6,7 @@ import Gem from "@/models/Gem";
 import Image from "next/image";
 
 type Props = {
-    gem: Gem | null;
+    gem: Gem | null | undefined;
 };
 
 const GemSocket: React.FC<Props> = ({ gem }: Props) => {

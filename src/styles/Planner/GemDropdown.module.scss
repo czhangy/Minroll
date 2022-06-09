@@ -1,0 +1,64 @@
+@use "@/styles/constants";
+
+.gem-dropdown {
+    position: relative;
+
+    .gem-input {
+        background: constants.$main-color;
+        width: 100%;
+        color: white;
+        font-family: constants.$main-font;
+        font-size: 1.3rem;
+    }
+
+    .gem-options {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s ease;
+        transform: translateY(10px);
+        width: 100%;
+        box-shadow: constants.$outline;
+        z-index: 99;
+        background: constants.$main-color;
+        max-height: 200px;
+        overflow-y: scroll;
+
+        .gem-option {
+            background: constants.$main-color;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0 16px;
+
+            .gem-icon {
+                margin-right: 16px;
+                height: 30px;
+                width: 30px;
+                position: relative;
+            }
+
+            .gem-name {
+                color: white;
+                font-family: constants.$main-font;
+                font-size: 1.3rem;
+                text-align: left;
+                padding: 12px 0;
+            }
+        }
+    }
+
+    .show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+@media (hover: hover) {
+    .gem-dropdown > .gem-options > .gem-option:hover {
+        background: constants.$main-color-hover;
+    }
+}
