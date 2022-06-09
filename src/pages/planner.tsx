@@ -54,7 +54,9 @@ const Planner: NextPage = () => {
         },
         skills: new Array(6).fill(null),
     };
+    const defaultRuneLists: Rune[][] = [[], [], [], [], [], []];
     const [build, setBuild] = useState<Build>(defaultBuild);
+    const [runeLists, setRuneLists] = useState<Rune[][]>(defaultRuneLists);
     const selectClass = (newClass: string) => {
         setBuild({
             ...build,
@@ -86,6 +88,19 @@ const Planner: NextPage = () => {
         });
     };
     const selectSkill = (ind: number, skill: Skill) => {
+        // Fetch runes and set state
+        axios
+            .get("/api/skills", {
+                params: { className: build.class, skillName: skill.slug },
+            })
+            .then((response) =>
+                setRuneLists([
+                    ...runeLists.slice(0, ind),
+                    response.data,
+                    ...runeLists.slice(ind + 1, 6),
+                ])
+            );
+        // Set state of skills
         const newSkills: Array<Skill | null> = [
             ...build.skills.slice(0, ind),
             skill,
@@ -130,6 +145,7 @@ const Planner: NextPage = () => {
             ...defaultBuild,
             class: build.class,
         });
+        setRuneLists(defaultRuneLists);
         if (build.class !== "") {
             setIsLoading(true);
             // Fetch gear
@@ -166,8 +182,8 @@ const Planner: NextPage = () => {
         if (page === 1)
             return (
                 <SkillsPage
-                    className={build.class}
                     skillList={skills}
+                    runeLists={runeLists}
                     savedSkills={build.skills}
                     onSkillSelect={selectSkill}
                     onRuneSelect={selectRune}
