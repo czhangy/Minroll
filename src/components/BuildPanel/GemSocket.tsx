@@ -15,7 +15,7 @@ const GemSocket: React.FC<Props> = ({ gem }: Props) => {
             {gem ? (
                 <div className={styles["image-container"]}>
                     <Image
-                        src={gem.icon}
+                        src={`http://media.blizzard.com/d3/icons/items/large/${gem.icon}.png`}
                         alt=""
                         layout="fill"
                         objectFit="contain"
