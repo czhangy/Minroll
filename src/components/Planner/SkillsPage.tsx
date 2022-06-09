@@ -63,6 +63,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                         props.onPassiveSelect(i, passive)
                                     }
                                     savedSkill={props.savedPassives[i]?.name}
+                                    inverted={i !== 0}
                                 />
                             </div>
                         </div>

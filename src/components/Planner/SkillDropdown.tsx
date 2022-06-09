@@ -13,6 +13,7 @@ type Props = {
     placeholder: string;
     onSelect: (item: Skill) => void;
     savedSkill: string | undefined;
+    inverted?: boolean;
 };
 
 const SkillDropdown: React.FC<Props> = (props: Props) => {
@@ -89,7 +90,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
             <ul
                 className={`${styles["skill-options"]} ${
                     open ? styles.show : ""
-                }`}
+                } ${props.inverted ? styles.inverted : ""}`}
             >
                 {filteredSkills.map((skill, i) => {
                     return (
