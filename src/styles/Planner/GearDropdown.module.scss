@@ -1,55 +1,26 @@
 @use "@/styles/constants";
 
-.dropdown {
+.gear-dropdown {
     position: relative;
 
-    .dropdown-button {
+    .gear-input {
         background: constants.$main-color;
         width: 100%;
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 16px;
-
-        &:focus {
-            border: 2px solid constants.$accent-color;
-            padding: 6px 14px;
-        }
-
-        .dropdown-selection {
-            display: flex;
-        }
-
-        .dropdown-text {
-            color: white;
-            font-family: constants.$main-font;
-            font-size: 1.3rem;
-            text-align: left;
-            margin-left: 16px;
-
-            &:first-child {
-                margin-left: 0;
-            }
-        }
-
-        .placeholder {
-            color: grey;
-        }
-
-        .dropdown-icon {
-            position: relative;
-            transition: transform 0.2s ease;
-            height: 20px;
-            width: 20px;
-        }
-
-        .rotated {
-            transform: rotate(180deg);
-        }
+        color: white;
+        font-family: constants.$main-font;
+        font-size: 1.3rem;
     }
 
-    .dropdown-options {
+    .disabled-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 16px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .gear-options {
         position: absolute;
         top: 40px;
         left: 0;
@@ -64,21 +35,21 @@
         max-height: 200px;
         overflow-y: scroll;
 
-        .dropdown-option {
+        .gear-option {
             background: constants.$main-color;
             display: flex;
             align-items: center;
             cursor: pointer;
             padding: 0 16px;
 
-            .option-image {
+            .gear-icon {
                 margin-right: 16px;
                 height: 30px;
                 width: 30px;
                 position: relative;
             }
 
-            .option-text {
+            .gear-name {
                 color: white;
                 font-family: constants.$main-font;
                 font-size: 1.3rem;
@@ -96,7 +67,7 @@
 }
 
 @media (hover: hover) {
-    .dropdown > .dropdown-options > .dropdown-option:hover {
+    .gear-dropdown > .gear-options > .gear-option:hover {
         background: constants.$main-color-hover;
     }
 }

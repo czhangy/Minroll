@@ -1,14 +1,15 @@
 @use "@/styles/constants";
 
-#gear-page {
+#skills-page {
     height: 100%;
     width: 100%;
     background: constants.$main-color;
     padding: 32px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 
-    .gear-container {
+    .skills-container {
         background: constants.$bg-color;
         padding: 32px;
         margin-bottom: 32px;
@@ -17,18 +18,26 @@
             margin-bottom: 0;
         }
 
-        .gear-header {
+        .skills-header {
             font-size: 1.5rem;
             font-family: constants.$header-font;
             margin-bottom: 1rem;
         }
 
-        .gear-dropdown {
+        .skill {
             margin-bottom: 1rem;
 
             &:last-child {
                 margin-bottom: 0;
             }
+
+            .skill-dropdown {
+                margin-bottom: 0.5rem;
+            }
         }
     }
+}
+
+#skills-page::-webkit-scrollbar-track {
+    background: constants.$main-color;
 }

@@ -5,11 +5,17 @@
     justify-content: space-evenly;
     margin-bottom: 16px;
 
-    .passive-button {
-        height: 64px;
-        width: 64px;
-        border-radius: 50%;
+    .passive-slot {
+        height: 55px;
+        width: 55px;
         border: 1px solid constants.$accent-color;
+        border-radius: 50%;
+
+        .image-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
     }
 }
 

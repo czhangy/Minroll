@@ -174,8 +174,8 @@ Start the application
 -   [ ] Build Build Sheet Component
 
     -   [x] Gear section
-    -   [ ] Skills section
-    -   [ ] Passives section
+    -   [x] Skills section
+    -   [x] Passives section
     -   [x] Kanai's Cube section
     -   [ ] Gem sockets
 
@@ -205,11 +205,11 @@ Start the application
 
     -   [x] Class selection
     -   [x] Gear selection
-    -   [ ] Skill selection
-    -   [ ] Passives selection
+    -   [x] Skill selection
+    -   [x] Passives selection
     -   [x] Cube selection
     -   [ ] Gem selection
-    -   [ ] Changes display on build
+    -   [x] Changes display on build
     -   [ ] Save functionality
     -   [ ] Edit previous build functionality
 

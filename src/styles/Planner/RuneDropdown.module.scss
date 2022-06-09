@@ -1,6 +1,6 @@
 @use "@/styles/constants";
 
-.dropdown {
+.rune-dropdown {
     position: relative;
 
     .dropdown-button {
@@ -17,11 +17,15 @@
             padding: 6px 14px;
         }
 
-        .dropdown-selection {
+        &:disabled {
+            cursor: default;
+        }
+
+        .rune-selection {
             display: flex;
         }
 
-        .dropdown-text {
+        .rune-text {
             color: white;
             font-family: constants.$main-font;
             font-size: 1.3rem;
@@ -49,7 +53,7 @@
         }
     }
 
-    .dropdown-options {
+    .rune-options {
         position: absolute;
         top: 40px;
         left: 0;
@@ -64,21 +68,21 @@
         max-height: 200px;
         overflow-y: scroll;
 
-        .dropdown-option {
+        .rune-option {
             background: constants.$main-color;
             display: flex;
             align-items: center;
             cursor: pointer;
             padding: 0 16px;
 
-            .option-image {
+            .rune-icon {
                 margin-right: 16px;
                 height: 30px;
                 width: 30px;
                 position: relative;
             }
 
-            .option-text {
+            .rune-name {
                 color: white;
                 font-family: constants.$main-font;
                 font-size: 1.3rem;
@@ -96,7 +100,7 @@
 }
 
 @media (hover: hover) {
-    .dropdown > .dropdown-options > .dropdown-option:hover {
+    .rune-dropdown > .rune-options > .rune-option:hover {
         background: constants.$main-color-hover;
     }
 }

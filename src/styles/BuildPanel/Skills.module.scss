@@ -5,10 +5,16 @@
     justify-content: space-between;
     margin: 16px 0;
 
-    .skill-button {
+    .skill-slot {
         height: 55px;
         width: 55px;
         border: 1px solid constants.$accent-color;
+
+        .image-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
     }
 }
 
