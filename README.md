@@ -235,7 +235,7 @@ Start the application
 -   [ ] Build other API routes
 
     -   [x] Auth routes
-    -   [ ] POST route for builds
+    -   [x] POST route for builds
     -   [ ] PUT route for builds
     -   [ ] DELETE route for builds
 

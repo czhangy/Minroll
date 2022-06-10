@@ -251,15 +251,26 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
-        if (validateBuild() && user)
-            axios.post("/api/builds", {
-                data: {
-                    build: JSON.stringify({
-                        ...build,
-                        userId: (user as CurrentUser).id,
-                    }),
-                },
-            });
+        // TODO: Redirect to /login if not logged in
+        // TODO: Preserve build (maybe thru local storage)
+        if (validateBuild() && user) {
+            const saveButton: HTMLButtonElement = document.getElementById(
+                styles["save-button"]
+            ) as HTMLButtonElement;
+            saveButton.innerHTML = "SAVING";
+            saveButton.disabled = true;
+            axios
+                .post("/api/builds", {
+                    data: {
+                        build: JSON.stringify({
+                            ...build,
+                            userId: (user as CurrentUser).id,
+                        }),
+                    },
+                })
+                .then(() => (saveButton.innerHTML = "SAVED!"))
+                .catch((err) => console.log(err));
+        }
     };
     const validateBuild: () => boolean = () => {
         let newErrors = {
@@ -273,6 +284,15 @@ const Planner: NextPage = () => {
         if (!build.class) newErrors.class = true;
         return Object.values(newErrors).every((error) => !error);
     };
+
+    // Re-enable save button on build change
+    useEffect(() => {
+        const saveButton: HTMLButtonElement = document.getElementById(
+            styles["save-button"]
+        ) as HTMLButtonElement;
+        saveButton.innerHTML = "SAVE";
+        saveButton.disabled = false;
+    }, [build]);
 
     // Page names
     const pageNames = ["Gear", "Skills", "Description"];
