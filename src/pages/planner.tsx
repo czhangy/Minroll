@@ -9,6 +9,7 @@ import Skill from "@/models/Skill";
 import Gear from "@/models/Gear";
 import Gem from "@/models/Gem";
 import Rune from "@/models/Rune";
+import CurrentUser from "@/models/CurrentUser";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -250,7 +251,15 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
-        if (validateBuild()) console.log(build);
+        if (validateBuild() && user)
+            axios.post("/api/builds", {
+                data: {
+                    build: JSON.stringify({
+                        ...build,
+                        userId: (user as CurrentUser).id,
+                    }),
+                },
+            });
     };
     const validateBuild: () => boolean = () => {
         let newErrors = {
