@@ -53,6 +53,17 @@
                 }
             }
         }
+
+        #build-error {
+            color: red;
+            font-family: constants.$main-font;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
     }
 
     #planner-content {

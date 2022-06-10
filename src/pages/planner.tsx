@@ -210,6 +210,7 @@ const Planner: NextPage = () => {
 
     // Page state
     const [page, setPage] = useState<number>(0);
+    const [error, setError] = useState<boolean>(false);
     const goToPage = (newPage: number) => {
         setPage(newPage);
     };
@@ -253,6 +254,7 @@ const Planner: NextPage = () => {
     const saveBuild = () => {
         // TODO: Redirect to /login if not logged in
         // TODO: Preserve build (maybe thru local storage)
+        setError(false);
         if (validateBuild() && user) {
             const saveButton: HTMLButtonElement = document.getElementById(
                 styles["save-button"]
@@ -270,7 +272,7 @@ const Planner: NextPage = () => {
                 })
                 .then(() => (saveButton.innerHTML = "SAVED!"))
                 .catch((err) => console.log(err));
-        }
+        } else setError(true);
     };
     const validateBuild: () => boolean = () => {
         let newErrors = {
@@ -344,6 +346,12 @@ const Planner: NextPage = () => {
                         SAVE
                     </button>
                 </div>
+                <p
+                    id={styles["build-error"]}
+                    className={error ? "" : styles.hidden}
+                >
+                    Please make sure you select a class and name your build.
+                </p>
             </div>
             <div id={styles["planner-content"]}>
                 <nav id={styles["content-nav"]}>
