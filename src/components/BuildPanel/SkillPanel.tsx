@@ -8,10 +8,9 @@ import Image from "next/image";
 type Props = {
     skill: Skill | null;
     show: boolean;
-    passive?: boolean;
 };
 
-const SkillPanel: React.FC<Props> = ({ skill, show, passive }: Props) => {
+const SkillPanel: React.FC<Props> = ({ skill, show }: Props) => {
     // Line break workaround
     const parseDescription = () => (skill as Skill).description.split("\n");
 
@@ -23,7 +22,17 @@ const SkillPanel: React.FC<Props> = ({ skill, show, passive }: Props) => {
         >
             {skill ? (
                 <div className={styles["skill-panel-container"]}>
-                    <h6 className={styles["skill-name"]}>{skill.name}</h6>
+                    <div className={styles["skill-header"]}>
+                        <div className={styles["skill-icon"]}>
+                            <Image
+                                src={`http://media.blizzard.com/d3/icons/skills/64/${skill.icon}.png`}
+                                alt=""
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                        <h6 className={styles["skill-name"]}>{skill.name}</h6>
+                    </div>
                     <hr className={styles.separator} />
                     {parseDescription().map((content: string) => {
                         return content === "" ? (

@@ -8,6 +8,7 @@
     background: constants.$main-color;
     box-shadow: constants.$outline;
     z-index: 600;
+    pointer-events: none;
 
     .gear-panel-container {
         padding: 24px;

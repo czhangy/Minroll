@@ -8,18 +8,31 @@
     background: constants.$main-color;
     box-shadow: constants.$outline;
     z-index: 600;
+    pointer-events: none;
 
     .skill-panel-container {
         padding: 24px;
         width: 500px;
         color: constants.$accent-color;
 
-        .skill-name {
-            font-size: 1.5rem;
-            font-family: constants.$header-font;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .skill-header {
+            display: flex;
+            align-items: center;
+
+            .skill-icon {
+                position: relative;
+                height: 50px;
+                min-width: 50px;
+            }
+
+            .skill-name {
+                font-size: 1.5rem;
+                font-family: constants.$header-font;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-left: 12px;
+            }
         }
 
         .separator {

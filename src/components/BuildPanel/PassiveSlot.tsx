@@ -35,7 +35,7 @@ const PassiveSlot: React.FC<Props> = ({ passive }: Props) => {
             ) : (
                 ""
             )}
-            <SkillPanel skill={passive} show={hover} passive={true} />
+            <SkillPanel skill={passive} show={hover} />
         </div>
     );
 };
