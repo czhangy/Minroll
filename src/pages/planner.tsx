@@ -9,6 +9,7 @@ import Skill from "@/models/Skill";
 import Gear from "@/models/Gear";
 import Gem from "@/models/Gem";
 import Rune from "@/models/Rune";
+import CurrentUser from "@/models/CurrentUser";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -21,12 +22,14 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 // Axios
 import axios from "axios";
 
 const Planner: NextPage = () => {
-    // Get user
+    // Get user + router
     const { user } = useAuth() as AuthContext;
+    const router = useRouter();
 
     // Build state
     const defaultBuild: Build = {
@@ -209,6 +212,7 @@ const Planner: NextPage = () => {
 
     // Page state
     const [page, setPage] = useState<number>(0);
+    const [error, setError] = useState<boolean>(false);
     const goToPage = (newPage: number) => {
         setPage(newPage);
     };
@@ -250,7 +254,31 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
-        if (validateBuild()) console.log(build);
+        // TODO: Preserve build (maybe thru local storage)
+        // Redirect if not logged in
+        if (!user) {
+            router.push("/login");
+            return;
+        }
+        setError(false);
+        if (validateBuild()) {
+            const saveButton: HTMLButtonElement = document.getElementById(
+                styles["save-button"]
+            ) as HTMLButtonElement;
+            saveButton.innerHTML = "SAVING";
+            saveButton.disabled = true;
+            axios
+                .post("/api/builds", {
+                    data: {
+                        build: JSON.stringify({
+                            ...build,
+                            userId: (user as CurrentUser).id,
+                        }),
+                    },
+                })
+                .then(() => (saveButton.innerHTML = "SAVED!"))
+                .catch((err) => console.log(err));
+        } else setError(true);
     };
     const validateBuild: () => boolean = () => {
         let newErrors = {
@@ -264,6 +292,15 @@ const Planner: NextPage = () => {
         if (!build.class) newErrors.class = true;
         return Object.values(newErrors).every((error) => !error);
     };
+
+    // Re-enable save button on build change
+    useEffect(() => {
+        const saveButton: HTMLButtonElement = document.getElementById(
+            styles["save-button"]
+        ) as HTMLButtonElement;
+        saveButton.innerHTML = "SAVE";
+        saveButton.disabled = false;
+    }, [build]);
 
     // Page names
     const pageNames = ["Gear", "Skills", "Description"];
@@ -315,6 +352,12 @@ const Planner: NextPage = () => {
                         SAVE
                     </button>
                 </div>
+                <p
+                    id={styles["build-error"]}
+                    className={error ? "" : styles.hidden}
+                >
+                    Please make sure you select a class and name your build.
+                </p>
             </div>
             <div id={styles["planner-content"]}>
                 <nav id={styles["content-nav"]}>

@@ -212,7 +212,7 @@ Start the application
     -   [x] Cube selection
     -   [x] Gem selection
     -   [x] Changes display on build
-    -   [ ] Save functionality
+    -   [x] Save functionality
     -   [ ] Edit previous build functionality
 
 -   [x] Build Auth Pages
@@ -235,7 +235,7 @@ Start the application
 -   [ ] Build other API routes
 
     -   [x] Auth routes
-    -   [ ] POST route for builds
+    -   [x] POST route for builds
     -   [ ] PUT route for builds
     -   [ ] DELETE route for builds
 

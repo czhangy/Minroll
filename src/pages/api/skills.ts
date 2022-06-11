@@ -45,7 +45,7 @@ const getSkillsByClass = async (className: string) => {
             description: skill.description,
         };
     });
-    return skills;
+    return skills.sort((a: Skill, b: Skill) => a.name.localeCompare(b.name));
 };
 
 export default async function handler(
@@ -77,6 +77,5 @@ export default async function handler(
         } catch (err) {
             res.status(400).send({ success: false, message: err });
         }
-        // Handle POST /api/gear
     } else res.status(405).send({ success: false });
 }

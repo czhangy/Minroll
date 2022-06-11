@@ -23,10 +23,11 @@ model Build {
     name        String
     class       String
     description String
-    gear        Json[]
-    cube        Json[]
-    skills      Json[]
-    passives    Json[]
+    gear        String[]
+    cube        String[]
+    skills      String[]
+    passives    String[]
+    gems        String[]
     userId      String
 }
 

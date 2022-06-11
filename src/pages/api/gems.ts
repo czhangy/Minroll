@@ -34,7 +34,10 @@ export default async function handler(
                         icon: gems[key].icon,
                     });
             }
-            res.json(gemArray);
+            gemArray = gemArray;
+            res.json(
+                gemArray.sort((a: Gem, b: Gem) => a.name.localeCompare(b.name))
+            );
         } catch (err) {
             res.status(400).send({ success: false, message: err });
         }

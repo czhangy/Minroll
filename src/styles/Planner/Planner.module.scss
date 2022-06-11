@@ -47,7 +47,22 @@
                 background: constants.$accent-color;
                 width: calc(30% - 8px);
                 font-size: 1.1rem;
+
+                &:disabled {
+                    pointer-events: none;
+                }
             }
+        }
+
+        #build-error {
+            color: red;
+            font-family: constants.$main-font;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .hidden {
+            display: none;
         }
     }
 
@@ -100,6 +115,7 @@
 @media screen and (max-width: constants.$tablet) {
     #planner {
         align-items: center;
+
         #planner-error {
             display: block;
         }

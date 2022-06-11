@@ -118,6 +118,5 @@ export default async function handler(
         } catch (err) {
             res.status(400).send({ success: false, message: err });
         }
-        // Handle POST /api/gear
     } else res.status(405).send({ success: false });
 }
