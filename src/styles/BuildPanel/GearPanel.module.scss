@@ -1,0 +1,111 @@
+@use "@/styles/constants";
+
+.gear-panel {
+    position: absolute;
+    top: 0;
+    transform: translateX(calc(100% + 8px));
+    right: 0;
+    background: constants.$main-color;
+    box-shadow: constants.$outline;
+    z-index: 600;
+
+    .gear-panel-container {
+        padding: 24px;
+        width: 500px;
+
+        .gear-name {
+            font-size: 1.5rem;
+            font-family: constants.$header-font;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .gear-type {
+            font-size: 1rem;
+            font-family: constants.$main-font;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .separator {
+            height: 2px;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .legendary {
+            background: constants.$legendary-color;
+        }
+
+        .set {
+            background: constants.$set-color;
+        }
+
+        .gear-effect {
+            font-family: constants.$main-font;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .gear-set {
+            margin-bottom: 12px;
+
+            .set-name {
+                font-family: constants.$main-font;
+                font-size: 1.2rem;
+                text-decoration: underline;
+                margin-bottom: 4px;
+            }
+
+            .set-bonus {
+                margin-bottom: 8px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .bonus-num {
+                    font-size: 1rem;
+                    font-family: constants.$main-font;
+                    margin-bottom: 4px;
+                }
+
+                .bonus-list {
+                    list-style: square;
+
+                    .bonus {
+                        font-size: 1rem;
+                        font-family: constants.$main-font;
+                        margin-left: 1rem;
+                    }
+                }
+            }
+        }
+
+        .gear-description {
+            font-family: constants.$main-font;
+            color: constants.$accent-color;
+        }
+    }
+
+    .legendary {
+        color: constants.$legendary-color;
+    }
+
+    .set {
+        color: constants.$set-color;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.inverted {
+    top: auto;
+    bottom: 0;
+}

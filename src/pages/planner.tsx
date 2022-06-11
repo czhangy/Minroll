@@ -254,12 +254,12 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
+        // TODO: Preserve build (maybe thru local storage)
         // Redirect if not logged in
         if (!user) {
             router.push("/login");
             return;
         }
-        // TODO: Preserve build (maybe thru local storage)
         setError(false);
         if (validateBuild()) {
             const saveButton: HTMLButtonElement = document.getElementById(
