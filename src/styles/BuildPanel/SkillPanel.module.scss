@@ -1,0 +1,42 @@
+@use "@/styles/constants";
+
+.skill-panel {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(calc(100% + 8px));
+    right: 0;
+    background: constants.$main-color;
+    box-shadow: constants.$outline;
+    z-index: 600;
+
+    .skill-panel-container {
+        padding: 24px;
+        width: 500px;
+        color: constants.$accent-color;
+
+        .skill-name {
+            font-size: 1.5rem;
+            font-family: constants.$header-font;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .separator {
+            height: 2px;
+            width: 100%;
+            margin-bottom: 12px;
+            background: constants.$accent-color;
+        }
+
+        .skill-description {
+            font-family: constants.$main-font;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
