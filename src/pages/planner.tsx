@@ -22,12 +22,14 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 // Axios
 import axios from "axios";
 
 const Planner: NextPage = () => {
-    // Get user
+    // Get user + router
     const { user } = useAuth() as AuthContext;
+    const router = useRouter();
 
     // Build state
     const defaultBuild: Build = {
@@ -252,10 +254,14 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
-        // TODO: Redirect to /login if not logged in
+        // Redirect if not logged in
+        if (!user) {
+            router.push("/login");
+            return;
+        }
         // TODO: Preserve build (maybe thru local storage)
         setError(false);
-        if (validateBuild() && user) {
+        if (validateBuild()) {
             const saveButton: HTMLButtonElement = document.getElementById(
                 styles["save-button"]
             ) as HTMLButtonElement;
