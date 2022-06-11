@@ -7,21 +7,24 @@ import Set from "@/models/Set";
 import { useState, useEffect } from "react";
 // Axios
 import axios from "axios";
+// Next
+import Image from "next/image";
 
 type Props = {
     gear: Gear | null;
     show: boolean;
     inverted: boolean;
+    cube?: boolean;
 };
 
-const GearPanel: React.FC<Props> = ({ gear, inverted, show }: Props) => {
+const GearPanel: React.FC<Props> = ({ gear, inverted, show, cube }: Props) => {
     // Gearset state
     const [set, setSet] = useState<Set | null>(null);
 
     // Refetch set on change
     useEffect(() => {
-        // Only refetch on set items
-        if (gear?.setId)
+        // Only refetch on set items in gear
+        if (!cube && gear?.setId)
             axios
                 .get("/api/set", { params: { setId: gear.setId } })
                 .then((response) => setSet(response.data))
@@ -47,10 +50,23 @@ const GearPanel: React.FC<Props> = ({ gear, inverted, show }: Props) => {
                             : styles.set
                     }`}
                 >
-                    <h6 className={styles["gear-name"]}>{gear.name}</h6>
-                    <p className={styles["gear-type"]}>
-                        {gear.rarity} {formatSlug(gear.category)}
-                    </p>
+                    <div className={styles["gear-header"]}>
+                        <div className={styles["gear-icon"]}>
+                            <Image
+                                src={gear.src}
+                                alt=""
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                        <div className={styles["gear-content"]}>
+                            <h6 className={styles["gear-name"]}>{gear.name}</h6>
+                            <p className={styles["gear-type"]}>
+                                {gear.rarity} {formatSlug(gear.category)}
+                            </p>
+                        </div>
+                    </div>
+
                     <hr
                         className={`${styles.separator} ${
                             gear.rarity === "legendary"

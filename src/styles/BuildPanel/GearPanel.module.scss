@@ -8,33 +8,48 @@
     background: constants.$main-color;
     box-shadow: constants.$outline;
     z-index: 600;
+    pointer-events: none;
 
     .gear-panel-container {
         padding: 24px;
         width: 500px;
 
-        .gear-name {
-            font-size: 1.5rem;
-            font-family: constants.$header-font;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
+        .gear-header {
+            display: flex;
+            align-items: center;
 
-        .gear-type {
-            font-size: 1rem;
-            font-family: constants.$main-font;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
+            .gear-icon {
+                position: relative;
+                height: 80px;
+                min-width: 80px;
+            }
+
+            .gear-content {
+                margin-left: 12px;
+
+                .gear-name {
+                    font-size: 1.5rem;
+                    font-family: constants.$header-font;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+
+                .gear-type {
+                    font-size: 1rem;
+                    font-family: constants.$main-font;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    margin-bottom: 12px;
+                    text-transform: uppercase;
+                }
+            }
         }
 
         .separator {
             height: 2px;
             width: 100%;
-            margin-bottom: 12px;
+            margin: 12px 0;
         }
 
         .legendary {

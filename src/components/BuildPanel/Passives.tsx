@@ -2,7 +2,7 @@
 import styles from "@/styles/BuildPanel/Passives.module.scss";
 // TS
 import Skill from "@/models/Skill";
-// Local components
+// Local component
 import PassiveSlot from "@/components/BuildPanel/PassiveSlot";
 
 type Props = {
