@@ -7,6 +7,8 @@ import Set from "@/models/Set";
 import { useState, useEffect } from "react";
 // Axios
 import axios from "axios";
+// Next
+import Image from "next/image";
 
 type Props = {
     gear: Gear | null;
@@ -48,10 +50,23 @@ const GearPanel: React.FC<Props> = ({ gear, inverted, show, cube }: Props) => {
                             : styles.set
                     }`}
                 >
-                    <h6 className={styles["gear-name"]}>{gear.name}</h6>
-                    <p className={styles["gear-type"]}>
-                        {gear.rarity} {formatSlug(gear.category)}
-                    </p>
+                    <div className={styles["gear-header"]}>
+                        <div className={styles["gear-icon"]}>
+                            <Image
+                                src={gear.src}
+                                alt=""
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </div>
+                        <div className={styles["gear-content"]}>
+                            <h6 className={styles["gear-name"]}>{gear.name}</h6>
+                            <p className={styles["gear-type"]}>
+                                {gear.rarity} {formatSlug(gear.category)}
+                            </p>
+                        </div>
+                    </div>
+
                     <hr
                         className={`${styles.separator} ${
                             gear.rarity === "legendary"

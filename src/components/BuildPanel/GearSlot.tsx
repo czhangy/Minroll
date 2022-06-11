@@ -23,14 +23,7 @@ const GearSlot: React.FC<Props> = ({ type, gear, gem }: Props) => {
 
     // Define slot attributes
     const sockets: String[] = ["left-finger", "right-finger", "neck"];
-    const inverted: String[] = [
-        "left-finger",
-        "right-finger",
-        "legs",
-        "feet",
-        "main-hand",
-        "off-hand",
-    ];
+    const inverted: String[] = ["feet", "main-hand", "off-hand"];
 
     return (
         <div
