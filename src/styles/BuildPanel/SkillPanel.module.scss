@@ -20,19 +20,48 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 4px;
         }
 
         .separator {
             height: 2px;
             width: 100%;
-            margin-bottom: 12px;
+            margin: 12px 0;
             background: constants.$accent-color;
         }
 
         .skill-description {
             font-family: constants.$main-font;
             font-size: 1.2rem;
+        }
+
+        .skill-rune {
+            .rune-info {
+                display: flex;
+                align-items: center;
+
+                .rune-icon {
+                    position: relative;
+                    height: 50px;
+                    min-width: 50px;
+                }
+
+                .rune-content {
+                    margin-left: 12px;
+
+                    .rune-name {
+                        font-family: constants.$header-font;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                    }
+
+                    .rune-description {
+                        font-family: constants.$main-font;
+                        font-size: 1.1rem;
+                    }
+                }
+            }
         }
     }
 }

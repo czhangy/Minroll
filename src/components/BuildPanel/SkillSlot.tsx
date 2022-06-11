@@ -4,14 +4,25 @@ import styles from "@/styles/BuildPanel/Skills.module.scss";
 import Skill from "@/models/Skill";
 // Next
 import Image from "next/image";
+// Local component
+import SkillPanel from "@/components/BuildPanel/SkillPanel";
+// React
+import { useState } from "react";
 
 type Props = {
     skill: Skill | null;
 };
 
 const SkillSlot: React.FC<Props> = ({ skill }: Props) => {
+    // Hover state
+    const [hover, setHover] = useState<boolean>(false);
+
     return (
-        <div className={styles["skill-slot"]}>
+        <div
+            className={styles["skill-slot"]}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             {skill ? (
                 <div className={styles["image-container"]}>
                     <Image
@@ -24,6 +35,7 @@ const SkillSlot: React.FC<Props> = ({ skill }: Props) => {
             ) : (
                 ""
             )}
+            <SkillPanel skill={skill} show={hover} />
         </div>
     );
 };
