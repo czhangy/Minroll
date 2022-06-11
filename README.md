@@ -171,14 +171,14 @@ Start the application
 
     -   [x] Gather all gear data/assets
 
--   [ ] Build Build Sheet Component
+-   [x] Build Build Sheet Component
 
     -   [x] Gear section
     -   [x] Skills section
     -   [x] Passives section
     -   [x] Kanai's Cube section
     -   [x] Gem sockets
-    -   [ ] Hoverable for data
+    -   [x] Hoverable for data
 
 -   [x] Build GET API routes
 
@@ -213,6 +213,8 @@ Start the application
     -   [x] Gem selection
     -   [x] Changes display on build
     -   [x] Save functionality
+    -   [ ] Local storage
+    -   [ ] Click to navigate
     -   [ ] Edit previous build functionality
 
 -   [x] Build Auth Pages
