@@ -54,6 +54,20 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
         setSearchedGem(props.savedGem ? props.savedGem.name : "");
     }, [props.gearList]);
 
+    // Match highlighting on option list
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedGem.toLowerCase());
+        return (
+            <p className={styles["gem-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedGem.length)}
+                </span>
+                {name.substring(split + searchedGem.length)}
+            </p>
+        );
+    };
+
     return (
         <div className={styles["gem-dropdown"]}>
             <input
@@ -86,7 +100,7 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
                                     objectFit="contain"
                                 />
                             </div>
-                            <p className={styles["gem-name"]}>{gem.name}</p>
+                            {highlightMatch(gem.name)}
                         </li>
                     );
                 })}

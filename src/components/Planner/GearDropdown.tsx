@@ -52,6 +52,20 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
         setSearchedItem(props.savedItem ? props.savedItem : "");
     }, [props.gearList]);
 
+    // Match highlighting on option list
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedItem.toLowerCase());
+        return (
+            <p className={styles["gear-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedItem.length)}
+                </span>
+                {name.substring(split + searchedItem.length)}
+            </p>
+        );
+    };
+
     return (
         <div className={styles["gear-dropdown"]}>
             <input
@@ -96,7 +110,7 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
                                     objectFit="contain"
                                 />
                             </div>
-                            <p className={styles["gear-name"]}>{item.name}</p>
+                            {highlightMatch(item.name)}
                         </li>
                     );
                 })}

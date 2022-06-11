@@ -45,7 +45,7 @@ const getSkillsByClass = async (className: string) => {
             description: skill.description,
         };
     });
-    return skills;
+    return skills.sort((a: Skill, b: Skill) => a.name.localeCompare(b.name));
 };
 
 export default async function handler(

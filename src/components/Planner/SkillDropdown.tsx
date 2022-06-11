@@ -48,20 +48,24 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
         );
     }, [props.skillList, searchedSkill]);
 
-    // Name formatting => remove hyphens and capitalize words
-    const formatSlug: (slug: string) => string = (slug: string) => {
-        const words = slug.replace(/-/g, " ").split(" ");
-        return words
-            .map((word) => {
-                return word[0].toUpperCase() + word.substring(1);
-            })
-            .join(" ");
-    };
-
     // Clear input on class/page change
     useEffect(() => {
-        setSearchedSkill(props.savedSkill ? formatSlug(props.savedSkill) : "");
+        setSearchedSkill(props.savedSkill ? props.savedSkill : "");
     }, [props.skillList]);
+
+    // Match highlighting on option list
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedSkill.toLowerCase());
+        return (
+            <p className={styles["skill-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedSkill.length)}
+                </span>
+                {name.substring(split + searchedSkill.length)}
+            </p>
+        );
+    };
 
     return (
         <div className={styles["skill-dropdown"]}>
@@ -107,7 +111,7 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                                     objectFit="contain"
                                 />
                             </div>
-                            <p className={styles["skill-name"]}>{skill.name}</p>
+                            {highlightMatch(skill.name)}
                         </li>
                     );
                 })}
