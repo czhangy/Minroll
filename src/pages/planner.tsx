@@ -167,6 +167,8 @@ const Planner: NextPage = () => {
     useEffect(() => {
         const savedBuild: string | null = localStorage.getItem("build");
         if (savedBuild) setBuild(JSON.parse(savedBuild));
+        const savedRuneLists: string | null = localStorage.getItem("runeLists");
+        if (savedRuneLists) setRuneLists(JSON.parse(savedRuneLists));
     }, []);
 
     // Fetch class data
@@ -210,9 +212,12 @@ const Planner: NextPage = () => {
 
     // Reset planner
     const resetPlanner = () => {
+        // Reset state
         setBuild(defaultBuild);
-        localStorage.setItem("build", JSON.stringify(defaultBuild));
         setRuneLists(defaultRuneLists);
+        // Reset local storage
+        localStorage.setItem("build", JSON.stringify(defaultBuild));
+        localStorage.setItem("runeLists", JSON.stringify(defaultRuneLists));
     };
 
     // Page state
@@ -305,8 +310,10 @@ const Planner: NextPage = () => {
         saveButton.innerHTML = "SAVE";
         saveButton.disabled = false;
         // Save to local storage
-        if (build.class || build.name)
+        if (build.class || build.name) {
             localStorage.setItem("build", JSON.stringify(build));
+            localStorage.setItem("runeLists", JSON.stringify(runeLists));
+        }
     }, [build]);
 
     // Page names
