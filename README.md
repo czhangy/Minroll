@@ -213,7 +213,7 @@ Start the application
     -   [x] Gem selection
     -   [x] Changes display on build
     -   [x] Save functionality
-    -   [ ] Local storage
+    -   [x] Local storage
     -   [ ] Click to navigate
     -   [ ] Edit previous build functionality
 
