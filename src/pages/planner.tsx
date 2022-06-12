@@ -215,6 +215,9 @@ const Planner: NextPage = () => {
         // Reset state
         setBuild(defaultBuild);
         setRuneLists(defaultRuneLists);
+        setGearList([]);
+        setSkillList([]);
+        setPassiveList([]);
         // Reset local storage
         localStorage.setItem("build", JSON.stringify(defaultBuild));
         localStorage.setItem("runeLists", JSON.stringify(defaultRuneLists));
