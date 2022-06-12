@@ -68,6 +68,7 @@ const Planner: NextPage = () => {
             ...build,
             class: newClass,
         });
+        fetchData(newClass);
     };
     const nameBuild = (e: SyntheticEvent) => {
         setBuild({
@@ -162,6 +163,34 @@ const Planner: NextPage = () => {
         });
     };
 
+    // Fetch previous build if it exists
+    useEffect(() => {
+        const savedBuild: string | null = localStorage.getItem("build");
+        if (savedBuild) setBuild(JSON.parse(savedBuild));
+    }, []);
+
+    // Fetch class data
+    const fetchData = (className: string) => {
+        setIsLoading(true);
+        // Fetch gear
+        const gear: Promise<void> = axios
+            .get("/api/gear", { params: { className: className } })
+            .then((response) => setGearList(response.data))
+            .catch((error) => console.log(error));
+        // Fetch skills
+        const skills: Promise<void> = axios
+            .get("/api/skills", { params: { className: className } })
+            .then((response) => setSkillList(response.data))
+            .catch((error) => console.log(error));
+        // Fetch passives
+        const passives: Promise<void> = axios
+            .get("/api/passives", { params: { className: className } })
+            .then((response) => setPassiveList(response.data))
+            .catch((error) => console.log(error));
+        // Loading complete
+        Promise.all([gear, skills, passives]).then(() => setIsLoading(false));
+    };
+
     // Page state
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -179,36 +208,12 @@ const Planner: NextPage = () => {
             .catch((error) => console.log(error));
     }, []);
 
-    // Clear build on class and refetch data
-    useEffect(() => {
-        setBuild({
-            ...defaultBuild,
-            class: build.class,
-        });
+    // Reset planner
+    const resetPlanner = () => {
+        setBuild(defaultBuild);
+        localStorage.setItem("build", JSON.stringify(defaultBuild));
         setRuneLists(defaultRuneLists);
-        if (build.class !== "") {
-            setIsLoading(true);
-            // Fetch gear
-            const gear: Promise<void> = axios
-                .get("/api/gear", { params: { className: build.class } })
-                .then((response) => setGearList(response.data))
-                .catch((error) => console.log(error));
-            // Fetch skills
-            const skills: Promise<void> = axios
-                .get("/api/skills", { params: { className: build.class } })
-                .then((response) => setSkillList(response.data))
-                .catch((error) => console.log(error));
-            // Fetch passives
-            const passives: Promise<void> = axios
-                .get("/api/passives", { params: { className: build.class } })
-                .then((response) => setPassiveList(response.data))
-                .catch((error) => console.log(error));
-            // Loading complete
-            Promise.all([gear, skills, passives]).then(() =>
-                setIsLoading(false)
-            );
-        }
-    }, [build.class]);
+    };
 
     // Page state
     const [page, setPage] = useState<number>(0);
@@ -254,7 +259,6 @@ const Planner: NextPage = () => {
 
     // Handle submission
     const saveBuild = () => {
-        // TODO: Preserve build (maybe thru local storage)
         // Redirect if not logged in
         if (!user) {
             router.push("/login");
@@ -300,6 +304,9 @@ const Planner: NextPage = () => {
         ) as HTMLButtonElement;
         saveButton.innerHTML = "SAVE";
         saveButton.disabled = false;
+        // Save to local storage
+        if (build.class || build.name)
+            localStorage.setItem("build", JSON.stringify(build));
     }, [build]);
 
     // Page names
@@ -330,8 +337,10 @@ const Planner: NextPage = () => {
                 <Dropdown
                     content={classNames}
                     placeholder="Select a class..."
+                    savedValue={build.class}
                     hasIcon={true}
                     onSelect={selectClass}
+                    onReset={resetPlanner}
                     isLoading={isLoading}
                 />
                 <BuildPanel
