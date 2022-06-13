@@ -13,7 +13,7 @@ import Image from "next/image";
 
 type Props = {
     gear: Gear | null;
-    gem: Gem | null | undefined;
+    gem?: Gem | null | undefined;
     show: boolean;
     inverted: boolean;
     cube?: boolean;
