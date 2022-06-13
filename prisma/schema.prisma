@@ -54,3 +54,10 @@ model Gear {
     src         String
     classes     String[]
 }
+
+model Gem {
+    id     String   @id @default(cuid())
+    name   String   @unique
+    src    String
+    effect String[]
+}

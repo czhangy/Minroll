@@ -3,6 +3,7 @@ import styles from "@/styles/BuildPanel/GearPanel.module.scss";
 // TS
 import Gear from "@/models/Gear";
 import Set from "@/models/Set";
+import Gem from "@/models/Gem";
 // React
 import { useState, useEffect } from "react";
 // Axios
@@ -12,6 +13,7 @@ import Image from "next/image";
 
 type Props = {
     gear: Gear | null;
+    gem: Gem;
     show: boolean;
     inverted: boolean;
     cube?: boolean;
