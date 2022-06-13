@@ -101,6 +101,39 @@
             }
         }
 
+        .gear-gem {
+            .gem-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+
+                .gem-icon {
+                    height: 40px;
+                    width: 40px;
+                    position: relative;
+                }
+
+                .gem-name {
+                    font-family: constants.$header-font;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    margin-left: 12px;
+                }
+            }
+
+            .gem-effects {
+                list-style: square;
+
+                .gem-effect {
+                    font-size: 1rem;
+                    font-family: constants.$main-font;
+                    margin-left: 1rem;
+                }
+            }
+        }
+
         .gear-description {
             font-family: constants.$main-font;
             color: constants.$accent-color;

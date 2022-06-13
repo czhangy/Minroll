@@ -49,6 +49,7 @@ const GearSlot: React.FC<Props> = ({ type, gear, gem }: Props) => {
             {sockets.includes(type) ? <GemSocket gem={gem} /> : ""}
             <GearPanel
                 gear={gear}
+                gem={gem}
                 show={hover}
                 inverted={inverted.includes(type)}
             />

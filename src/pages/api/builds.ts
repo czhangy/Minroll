@@ -29,7 +29,7 @@ const postBuild = async (build: Build) => {
     for (const passive of build.passives)
         passives.push(passive ? passive.slug : "");
     let gems: string[] = [];
-    for (const gem of build.gems) gems.push(gem ? gem.slug : "");
+    for (const gem of build.gems) gems.push(gem ? gem.name : "");
     // Send to DB
     const response = await prisma.build.create({
         data: {

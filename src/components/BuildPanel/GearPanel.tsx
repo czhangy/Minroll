@@ -3,6 +3,7 @@ import styles from "@/styles/BuildPanel/GearPanel.module.scss";
 // TS
 import Gear from "@/models/Gear";
 import Set from "@/models/Set";
+import Gem from "@/models/Gem";
 // React
 import { useState, useEffect } from "react";
 // Axios
@@ -12,12 +13,19 @@ import Image from "next/image";
 
 type Props = {
     gear: Gear | null;
+    gem?: Gem | null | undefined;
     show: boolean;
     inverted: boolean;
     cube?: boolean;
 };
 
-const GearPanel: React.FC<Props> = ({ gear, inverted, show, cube }: Props) => {
+const GearPanel: React.FC<Props> = ({
+    gear,
+    gem,
+    inverted,
+    show,
+    cube,
+}: Props) => {
     // Gearset state
     const [set, setSet] = useState<Set | null>(null);
 
@@ -166,6 +174,42 @@ const GearPanel: React.FC<Props> = ({ gear, inverted, show, cube }: Props) => {
                             ) : (
                                 ""
                             )}
+                        </div>
+                    ) : (
+                        ""
+                    )}
+                    {gem ? (
+                        <div className={styles["gear-gem"]}>
+                            <hr
+                                className={`${styles.separator} ${
+                                    gear.rarity === "legendary"
+                                        ? styles.legendary
+                                        : styles.set
+                                }`}
+                            />
+                            <div className={styles["gem-header"]}>
+                                <div className={styles["gem-icon"]}>
+                                    <Image
+                                        src={gem.src}
+                                        alt=""
+                                        layout="fill"
+                                        objectFit="contain"
+                                    />
+                                </div>
+                                <p className={styles["gem-name"]}>{gem.name}</p>
+                            </div>
+                            <ul className={styles["gem-effects"]}>
+                                {gem.effect.map((effect: string, i: number) => {
+                                    return (
+                                        <li
+                                            className={styles["gem-effect"]}
+                                            key={i}
+                                        >
+                                            {effect}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
                     ) : (
                         ""

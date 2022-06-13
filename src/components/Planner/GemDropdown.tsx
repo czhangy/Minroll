@@ -94,7 +94,7 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
                         >
                             <div className={styles["gem-icon"]}>
                                 <Image
-                                    src={`http://media.blizzard.com/d3/icons/items/small/${gem.icon}.png`}
+                                    src={gem.src}
                                     alt=""
                                     layout="fill"
                                     objectFit="contain"

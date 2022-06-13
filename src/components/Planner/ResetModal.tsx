@@ -1,7 +1,5 @@
 // Stylesheet
 import styles from "@/styles/Planner/ResetModal.module.scss";
-// Next
-import Image from "next/image";
 // TS
 import { SyntheticEvent } from "react";
 
