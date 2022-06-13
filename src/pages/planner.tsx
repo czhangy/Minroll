@@ -200,7 +200,7 @@ const Planner: NextPage = () => {
     const [gearList, setGearList] = useState<Gear[]>([]);
     const [skillList, setSkillList] = useState<Skill[]>([]);
     const [passiveList, setPassiveList] = useState<Skill[]>([]);
-    const [gemList, setGemList] = useState<Skill[]>([]);
+    const [gemList, setGemList] = useState<Gem[]>([]);
 
     // Fetch gems at beginning
     useEffect(() => {
