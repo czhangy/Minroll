@@ -34,11 +34,11 @@ const SkillPanel: React.FC<Props> = ({ skill, show }: Props) => {
                         <h6 className={styles["skill-name"]}>{skill.name}</h6>
                     </div>
                     <hr className={styles.separator} />
-                    {parseDescription().map((content: string) => {
+                    {parseDescription().map((content: string, i: number) => {
                         return content === "" ? (
-                            <br />
+                            <br key={i} />
                         ) : (
-                            <p className={styles["skill-description"]}>
+                            <p className={styles["skill-description"]} key={i}>
                                 {content}
                             </p>
                         );

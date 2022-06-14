@@ -13,6 +13,7 @@ type Props = {
     placeholder: string;
     onSelect: (item: Skill) => void;
     savedSkill: string | undefined;
+    buildSkills: (Skill | null)[];
     inverted?: boolean;
 };
 
@@ -41,12 +42,22 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     // Filter skills by search
     const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);
     useEffect(() => {
+        // Get names of equipped skills
+        const names = props.buildSkills
+            .filter((skill: Skill | null) => skill !== null)
+            .map((skill) => (skill as Skill).name);
+        console.log(props.savedSkill);
         setFilteredSkills(
-            props.skillList.filter((skill: Skill) =>
-                skill.name.toLowerCase().includes(searchedSkill.toLowerCase())
+            props.skillList.filter(
+                (skill: Skill) =>
+                    skill.name === props.savedSkill ||
+                    (skill.name
+                        .toLowerCase()
+                        .includes(searchedSkill.toLowerCase()) &&
+                        !names.includes(skill.name))
             )
         );
-    }, [props.skillList, searchedSkill]);
+    }, [props.skillList, searchedSkill, props.buildSkills]);
 
     // Clear input on class/page change
     useEffect(() => {

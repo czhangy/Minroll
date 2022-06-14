@@ -118,6 +118,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                                 ? props.savedGear[slot as keyof BuildGear]?.name
                                 : null
                         }
+                        buildGear={Object.values(props.savedGear)}
                     />
                 </div>
             </div>
@@ -131,6 +132,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         }
                         placeholder="Select a weapon item..."
                         savedItem={props.savedCube["weapon"]?.name}
+                        buildGear={Object.values(props.savedCube)}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -141,6 +143,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         }
                         placeholder="Select an armor item..."
                         savedItem={props.savedCube["armor"]?.name}
+                        buildGear={Object.values(props.savedCube)}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -151,6 +154,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         }
                         placeholder="Select a jewelry item..."
                         savedItem={props.savedCube["jewelry"]?.name}
+                        buildGear={Object.values(props.savedCube)}
                     />
                 </div>
             </div>
@@ -163,6 +167,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(0, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[0]}
+                        buildGems={props.savedGems}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -172,6 +177,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(1, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[1]}
+                        buildGems={props.savedGems}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -181,6 +187,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(2, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[2]}
+                        buildGems={props.savedGems}
                     />
                 </div>
             </div>
