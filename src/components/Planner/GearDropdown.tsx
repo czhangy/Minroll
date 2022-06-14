@@ -13,6 +13,7 @@ type Props = {
     placeholder: string;
     onSelect: (item: Gear) => void;
     savedItem: string | null | undefined;
+    buildGear: Array<Gear | null>;
 };
 
 const GearDropdown: React.FC<Props> = (props: Props) => {
@@ -40,9 +41,18 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     // Filter content by search
     const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
     useEffect(() => {
+        // Get names of equipped gear
+        const names = props.buildGear
+            .filter((gear: Gear | null) => gear !== null)
+            .map((gear) => (gear as Gear).name);
         setFilteredGear(
-            props.gearList.filter((item: Gear) =>
-                item.name.toLowerCase().includes(searchedItem.toLowerCase())
+            props.gearList.filter(
+                (item: Gear) =>
+                    item.name === searchedItem ||
+                    (item.name
+                        .toLowerCase()
+                        .includes(searchedItem.toLowerCase()) &&
+                        !names.includes(item.name))
             )
         );
     }, [props.gearList, searchedItem]);

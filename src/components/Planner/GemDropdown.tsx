@@ -15,6 +15,7 @@ type Props = {
     placeholder: string;
     onSelect: (gem: Gem) => void;
     savedGem: Gem | null | undefined;
+    buildGems: Gem[];
 };
 
 const GemDropdown: React.FC<Props> = (props: Props) => {
