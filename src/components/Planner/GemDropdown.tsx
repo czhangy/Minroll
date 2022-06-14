@@ -15,7 +15,7 @@ type Props = {
     placeholder: string;
     onSelect: (gem: Gem) => void;
     savedGem: Gem | null | undefined;
-    buildGems: Gem[];
+    buildGems: (Gem | null)[];
 };
 
 const GemDropdown: React.FC<Props> = (props: Props) => {
@@ -43,9 +43,19 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
     // Filter gems by search
     const [filteredGems, setFilteredGems] = useState<Gem[]>([]);
     useEffect(() => {
+        // Get names of equipped gems
+        const names = props.buildGems
+            .filter((gem: Gem | null) => gem !== null)
+            .map((gem) => (gem as Gem).name);
+        console.log(props.buildGems);
         setFilteredGems(
-            props.gemList.filter((gem: Gem) =>
-                gem.name.toLowerCase().includes(searchedGem.toLowerCase())
+            props.gemList.filter(
+                (gem: Gem) =>
+                    (props.savedGem && gem.name === props.savedGem.name) ||
+                    (gem.name
+                        .toLowerCase()
+                        .includes(searchedGem.toLowerCase()) &&
+                        !names.includes(gem.name))
             )
         );
     }, [props.gemList, searchedGem]);

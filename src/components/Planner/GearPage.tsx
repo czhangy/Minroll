@@ -167,6 +167,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(0, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[0]}
+                        buildGems={props.savedGems}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -176,6 +177,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(1, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[1]}
+                        buildGems={props.savedGems}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -185,6 +187,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         onSelect={(gem: Gem) => props.onGemSelect(2, gem)}
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[2]}
+                        buildGems={props.savedGems}
                     />
                 </div>
             </div>

@@ -48,7 +48,7 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
         setFilteredGear(
             props.gearList.filter(
                 (item: Gear) =>
-                    item.name === searchedItem ||
+                    item.name === props.savedItem ||
                     (item.name
                         .toLowerCase()
                         .includes(searchedItem.toLowerCase()) &&
