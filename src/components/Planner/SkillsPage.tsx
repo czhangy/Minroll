@@ -34,6 +34,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                         props.onSkillSelect(i, skill)
                                     }
                                     savedSkill={props.savedSkills[i]?.name}
+                                    buildSkills={props.savedSkills}
                                 />
                             </div>
                             <div className={styles["rune-dropdown"]}>
@@ -63,6 +64,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                         props.onPassiveSelect(i, passive)
                                     }
                                     savedSkill={props.savedPassives[i]?.name}
+                                    buildSkills={props.savedPassives}
                                     inverted={i !== 0}
                                 />
                             </div>

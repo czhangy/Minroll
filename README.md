@@ -203,7 +203,7 @@ Start the application
 
     -   [ ] List with links to individual builds
 
--   [ ] Build Planner Page
+-   [x] Build Planner Page
 
     -   [x] Class selection
     -   [x] Gear selection
@@ -214,8 +214,6 @@ Start the application
     -   [x] Changes display on build
     -   [x] Save functionality
     -   [x] Local storage
-    -   [ ] Click to navigate
-    -   [ ] Edit previous build functionality
 
 -   [x] Build Auth Pages
 

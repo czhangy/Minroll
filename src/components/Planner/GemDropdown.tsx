@@ -58,7 +58,7 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
                         !names.includes(gem.name))
             )
         );
-    }, [props.gemList, searchedGem]);
+    }, [props.gemList, searchedGem, props.buildGems]);
 
     // Clear input on class/page change
     useEffect(() => {
