@@ -8,6 +8,8 @@ import Skill from "@/models/Skill";
 // Next
 import Image from "next/image";
 
+// DELETE THIS
+
 type Props = {
     skillList: Skill[];
     placeholder: string;
