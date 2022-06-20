@@ -11,6 +11,7 @@ const Builds: NextPage = () => {
             <Head>
                 <title>Official Builds | Minroll</title>
             </Head>
+            Builds
         </div>
     );
 };
