@@ -4,8 +4,8 @@ export default interface Gear {
     slot: string;
     category: string;
     rarity: string;
-    setId: string;
-    effect: string;
+    setId: string | null;
+    effect: string | null;
     description: string;
     src: string;
 }

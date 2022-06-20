@@ -57,7 +57,6 @@ const Login: NextPage = () => {
         axios
             .post("/api/login", formData)
             .then((response) => {
-                console.log(response);
                 // Build fetched user
                 const currentUser: CurrentUser = {
                     id: response.data.id,
