@@ -8,6 +8,7 @@ import CurrentUser from "@/models/CurrentUser";
 import prisma from "@/lib/prisma";
 // Next
 import Image from "next/image";
+import Head from "next/head";
 
 type Props = {
     build: Build | null;
@@ -22,6 +23,11 @@ const BuildDisplay: NextPage<Props> = ({ build, user }: Props) => {
                     id={styles["build-display"]}
                     className={build ? "" : styles.loading}
                 >
+                    <Head>
+                        <title>
+                            {build.name} by {user?.username} | Minroll
+                        </title>
+                    </Head>
                     <div id={styles["display-header"]}>
                         <h2 id={styles["build-name"]}>{build.name}</h2>
                         <em id={styles.author}>by {user?.username}</em>
@@ -64,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } catch (err) {
         console.log(err);
         return {
-            props: { build: null },
+            props: {},
         };
     }
 };

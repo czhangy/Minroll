@@ -9,7 +9,7 @@ const Tiers: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>Minroll Tier List</title>
+                <title>Tier List | Minroll</title>
             </Head>
         </div>
     );

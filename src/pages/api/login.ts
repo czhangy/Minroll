@@ -24,7 +24,6 @@ export default async function handler(
                     id: true,
                     username: true,
                     password: true,
-                    builds: true,
                 },
             });
             // User not found

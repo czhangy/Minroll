@@ -335,7 +335,7 @@ const Planner: NextPage = () => {
     return (
         <div id={styles.planner}>
             <Head>
-                <title>Develop Your Build</title>
+                <title>Build Planner | Minroll</title>
             </Head>
             <p id={styles["planner-error"]}>
                 Sorry!

@@ -25,7 +25,7 @@ const Profile: NextPage = () => {
     return (
         <div id={styles.profile}>
             <Head>
-                <title>Your Minroll Profile</title>
+                <title>My Profile | Minroll</title>
             </Head>
             <div id={styles["profile-header"]}>
                 <div id={styles["header-container"]}>

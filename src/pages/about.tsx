@@ -9,7 +9,7 @@ const About: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>About Minroll</title>
+                <title>About | Minroll</title>
             </Head>
         </div>
     );

@@ -119,7 +119,7 @@ const Register: NextPage = () => {
     return (
         <div id={styles.auth}>
             <Head>
-                <title>Register to Minroll</title>
+                <title>Register | Minroll</title>
             </Head>
             <form id={styles["auth-form"]} onSubmit={(e) => submitRegister(e)}>
                 <h2 id={styles["form-header"]}>REGISTER</h2>

@@ -62,7 +62,6 @@ const Login: NextPage = () => {
                 const currentUser: CurrentUser = {
                     id: response.data.id,
                     username: response.data.username,
-                    builds: response.data.builds,
                 };
                 // Set context
                 loginUser(currentUser);
@@ -89,7 +88,7 @@ const Login: NextPage = () => {
     return (
         <div id={styles.auth}>
             <Head>
-                <title>Log In to Minroll</title>
+                <title>Login | Minroll</title>
             </Head>
             <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
                 <h2 id={styles["form-header"]}>LOGIN</h2>
