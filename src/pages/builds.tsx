@@ -9,7 +9,7 @@ const Builds: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>Official Minroll Builds</title>
+                <title>Official Builds | Minroll</title>
             </Head>
         </div>
     );

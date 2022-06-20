@@ -46,7 +46,6 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
         const names = props.buildSkills
             .filter((skill: Skill | null) => skill !== null)
             .map((skill) => (skill as Skill).name);
-        console.log(props.savedSkill);
         setFilteredSkills(
             props.skillList.filter(
                 (skill: Skill) =>

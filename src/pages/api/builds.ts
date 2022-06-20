@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import Build from "@/models/Build";
 // Prisma
 import prisma from "@/lib/prisma";
+import { runInThisContext } from "vm";
 
 const postBuild = async (build: Build) => {
     // Strip out gear names
@@ -24,7 +25,11 @@ const postBuild = async (build: Build) => {
     });
     // Strip out slugs
     let skills: string[] = [];
-    for (const skill of build.skills) skills.push(skill ? skill.slug : "");
+    let runes: string[] = [];
+    build.skills.map((skill) => {
+        skills.push(skill ? skill.slug : "");
+        runes.push(skill && skill.rune ? skill.rune.name : "");
+    });
     let passives: string[] = [];
     for (const passive of build.passives)
         passives.push(passive ? passive.slug : "");
@@ -39,6 +44,7 @@ const postBuild = async (build: Build) => {
             gear: gear,
             cube: cube,
             skills: skills,
+            runes: runes,
             passives: passives,
             gems: gems,
             userId: build.userId as string,

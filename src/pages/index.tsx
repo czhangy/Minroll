@@ -15,7 +15,7 @@ const Home: NextPage = () => {
     return (
         <div id={styles.home}>
             <Head>
-                <title>Minroll</title>
+                <title>Home | Minroll</title>
             </Head>
             <div id={styles["home-container"]}>
                 <p id={styles["home-text"]}>

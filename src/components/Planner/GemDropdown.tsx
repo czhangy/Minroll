@@ -47,7 +47,6 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
         const names = props.buildGems
             .filter((gem: Gem | null) => gem !== null)
             .map((gem) => (gem as Gem).name);
-        console.log(props.buildGems);
         setFilteredGems(
             props.gemList.filter(
                 (gem: Gem) =>

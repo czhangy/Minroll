@@ -112,8 +112,6 @@ export default async function handler(
                 );
                 res.json(gear);
                 // Get specific item by ID
-            } else {
-                console.log("Get by ID");
             }
         } catch (err) {
             res.status(400).send({ success: false, message: err });

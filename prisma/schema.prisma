@@ -11,11 +11,10 @@ datasource db {
 }
 
 model User {
-    id       String   @id @default(cuid())
-    email    String   @unique
-    username String   @unique
+    id       String @id @default(cuid())
+    email    String @unique
+    username String @unique
     password String
-    builds   String[]
 }
 
 model Build {
@@ -26,6 +25,7 @@ model Build {
     gear        String[]
     cube        String[]
     skills      String[]
+    runes       String[]
     passives    String[]
     gems        String[]
     userId      String

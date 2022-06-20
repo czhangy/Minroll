@@ -194,10 +194,11 @@ Start the application
         -   [ ] Sortable by class/set
         -   [ ] Pagination
 
-    -   [ ] Specific build page accessed by ID
+    -   [x] Specific build page accessed by ID
 
-        -   [ ] Build sheet
-        -   [ ] Tier ranking
+        -   [x] Build sheet
+        -   [ ] Copyable
+        -   [ ] Mobile?
 
 -   [ ] Build Tiers Page
 
