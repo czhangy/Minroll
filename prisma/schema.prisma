@@ -15,7 +15,6 @@ model User {
     email    String   @unique
     username String   @unique
     password String
-    builds   String[]
 }
 
 model Build {

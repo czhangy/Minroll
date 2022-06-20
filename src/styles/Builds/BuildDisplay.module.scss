@@ -1,0 +1,41 @@
+@use "@/styles/constants";
+
+#build-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - constants.$navbar-height);
+    max-width: constants.$max-container;
+    padding: 32px;
+    margin: 0 auto;
+
+    #display-header {
+        background: constants.$main-color;
+        padding: 32px;
+        width: 100%;
+
+        #build-name {
+            color: constants.$accent-color;
+            font-family: constants.$header-font;
+            font-weight: bold;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        #author {
+            color: white;
+            font-size: 1.2rem;
+            font-family: constants.$main-font;
+        }
+    }
+
+    #loading-container {
+        height: 50px;
+        width: 50px;
+        position: relative;
+    }
+}
+
+#build-display.loading {
+    align-items: center;
+}
