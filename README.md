@@ -199,6 +199,7 @@ Start the application
         -   [x] Build sheet
         -   [ ] Copyable
         -   [ ] Mobile?
+        -   [ ] Scroll
 
 -   [ ] Build Tiers Page
 
