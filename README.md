@@ -19,7 +19,7 @@
 <h4>
     <a href="https://github.com/czhangy/minroll">Documentation</a>
     <span> · </span>
-    <a href="https://github.com/czhangy/minroll/">Report Bug</a>
+    <a href="https://github.com/czhangy/minroll/issues">Report Bug</a>
 </h4>
 
 </div>
@@ -47,6 +47,14 @@
 <!-- About the Project -->
 
 ## About the Project
+
+<!-- Summary -->
+
+### Summary
+
+Minroll is a utility web application for Diablo III. It aims to provide a minimalistic experience of the popular site Maxroll, containing only tier lists, a build planner, and community builds. Development for this project is ongoing, and major features are still under development.
+
+The most up-to-date version of Minroll is currently deployed at: https://minroll.vercel.app/.
 
 <!-- Tech Stack -->
 
@@ -98,18 +106,6 @@
         <img src="https://img.shields.io/badge/-vercel-black?logo=vercel&logoColor=white&style=for-the-badge" alt="Vercel" />
     </a>
 </details>
-
-<!-- Color Reference -->
-
-### Color Reference
-
-| Color            | Hex     |
-| ---------------- | ------- |
-| Main Color       | #222529 |
-| Accent Color     | #006BFF |
-| Background Color | #0E1011 |
-| Text Color       | #FFFFFF |
-
 <!-- Env Variables -->
 
 ### Environment Variables
