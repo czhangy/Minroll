@@ -37,7 +37,7 @@
 @media (hover: hover) {
     .build-card:hover {
         border: 2px solid constants.$accent-color;
-        transform: scale(1.02);
+        transform: scale(1.01);
 
         .build-info {
             color: constants.$accent-color;

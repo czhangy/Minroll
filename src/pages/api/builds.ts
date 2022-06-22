@@ -69,9 +69,10 @@ const getBuildsByUser = async (id: string) => {
             id: true,
             name: true,
             class: true,
+            timestamp: true,
         },
         orderBy: {
-            name: "asc",
+            timestamp: "desc",
         },
     });
     return builds;
