@@ -54,7 +54,7 @@ const postBuild = async (build: Build) => {
 };
 
 // Fetch all builds by userId
-const getBuildsByID = async (id: string) => {
+const getBuildsByUser = async (id: string) => {
     const builds: Build[] = await prisma.build.findMany({
         where: {
             userId: id,
@@ -63,6 +63,9 @@ const getBuildsByID = async (id: string) => {
             id: true,
             name: true,
             class: true,
+        },
+        orderBy: {
+            name: "asc",
         },
     });
     return builds;
@@ -84,7 +87,7 @@ export default async function handler(
         // Handle GET /api/builds
     } else if (req.method === "GET") {
         try {
-            const response: Build[] = await getBuildsByID(
+            const response: Build[] = await getBuildsByUser(
                 req.query.id as string
             );
             res.json(response);

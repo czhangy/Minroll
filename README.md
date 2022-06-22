@@ -223,10 +223,11 @@ Start the application
 
     -   [x] Display username
     -   [x] Logout button
-    -   [ ] List of saved builds
+    -   [x] List of saved builds
 
         -   [ ] Update functionality
         -   [ ] Delete functionality
+        -   [ ] Show more functionality
 
     -   [ ] Redirect on unauthorized
 
