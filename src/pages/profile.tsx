@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 // Next
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 // React
 import { useState, useEffect } from "react";
 // Axios
@@ -29,14 +30,22 @@ const Profile: NextPage = () => {
         logoutUser();
     };
 
+    // Loading state
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     // Build list state
     const [buildList, setBuildList] = useState<Build[]>([]);
     useEffect(() => {
-        if (user)
+        if (user) {
+            setIsLoading(true);
             axios
                 .get("/api/builds", { params: { id: user.id } })
-                .then((response) => setBuildList(response.data))
+                .then((response) => {
+                    setBuildList(response.data);
+                    setIsLoading(false);
+                })
                 .catch((err) => console.log(err));
+        }
     }, [user]);
 
     return (
@@ -56,7 +65,21 @@ const Profile: NextPage = () => {
             </div>
             <div id={styles["profile-content"]}>
                 <div id={styles["content-container"]}>
-                    <h3 id={styles["content-header"]}>Your Builds</h3>
+                    <div id={styles["content-header"]}>
+                        <h3 id={styles["content-text"]}>Your Builds</h3>
+                        {isLoading ? (
+                            <div id={styles["loading-icon"]}>
+                                <Image
+                                    src="/icons/loading.gif"
+                                    alt="Loading"
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                    </div>
                     <ul id={styles["builds-list"]}>
                         {buildList.map((build: Build, i: number) => {
                             return (
