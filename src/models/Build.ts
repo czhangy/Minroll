@@ -8,11 +8,11 @@ export default interface Build {
     id?: string;
     name: string;
     class: string;
-    description: string;
-    gear: BuildGear;
-    cube: BuildCube;
-    skills: Array<Skill | null>;
-    passives: Array<Skill | null>;
-    gems: Array<Gem | null>;
+    description?: string;
+    gear?: BuildGear | String[];
+    cube?: BuildCube | String[];
+    skills?: Array<Skill | null> | String[];
+    passives?: Array<Skill | null> | String[];
+    gems?: Array<Gem | null> | String[];
     userId?: string | null;
 }

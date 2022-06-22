@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import Build from "@/models/Build";
 // Prisma
 import prisma from "@/lib/prisma";
-import { runInThisContext } from "vm";
 
+// Post a build to the DB
 const postBuild = async (build: Build) => {
     // Strip out gear names
     let gear: string[] = [];
@@ -53,6 +53,21 @@ const postBuild = async (build: Build) => {
     return response;
 };
 
+// Fetch all builds by userId
+const getBuildsByID = async (id: string) => {
+    const builds: Build[] = await prisma.build.findMany({
+        where: {
+            userId: id,
+        },
+        select: {
+            id: true,
+            name: true,
+            class: true,
+        },
+    });
+    return builds;
+};
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -61,6 +76,17 @@ export default async function handler(
     if (req.method === "POST") {
         try {
             const response = await postBuild(JSON.parse(req.body.data.build));
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
+        // Handle GET /api/builds
+    } else if (req.method === "GET") {
+        try {
+            const response: Build[] = await getBuildsByID(
+                req.query.id as string
+            );
             res.json(response);
         } catch (err) {
             console.log(err);
