@@ -29,6 +29,7 @@ model Build {
     passives    String[]
     gems        String[]
     userId      String
+    timestamp   DateTime
 }
 
 model Set {

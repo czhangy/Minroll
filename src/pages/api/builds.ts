@@ -1,6 +1,9 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
 import Build from "@/models/Build";
+import Skill from "@/models/Skill";
+import Gear from "@/models/Gear";
+import Gem from "@/models/Gem";
 // Prisma
 import prisma from "@/lib/prisma";
 
@@ -8,39 +11,41 @@ import prisma from "@/lib/prisma";
 const postBuild = async (build: Build) => {
     // Strip out gear names
     let gear: string[] = [];
-    Object.keys(build.gear).forEach((key) => {
-        if (build.gear[key as keyof typeof build.gear])
+    Object.keys(build.gear!).forEach((key) => {
+        if (build.gear![key as keyof typeof build.gear])
             gear.push(
-                build.gear[key as keyof typeof build.gear]?.name as string
+                (build.gear![key as keyof typeof build.gear] as Gear)
+                    .name as string
             );
         else gear.push("");
     });
     let cube: string[] = [];
-    Object.keys(build.cube).forEach((key) => {
-        if (build.cube[key as keyof typeof build.cube])
+    Object.keys(build.cube!).forEach((key) => {
+        if (build.cube![key as keyof typeof build.cube])
             cube.push(
-                build.cube[key as keyof typeof build.cube]?.name as string
+                (build.cube![key as keyof typeof build.cube] as Gear)
+                    .name as string
             );
         else cube.push("");
     });
     // Strip out slugs
     let skills: string[] = [];
     let runes: string[] = [];
-    build.skills.map((skill) => {
+    (build.skills as Skill[]).map((skill: Skill) => {
         skills.push(skill ? skill.slug : "");
         runes.push(skill && skill.rune ? skill.rune.name : "");
     });
     let passives: string[] = [];
-    for (const passive of build.passives)
+    for (const passive of build.passives as Skill[])
         passives.push(passive ? passive.slug : "");
     let gems: string[] = [];
-    for (const gem of build.gems) gems.push(gem ? gem.name : "");
+    for (const gem of build.gems as Gem[]) gems.push(gem ? gem.name : "");
     // Send to DB
     const response = await prisma.build.create({
         data: {
             name: build.name,
             class: build.class,
-            description: build.description,
+            description: build.description as string,
             gear: gear,
             cube: cube,
             skills: skills,
@@ -48,6 +53,7 @@ const postBuild = async (build: Build) => {
             passives: passives,
             gems: gems,
             userId: build.userId as string,
+            timestamp: new Date(),
         },
     });
     return response;
