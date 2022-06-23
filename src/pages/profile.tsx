@@ -13,7 +13,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 // React
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 // Axios
 import axios from "axios";
 // Global components
@@ -21,6 +21,7 @@ import BuildCard from "@/components/Global/BuildCard";
 import Pagination from "@/components/Global/Pagination";
 // Local component
 import DeleteModal from "@/components/Profile/DeleteModal";
+import SortMenu from "@/components/Profile/SortMenu";
 
 const Profile: NextPage = () => {
     // Grab user
@@ -84,6 +85,36 @@ const Profile: NextPage = () => {
             .catch((err) => console.log(err));
     };
 
+    // Sort menu display state
+    const [sortMenuOpen, setSortMenuOpen] = useState<boolean>(false);
+    const openSortMenu = (event: SyntheticEvent) => {
+        // Safari focus workaround
+        (event.target as HTMLButtonElement).focus();
+        setSortMenuOpen(true);
+    };
+    const closeSortMenu = () => {
+        // Allow nav links to be clicked before menu close
+        setTimeout(() => setSortMenuOpen(false), 50);
+    };
+
+    // Sort builds by selection
+    const sortBy = (option: string) => {
+        let newList: Build[] = [...buildList];
+        if (option === "Most Recent")
+            newList.sort((a: Build, b: Build) =>
+                a.timestamp! < b.timestamp! ? 1 : -1
+            );
+        else if (option === "Least Recent")
+            newList.sort((a: Build, b: Build) =>
+                a.timestamp! > b.timestamp! ? 1 : -1
+            );
+        else if (option === "Alpha")
+            newList.sort((a: Build, b: Build) => (a.name! > b.name! ? 1 : -1));
+        else if (option === "Reverse Alpha")
+            newList.sort((a: Build, b: Build) => (a.name! < b.name! ? 1 : -1));
+        setBuildList(newList);
+    };
+
     return (
         <div id={styles.profile}>
             <Head>
@@ -120,7 +151,31 @@ const Profile: NextPage = () => {
                                     />
                                 </div>
                             ) : (
-                                ""
+                                <div id={styles["menu-container"]}>
+                                    <button
+                                        id={styles["menu-button"]}
+                                        onClick={(event: SyntheticEvent) =>
+                                            openSortMenu(event)
+                                        }
+                                        onBlur={closeSortMenu}
+                                    >
+                                        Sort By
+                                        <div id={styles["sort-icon"]}>
+                                            <Image
+                                                src="/icons/sort.svg"
+                                                alt=""
+                                                layout="fill"
+                                                objectFit="contain"
+                                            />
+                                        </div>
+                                    </button>
+                                    <SortMenu
+                                        open={sortMenuOpen}
+                                        onSelect={(option: string) =>
+                                            sortBy(option)
+                                        }
+                                    />
+                                </div>
                             )}
                         </div>
                         <Link href="/planner">

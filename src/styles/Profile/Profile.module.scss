@@ -78,6 +78,27 @@
                         width: 24px;
                         position: relative;
                     }
+
+                    #menu-container {
+                        position: relative;
+
+                        #menu-button {
+                            font-size: 1.2rem;
+                            font-family: constants.$header-font;
+                            color: white;
+                            background: constants.$accent-color;
+                            padding: 4px 16px;
+                            display: flex;
+                            align-items: center;
+
+                            #sort-icon {
+                                height: 24px;
+                                width: 24px;
+                                position: relative;
+                                margin-left: 8px;
+                            }
+                        }
+                    }
                 }
 
                 #planner-link {
@@ -110,8 +131,19 @@
 }
 
 @media (hover: hover) {
-    #profile > #profile-header > #header-container > #logout-button:hover {
-        background: constants.$accent-color-hover;
+    #profile {
+        #profile-header > #header-container > #logout-button:hover {
+            background: constants.$accent-color-hover;
+        }
+
+        #profile-content
+            > #content-container
+            > #content-header
+            > #header-left
+            > #menu-container
+            > #menu-button:hover {
+            background: constants.$accent-color-hover;
+        }
     }
 }
 

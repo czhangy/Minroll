@@ -16,4 +16,5 @@ export default interface Build {
     passives?: Array<Skill | null> | String[];
     gems?: Array<Gem | null> | String[];
     userId?: string | null;
+    timestamp?: Date;
 }
