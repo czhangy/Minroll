@@ -168,9 +168,9 @@ const Planner: NextPage = () => {
     // Fetch previous build if it exists
     useEffect(() => {
         const savedBuild: string | null = localStorage.getItem("build");
-        if (savedBuild) setBuild(JSON.parse(savedBuild));
-        const savedRuneLists: string | null = localStorage.getItem("runeLists");
-        if (savedRuneLists) setRuneLists(JSON.parse(savedRuneLists));
+        if (savedBuild) {
+            setBuild(JSON.parse(savedBuild));
+        }
     }, []);
 
     // Fetch class data
@@ -193,6 +193,25 @@ const Planner: NextPage = () => {
             .catch((error) => console.log(error));
         // Loading complete
         Promise.all([gear, skills, passives]).then(() => setIsLoading(false));
+    };
+
+    // Fetch rune lists when loading from local storage
+    const fetchRuneLists = async () => {
+        const runeLists: Rune[][] = defaultRuneLists;
+        // Fetch rune list for every set skill
+        for (let i = 0; i < 6; i++) {
+            if (build.skills![i]) {
+                await axios
+                    .get("/api/skills", {
+                        params: {
+                            className: build.class,
+                            skillName: (build.skills![i] as Skill).slug,
+                        },
+                    })
+                    .then((response) => (runeLists[i] = response.data));
+            }
+        }
+        setRuneLists(runeLists);
     };
 
     // Page state
@@ -222,7 +241,6 @@ const Planner: NextPage = () => {
         setPassiveList([]);
         // Reset local storage
         localStorage.setItem("build", JSON.stringify(defaultBuild));
-        localStorage.setItem("runeLists", JSON.stringify(defaultRuneLists));
     };
 
     // Page state
@@ -314,11 +332,11 @@ const Planner: NextPage = () => {
         ) as HTMLButtonElement;
         saveButton.innerHTML = "SAVE";
         saveButton.disabled = false;
+        // Re-fetch rune lists
+        fetchRuneLists();
         // Save to local storage
-        if (build.class || build.name) {
+        if (build.class || build.name)
             localStorage.setItem("build", JSON.stringify(build));
-            localStorage.setItem("runeLists", JSON.stringify(runeLists));
-        }
     }, [build]);
 
     // Page names
