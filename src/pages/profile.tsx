@@ -48,6 +48,9 @@ const Profile: NextPage = () => {
         }
     }, [user]);
 
+    // List display state
+    const [page, setPage] = useState<number>(1);
+
     return (
         <div id={styles.profile}>
             <Head>

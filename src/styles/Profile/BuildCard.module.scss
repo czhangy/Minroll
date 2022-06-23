@@ -1,46 +1,80 @@
 @use "@/styles/constants";
 
 .build-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
     border: 2px solid white;
     width: 100%;
-    padding: 32px;
+    padding: 64px 32px;
     display: flex;
     transition: transform 0.2s ease;
 
-    .build-icon {
-        height: 80px;
-        width: 80px;
-        margin-right: 24px;
-        position: relative;
+    .build-name {
+        font-family: constants.$header-font;
+        letter-spacing: 1px;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
     }
 
-    .build-info {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-
-        .build-name {
-            font-family: constants.$header-font;
-            letter-spacing: 1px;
-            font-size: 1.5rem;
-        }
-
-        .build-class {
-            font-family: constants.$main-font;
-            font-size: 1.2rem;
-        }
+    .build-class {
+        font-family: constants.$main-font;
+        font-size: 1.2rem;
     }
+}
+
+.barbarian {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/barbarian-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.crusader {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/crusader-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.demon-hunter {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/demon-hunter-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.monk {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/monk-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.necromancer {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/necromancer-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.witch-doctor {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/witch-doctor-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.wizard {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/wizard-bg.webp");
+    background-size: cover;
+    background-position: right;
 }
 
 @media (hover: hover) {
     .build-card:hover {
         border: 2px solid constants.$accent-color;
         transform: scale(1.01);
-
-        .build-info {
-            color: constants.$accent-color;
-        }
+        color: constants.$accent-color;
     }
 }
