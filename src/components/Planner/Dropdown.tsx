@@ -126,7 +126,7 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                             }`}
                         >
                             <Image
-                                src="/icons/chevron-down.svg"
+                                src="/icons/chevron.svg"
                                 alt=""
                                 layout="fill"
                                 objectFit="contain"

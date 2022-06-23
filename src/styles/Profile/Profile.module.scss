@@ -50,6 +50,9 @@
             background: constants.$main-color;
             padding: 32px;
             box-shadow: constants.$outline;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             #content-header {
                 border-bottom: 2px solid white;
@@ -57,6 +60,7 @@
                 justify-content: space-between;
                 align-items: center;
                 padding-bottom: 8px;
+                width: 100%;
 
                 #header-left {
                     display: flex;
@@ -95,13 +99,10 @@
 
             #builds-list {
                 margin-top: 1.5rem;
+                width: 100%;
 
                 .build {
                     margin-bottom: 16px;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
                 }
             }
         }

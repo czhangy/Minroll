@@ -16,8 +16,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 // Axios
 import axios from "axios";
-// Local component
-import BuildCard from "@/components/Profile/BuildCard";
+// Global components
+import BuildCard from "@/components/Global/BuildCard";
+import Pagination from "@/components/Global/Pagination";
 
 const Profile: NextPage = () => {
     // Grab user
@@ -51,6 +52,17 @@ const Profile: NextPage = () => {
 
     // List display state
     const [page, setPage] = useState<number>(1);
+    const [currentList, setCurrentList] = useState<Build[]>([]);
+
+    // Scroll to top on page change
+    useEffect(() => {
+        document.getElementById(styles["header-container"])!.scrollIntoView();
+    }, [page]);
+
+    // Update build list on page change + initial build list fetch
+    useEffect(() => {
+        setCurrentList(buildList.slice((page - 1) * 5, page * 5));
+    }, [page, buildList]);
 
     return (
         <div id={styles.profile}>
@@ -72,7 +84,7 @@ const Profile: NextPage = () => {
                     <div id={styles["content-header"]}>
                         <div id={styles["header-left"]}>
                             <h3 id={styles["content-text"]}>Your Builds</h3>
-                            {!isLoading ? (
+                            {isLoading ? (
                                 <div id={styles["loading-icon"]}>
                                     <Image
                                         src="/icons/loading.gif"
@@ -100,7 +112,7 @@ const Profile: NextPage = () => {
                         </Link>
                     </div>
                     <ul id={styles["builds-list"]}>
-                        {buildList.map((build: Build, i: number) => {
+                        {currentList.map((build: Build, i: number) => {
                             return (
                                 <li className={styles.build} key={i}>
                                     <BuildCard build={build} />
@@ -108,6 +120,12 @@ const Profile: NextPage = () => {
                             );
                         })}
                     </ul>
+                    <Pagination
+                        page={page}
+                        maxPage={Math.ceil(buildList.length / 5)}
+                        onPrev={() => setPage(page - 1)}
+                        onNext={() => setPage(page + 1)}
+                    />
                 </div>
             </div>
         </div>

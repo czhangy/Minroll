@@ -1,5 +1,5 @@
 // Stylesheet
-import styles from "@/styles/Profile/BuildCard.module.scss";
+import styles from "@/styles/Global/BuildCard.module.scss";
 // TS
 import Build from "@/models/Build";
 // Link
