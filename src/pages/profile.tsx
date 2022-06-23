@@ -22,6 +22,7 @@ import Pagination from "@/components/Global/Pagination";
 // Local component
 import DeleteModal from "@/components/Profile/DeleteModal";
 import SortMenu from "@/components/Profile/SortMenu";
+import build from "next/dist/build";
 
 const Profile: NextPage = () => {
     // Grab user
@@ -87,6 +88,7 @@ const Profile: NextPage = () => {
 
     // Sort menu display state
     const [sortMenuOpen, setSortMenuOpen] = useState<boolean>(false);
+    const [sortOption, setSortOption] = useState<string>("Most Recent");
     const openSortMenu = (event: SyntheticEvent) => {
         // Safari focus workaround
         (event.target as HTMLButtonElement).focus();
@@ -94,26 +96,26 @@ const Profile: NextPage = () => {
     };
     const closeSortMenu = () => {
         // Allow nav links to be clicked before menu close
-        setTimeout(() => setSortMenuOpen(false), 50);
+        setTimeout(() => setSortMenuOpen(false), 100);
     };
 
     // Sort builds by selection
-    const sortBy = (option: string) => {
+    useEffect(() => {
         let newList: Build[] = [...buildList];
-        if (option === "Most Recent")
+        if (sortOption === "Most Recent")
             newList.sort((a: Build, b: Build) =>
                 a.timestamp! < b.timestamp! ? 1 : -1
             );
-        else if (option === "Least Recent")
+        else if (sortOption === "Least Recent")
             newList.sort((a: Build, b: Build) =>
                 a.timestamp! > b.timestamp! ? 1 : -1
             );
-        else if (option === "Alpha")
+        else if (sortOption === "A → Z")
             newList.sort((a: Build, b: Build) => (a.name! > b.name! ? 1 : -1));
-        else if (option === "Reverse Alpha")
+        else if (sortOption === "Z → A")
             newList.sort((a: Build, b: Build) => (a.name! < b.name! ? 1 : -1));
         setBuildList(newList);
-    };
+    }, [sortOption]);
 
     return (
         <div id={styles.profile}>
@@ -159,7 +161,9 @@ const Profile: NextPage = () => {
                                         }
                                         onBlur={closeSortMenu}
                                     >
-                                        Sort By
+                                        <p id={styles["sort-option"]}>
+                                            {sortOption}
+                                        </p>
                                         <div id={styles["sort-icon"]}>
                                             <Image
                                                 src="/icons/sort.svg"
@@ -171,8 +175,9 @@ const Profile: NextPage = () => {
                                     </button>
                                     <SortMenu
                                         open={sortMenuOpen}
+                                        selected={sortOption}
                                         onSelect={(option: string) =>
-                                            sortBy(option)
+                                            setSortOption(option)
                                         }
                                     />
                                 </div>
