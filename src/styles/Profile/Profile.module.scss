@@ -54,20 +54,42 @@
             #content-header {
                 border-bottom: 2px solid white;
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
                 padding-bottom: 8px;
 
-                #content-text {
-                    font-weight: bold;
-                    font-family: constants.$header-font;
-                    font-size: 2rem;
-                    margin-right: 16px;
+                #header-left {
+                    display: flex;
+                    align-items: center;
+
+                    #content-text {
+                        font-weight: bold;
+                        font-family: constants.$header-font;
+                        font-size: 2rem;
+                        margin-right: 16px;
+                    }
+
+                    #loading-icon {
+                        height: 24px;
+                        width: 24px;
+                        position: relative;
+                    }
                 }
 
-                #loading-icon {
-                    height: 24px;
-                    width: 24px;
-                    position: relative;
+                #planner-link {
+                    display: flex;
+                    align-items: center;
+                    font-family: constants.$header-font;
+                    font-size: 1.5rem;
+                    color: white;
+                    letter-spacing: 2px;
+
+                    #link-icon {
+                        height: 48px;
+                        width: 48px;
+                        position: relative;
+                        margin-right: -4px;
+                    }
                 }
             }
 

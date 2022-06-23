@@ -11,6 +11,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 // React
 import { useState, useEffect } from "react";
 // Axios
@@ -69,19 +70,34 @@ const Profile: NextPage = () => {
             <div id={styles["profile-content"]}>
                 <div id={styles["content-container"]}>
                     <div id={styles["content-header"]}>
-                        <h3 id={styles["content-text"]}>Your Builds</h3>
-                        {isLoading ? (
-                            <div id={styles["loading-icon"]}>
-                                <Image
-                                    src="/icons/loading.gif"
-                                    alt="Loading"
-                                    layout="fill"
-                                    objectFit="contain"
-                                />
-                            </div>
-                        ) : (
-                            ""
-                        )}
+                        <div id={styles["header-left"]}>
+                            <h3 id={styles["content-text"]}>Your Builds</h3>
+                            {!isLoading ? (
+                                <div id={styles["loading-icon"]}>
+                                    <Image
+                                        src="/icons/loading.gif"
+                                        alt="Loading"
+                                        layout="fill"
+                                        objectFit="contain"
+                                    />
+                                </div>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                        <Link href="/planner">
+                            <a id={styles["planner-link"]}>
+                                <div id={styles["link-icon"]}>
+                                    <Image
+                                        src="/icons/plus.svg"
+                                        alt=""
+                                        layout="fill"
+                                        objectFit="contain"
+                                    />
+                                </div>
+                                New Build
+                            </a>
+                        </Link>
                     </div>
                     <ul id={styles["builds-list"]}>
                         {buildList.map((build: Build, i: number) => {
