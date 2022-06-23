@@ -225,10 +225,10 @@ Start the application
     -   [x] Logout button
     -   [x] List of saved builds
 
-        -   [ ] Update functionality
+        -   [x] Update functionality
         -   [x] Delete functionality
         -   [x] Show more functionality
-        -   [ ] Sort by functionality
+        -   [x] Sort by functionality
 
     -   [ ] Redirect on unauthorized
 
