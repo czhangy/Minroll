@@ -15,8 +15,6 @@ import Image from "next/image";
 import Head from "next/head";
 // Local component
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
-// BlizzAPI
-import { BlizzAPI, RegionIdOrName } from "blizzapi";
 
 type Props = {
     build: Build | null;
@@ -70,14 +68,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // Get build ID from route
     const { bid } = context.query;
     try {
-        // Init BAPI
-        const api = new BlizzAPI({
-            region: "us" as RegionIdOrName,
-            clientId: process.env.BNET_ID as string,
-            clientSecret: process.env.BNET_SECRET as string,
-        });
         // Fetch build from DB using bid
-        const build: Build | null = await prisma.build.findUnique({
+        let build: Build | null = await prisma.build.findUnique({
             where: {
                 id: bid as string,
             },
@@ -86,133 +78,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 name: true,
                 class: true,
                 description: true,
-                gear: true,
-                cube: true,
-                skills: true,
-                runes: true,
-                passives: true,
-                gems: true,
+                data: true,
                 userId: true,
             },
         });
-        if (build) {
-            // Fetch user from DB using userId
-            const user: CurrentUser | null = await prisma.user.findUnique({
-                where: {
-                    id: build.userId!,
-                },
-            });
-            // Get all build gear
-            let gear: BuildGear = {
-                head: null,
-                shoulders: null,
-                torso: null,
-                hands: null,
-                wrists: null,
-                waist: null,
-                legs: null,
-                feet: null,
-                neck: null,
-                "left-finger": null,
-                "right-finger": null,
-                "main-hand": null,
-                "off-hand": null,
-            };
-            let gearInd: number = 0;
-            for (const slot in gear) {
-                if ((build.gear as string[])[gearInd])
-                    gear[slot as keyof typeof gear] =
-                        await prisma.gear.findUnique({
-                            where: {
-                                name: (build.gear as string[])[gearInd],
-                            },
-                        });
-                gearInd++;
-            }
-            build.gear = gear;
-            // Get all build skills
-            let skills: (Skill | null)[] = [];
-            for (let i = 0; i < 6; i++) {
-                if ((build.skills as string[])[i] !== "") {
-                    let skillData: any = await api.query(
-                        `/d3/data/hero/${build!.class}/skill/${
-                            (build.skills as string[])[i]
-                        }`
-                    );
-                    // Fetch rune
-                    let rune = null;
-                    if ((build.runes as string[])[i] !== "") {
-                        rune = skillData.runes.find(
-                            (r: any) => r.name === (build.runes as string[])[i]
-                        );
-                    }
-                    skillData = {
-                        name: skillData.skill.name,
-                        slug: skillData.skill.slug,
-                        icon: skillData.skill.icon,
-                        description: skillData.skill.description,
-                        rune: rune,
-                    };
-                    skills.push(skillData);
-                } else skills.push(null);
-            }
-            build.skills = skills;
-            // Get all build passives
-            let passives: (Skill | null)[] = [];
-            for (let i = 0; i < 4; i++) {
-                if ((build.passives as string[])[i] !== "") {
-                    let passiveData: any = await api.query(
-                        `/d3/data/hero/${build!.class}/skill/${
-                            (build.passives as string[])[i]
-                        }`
-                    );
-                    passiveData = {
-                        name: passiveData.skill.name,
-                        slug: passiveData.skill.slug,
-                        icon: passiveData.skill.icon,
-                        description: passiveData.skill.description,
-                    };
-                    passives.push(passiveData);
-                } else passives.push(null);
-            }
-            build.passives = passives;
-            // Get all build gems
-            let gems: (Gem | null)[] = [];
-            for (let i = 0; i < 3; i++) {
-                const gem = await prisma.gem.findUnique({
-                    where: {
-                        name: (build.gems as string[])[i],
-                    },
-                });
-                gems.push(gem);
-            }
-            build.gems = gems;
-            // Get all build cube items
-            let cube: BuildCube = {
-                weapon: null,
-                armor: null,
-                jewelry: null,
-            };
-            let cubeInd: number = 0;
-            for (const slot in cube) {
-                if ((build!.cube! as string[])[cubeInd] !== null)
-                    cube[slot as keyof typeof cube] =
-                        await prisma.gear.findUnique({
-                            where: {
-                                name: (build!.cube as string[])[cubeInd],
-                            },
-                        });
-                cubeInd++;
-            }
-            build!.cube = cube as any;
-
-            return {
-                props: { build, user },
-            };
-        } else
-            return {
-                props: {},
-            };
+        // Parse build data
+        const buildData = JSON.parse(build!.data as string);
+        build = {
+            ...build!,
+            gear: buildData.gear,
+            skills: buildData.skills,
+            passives: buildData.passives,
+            cube: buildData.cube,
+            gems: buildData.gems,
+        };
+        // Fetch user from DB using userId
+        const user: CurrentUser | null = await prisma.user.findUnique({
+            where: {
+                id: build!.userId as string,
+            },
+        });
+        return {
+            props: { build, user },
+        };
     } catch (err) {
         console.log(err);
         return {

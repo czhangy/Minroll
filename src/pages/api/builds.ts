@@ -1,57 +1,25 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
 import Build from "@/models/Build";
-import Skill from "@/models/Skill";
-import Gear from "@/models/Gear";
-import Gem from "@/models/Gem";
 // Prisma
 import prisma from "@/lib/prisma";
 
 // Post a build to the DB
 const postBuild = async (build: Build) => {
-    // Strip out gear names
-    let gear: string[] = [];
-    Object.keys(build.gear!).forEach((key) => {
-        if (build.gear![key as keyof typeof build.gear])
-            gear.push(
-                (build.gear![key as keyof typeof build.gear] as Gear)
-                    .name as string
-            );
-        else gear.push("");
-    });
-    let cube: string[] = [];
-    Object.keys(build.cube!).forEach((key) => {
-        if (build.cube![key as keyof typeof build.cube])
-            cube.push(
-                (build.cube![key as keyof typeof build.cube] as Gear)
-                    .name as string
-            );
-        else cube.push("");
-    });
-    // Strip out slugs
-    let skills: string[] = [];
-    let runes: string[] = [];
-    (build.skills as Skill[]).map((skill: Skill) => {
-        skills.push(skill ? skill.slug : "");
-        runes.push(skill && skill.rune ? skill.rune.name : "");
-    });
-    let passives: string[] = [];
-    for (const passive of build.passives as Skill[])
-        passives.push(passive ? passive.slug : "");
-    let gems: string[] = [];
-    for (const gem of build.gems as Gem[]) gems.push(gem ? gem.name : "");
+    const buildData = {
+        gear: build.gear,
+        skills: build.skills,
+        passives: build.passives,
+        cube: build.cube,
+        gems: build.gems,
+    };
     // Send to DB
     const response = await prisma.build.create({
         data: {
             name: build.name,
             class: build.class,
             description: build.description as string,
-            gear: gear,
-            cube: cube,
-            skills: skills,
-            runes: runes,
-            passives: passives,
-            gems: gems,
+            data: JSON.stringify(buildData),
             userId: build.userId as string,
             timestamp: new Date(),
         },
