@@ -5,11 +5,17 @@ import { SyntheticEvent } from "react";
 
 type Props = {
     open: boolean;
+    buildName?: string;
     onConfirm: () => void;
     onClose: () => void;
 };
 
-const DeleteModal: React.FC<Props> = ({ open, onConfirm, onClose }: Props) => {
+const DeleteModal: React.FC<Props> = ({
+    open,
+    buildName,
+    onConfirm,
+    onClose,
+}: Props) => {
     // Stops click on content from closing modal
     const contentClick = (e: SyntheticEvent) => {
         e.stopPropagation();
@@ -23,9 +29,9 @@ const DeleteModal: React.FC<Props> = ({ open, onConfirm, onClose }: Props) => {
         >
             <div id={styles["delete-modal-content"]} onClick={contentClick}>
                 <h2 id={styles["delete-header"]}>
-                    Deleting this build cannot be undone.
+                    Are you sure you want to delete
                     <br />
-                    Are you sure?
+                    {buildName ? buildName : "this build"}?
                 </h2>
                 <div id={styles["delete-buttons"]}>
                     <button

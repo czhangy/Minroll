@@ -91,6 +91,7 @@ const Profile: NextPage = () => {
             </Head>
             <DeleteModal
                 open={deleteModalOpen}
+                buildName={buildToDelete?.name}
                 onClose={() => setDeleteModalOpen(false)}
                 onConfirm={deleteBuild}
             />
