@@ -12,6 +12,7 @@ export default interface Build {
     gear?: BuildGear | String[];
     cube?: BuildCube | String[];
     skills?: Array<Skill | null> | String[];
+    runes?: String[];
     passives?: Array<Skill | null> | String[];
     gems?: Array<Gem | null> | String[];
     userId?: string | null;
