@@ -2,8 +2,9 @@
 import styles from "@/styles/Global/BuildCard.module.scss";
 // TS
 import Build from "@/models/Build";
-// Link
+// Next
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
     build: Build;
@@ -19,14 +20,34 @@ const BuildCard: React.FC<Props> = ({ build }: Props) => {
     };
 
     return (
-        <Link href={`/builds/${build.id}`}>
-            <a className={`${styles["build-card"]} ${styles[build.class]}`}>
-                <h5 className={styles["build-name"]}>{build.name}</h5>
-                <em className={styles["build-class"]}>
-                    {formatClassName(build.class)} Build
-                </em>
-            </a>
-        </Link>
+        <div className={`${styles["build-card"]} ${styles[build.class]}`}>
+            <Link href={`/builds/${build.id}`}>
+                <a className={styles["build-link"]}>
+                    <h5 className={styles["build-name"]}>{build.name}</h5>
+                    <em className={styles["build-class"]}>
+                        {formatClassName(build.class)} Build
+                    </em>
+                </a>
+            </Link>
+            <div className={styles["build-icons"]}>
+                <button className={styles["build-icon"]}>
+                    <Image
+                        src="/icons/edit.svg"
+                        alt="Edit"
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </button>
+                <button className={styles["build-icon"]}>
+                    <Image
+                        src="/icons/delete.svg"
+                        alt="Delete"
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </button>
+            </div>
+        </div>
     );
 };
 

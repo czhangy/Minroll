@@ -227,7 +227,8 @@ Start the application
 
         -   [ ] Update functionality
         -   [ ] Delete functionality
-        -   [ ] Show more functionality
+        -   [x] Show more functionality
+        -   [ ] Sort by functionality
 
     -   [ ] Redirect on unauthorized
 

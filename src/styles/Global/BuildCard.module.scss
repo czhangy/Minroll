@@ -1,24 +1,50 @@
 @use "@/styles/constants";
 
 .build-card {
-    display: flex;
-    flex-direction: column;
     border: 2px solid white;
     width: 100%;
-    padding: 64px 32px;
-    display: flex;
+    justify-content: space-between;
     transition: transform 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
 
-    .build-name {
-        font-family: constants.$header-font;
-        letter-spacing: 1px;
-        font-size: 1.5rem;
-        margin-bottom: 12px;
+    .build-link {
+        height: 100%;
+        width: 100%;
+        padding: 64px 32px;
+
+        .build-name {
+            font-family: constants.$header-font;
+            letter-spacing: 1px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .build-class {
+            font-family: constants.$main-font;
+            font-size: 1.2rem;
+        }
     }
 
-    .build-class {
-        font-family: constants.$main-font;
-        font-size: 1.2rem;
+    .build-icons {
+        position: absolute;
+        right: 32px;
+        color: white;
+
+        .build-icon {
+            height: 48px;
+            width: 48px;
+            position: relative;
+            z-index: 9;
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
+                brightness(101%) contrast(103%);
+            margin-right: 24px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
     }
 }
 
@@ -75,6 +101,14 @@
     .build-card:hover {
         border: 2px solid constants.$accent-color;
         transform: scale(1.01);
-        color: constants.$accent-color;
+
+        .build-link {
+            color: constants.$accent-color;
+        }
+
+        .build-icons > .build-icon:hover {
+            filter: invert(32%) sepia(80%) saturate(5717%) hue-rotate(210deg)
+                brightness(104%) contrast(104%);
+        }
     }
 }
