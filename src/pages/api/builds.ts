@@ -70,5 +70,18 @@ export default async function handler(
             console.log(err);
             res.status(400).send({ success: false, message: err });
         }
+        // Handle DELETE /api/builds
+    } else if (req.method === "DELETE") {
+        try {
+            const response = await prisma.build.delete({
+                where: {
+                    id: req.query.id as string,
+                },
+            });
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
     } else res.status(405).send({ success: false });
 }

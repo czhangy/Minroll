@@ -226,7 +226,7 @@ Start the application
     -   [x] List of saved builds
 
         -   [ ] Update functionality
-        -   [ ] Delete functionality
+        -   [x] Delete functionality
         -   [x] Show more functionality
         -   [ ] Sort by functionality
 

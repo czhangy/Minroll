@@ -19,6 +19,8 @@ import axios from "axios";
 // Global components
 import BuildCard from "@/components/Global/BuildCard";
 import Pagination from "@/components/Global/Pagination";
+// Local component
+import DeleteModal from "@/components/Profile/DeleteModal";
 
 const Profile: NextPage = () => {
     // Grab user
@@ -35,19 +37,22 @@ const Profile: NextPage = () => {
     // Loading state
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    // Fetch user's builds
+    const fetchBuilds = () => {
+        setIsLoading(true);
+        axios
+            .get("/api/builds", { params: { id: user!.id } })
+            .then((response) => {
+                setBuildList(response.data);
+                setIsLoading(false);
+            })
+            .catch((err) => console.log(err));
+    };
+
     // Build list state
     const [buildList, setBuildList] = useState<Build[]>([]);
     useEffect(() => {
-        if (user) {
-            setIsLoading(true);
-            axios
-                .get("/api/builds", { params: { id: user.id } })
-                .then((response) => {
-                    setBuildList(response.data);
-                    setIsLoading(false);
-                })
-                .catch((err) => console.log(err));
-        }
+        if (user) fetchBuilds();
     }, [user]);
 
     // List display state
@@ -59,16 +64,36 @@ const Profile: NextPage = () => {
         document.getElementById(styles["header-container"])!.scrollIntoView();
     }, [page]);
 
-    // Update build list on page change + initial build list fetch
+    // Update build list on page change + master build list fetch/refetch
     useEffect(() => {
         setCurrentList(buildList.slice((page - 1) * 5, page * 5));
     }, [page, buildList]);
+
+    // Delete modal display state
+    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+    const [buildToDelete, setBuildToDelete] = useState<Build | null>(null);
+
+    // Delete the build identified by buildToDelete from the DB
+    const deleteBuild = () => {
+        // Close delete modal
+        setDeleteModalOpen(false);
+        axios
+            .delete("/api/builds", { params: { id: buildToDelete!.id } })
+            // Refetch the master list
+            .then(() => fetchBuilds())
+            .catch((err) => console.log(err));
+    };
 
     return (
         <div id={styles.profile}>
             <Head>
                 <title>My Profile | Minroll</title>
             </Head>
+            <DeleteModal
+                open={deleteModalOpen}
+                onClose={() => setDeleteModalOpen(false)}
+                onConfirm={deleteBuild}
+            />
             <div id={styles["profile-header"]}>
                 <div id={styles["header-container"]}>
                     <h2 id={styles.username}>
@@ -115,7 +140,13 @@ const Profile: NextPage = () => {
                         {currentList.map((build: Build, i: number) => {
                             return (
                                 <li className={styles.build} key={i}>
-                                    <BuildCard build={build} />
+                                    <BuildCard
+                                        build={build}
+                                        onDelete={(build: Build) => {
+                                            setBuildToDelete(build);
+                                            setDeleteModalOpen(true);
+                                        }}
+                                    />
                                 </li>
                             );
                         })}

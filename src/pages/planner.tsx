@@ -10,6 +10,8 @@ import Gear from "@/models/Gear";
 import Gem from "@/models/Gem";
 import Rune from "@/models/Rune";
 import CurrentUser from "@/models/CurrentUser";
+import BuildGear from "@/models/BuildGear";
+import BuildCube from "@/models/BuildCube";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -80,7 +82,7 @@ const Planner: NextPage = () => {
         setBuild({
             ...build,
             gear: {
-                ...build.gear,
+                ...(build.gear as BuildGear),
                 [slot]: item,
             },
         });
@@ -89,7 +91,7 @@ const Planner: NextPage = () => {
         setBuild({
             ...build,
             cube: {
-                ...build.cube,
+                ...(build.cube as BuildCube),
                 [slot]: item,
             },
         });
@@ -109,9 +111,9 @@ const Planner: NextPage = () => {
             );
         // Set state of skills
         const newSkills: Array<Skill | null> = [
-            ...build.skills.slice(0, ind),
+            ...build.skills!.slice(0, ind),
             skill,
-            ...build.skills.slice(ind + 1, 6),
+            ...build.skills!.slice(ind + 1, 6),
         ];
         setBuild({
             ...build,
@@ -235,9 +237,9 @@ const Planner: NextPage = () => {
                 <GearPage
                     gearList={gearList}
                     gemList={gemList}
-                    savedGear={build.gear}
-                    savedCube={build.cube}
-                    savedGems={build.gems}
+                    savedGear={build.gear as BuildGear}
+                    savedCube={build.cube as BuildCube}
+                    savedGems={build.gems as Gem[]}
                     onGearSelect={selectGear}
                     onCubeSelect={selectCube}
                     onGemSelect={selectGem}
@@ -249,8 +251,8 @@ const Planner: NextPage = () => {
                     skillList={skillList}
                     runeLists={runeLists}
                     passiveList={passiveList}
-                    savedSkills={build.skills}
-                    savedPassives={build.passives}
+                    savedSkills={build.skills as Skill[]}
+                    savedPassives={build.passives as Skill[]}
                     onSkillSelect={selectSkill}
                     onRuneSelect={selectRune}
                     onPassiveSelect={selectPassive}
@@ -354,11 +356,11 @@ const Planner: NextPage = () => {
                     isLoading={isLoading}
                 />
                 <BuildPanel
-                    gear={build.gear}
-                    cube={build.cube}
-                    skills={build.skills}
-                    passives={build.passives}
-                    gems={build.gems}
+                    gear={build.gear as BuildGear}
+                    cube={build.cube as BuildCube}
+                    skills={build.skills as Skill[]}
+                    passives={build.passives as Skill[]}
+                    gems={build.gems as Gem[]}
                 />
                 <div id={styles["build-footer"]}>
                     <input

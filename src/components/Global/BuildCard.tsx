@@ -8,9 +8,10 @@ import Image from "next/image";
 
 type Props = {
     build: Build;
+    onDelete: (build: Build) => void;
 };
 
-const BuildCard: React.FC<Props> = ({ build }: Props) => {
+const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
     // Capitalize words and remove spaces from class name
     const formatClassName = (name: string) => {
         const words = name.replace(/-/g, " ").split(" ");
@@ -29,18 +30,19 @@ const BuildCard: React.FC<Props> = ({ build }: Props) => {
                     </em>
                 </a>
             </Link>
-            <button
-                className={`${styles["build-icon"]} ${styles["edit-icon"]}`}
-            >
-                <Image
-                    src="/icons/edit.svg"
-                    alt="Edit"
-                    layout="fill"
-                    objectFit="cover"
-                />
-            </button>
+            <Link href="/planner">
+                <a className={`${styles["build-icon"]} ${styles["edit-icon"]}`}>
+                    <Image
+                        src="/icons/edit.svg"
+                        alt="Edit"
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </a>
+            </Link>
             <button
                 className={`${styles["build-icon"]} ${styles["delete-icon"]}`}
+                onClick={() => onDelete(build)}
             >
                 <Image
                     src="/icons/delete.svg"
