@@ -72,7 +72,7 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
                         src={
                             props.runeList.length === 0
                                 ? "/icons/lock.svg"
-                                : "/icons/chevron-down.svg"
+                                : "/icons/chevron.svg"
                         }
                         alt=""
                         layout="fill"

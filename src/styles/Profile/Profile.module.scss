@@ -50,27 +50,85 @@
             background: constants.$main-color;
             padding: 32px;
             box-shadow: constants.$outline;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             #content-header {
-                font-weight: bold;
-                font-family: constants.$header-font;
-                font-size: 2rem;
                 border-bottom: 2px solid white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
                 padding-bottom: 8px;
+                width: 100%;
+
+                #header-left {
+                    display: flex;
+                    align-items: center;
+
+                    #content-text {
+                        font-weight: bold;
+                        font-family: constants.$header-font;
+                        font-size: 2rem;
+                        margin-right: 16px;
+                    }
+
+                    #loading-icon {
+                        height: 24px;
+                        width: 24px;
+                        position: relative;
+                    }
+
+                    #menu-container {
+                        position: relative;
+
+                        #menu-button {
+                            font-size: 1.2rem;
+                            font-family: constants.$header-font;
+                            color: white;
+                            background: constants.$accent-color;
+                            padding: 4px 16px;
+                            display: flex;
+                            align-items: center;
+
+                            #sort-option {
+                                width: 140px;
+                                text-align: center;
+                            }
+
+                            #sort-icon {
+                                height: 24px;
+                                width: 24px;
+                                position: relative;
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                }
+
+                #planner-link {
+                    display: flex;
+                    align-items: center;
+                    font-family: constants.$header-font;
+                    font-size: 1.5rem;
+                    color: white;
+                    letter-spacing: 2px;
+
+                    #link-icon {
+                        height: 48px;
+                        width: 48px;
+                        position: relative;
+                        margin-right: -4px;
+                    }
+                }
             }
 
             #builds-list {
                 margin-top: 1.5rem;
+                width: 100%;
 
-                .placeholder {
-                    width: 100%;
-                    background: green;
-                    height: 200px;
+                .build {
                     margin-bottom: 16px;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
                 }
             }
         }
@@ -78,8 +136,19 @@
 }
 
 @media (hover: hover) {
-    #profile > #profile-header > #header-container > #logout-button:hover {
-        background: constants.$accent-color-hover;
+    #profile {
+        #profile-header > #header-container > #logout-button:hover {
+            background: constants.$accent-color-hover;
+        }
+
+        #profile-content
+            > #content-container
+            > #content-header
+            > #header-left
+            > #menu-container
+            > #menu-button:hover {
+            background: constants.$accent-color-hover;
+        }
     }
 }
 

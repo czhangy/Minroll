@@ -1,0 +1,112 @@
+@use "@/styles/constants";
+
+.build-card {
+    border: 2px solid white;
+    width: 100%;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .build-link {
+        height: 100%;
+        width: 100%;
+        padding: 64px 32px;
+
+        .build-name {
+            font-family: constants.$header-font;
+            letter-spacing: 1px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .build-class {
+            font-family: constants.$main-font;
+            font-size: 1.2rem;
+        }
+    }
+
+    .build-icon {
+        position: absolute;
+        height: 48px;
+        width: 48px;
+        position: relative;
+        z-index: 9;
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
+            brightness(101%) contrast(103%);
+    }
+
+    .edit-icon {
+        right: 64px;
+    }
+
+    .delete-icon {
+        right: 32px;
+    }
+}
+
+.barbarian {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/barbarian-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.crusader {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/crusader-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.demon-hunter {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/demon-hunter-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.monk {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/monk-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.necromancer {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/necromancer-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.witch-doctor {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/witch-doctor-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+.wizard {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+        url("/images/wizard-bg.webp");
+    background-size: cover;
+    background-position: right;
+}
+
+@media (hover: hover) {
+    .build-card:hover {
+        border: 2px solid constants.$accent-color;
+        transform: scale(1.01);
+
+        .build-link {
+            color: constants.$accent-color;
+        }
+
+        .build-icon:hover {
+            filter: invert(32%) sepia(80%) saturate(5717%) hue-rotate(210deg)
+                brightness(104%) contrast(104%);
+        }
+    }
+}

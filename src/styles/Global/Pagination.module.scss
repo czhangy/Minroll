@@ -1,0 +1,38 @@
+@use "@/styles/constants";
+
+.pagination {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .arrow {
+        height: 24px;
+        width: 24px;
+        position: absolute;
+    }
+
+    .left {
+        left: -64px;
+        transform: rotate(90deg);
+    }
+
+    .right {
+        right: -64px;
+        transform: rotate(270deg);
+    }
+
+    .page-num {
+        font-size: 1.5rem;
+        font-family: constants.$main-font;
+        color: constants.$accent-color;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .slash {
+        font-size: 2rem;
+        font-family: constants.$main-font;
+        color: constants.$accent-color;
+        margin: 0 4px;
+    }
+}

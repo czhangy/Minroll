@@ -22,13 +22,9 @@ model Build {
     name        String
     class       String
     description String
-    gear        String[]
-    cube        String[]
-    skills      String[]
-    runes       String[]
-    passives    String[]
-    gems        String[]
+    data        String
     userId      String
+    timestamp   DateTime
 }
 
 model Set {

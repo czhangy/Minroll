@@ -10,6 +10,8 @@ import Gear from "@/models/Gear";
 import Gem from "@/models/Gem";
 import Rune from "@/models/Rune";
 import CurrentUser from "@/models/CurrentUser";
+import BuildGear from "@/models/BuildGear";
+import BuildCube from "@/models/BuildCube";
 // Local components
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 import Dropdown from "@/components/Planner/Dropdown";
@@ -80,7 +82,7 @@ const Planner: NextPage = () => {
         setBuild({
             ...build,
             gear: {
-                ...build.gear,
+                ...(build.gear as BuildGear),
                 [slot]: item,
             },
         });
@@ -89,7 +91,7 @@ const Planner: NextPage = () => {
         setBuild({
             ...build,
             cube: {
-                ...build.cube,
+                ...(build.cube as BuildCube),
                 [slot]: item,
             },
         });
@@ -108,51 +110,51 @@ const Planner: NextPage = () => {
                 ])
             );
         // Set state of skills
-        const newSkills: Array<Skill | null> = [
-            ...build.skills.slice(0, ind),
+        const newSkills = [
+            ...build.skills!.slice(0, ind),
             skill,
-            ...build.skills.slice(ind + 1, 6),
+            ...build.skills!.slice(ind + 1, 6),
         ];
         setBuild({
             ...build,
-            skills: newSkills,
+            skills: newSkills as (Skill | null)[],
         });
     };
     const selectRune = (ind: number, rune: Rune) => {
-        let newSkill: Skill = build.skills[ind] as Skill;
+        let newSkill: Skill = build!.skills![ind] as Skill;
         newSkill.rune = rune;
-        const newSkills: Array<Skill | null> = [
-            ...build.skills.slice(0, ind),
+        const newSkills = [
+            ...build!.skills!.slice(0, ind),
             newSkill,
-            ...build.skills.slice(ind + 1, 6),
+            ...build!.skills!.slice(ind + 1, 6),
         ];
         setBuild({
             ...build,
-            skills: newSkills,
+            skills: newSkills as (Skill | null)[],
         });
     };
     const selectPassive = (ind: number, passive: Skill) => {
         // Set state of passives
-        const newPassives: Array<Skill | null> = [
-            ...build.passives.slice(0, ind),
+        const newPassives = [
+            ...build.passives!.slice(0, ind),
             passive,
-            ...build.passives.slice(ind + 1, 4),
+            ...build.passives!.slice(ind + 1, 4),
         ];
         setBuild({
             ...build,
-            passives: newPassives,
+            passives: newPassives as (Skill | null)[],
         });
     };
     const selectGem = (ind: number, gem: Gem) => {
         // Set state of gems
-        const newGems: Array<Gem | null> = [
-            ...build.gems.slice(0, ind),
+        const newGems = [
+            ...build.gems!.slice(0, ind),
             gem,
-            ...build.gems.slice(ind + 1, 3),
+            ...build.gems!.slice(ind + 1, 3),
         ];
         setBuild({
             ...build,
-            gems: newGems,
+            gems: newGems as (Gem | null)[],
         });
     };
     const updateDescription = (e: SyntheticEvent) => {
@@ -166,9 +168,9 @@ const Planner: NextPage = () => {
     // Fetch previous build if it exists
     useEffect(() => {
         const savedBuild: string | null = localStorage.getItem("build");
-        if (savedBuild) setBuild(JSON.parse(savedBuild));
-        const savedRuneLists: string | null = localStorage.getItem("runeLists");
-        if (savedRuneLists) setRuneLists(JSON.parse(savedRuneLists));
+        if (savedBuild) {
+            setBuild(JSON.parse(savedBuild));
+        }
     }, []);
 
     // Fetch class data
@@ -191,6 +193,25 @@ const Planner: NextPage = () => {
             .catch((error) => console.log(error));
         // Loading complete
         Promise.all([gear, skills, passives]).then(() => setIsLoading(false));
+    };
+
+    // Fetch rune lists when loading from local storage
+    const fetchRuneLists = async () => {
+        const runeLists: Rune[][] = defaultRuneLists;
+        // Fetch rune list for every set skill
+        for (let i = 0; i < 6; i++) {
+            if (build.skills![i]) {
+                await axios
+                    .get("/api/skills", {
+                        params: {
+                            className: build.class,
+                            skillName: (build.skills![i] as Skill).slug,
+                        },
+                    })
+                    .then((response) => (runeLists[i] = response.data));
+            }
+        }
+        setRuneLists(runeLists);
     };
 
     // Page state
@@ -220,7 +241,6 @@ const Planner: NextPage = () => {
         setPassiveList([]);
         // Reset local storage
         localStorage.setItem("build", JSON.stringify(defaultBuild));
-        localStorage.setItem("runeLists", JSON.stringify(defaultRuneLists));
     };
 
     // Page state
@@ -235,9 +255,9 @@ const Planner: NextPage = () => {
                 <GearPage
                     gearList={gearList}
                     gemList={gemList}
-                    savedGear={build.gear}
-                    savedCube={build.cube}
-                    savedGems={build.gems}
+                    savedGear={build.gear as BuildGear}
+                    savedCube={build.cube as BuildCube}
+                    savedGems={build.gems as Gem[]}
                     onGearSelect={selectGear}
                     onCubeSelect={selectCube}
                     onGemSelect={selectGem}
@@ -249,8 +269,8 @@ const Planner: NextPage = () => {
                     skillList={skillList}
                     runeLists={runeLists}
                     passiveList={passiveList}
-                    savedSkills={build.skills}
-                    savedPassives={build.passives}
+                    savedSkills={build.skills as Skill[]}
+                    savedPassives={build.passives as Skill[]}
                     onSkillSelect={selectSkill}
                     onRuneSelect={selectRune}
                     onPassiveSelect={selectPassive}
@@ -279,15 +299,17 @@ const Planner: NextPage = () => {
             ) as HTMLButtonElement;
             saveButton.innerHTML = "SAVING";
             saveButton.disabled = true;
-            axios
-                .post("/api/builds", {
-                    data: {
-                        build: JSON.stringify({
-                            ...build,
-                            userId: (user as CurrentUser).id,
-                        }),
-                    },
-                })
+            axios({
+                method: router.query.id ? "PUT" : "POST",
+                url: "/api/builds",
+                data: {
+                    build: JSON.stringify({
+                        ...build,
+                        userId: (user as CurrentUser).id,
+                    }),
+                    id: router.query.id,
+                },
+            })
                 .then(() => (saveButton.innerHTML = "SAVED!"))
                 .catch((err) => console.log(err));
         } else setError(true);
@@ -312,11 +334,11 @@ const Planner: NextPage = () => {
         ) as HTMLButtonElement;
         saveButton.innerHTML = "SAVE";
         saveButton.disabled = false;
+        // Re-fetch rune lists
+        fetchRuneLists();
         // Save to local storage
-        if (build.class || build.name) {
+        if (build.class || build.name)
             localStorage.setItem("build", JSON.stringify(build));
-            localStorage.setItem("runeLists", JSON.stringify(runeLists));
-        }
     }, [build]);
 
     // Page names
@@ -354,11 +376,11 @@ const Planner: NextPage = () => {
                     isLoading={isLoading}
                 />
                 <BuildPanel
-                    gear={build.gear}
-                    cube={build.cube}
-                    skills={build.skills}
-                    passives={build.passives}
-                    gems={build.gems}
+                    gear={build.gear as BuildGear}
+                    cube={build.cube as BuildCube}
+                    skills={build.skills as Skill[]}
+                    passives={build.passives as Skill[]}
+                    gems={build.gems as Gem[]}
                 />
                 <div id={styles["build-footer"]}>
                     <input

@@ -3,54 +3,65 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import Build from "@/models/Build";
 // Prisma
 import prisma from "@/lib/prisma";
-import { runInThisContext } from "vm";
 
-const postBuild = async (build: Build) => {
-    // Strip out gear names
-    let gear: string[] = [];
-    Object.keys(build.gear).forEach((key) => {
-        if (build.gear[key as keyof typeof build.gear])
-            gear.push(
-                build.gear[key as keyof typeof build.gear]?.name as string
-            );
-        else gear.push("");
-    });
-    let cube: string[] = [];
-    Object.keys(build.cube).forEach((key) => {
-        if (build.cube[key as keyof typeof build.cube])
-            cube.push(
-                build.cube[key as keyof typeof build.cube]?.name as string
-            );
-        else cube.push("");
-    });
-    // Strip out slugs
-    let skills: string[] = [];
-    let runes: string[] = [];
-    build.skills.map((skill) => {
-        skills.push(skill ? skill.slug : "");
-        runes.push(skill && skill.rune ? skill.rune.name : "");
-    });
-    let passives: string[] = [];
-    for (const passive of build.passives)
-        passives.push(passive ? passive.slug : "");
-    let gems: string[] = [];
-    for (const gem of build.gems) gems.push(gem ? gem.name : "");
+// Post a build to the DB
+const postBuild = async (build: Build, id?: string) => {
+    const buildData = {
+        gear: build.gear,
+        skills: build.skills,
+        passives: build.passives,
+        cube: build.cube,
+        gems: build.gems,
+    };
     // Send to DB
-    const response = await prisma.build.create({
-        data: {
+    const response = await prisma.build.upsert({
+        where: {
+            id: id ? id : "",
+        },
+        update: {
             name: build.name,
             class: build.class,
-            description: build.description,
-            gear: gear,
-            cube: cube,
-            skills: skills,
-            runes: runes,
-            passives: passives,
-            gems: gems,
+            description: build.description as string,
+            data: JSON.stringify(buildData),
             userId: build.userId as string,
+            timestamp: new Date(),
+        },
+        create: {
+            name: build.name,
+            class: build.class,
+            description: build.description as string,
+            data: JSON.stringify(buildData),
+            userId: build.userId as string,
+            timestamp: new Date(),
         },
     });
     return response;
+};
+
+// Fetch all builds by userId
+const getBuildsByUser = async (id: string) => {
+    let builds: Build[] = await prisma.build.findMany({
+        where: {
+            userId: id,
+        },
+        orderBy: {
+            timestamp: "desc",
+        },
+    });
+    // Flatten JSON
+    for (let i = 0; i < builds.length; i++) {
+        const buildData = JSON.parse(builds[i].data as string);
+        builds[i] = {
+            ...builds[i],
+            gear: buildData.gear,
+            skills: buildData.skills,
+            passives: buildData.passives,
+            cube: buildData.cube,
+            gems: buildData.gems,
+        };
+        delete builds[i].data;
+    }
+    return builds;
 };
 
 export default async function handler(
@@ -60,7 +71,43 @@ export default async function handler(
     // Handle POST /api/builds
     if (req.method === "POST") {
         try {
-            const response = await postBuild(JSON.parse(req.body.data.build));
+            const response = await postBuild(JSON.parse(req.body.build));
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
+        // Handle GET /api/builds
+    } else if (req.method === "GET") {
+        try {
+            const response: Build[] = await getBuildsByUser(
+                req.query.id as string
+            );
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
+        // Handle DELETE /api/builds
+    } else if (req.method === "DELETE") {
+        try {
+            const response = await prisma.build.delete({
+                where: {
+                    id: req.query.id as string,
+                },
+            });
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
+        // Handle PUT /api/builds
+    } else if (req.method === "PUT") {
+        try {
+            const response = await postBuild(
+                JSON.parse(req.body.build),
+                req.body.id
+            );
             res.json(response);
         } catch (err) {
             console.log(err);

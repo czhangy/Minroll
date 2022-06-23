@@ -1,0 +1,39 @@
+@use "@/styles/constants";
+
+#sort-menu {
+    opacity: 0;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    background: constants.$bg-color;
+    z-index: 9;
+    width: 180px;
+    box-shadow: constants.$outline;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    transform: translateY(-10px);
+
+    .menu-option {
+        font-family: constants.$main-font;
+        color: white;
+        padding: 12px 32px;
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .active {
+        color: constants.$accent-color;
+    }
+}
+
+#sort-menu.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+@media (hover: hover) {
+    #sort-menu .menu-option:hover {
+        background: constants.$main-color;
+    }
+}
