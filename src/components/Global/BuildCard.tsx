@@ -29,24 +29,26 @@ const BuildCard: React.FC<Props> = ({ build }: Props) => {
                     </em>
                 </a>
             </Link>
-            <div className={styles["build-icons"]}>
-                <button className={styles["build-icon"]}>
-                    <Image
-                        src="/icons/edit.svg"
-                        alt="Edit"
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </button>
-                <button className={styles["build-icon"]}>
-                    <Image
-                        src="/icons/delete.svg"
-                        alt="Delete"
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </button>
-            </div>
+            <button
+                className={`${styles["build-icon"]} ${styles["edit-icon"]}`}
+            >
+                <Image
+                    src="/icons/edit.svg"
+                    alt="Edit"
+                    layout="fill"
+                    objectFit="cover"
+                />
+            </button>
+            <button
+                className={`${styles["build-icon"]} ${styles["delete-icon"]}`}
+            >
+                <Image
+                    src="/icons/delete.svg"
+                    alt="Delete"
+                    layout="fill"
+                    objectFit="cover"
+                />
+            </button>
         </div>
     );
 };

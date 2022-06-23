@@ -27,24 +27,22 @@
         }
     }
 
-    .build-icons {
+    .build-icon {
         position: absolute;
+        height: 48px;
+        width: 48px;
+        position: relative;
+        z-index: 9;
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
+            brightness(101%) contrast(103%);
+    }
+
+    .edit-icon {
+        right: 64px;
+    }
+
+    .delete-icon {
         right: 32px;
-        color: white;
-
-        .build-icon {
-            height: 48px;
-            width: 48px;
-            position: relative;
-            z-index: 9;
-            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
-                brightness(101%) contrast(103%);
-            margin-right: 24px;
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
     }
 }
 
@@ -106,7 +104,7 @@
             color: constants.$accent-color;
         }
 
-        .build-icons > .build-icon:hover {
+        .build-icon:hover {
             filter: invert(32%) sepia(80%) saturate(5717%) hue-rotate(210deg)
                 brightness(104%) contrast(104%);
         }
