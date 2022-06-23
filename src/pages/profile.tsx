@@ -68,6 +68,9 @@ const Profile: NextPage = () => {
 
     // Update build list on page change + master build list fetch/refetch
     useEffect(() => {
+        // Handle case where deleting a build causes page overflow
+        if (page > Math.ceil(buildList.length / 5) && page !== 1)
+            setPage(page - 1);
         setCurrentList(buildList.slice((page - 1) * 5, page * 5));
     }, [page, buildList]);
 
