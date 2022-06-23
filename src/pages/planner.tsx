@@ -299,15 +299,17 @@ const Planner: NextPage = () => {
             ) as HTMLButtonElement;
             saveButton.innerHTML = "SAVING";
             saveButton.disabled = true;
-            axios
-                .post("/api/builds", {
-                    data: {
-                        build: JSON.stringify({
-                            ...build,
-                            userId: (user as CurrentUser).id,
-                        }),
-                    },
-                })
+            axios({
+                method: router.query.id ? "PUT" : "POST",
+                url: "/api/builds",
+                data: {
+                    build: JSON.stringify({
+                        ...build,
+                        userId: (user as CurrentUser).id,
+                    }),
+                    id: router.query.id,
+                },
+            })
                 .then(() => (saveButton.innerHTML = "SAVED!"))
                 .catch((err) => console.log(err));
         } else setError(true);

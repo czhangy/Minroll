@@ -231,13 +231,14 @@ Start the application
         -   [x] Sort by functionality
 
     -   [ ] Redirect on unauthorized
+    -   [ ] Mobile display
 
--   [ ] Build other API routes
+-   [x] Build other API routes
 
     -   [x] Auth routes
     -   [x] POST route for builds
-    -   [ ] PUT route for builds
-    -   [ ] DELETE route for builds
+    -   [x] PUT route for builds
+    -   [x] DELETE route for builds
 
 -   [ ] Build About Page
 

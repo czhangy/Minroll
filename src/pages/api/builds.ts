@@ -5,7 +5,7 @@ import Build from "@/models/Build";
 import prisma from "@/lib/prisma";
 
 // Post a build to the DB
-const postBuild = async (build: Build) => {
+const postBuild = async (build: Build, id?: string) => {
     const buildData = {
         gear: build.gear,
         skills: build.skills,
@@ -14,8 +14,19 @@ const postBuild = async (build: Build) => {
         gems: build.gems,
     };
     // Send to DB
-    const response = await prisma.build.create({
-        data: {
+    const response = await prisma.build.upsert({
+        where: {
+            id: id ? id : "",
+        },
+        update: {
+            name: build.name,
+            class: build.class,
+            description: build.description as string,
+            data: JSON.stringify(buildData),
+            userId: build.userId as string,
+            timestamp: new Date(),
+        },
+        create: {
             name: build.name,
             class: build.class,
             description: build.description as string,
@@ -60,7 +71,7 @@ export default async function handler(
     // Handle POST /api/builds
     if (req.method === "POST") {
         try {
-            const response = await postBuild(JSON.parse(req.body.data.build));
+            const response = await postBuild(JSON.parse(req.body.build));
             res.json(response);
         } catch (err) {
             console.log(err);
@@ -85,6 +96,18 @@ export default async function handler(
                     id: req.query.id as string,
                 },
             });
+            res.json(response);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({ success: false, message: err });
+        }
+        // Handle PUT /api/builds
+    } else if (req.method === "PUT") {
+        try {
+            const response = await postBuild(
+                JSON.parse(req.body.build),
+                req.body.id
+            );
             res.json(response);
         } catch (err) {
             console.log(err);

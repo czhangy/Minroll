@@ -33,7 +33,7 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
                 timestamp: null,
             })
         );
-        router.push("/planner");
+        router.push({ pathname: "/planner", query: { id: build.id } });
     };
 
     return (
