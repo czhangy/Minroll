@@ -29,20 +29,27 @@ const postBuild = async (build: Build) => {
 
 // Fetch all builds by userId
 const getBuildsByUser = async (id: string) => {
-    const builds: Build[] = await prisma.build.findMany({
+    let builds: Build[] = await prisma.build.findMany({
         where: {
             userId: id,
-        },
-        select: {
-            id: true,
-            name: true,
-            class: true,
-            timestamp: true,
         },
         orderBy: {
             timestamp: "desc",
         },
     });
+    // Flatten JSON
+    for (let i = 0; i < builds.length; i++) {
+        const buildData = JSON.parse(builds[i].data as string);
+        builds[i] = {
+            ...builds[i],
+            gear: buildData.gear,
+            skills: buildData.skills,
+            passives: buildData.passives,
+            cube: buildData.cube,
+            gems: buildData.gems,
+        };
+        delete builds[i].data;
+    }
     return builds;
 };
 

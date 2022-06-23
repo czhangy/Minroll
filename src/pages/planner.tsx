@@ -110,51 +110,51 @@ const Planner: NextPage = () => {
                 ])
             );
         // Set state of skills
-        const newSkills: Array<Skill | null> = [
+        const newSkills = [
             ...build.skills!.slice(0, ind),
             skill,
             ...build.skills!.slice(ind + 1, 6),
         ];
         setBuild({
             ...build,
-            skills: newSkills,
+            skills: newSkills as (Skill | null)[],
         });
     };
     const selectRune = (ind: number, rune: Rune) => {
-        let newSkill: Skill = build.skills[ind] as Skill;
+        let newSkill: Skill = build!.skills![ind] as Skill;
         newSkill.rune = rune;
-        const newSkills: Array<Skill | null> = [
-            ...build.skills.slice(0, ind),
+        const newSkills = [
+            ...build!.skills!.slice(0, ind),
             newSkill,
-            ...build.skills.slice(ind + 1, 6),
+            ...build!.skills!.slice(ind + 1, 6),
         ];
         setBuild({
             ...build,
-            skills: newSkills,
+            skills: newSkills as (Skill | null)[],
         });
     };
     const selectPassive = (ind: number, passive: Skill) => {
         // Set state of passives
-        const newPassives: Array<Skill | null> = [
-            ...build.passives.slice(0, ind),
+        const newPassives = [
+            ...build.passives!.slice(0, ind),
             passive,
-            ...build.passives.slice(ind + 1, 4),
+            ...build.passives!.slice(ind + 1, 4),
         ];
         setBuild({
             ...build,
-            passives: newPassives,
+            passives: newPassives as (Skill | null)[],
         });
     };
     const selectGem = (ind: number, gem: Gem) => {
         // Set state of gems
-        const newGems: Array<Gem | null> = [
-            ...build.gems.slice(0, ind),
+        const newGems = [
+            ...build.gems!.slice(0, ind),
             gem,
-            ...build.gems.slice(ind + 1, 3),
+            ...build.gems!.slice(ind + 1, 3),
         ];
         setBuild({
             ...build,
-            gems: newGems,
+            gems: newGems as (Gem | null)[],
         });
     };
     const updateDescription = (e: SyntheticEvent) => {

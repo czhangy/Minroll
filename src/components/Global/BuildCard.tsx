@@ -5,6 +5,7 @@ import Build from "@/models/Build";
 // Next
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 type Props = {
     build: Build;
@@ -12,12 +13,27 @@ type Props = {
 };
 
 const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
+    // Init router
+    const router = useRouter();
+
     // Capitalize words and remove spaces from class name
     const formatClassName = (name: string) => {
         const words = name.replace(/-/g, " ").split(" ");
         return words
             .map((word) => word[0].toUpperCase() + word.substring(1))
             .join(" ");
+    };
+
+    // Prep build for edit on /planner
+    const editBuild = () => {
+        localStorage.setItem(
+            "build",
+            JSON.stringify({
+                ...build,
+                timestamp: null,
+            })
+        );
+        router.push("/planner");
     };
 
     return (
@@ -30,16 +46,17 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
                     </em>
                 </a>
             </Link>
-            <Link href="/planner">
-                <a className={`${styles["build-icon"]} ${styles["edit-icon"]}`}>
-                    <Image
-                        src="/icons/edit.svg"
-                        alt="Edit"
-                        layout="fill"
-                        objectFit="cover"
-                    />
-                </a>
-            </Link>
+            <button
+                className={`${styles["build-icon"]} ${styles["edit-icon"]}`}
+                onClick={editBuild}
+            >
+                <Image
+                    src="/icons/edit.svg"
+                    alt="Edit"
+                    layout="fill"
+                    objectFit="cover"
+                />
+            </button>
             <button
                 className={`${styles["build-icon"]} ${styles["delete-icon"]}`}
                 onClick={() => onDelete(build)}
