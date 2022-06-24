@@ -42,7 +42,7 @@ const About: NextPage = () => {
                         Prisma, and PostgreSQL, hosted on Vercel, and enabled by
                         sources/tools like Maxroll and BlizzAPI. Building this
                         provided a lot of great experience in industry-relevant
-                        technologies (don't look at the dumpster-fire of a
+                        technologies (don&apos;t look at the dumpster-fire of a
                         codebase though), and I hope it can be of use to those
                         that stumble across it!
                     </p>
@@ -50,33 +50,33 @@ const About: NextPage = () => {
                 <h4 className={styles["about-subheader"]}>The Developer</h4>
                 <div className={styles["about-content"]}>
                     <p className={styles["about-paragraph"]}>
-                        Hi, my name is Charles Zhang! As I write this, I'm a
-                        rising senior studying Computer Science at UCLA,
+                        Hi, my name is Charles Zhang! As I write this, I&apos;m
+                        a rising senior studying Computer Science at UCLA,
                         interning with Capital One as TIP on the Auto Refinance
                         team for the summer. Outside of programming, I have a
                         passion for video games and am a massive Warriors fan
-                        (currently riding the high of Curry's first FMVP), and I
-                        do what I can to let these passions guide my work. As a
-                        result, the vast majority of my projects aim to serve my
-                        local communities, both in-person and online. If you're
-                        looking to learn more about me, check out the links in
-                        the footer below!
+                        (currently riding the high of Curry&apos;s first FMVP),
+                        and I do what I can to let these passions guide my work.
+                        As a result, the vast majority of my projects aim to
+                        serve my local communities, both in-person and online.
+                        If you&apos;re looking to learn more about me, check out
+                        the links in the footer below!
                     </p>
                     <p className={styles["about-paragraph"]}>
-                        I'm a huge fan of Diablo III, and have been an active
-                        member of the game's console community for over 4 years.
-                        Diablo III is unique in that versions distributed on
-                        console are significantly different than versions on PC.
-                        Over my years of playing the game, I came to notice a
-                        distinct lack of documentation of the console
-                        experience, most notably, that the undisputed best build
-                        on console is completely irrelevant on PC, and has been
-                        for years. I decided that this project would attempt to
-                        fill that void. Admittedly, I'm no Wudi or Raxx, so the
-                        quality of information here isn't going to be
-                        world-class. Over 4 years of gameplay, I peaked at #3 on
-                        Monk leaderboards for maybe 12 hours. But hopefully,
-                        it's a start.
+                        I&apos;m a huge fan of Diablo III, and have been an
+                        active member of the game&apos;s console community for
+                        over 4 years. Diablo III is unique in that versions
+                        distributed on console are significantly different than
+                        versions on PC. Over my years of playing the game, I
+                        came to notice a distinct lack of documentation of the
+                        console experience, most notably, that the undisputed
+                        best build on console is completely irrelevant on PC,
+                        and has been for years. I decided that this project
+                        would attempt to fill that void. Admittedly, I&apos;m no
+                        Wudi or Raxx, so the quality of information here
+                        isn&apos;t going to be world-class. Over 4 years of
+                        gameplay, I peaked at #3 on Monk leaderboards for maybe
+                        12 hours. But hopefully, it&apos;s a start.
                     </p>
                 </div>
             </div>
