@@ -119,6 +119,7 @@
                         width: 48px;
                         position: relative;
                         margin-right: -4px;
+                        transition: transform 0.8s ease;
                     }
                 }
             }
@@ -141,13 +142,14 @@
             background: constants.$accent-color-hover;
         }
 
-        #profile-content
-            > #content-container
-            > #content-header
-            > #header-left
-            > #menu-container
-            > #menu-button:hover {
-            background: constants.$accent-color-hover;
+        #profile-content > #content-container > #content-header {
+            #header-left > #menu-container > #menu-button:hover {
+                background: constants.$accent-color-hover;
+            }
+
+            #planner-link:hover > #link-icon {
+                transform: rotate(360deg);
+            }
         }
     }
 }
