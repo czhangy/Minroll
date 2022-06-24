@@ -21,6 +21,10 @@
 ::-webkit-scrollbar-thumb {
     background: constants.$accent-color;
     height: 20px;
+
+    &:hover {
+        background: constants.$accent-color-hover;
+    }
 }
 
 html,
