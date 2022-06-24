@@ -15,6 +15,7 @@
         &:focus {
             border: 2px solid constants.$accent-color;
             padding: 6px 14px;
+            cursor: auto;
         }
 
         .dropdown-selection {
@@ -42,12 +43,20 @@
             transition: transform 0.2s ease;
             height: 20px;
             width: 20px;
+            filter: constants.$svg-color;
         }
 
-        .reset-button {
+        #loading-icon {
             position: relative;
             height: 25px;
             width: 25px;
+        }
+
+        #reset-button {
+            position: relative;
+            height: 25px;
+            width: 25px;
+            filter: constants.$svg-color;
         }
 
         .rotated {
@@ -102,7 +111,22 @@
 }
 
 @media (hover: hover) {
-    .dropdown > .dropdown-options > .dropdown-option:hover {
-        background: constants.$main-color-hover;
+    .dropdown {
+        .dropdown-button {
+            &:hover {
+                .dropdown-icon,
+                #reset-icon {
+                    filter: constants.$svg-color-hover;
+                }
+            }
+
+            &:focus .dropdown-icon {
+                filter: constants.$svg-color;
+            }
+        }
+
+        .dropdown-options > .dropdown-option:hover {
+            background: constants.$main-color-hover;
+        }
     }
 }
