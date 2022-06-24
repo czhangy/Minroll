@@ -84,21 +84,28 @@ const Dropdown: React.FC<Props> = (props: Props) => {
                                 {formatValue(selectedValue)}
                             </p>
                         </div>
-                        <button
-                            className={styles["reset-button"]}
-                            onClick={() => setResetModalOpen(true)}
-                        >
-                            <Image
-                                src={
-                                    props.isLoading
-                                        ? "/icons/loading.gif"
-                                        : "/icons/reset.svg"
-                                }
-                                alt=""
-                                layout="fill"
-                                objectFit="contain"
-                            />
-                        </button>
+                        {props.isLoading ? (
+                            <div id={styles["loading-icon"]}>
+                                <Image
+                                    src="/icons/loading.gif"
+                                    alt=""
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </div>
+                        ) : (
+                            <button
+                                id={styles["reset-button"]}
+                                onClick={() => setResetModalOpen(true)}
+                            >
+                                <Image
+                                    src="/icons/reset.svg"
+                                    alt=""
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </button>
+                        )}
                     </div>
                 ) : (
                     <button

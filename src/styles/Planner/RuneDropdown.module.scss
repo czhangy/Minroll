@@ -15,6 +15,7 @@
         &:focus {
             border: 2px solid constants.$accent-color;
             padding: 6px 14px;
+            cursor: auto;
         }
 
         &:disabled {
@@ -37,8 +38,11 @@
             }
         }
 
-        .placeholder {
-            color: grey;
+        .lock-icon {
+            position: relative;
+            transition: transform 0.2s ease;
+            height: 20px;
+            width: 20px;
         }
 
         .dropdown-icon {
@@ -46,6 +50,7 @@
             transition: transform 0.2s ease;
             height: 20px;
             width: 20px;
+            filter: constants.$svg-color;
         }
 
         .rotated {
@@ -100,7 +105,21 @@
 }
 
 @media (hover: hover) {
-    .rune-dropdown > .rune-options > .rune-option:hover {
-        background: constants.$main-color-hover;
+    .rune-dropdown {
+        .dropdown-button {
+            &:hover {
+                .dropdown-icon {
+                    filter: constants.$svg-color-hover;
+                }
+            }
+
+            &:focus .dropdown-icon {
+                filter: constants.$svg-color;
+            }
+        }
+
+        .rune-options > .rune-option:hover {
+            background: constants.$main-color-hover;
+        }
     }
 }

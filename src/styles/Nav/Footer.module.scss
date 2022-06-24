@@ -37,13 +37,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            .social-link {
+                filter: constants.$svg-color;
+            }
         }
     }
 }
 
 @media (hover: hover) {
-    #footer > #footer-container > #credits > #credits-text > #site-link:hover {
-        color: constants.$accent-color-hover;
+    #footer > #footer-container {
+        #credits > #credits-text > #site-link:hover {
+            color: constants.$accent-color-hover;
+        }
+
+        #socials > .social-link:hover {
+            filter: constants.$svg-color-hover;
+        }
     }
 }
 

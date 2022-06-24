@@ -51,8 +51,14 @@
 }
 
 @media (hover: hover) {
-    #navbar > #navbar-container > #nav > .nav-link:hover {
-        background: constants.$main-color-hover;
+    #navbar > #navbar-container {
+        #logo:hover {
+            filter: brightness(80%);
+        }
+
+        #nav > .nav-link:hover {
+            background: constants.$main-color-hover;
+        }
     }
 }
 

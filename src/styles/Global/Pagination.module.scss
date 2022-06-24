@@ -9,6 +9,7 @@
         height: 24px;
         width: 24px;
         position: absolute;
+        filter: constants.$svg-color;
     }
 
     .left {
@@ -34,5 +35,11 @@
         font-family: constants.$main-font;
         color: constants.$accent-color;
         margin: 0 4px;
+    }
+}
+
+@media (hover: hover) {
+    .pagination > .arrow:hover {
+        filter: constants.$svg-color-hover;
     }
 }

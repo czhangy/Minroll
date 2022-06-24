@@ -32,8 +32,7 @@
         position: absolute;
         height: 48px;
         width: 48px;
-        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
-            brightness(101%) contrast(103%);
+        filter: constants.$svg-color;
     }
 
     .edit-icon {
@@ -107,8 +106,7 @@
             display: block;
 
             &:hover {
-                filter: invert(32%) sepia(80%) saturate(5717%)
-                    hue-rotate(210deg) brightness(104%) contrast(104%);
+                filter: constants.$svg-color-hover;
             }
         }
     }
