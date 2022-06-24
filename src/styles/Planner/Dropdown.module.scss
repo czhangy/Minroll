@@ -114,14 +114,17 @@
     .dropdown {
         .dropdown-button {
             &:hover {
-                .dropdown-icon,
-                #reset-icon {
+                .dropdown-icon {
                     filter: constants.$svg-color-hover;
                 }
             }
 
             &:focus .dropdown-icon {
                 filter: constants.$svg-color;
+            }
+
+            #reset-button:hover {
+                filter: constants.$svg-color-hover;
             }
         }
 

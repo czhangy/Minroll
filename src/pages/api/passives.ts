@@ -1,5 +1,6 @@
 // TS
 import type { NextApiRequest, NextApiResponse } from "next";
+import Skill from "@/models/Skill";
 // BlizzAPI
 import { BlizzAPI, RegionIdOrName } from "blizzapi";
 
@@ -30,7 +31,11 @@ export default async function handler(
                         description: passive.description,
                     };
                 });
-                res.json(passives);
+                res.json(
+                    passives.sort((a: Skill, b: Skill) =>
+                        a.name.localeCompare(b.name)
+                    )
+                );
             } else {
                 res.status(400).send({
                     success: false,

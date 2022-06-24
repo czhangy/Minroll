@@ -38,8 +38,11 @@
             }
         }
 
-        .placeholder {
-            color: grey;
+        .lock-icon {
+            position: relative;
+            transition: transform 0.2s ease;
+            height: 20px;
+            width: 20px;
         }
 
         .dropdown-icon {

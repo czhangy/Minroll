@@ -63,22 +63,29 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
                         {props.placeholder}
                     </p>
                 )}
-                <div
-                    className={`${styles["dropdown-icon"]} ${
-                        open ? styles.rotated : ""
-                    }`}
-                >
-                    <Image
-                        src={
-                            props.runeList.length === 0
-                                ? "/icons/lock.svg"
-                                : "/icons/chevron.svg"
-                        }
-                        alt=""
-                        layout="fill"
-                        objectFit="contain"
-                    />
-                </div>
+                {props.runeList.length === 0 ? (
+                    <div className={styles["lock-icon"]}>
+                        <Image
+                            src="/icons/lock.svg"
+                            alt=""
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                ) : (
+                    <div
+                        className={`${styles["dropdown-icon"]} ${
+                            open ? styles.rotated : ""
+                        }`}
+                    >
+                        <Image
+                            src="/icons/chevron.svg"
+                            alt=""
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                )}
             </button>
             <ul
                 className={`${styles["rune-options"]} ${
