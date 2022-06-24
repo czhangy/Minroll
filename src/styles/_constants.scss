@@ -3,7 +3,11 @@ $main-color: #1b1b1b;
 $accent-color: #006bff;
 $bg-color: #292929;
 $main-color-hover: lighten($main-color, 10);
-$accent-color-hover: darken($accent-color, 10);
+$accent-color-hover: #0154c8;
+$svg-color: invert(32%) sepia(80%) saturate(5717%) hue-rotate(210deg)
+    brightness(104%) contrast(104%);
+$svg-color-hover: invert(22%) sepia(82%) saturate(2455%) hue-rotate(206deg)
+    brightness(90%) contrast(104%);
 $legendary-color: #ff6c33;
 $set-color: #00ff7f;
 
