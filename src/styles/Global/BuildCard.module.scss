@@ -28,17 +28,16 @@
     }
 
     .build-icon {
+        display: none;
         position: absolute;
         height: 48px;
         width: 48px;
-        position: relative;
-        z-index: 9;
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(23deg)
             brightness(101%) contrast(103%);
     }
 
     .edit-icon {
-        right: 64px;
+        right: 112px;
     }
 
     .delete-icon {
@@ -104,9 +103,13 @@
             color: constants.$accent-color;
         }
 
-        .build-icon:hover {
-            filter: invert(32%) sepia(80%) saturate(5717%) hue-rotate(210deg)
-                brightness(104%) contrast(104%);
+        .build-icon {
+            display: block;
+
+            &:hover {
+                filter: invert(32%) sepia(80%) saturate(5717%)
+                    hue-rotate(210deg) brightness(104%) contrast(104%);
+            }
         }
     }
 }
