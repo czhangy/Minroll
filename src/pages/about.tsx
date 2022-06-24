@@ -4,7 +4,6 @@ import styles from "@/styles/About/About.module.scss";
 import { NextPage } from "next";
 // Next
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 
 const About: NextPage = () => {
