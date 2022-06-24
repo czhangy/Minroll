@@ -240,7 +240,7 @@ Start the application
     -   [x] PUT route for builds
     -   [x] DELETE route for builds
 
--   [ ] Build About Page
+-   [x] Build About Page
 
 ## License
 

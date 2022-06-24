@@ -1,0 +1,72 @@
+@use "@/styles/constants";
+
+#about {
+    padding: 32px;
+    background: constants.$bg-color;
+
+    #about-container {
+        max-width: constants.$max-container;
+        margin: 0 auto;
+        background: constants.$main-color;
+        padding: 32px 64px;
+        box-shadow: constants.$outline;
+
+        #about-header {
+            font-weight: bold;
+            font-family: constants.$header-font;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: constants.$accent-color;
+            width: 100%;
+            text-align: center;
+        }
+
+        .separator {
+            height: 3px;
+            width: 30%;
+            background: constants.$accent-color;
+        }
+
+        .about-subheader {
+            margin-top: 4rem;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: constants.$accent-color;
+            font-family: constants.$header-font;
+            letter-spacing: 1px;
+            text-decoration: underline;
+        }
+
+        .about-content {
+            width: 100%;
+
+            .about-paragraph {
+                font-family: constants.$main-font;
+                color: white;
+                font-size: 1.5rem;
+                text-indent: 50px;
+
+                .about-link {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #about > #about-container {
+        padding: 32px;
+
+        .about-subheader {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-content > .about-paragraph {
+            font-size: 1.2rem;
+        }
+    }
+}
