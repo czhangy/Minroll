@@ -199,27 +199,37 @@ const Profile: NextPage = () => {
                             </a>
                         </Link>
                     </div>
-                    <ul id={styles["builds-list"]}>
-                        {currentList.map((build: Build, i: number) => {
-                            return (
-                                <li className={styles.build} key={i}>
-                                    <BuildCard
-                                        build={build}
-                                        onDelete={(build: Build) => {
-                                            setBuildToDelete(build);
-                                            setDeleteModalOpen(true);
-                                        }}
-                                    />
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    <Pagination
-                        page={page}
-                        maxPage={Math.ceil(buildList.length / 5)}
-                        onPrev={() => setPage(page - 1)}
-                        onNext={() => setPage(page + 1)}
-                    />
+                    {buildList.length > 0 ? (
+                        <ul id={styles["builds-list"]}>
+                            {currentList.map((build: Build, i: number) => {
+                                return (
+                                    <li className={styles.build} key={i}>
+                                        <BuildCard
+                                            build={build}
+                                            onDelete={(build: Build) => {
+                                                setBuildToDelete(build);
+                                                setDeleteModalOpen(true);
+                                            }}
+                                        />
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <p id={styles["alt-text"]}>
+                            You haven't saved any builds yet!
+                        </p>
+                    )}
+                    {buildList.length > 5 ? (
+                        <Pagination
+                            page={page}
+                            maxPage={Math.ceil(buildList.length / 5)}
+                            onPrev={() => setPage(page - 1)}
+                            onNext={() => setPage(page + 1)}
+                        />
+                    ) : (
+                        ""
+                    )}
                 </div>
             </div>
         </div>

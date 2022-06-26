@@ -212,7 +212,7 @@ Start the application
     -   [x] Changes display on build
     -   [x] Save functionality
     -   [x] Local storage
-    -   [ ] Edge case checks
+    -   [ ] Comprehensive edge case checks
     -   [ ] Responsive
 
 -   [x] Build Auth Pages
@@ -231,6 +231,7 @@ Start the application
         -   [x] Delete functionality
         -   [x] Show more functionality
         -   [x] Sort by functionality
+        -   [x] Alternate text
 
     -   [ ] Redirect on unauthorized
     -   [ ] Mobile display
