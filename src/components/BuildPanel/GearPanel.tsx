@@ -31,6 +31,7 @@ const GearPanel: React.FC<Props> = ({
 
     // Refetch set on change
     useEffect(() => {
+        if (!gear) setSet(null);
         // Only refetch on set items in gear
         if (!cube && gear?.setId)
             axios

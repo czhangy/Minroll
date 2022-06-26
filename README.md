@@ -193,7 +193,7 @@ Start the application
     -   [x] Specific build page accessed by ID
 
         -   [x] Build sheet displaying build contents
-        -   [ ] Copyable into planner
+        -   [x] Copyable into planner
         -   [ ] Mobile display
 
 -   [ ] Build Tiers Page

@@ -55,10 +55,12 @@
             #build-desc {
                 margin-left: 12px;
                 background: constants.$main-color;
-                flex-grow: 1;
+                height: 787px;
                 padding: 32px;
                 font-family: constants.$main-font;
                 font-size: 1.2rem;
+                white-space: pre-wrap;
+                overflow-y: scroll;
             }
         }
     }
