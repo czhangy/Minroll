@@ -22,6 +22,9 @@
             padding: 32px;
             width: 100%;
             margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             #build-name {
                 color: constants.$accent-color;
@@ -35,6 +38,13 @@
                 color: white;
                 font-size: 1.2rem;
                 font-family: constants.$main-font;
+            }
+
+            #copy-button {
+                height: 50px;
+                width: 50px;
+                position: relative;
+                filter: constants.$svg-color;
             }
         }
 
@@ -57,5 +67,11 @@
         height: 50px;
         width: 50px;
         position: relative;
+    }
+}
+
+@media (hover: hover) {
+    #container > #build-display > #display-header > #copy-button:hover {
+        filter: constants.$svg-color-hover;
     }
 }

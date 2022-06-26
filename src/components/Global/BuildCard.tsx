@@ -31,6 +31,7 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
             JSON.stringify({
                 ...build,
                 timestamp: null,
+                userId: null,
             })
         );
         router.push({ pathname: "/planner", query: { id: build.id } });

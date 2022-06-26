@@ -13,27 +13,54 @@ import prisma from "@/lib/prisma";
 // Next
 import Image from "next/image";
 import Head from "next/head";
+import { useRouter } from "next/router";
 // Local component
 import BuildPanel from "@/components/BuildPanel/BuildPanel";
 
 type Props = {
-    build: Build | null;
-    user: CurrentUser | null;
+    build: Build;
+    user: CurrentUser;
 };
 
 const BuildDisplay: NextPage<Props> = ({ build, user }: Props) => {
+    // Init router
+    const router = useRouter();
+
+    // Copy build to /planner
+    const copyBuild = () => {
+        localStorage.setItem(
+            "build",
+            JSON.stringify({
+                ...build,
+                name: `Copy of ${build.name}`,
+                timestamp: null,
+            })
+        );
+        router.push({ pathname: "/planner" });
+    };
+
     return (
         <div id={styles.container}>
             {build ? (
                 <div id={styles["build-display"]}>
                     <Head>
                         <title>
-                            {build.name} by {user?.username} | Minroll
+                            {build.name} by {user.username} | Minroll
                         </title>
                     </Head>
                     <div id={styles["display-header"]}>
-                        <h2 id={styles["build-name"]}>{build.name}</h2>
-                        <em id={styles.author}>by {user?.username}</em>
+                        <div>
+                            <h2 id={styles["build-name"]}>{build.name}</h2>
+                            <em id={styles.author}>by {user?.username}</em>
+                        </div>
+                        <button id={styles["copy-button"]} onClick={copyBuild}>
+                            <Image
+                                src="/icons/copy.svg"
+                                alt=""
+                                layout="fill"
+                                objectFit="contain"
+                            />
+                        </button>
                     </div>
                     <div id={styles["display-content"]}>
                         <BuildPanel

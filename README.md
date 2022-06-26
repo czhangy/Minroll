@@ -207,7 +207,6 @@ Start the application
     -   [x] Skill selection
     -   [x] Passives selection
     -   [x] Cube selection
-    -   [ ] Gem selection
     -   [x] Legendary Gem selection
     -   [x] Changes display on build
     -   [x] Save functionality
