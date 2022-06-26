@@ -31,6 +31,16 @@
 
             #menu-container {
                 position: relative;
+                display: flex;
+                align-items: center;
+
+                #x-icon {
+                    position: relative;
+                    height: 30px;
+                    width: 30px;
+                    margin-right: 12px;
+                    filter: constants.$svg-color;
+                }
 
                 #menu-button {
                     font-size: 1.2rem;
@@ -74,11 +84,13 @@
 }
 
 @media (hover: hover) {
-    #builds
-        > #builds-container
-        > #builds-header
-        > #menu-container
-        > #menu-button:hover {
-        background: constants.$accent-color-hover;
+    #builds > #builds-container > #builds-header > #menu-container {
+        #x-icon:hover {
+            filter: constants.$svg-color-hover;
+        }
+
+        #menu-button:hover {
+            background: constants.$accent-color-hover;
+        }
     }
 }

@@ -71,6 +71,21 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                 <div id={styles["builds-header"]}>
                     <h2 id={styles["header-text"]}>Official Builds</h2>
                     <div id={styles["menu-container"]}>
+                        {filterOption !== "" ? (
+                            <button
+                                id={styles["x-icon"]}
+                                onClick={() => setFilterOption("")}
+                            >
+                                <Image
+                                    src="/icons/x.svg"
+                                    alt=""
+                                    layout="fill"
+                                    objectFit="contain"
+                                />
+                            </button>
+                        ) : (
+                            ""
+                        )}
                         <button
                             id={styles["menu-button"]}
                             onClick={(event: SyntheticEvent) =>
