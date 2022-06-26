@@ -22,7 +22,6 @@ import Pagination from "@/components/Global/Pagination";
 // Local component
 import DeleteModal from "@/components/Profile/DeleteModal";
 import SortMenu from "@/components/Profile/SortMenu";
-import build from "next/dist/build";
 
 const Profile: NextPage = () => {
     // Grab user

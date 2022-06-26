@@ -80,6 +80,7 @@ export default async function handler(
         // Handle GET /api/builds
     } else if (req.method === "GET") {
         try {
+            // Fetch current user's builds
             const response: Build[] = await getBuildsByUser(
                 req.query.id as string
             );

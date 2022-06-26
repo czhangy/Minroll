@@ -1,0 +1,48 @@
+@use "@/styles/constants";
+
+#builds {
+    padding: 32px;
+    background: constants.$bg-color;
+    min-height: calc(100vh - constants.$navbar-height);
+
+    #builds-container {
+        max-width: constants.$max-container;
+        margin: 0 auto;
+        background: constants.$main-color;
+        padding: 32px 64px;
+        box-shadow: constants.$outline;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #builds-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            #header-text {
+                font-weight: bold;
+                font-family: constants.$header-font;
+                font-size: 2rem;
+                letter-spacing: 2px;
+                color: constants.$accent-color;
+            }
+        }
+
+        .separator {
+            height: 3px;
+            width: 100%;
+            background: constants.$accent-color;
+        }
+
+        #builds-list {
+            margin-top: 1.5rem;
+            width: 100%;
+
+            .build {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

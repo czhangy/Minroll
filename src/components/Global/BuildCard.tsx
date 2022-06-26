@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 type Props = {
     build: Build;
-    onDelete: (build: Build) => void;
+    onDelete?: (build: Build) => void;
 };
 
 const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
@@ -46,28 +46,34 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
                     </em>
                 </a>
             </Link>
-            <button
-                className={`${styles["build-icon"]} ${styles["edit-icon"]}`}
-                onClick={editBuild}
-            >
-                <Image
-                    src="/icons/edit.svg"
-                    alt="Edit"
-                    layout="fill"
-                    objectFit="cover"
-                />
-            </button>
-            <button
-                className={`${styles["build-icon"]} ${styles["delete-icon"]}`}
-                onClick={() => onDelete(build)}
-            >
-                <Image
-                    src="/icons/delete.svg"
-                    alt="Delete"
-                    layout="fill"
-                    objectFit="cover"
-                />
-            </button>
+            {onDelete ? (
+                <>
+                    <button
+                        className={`${styles["build-icon"]} ${styles["edit-icon"]}`}
+                        onClick={editBuild}
+                    >
+                        <Image
+                            src="/icons/edit.svg"
+                            alt="Edit"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </button>
+                    <button
+                        className={`${styles["build-icon"]} ${styles["delete-icon"]}`}
+                        onClick={() => onDelete(build)}
+                    >
+                        <Image
+                            src="/icons/delete.svg"
+                            alt="Delete"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </button>
+                </>
+            ) : (
+                ""
+            )}
         </div>
     );
 };
