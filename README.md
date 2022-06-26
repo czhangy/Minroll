@@ -185,10 +185,10 @@ Start the application
 
 -   [ ] Build Builds Page
 
-    -   [ ] Main page with list of official builds
+    -   [x] Main page with list of official builds
 
-        -   [ ] Sortable by class
-        -   [ ] Pagination
+        -   [x] Sortable by class
+        -   [x] Pagination
 
     -   [x] Specific build page accessed by ID
 

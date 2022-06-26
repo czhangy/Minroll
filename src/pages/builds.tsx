@@ -25,6 +25,7 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
     // List display state
     const [page, setPage] = useState<number>(1);
     const [currentList, setCurrentList] = useState<Build[]>([]);
+    const [filteredList, setFilteredList] = useState<Build[]>([]);
 
     // Scroll to top on page change
     useEffect(() => window.scrollTo(0, 0), [page]);
@@ -50,17 +51,20 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
             .join(" ");
     };
 
-    // Update build list on page change + master build list fetch/refetch
+    // Filter master builds list
+    useEffect(() => {
+        setFilteredList(
+            builds.filter((build: Build) => build.class.includes(filterOption))
+        );
+    }, [builds, filterOption]);
+
+    // Update build list on page change + filtered list change
     useEffect(() => {
         // Handle case where deleting a build causes page overflow
-        if (page > Math.ceil(builds.length / 5) && page !== 1)
+        if (page > Math.ceil(filteredList.length / 5) && page !== 1)
             setPage(page - 1);
-        setCurrentList(
-            builds
-                .filter((build: Build) => build.class.includes(filterOption))
-                .slice((page - 1) * 5, page * 5)
-        );
-    }, [page, builds, filterOption]);
+        setCurrentList(filteredList.slice((page - 1) * 5, page * 5));
+    }, [page, filteredList]);
 
     return (
         <div id={styles.builds}>
@@ -128,7 +132,7 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                 </ul>
                 <Pagination
                     page={page}
-                    maxPage={Math.ceil(currentList.length / 5)}
+                    maxPage={Math.ceil(filteredList.length / 5)}
                     onPrev={() => setPage(page - 1)}
                     onNext={() => setPage(page + 1)}
                 />
