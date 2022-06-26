@@ -28,6 +28,32 @@
                 letter-spacing: 2px;
                 color: constants.$accent-color;
             }
+
+            #menu-container {
+                position: relative;
+
+                #menu-button {
+                    font-size: 1.2rem;
+                    font-family: constants.$header-font;
+                    color: white;
+                    background: constants.$accent-color;
+                    padding: 4px 16px;
+                    display: flex;
+                    align-items: center;
+
+                    #filter-option {
+                        width: 140px;
+                        text-align: center;
+                    }
+
+                    #filter-icon {
+                        height: 24px;
+                        width: 24px;
+                        position: relative;
+                        margin-left: 8px;
+                    }
+                }
+            }
         }
 
         .separator {
@@ -44,5 +70,15 @@
                 margin-bottom: 16px;
             }
         }
+    }
+}
+
+@media (hover: hover) {
+    #builds
+        > #builds-container
+        > #builds-header
+        > #menu-container
+        > #menu-button:hover {
+        background: constants.$accent-color-hover;
     }
 }
