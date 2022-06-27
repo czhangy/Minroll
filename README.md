@@ -161,11 +161,11 @@ Start the application
 -   [x] Build Home Page
 
     -   [x] Welcome text
-    -   [x] Link to login page
+    -   [x] Link to login/planner page
 
 -   [x] Collect data
 
-    -   [x] Gather all gear data/assets
+    -   [x] Gather all gear data/assets into DB
 
 -   [x] Build Build Sheet Component
 
@@ -185,17 +185,16 @@ Start the application
 
 -   [ ] Build Builds Page
 
-    -   [ ] Main page with list of builds
+    -   [x] Main page with list of official builds
 
-        -   [ ] Sortable by class/set
-        -   [ ] Pagination
+        -   [x] Sortable by class
+        -   [x] Pagination
 
     -   [x] Specific build page accessed by ID
 
-        -   [x] Build sheet
-        -   [ ] Copyable
-        -   [ ] Mobile?
-        -   [ ] Scroll
+        -   [x] Build sheet displaying build contents
+        -   [x] Copyable into planner
+        -   [ ] Mobile display
 
 -   [ ] Build Tiers Page
 
@@ -208,10 +207,12 @@ Start the application
     -   [x] Skill selection
     -   [x] Passives selection
     -   [x] Cube selection
-    -   [x] Gem selection
+    -   [x] Legendary Gem selection
     -   [x] Changes display on build
     -   [x] Save functionality
     -   [x] Local storage
+    -   [ ] Comprehensive edge case checks
+    -   [ ] Responsive
 
 -   [x] Build Auth Pages
 
@@ -229,6 +230,7 @@ Start the application
         -   [x] Delete functionality
         -   [x] Show more functionality
         -   [x] Sort by functionality
+        -   [x] Alternate text
 
     -   [ ] Redirect on unauthorized
     -   [ ] Mobile display

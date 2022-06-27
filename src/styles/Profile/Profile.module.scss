@@ -126,11 +126,29 @@
 
             #builds-list {
                 margin-top: 1.5rem;
+                margin-bottom: 16px;
                 width: 100%;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
                 .build {
                     margin-bottom: 16px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
+            }
+
+            #alt-text {
+                margin-top: 32px;
+                font-family: constants.$header-font;
+                font-size: 2rem;
+                font-weight: bold;
+                letter-spacing: 1px;
+                color: constants.$accent-color;
             }
         }
     }

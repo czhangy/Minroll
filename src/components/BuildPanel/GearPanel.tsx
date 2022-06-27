@@ -31,6 +31,7 @@ const GearPanel: React.FC<Props> = ({
 
     // Refetch set on change
     useEffect(() => {
+        if (!gear) setSet(null);
         // Only refetch on set items in gear
         if (!cube && gear?.setId)
             axios
@@ -42,6 +43,11 @@ const GearPanel: React.FC<Props> = ({
     // Format slug => remove hyphens
     const formatSlug = (slug: string) => {
         return slug.replace(/-/g, " ");
+    };
+
+    // Format descriptions => add period if necessary
+    const formatText = (text: string) => {
+        return text.slice(-1) === "." ? text : text + ".";
     };
 
     return (
@@ -75,106 +81,115 @@ const GearPanel: React.FC<Props> = ({
                         </div>
                     </div>
 
-                    <hr
-                        className={`${styles.separator} ${
-                            gear.rarity === "legendary"
-                                ? styles.legendary
-                                : styles.set
-                        }`}
-                    />
                     {gear.effect ? (
-                        <p className={styles["gear-effect"]}>{gear.effect}</p>
+                        <>
+                            <hr
+                                className={`${styles.separator} ${
+                                    gear.rarity === "legendary"
+                                        ? styles.legendary
+                                        : styles.set
+                                }`}
+                            />
+                            <p className={styles["gear-effect"]}>
+                                {formatText(gear.effect)}
+                            </p>
+                        </>
                     ) : (
                         ""
                     )}
                     {set ? (
-                        <div className={styles["gear-set"]}>
-                            <p className={styles["set-name"]}>{set.name}</p>
-                            {set.twoPc.length > 0 ? (
-                                <div className={styles["set-bonus"]}>
-                                    <p className={styles["bonus-num"]}>
-                                        2 Piece Bonus:
-                                    </p>
-                                    <ul className={styles["bonus-list"]}>
-                                        {set.twoPc.map(
-                                            (bonus: string, i: number) => (
-                                                <li
-                                                    className={styles.bonus}
-                                                    key={i}
-                                                >
-                                                    {bonus}
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                            {set.threePc.length > 0 ? (
-                                <div className={styles["set-bonus"]}>
-                                    <p className={styles["bonus-num"]}>
-                                        3 Piece Bonus:
-                                    </p>
-                                    <ul className={styles["bonus-list"]}>
-                                        {set.threePc.map(
-                                            (bonus: string, i: number) => (
-                                                <li
-                                                    className={styles.bonus}
-                                                    key={i}
-                                                >
-                                                    {bonus}
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                            {set.fourPc.length > 0 ? (
-                                <div className={styles["set-bonus"]}>
-                                    <p className={styles["bonus-num"]}>
-                                        4 Piece Bonus:
-                                    </p>
-                                    <ul className={styles["bonus-list"]}>
-                                        {set.fourPc.map(
-                                            (bonus: string, i: number) => (
-                                                <li
-                                                    className={styles.bonus}
-                                                    key={i}
-                                                >
-                                                    {bonus}
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                            {set.sixPc.length > 0 ? (
-                                <div className={styles["set-bonus"]}>
-                                    <p className={styles["bonus-num"]}>
-                                        6 Piece Bonus:
-                                    </p>
-                                    <ul className={styles["bonus-list"]}>
-                                        {set.sixPc.map(
-                                            (bonus: string, i: number) => (
-                                                <li
-                                                    className={styles.bonus}
-                                                    key={i}
-                                                >
-                                                    {bonus}
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                        </div>
+                        <>
+                            <hr
+                                className={`${styles.separator} ${styles.set}`}
+                            />
+                            <div className={styles["gear-set"]}>
+                                <p className={styles["set-name"]}>{set.name}</p>
+                                {set.twoPc.length > 0 ? (
+                                    <div className={styles["set-bonus"]}>
+                                        <p className={styles["bonus-num"]}>
+                                            2 Piece Bonus:
+                                        </p>
+                                        <ul className={styles["bonus-list"]}>
+                                            {set.twoPc.map(
+                                                (bonus: string, i: number) => (
+                                                    <li
+                                                        className={styles.bonus}
+                                                        key={i}
+                                                    >
+                                                        {bonus}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                                {set.threePc.length > 0 ? (
+                                    <div className={styles["set-bonus"]}>
+                                        <p className={styles["bonus-num"]}>
+                                            3 Piece Bonus:
+                                        </p>
+                                        <ul className={styles["bonus-list"]}>
+                                            {set.threePc.map(
+                                                (bonus: string, i: number) => (
+                                                    <li
+                                                        className={styles.bonus}
+                                                        key={i}
+                                                    >
+                                                        {bonus}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                                {set.fourPc.length > 0 ? (
+                                    <div className={styles["set-bonus"]}>
+                                        <p className={styles["bonus-num"]}>
+                                            4 Piece Bonus:
+                                        </p>
+                                        <ul className={styles["bonus-list"]}>
+                                            {set.fourPc.map(
+                                                (bonus: string, i: number) => (
+                                                    <li
+                                                        className={styles.bonus}
+                                                        key={i}
+                                                    >
+                                                        {bonus}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                                {set.sixPc.length > 0 ? (
+                                    <div className={styles["set-bonus"]}>
+                                        <p className={styles["bonus-num"]}>
+                                            6 Piece Bonus:
+                                        </p>
+                                        <ul className={styles["bonus-list"]}>
+                                            {set.sixPc.map(
+                                                (bonus: string, i: number) => (
+                                                    <li
+                                                        className={styles.bonus}
+                                                        key={i}
+                                                    >
+                                                        {bonus}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                        </>
                     ) : (
                         ""
                     )}

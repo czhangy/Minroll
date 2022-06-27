@@ -22,6 +22,9 @@
             padding: 32px;
             width: 100%;
             margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             #build-name {
                 color: constants.$accent-color;
@@ -36,6 +39,13 @@
                 font-size: 1.2rem;
                 font-family: constants.$main-font;
             }
+
+            #copy-button {
+                height: 50px;
+                width: 50px;
+                position: relative;
+                filter: constants.$svg-color;
+            }
         }
 
         #display-content {
@@ -45,10 +55,12 @@
             #build-desc {
                 margin-left: 12px;
                 background: constants.$main-color;
-                flex-grow: 1;
+                height: 787px;
                 padding: 32px;
                 font-family: constants.$main-font;
                 font-size: 1.2rem;
+                white-space: pre-wrap;
+                overflow-y: scroll;
             }
         }
     }
@@ -57,5 +69,11 @@
         height: 50px;
         width: 50px;
         position: relative;
+    }
+}
+
+@media (hover: hover) {
+    #container > #build-display > #display-header > #copy-button:hover {
+        filter: constants.$svg-color-hover;
     }
 }

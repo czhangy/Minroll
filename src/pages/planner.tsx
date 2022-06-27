@@ -342,9 +342,9 @@ const Planner: NextPage = () => {
     }, [build]);
 
     // Page names
-    const pageNames = ["Gear", "Skills", "Description"];
+    const pageNames: string[] = ["Gear", "Skills", "Description"];
     // All classes
-    const classNames = [
+    const classNames: string[] = [
         "barbarian",
         "crusader",
         "demon-hunter",
