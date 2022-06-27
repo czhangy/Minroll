@@ -217,7 +217,7 @@ const Profile: NextPage = () => {
                         </ul>
                     ) : (
                         <p id={styles["alt-text"]}>
-                            You haven't saved any builds yet!
+                            You haven&apos;t saved any builds yet!
                         </p>
                     )}
                     {buildList.length > 5 ? (
