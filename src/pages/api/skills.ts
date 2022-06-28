@@ -43,6 +43,7 @@ const getSkillsByClass = async (className: string) => {
             slug: skill.slug,
             icon: skill.icon,
             description: skill.description,
+            runeList: null,
         };
     });
     return skills.sort((a: Skill, b: Skill) => a.name.localeCompare(b.name));

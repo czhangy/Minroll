@@ -9,7 +9,6 @@ import Rune from "@/models/Rune";
 
 type Props = {
     skillList: Skill[];
-    runeLists: Rune[][];
     passiveList: Skill[];
     savedSkills: Array<Skill | null>;
     savedPassives: Array<Skill | null>;
@@ -23,7 +22,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
         <div id={styles["skills-page"]}>
             <div className={styles["skills-container"]}>
                 <h3 className={styles["skills-header"]}>Skills Selection</h3>
-                {props.runeLists.map((runeList: Rune[], i: number) => {
+                {props.savedSkills.map((skill: Skill | null, i: number) => {
                     return (
                         <div className={styles.skill} key={i}>
                             <div className={styles["skill-dropdown"]}>
@@ -33,18 +32,20 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                     onSelect={(skill: Skill) =>
                                         props.onSkillSelect(i, skill)
                                     }
-                                    savedSkill={props.savedSkills[i]?.name}
+                                    savedSkill={skill?.name}
                                     buildSkills={props.savedSkills}
                                 />
                             </div>
                             <div className={styles["rune-dropdown"]}>
                                 <RuneDropdown
-                                    runeList={runeList}
+                                    runeList={
+                                        skill?.runeList ? skill.runeList : []
+                                    }
                                     placeholder="Select a rune..."
                                     onSelect={(rune: Rune) =>
                                         props.onRuneSelect(i, rune)
                                     }
-                                    savedRune={props.savedSkills[i]?.rune}
+                                    savedRune={skill?.rune}
                                 />
                             </div>
                         </div>
