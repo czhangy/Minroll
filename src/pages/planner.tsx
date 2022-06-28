@@ -229,9 +229,6 @@ const Planner: NextPage = () => {
         localStorage.setItem("build", JSON.stringify(defaultBuild));
     };
     // Page navigation handler => render component based on page #
-    //  - 0 => gear tab
-    //  - 1 => skills tab
-    //  - 2 => description tab
     const renderPage = () => {
         if (page === 0)
             return (
