@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// IMPORTS
-// -----------------------------------------------------------------------------
-
 // Stylesheet
 import styles from "@/styles/Planner/Planner.module.scss";
 // TS
@@ -33,17 +29,11 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const Planner: NextPage = () => {
-    // -------------------------------------------------------------------------
-    // HOOKS
-    // -------------------------------------------------------------------------
-
+    // Hooks
     const { user } = useAuth() as AuthContext;
     const router = useRouter();
 
-    // -------------------------------------------------------------------------
-    // CONSTANTS
-    // -------------------------------------------------------------------------
-
+    // Constants
     const defaultBuild: Build = {
         name: "",
         class: "",
@@ -83,10 +73,7 @@ const Planner: NextPage = () => {
         "wizard",
     ];
 
-    // -------------------------------------------------------------------------
-    // COMPONENT STATE
-    // -------------------------------------------------------------------------
-
+    // Component state
     const [build, setBuild] = useState<Build>(defaultBuild);
     const [gearList, setGearList] = useState<Gear[]>([]);
     const [skillList, setSkillList] = useState<Skill[]>([]);
@@ -95,10 +82,6 @@ const Planner: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(0);
     const [error, setError] = useState<boolean>(false);
-
-    // -------------------------------------------------------------------------
-    // METHODS
-    // -------------------------------------------------------------------------
 
     // Build state modifiers => called from dropdowns/input fields
     const selectClass = (newClass: string) => {
@@ -197,6 +180,7 @@ const Planner: NextPage = () => {
             description: newDescription,
         });
     };
+
     // Fetch class data => called on class selection
     const fetchData = (className: string) => {
         setIsLoading(true);
@@ -218,16 +202,7 @@ const Planner: NextPage = () => {
         // Loading complete
         Promise.all([gear, skills, passives]).then(() => setIsLoading(false));
     };
-    // Reset planner to default state => called on reset button confirm
-    const resetPlanner = () => {
-        // Reset state
-        setBuild(defaultBuild);
-        setGearList([]);
-        setSkillList([]);
-        setPassiveList([]);
-        // Reset local storage
-        localStorage.setItem("build", JSON.stringify(defaultBuild));
-    };
+
     // Page navigation handler => render component based on page #
     const renderPage = () => {
         if (page === 0)
@@ -263,6 +238,7 @@ const Planner: NextPage = () => {
                 />
             );
     };
+
     // Submission handler => called on save button press
     const saveBuild = () => {
         // Redirect to login page if not logged in
@@ -310,9 +286,16 @@ const Planner: NextPage = () => {
         return Object.values(newErrors).every((error) => !error);
     };
 
-    // -------------------------------------------------------------------------
-    // LISTENERS
-    // -------------------------------------------------------------------------
+    // Reset planner to default state => called on reset button confirm
+    const resetPlanner = () => {
+        // Reset state
+        setBuild(defaultBuild);
+        setGearList([]);
+        setSkillList([]);
+        setPassiveList([]);
+        // Reset local storage
+        localStorage.setItem("build", JSON.stringify(defaultBuild));
+    };
 
     // Check local storage for a previous/redirected build
     useEffect(() => {
@@ -336,10 +319,6 @@ const Planner: NextPage = () => {
         if (build.class || build.name)
             localStorage.setItem("build", JSON.stringify(build));
     }, [build]);
-
-    // -------------------------------------------------------------------------
-    // MARKUP
-    // -------------------------------------------------------------------------
 
     return (
         <div id={styles.planner}>
