@@ -18,8 +18,10 @@
 
             #profile-pic {
                 border-radius: 50%;
-                overflow: hidden;
                 height: 80px;
+                width: 80px;
+                position: relative;
+                overflow: hidden;
             }
 
             #credits-text {
@@ -40,6 +42,9 @@
 
             .social-link {
                 filter: constants.$svg-color;
+                height: 40px;
+                width: 40px;
+                position: relative;
             }
         }
     }

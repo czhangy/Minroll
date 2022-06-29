@@ -11,7 +11,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import AuthContext from "@/models/AuthContext";
 
 const Navbar: React.FC = () => {
+    // Hook
     const { user } = useAuth() as AuthContext;
+
     return (
         <div id={styles.navbar}>
             <div id={styles["navbar-container"]}>
@@ -21,11 +23,11 @@ const Navbar: React.FC = () => {
                             <Image
                                 src="/images/logo.webp"
                                 alt=""
-                                height={60}
-                                width={60}
+                                layout="fill"
+                                objectFit="contain"
                             />
                         </div>
-                        <p id={styles["logo-text"]}>minroll</p>
+                        <p id={styles["logo-text"]}>MINROLL</p>
                     </a>
                 </Link>
                 <nav id={styles.nav}>
