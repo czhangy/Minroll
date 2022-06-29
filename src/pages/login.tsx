@@ -18,16 +18,22 @@ import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Login: NextPage = () => {
-    // Set up router for redirect
+    // Hooks
     const router = useRouter();
-    // Set up context for login
     const { loginUser } = useAuth() as AuthContext;
 
-    // Form state
+    // Component state
     const [formData, setFormData] = useState<LoginUser>({
         username: "",
         password: "",
     });
+    const [formErrors, setFormErrors] = useState<AuthErrors>({
+        username: false,
+        password: false,
+        form: false,
+    });
+
+    // Form state modifier => called on input field change
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue: string = e.target.value;
         const field: string = e.target.name;
@@ -37,12 +43,7 @@ const Login: NextPage = () => {
         });
     };
 
-    // Error state
-    const [formErrors, setFormErrors] = useState<AuthErrors>({
-        username: false,
-        password: false,
-        form: false,
-    });
+    // Error state modifier => called on received error codes
     const updateError = (field: string, value: string) => {
         setFormErrors({
             ...formErrors,
@@ -50,10 +51,11 @@ const Login: NextPage = () => {
         });
     };
 
-    // Submit login form handler
+    // Login handler
     const submitLogin = (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent page refresh on click
         e.preventDefault();
+        // Query DB with provided username + password
         axios
             .post("/api/login", formData)
             .then((response) => {
@@ -68,8 +70,8 @@ const Login: NextPage = () => {
                 router.push("/profile");
             })
             .catch((error) => {
+                // Parse error
                 const errorCode: number = error.response.status;
-                // Handle server errors
                 if (errorCode === 462)
                     updateError("username", error.response.data.message);
                 else if (errorCode === 463)
@@ -86,11 +88,14 @@ const Login: NextPage = () => {
 
     return (
         <div id={styles.auth}>
+            {/* Metadata */}
             <Head>
                 <title>Login | Minroll</title>
             </Head>
             <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
+                {/* Header */}
                 <h2 id={styles["form-header"]}>LOGIN</h2>
+                {/* Username field */}
                 <input
                     className={`${styles["form-input"]} ${
                         formErrors.username ? styles["error-input"] : ""
@@ -101,6 +106,7 @@ const Login: NextPage = () => {
                     onChange={updateForm}
                     autoComplete="username"
                 />
+                {/* Username field error */}
                 {formErrors.username ? (
                     <p className={styles["error-text"]}>
                         {formErrors.username}
@@ -108,6 +114,7 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
+                {/* Password field */}
                 <input
                     className={`${styles["form-input"]} ${
                         formErrors.password ? styles["error-input"] : ""
@@ -119,6 +126,7 @@ const Login: NextPage = () => {
                     onChange={updateForm}
                     autoComplete="current-password"
                 />
+                {/* Password field error */}
                 {formErrors.password ? (
                     <p className={styles["error-text"]}>
                         {formErrors.password}
@@ -126,12 +134,14 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
+                {/* Submit button */}
                 <input
                     id={styles["submit-button"]}
                     type="submit"
                     value="LOGIN"
                     className={styles.active}
                 />
+                {/* Unknown form error */}
                 {formErrors.form ? (
                     <p
                         className={styles["error-text"]}
@@ -142,6 +152,7 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
+                {/* Redirect to register link */}
                 <div id={styles["nav-links"]}>
                     <Link href="/register">
                         <a className={styles["nav-link"]}>
