@@ -82,6 +82,8 @@ const Planner: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(0);
     const [error, setError] = useState<boolean>(false);
+    const [buttonText, setButtonText] = useState<string>("SAVE");
+    const [isModified, setIsModified] = useState<boolean>(true);
 
     // Build state modifiers => called from dropdowns/input fields
     const selectClass = (newClass: string) => {
@@ -263,11 +265,8 @@ const Planner: NextPage = () => {
         setError(false);
         if (validateBuild()) {
             // Disable save button (until build changes)
-            const saveButton: HTMLButtonElement = document.getElementById(
-                styles["save-button"]
-            ) as HTMLButtonElement;
-            saveButton.innerHTML = "SAVING";
-            saveButton.disabled = true;
+            setButtonText("SAVING");
+            setIsModified(false);
             // Send request to backend
             axios({
                 // PUT/POST based on if router.query.id exists
@@ -283,7 +282,7 @@ const Planner: NextPage = () => {
                 },
             })
                 .then((response) => {
-                    saveButton.innerHTML = "SAVED!";
+                    setButtonText("SAVED!");
                     // Set planner to edit mode with recently saved build
                     router.replace({ query: { id: response.data.id } });
                     localStorage.setItem("bid", response.data.id);
@@ -306,16 +305,18 @@ const Planner: NextPage = () => {
 
     // Reset planner to default state => called on reset button confirm
     const resetPlanner = () => {
+        // Reset route
+        router.replace({ query: null });
         // Reset state
         setBuild(defaultBuild);
         setGearList([]);
         setSkillList([]);
         setPassiveList([]);
+        setButtonText("SAVE");
+        setIsModified(true);
         // Reset local storage
         localStorage.setItem("build", JSON.stringify(defaultBuild));
         localStorage.removeItem("bid");
-        // Reset route
-        router.replace({ query: null });
     };
 
     // Check local storage for a previous/redirected build
@@ -334,11 +335,9 @@ const Planner: NextPage = () => {
     }, []);
     // Re-enable save button + write to local storage on build change
     useEffect(() => {
-        const saveButton: HTMLButtonElement = document.getElementById(
-            styles["save-button"]
-        ) as HTMLButtonElement;
-        saveButton.innerHTML = "SAVE";
-        saveButton.disabled = false;
+        // Set button state
+        setButtonText("SAVE");
+        setIsModified(true);
         if (build.class || build.name)
             localStorage.setItem("build", JSON.stringify(build));
     }, [build]);
@@ -378,8 +377,12 @@ const Planner: NextPage = () => {
                         value={build.name}
                         onChange={updateName}
                     />
-                    <button id={styles["save-button"]} onClick={saveBuild}>
-                        SAVE
+                    <button
+                        id={styles["save-button"]}
+                        onClick={saveBuild}
+                        disabled={!isModified}
+                    >
+                        {buttonText}
                     </button>
                 </div>
                 <p
