@@ -18,9 +18,9 @@ type Props = {
     savedGear: BuildGear;
     savedCube: BuildCube;
     savedGems: Array<Gem | null>;
-    onGearSelect: (slot: string, item: Gear) => void;
-    onCubeSelect: (slot: string, item: Gear) => void;
-    onGemSelect: (ind: number, gem: Gem) => void;
+    onGearSelect: (slot: string, item: Gear | null) => void;
+    onCubeSelect: (slot: string, item: Gear | null) => void;
+    onGemSelect: (ind: number, gem: Gem | null) => void;
 };
 
 const GearPage: React.FC<Props> = (props: Props) => {
@@ -107,7 +107,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gearList={filteredGearList}
-                        onSelect={(item: Gear) =>
+                        onSelect={(item: Gear | null) =>
                             props.onGearSelect(slot as string, item)
                         }
                         placeholder="Select an item..."
@@ -128,7 +128,9 @@ const GearPage: React.FC<Props> = (props: Props) => {
                     <GemDropdown
                         gemList={props.gemList}
                         gearList={props.gearList}
-                        onSelect={(gem: Gem) => props.onGemSelect(0, gem)}
+                        onSelect={(gem: Gem | null) =>
+                            props.onGemSelect(0, gem)
+                        }
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[0]}
                         buildGems={props.savedGems}
@@ -138,7 +140,9 @@ const GearPage: React.FC<Props> = (props: Props) => {
                     <GemDropdown
                         gemList={props.gemList}
                         gearList={props.gearList}
-                        onSelect={(gem: Gem) => props.onGemSelect(1, gem)}
+                        onSelect={(gem: Gem | null) =>
+                            props.onGemSelect(1, gem)
+                        }
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[1]}
                         buildGems={props.savedGems}
@@ -148,7 +152,9 @@ const GearPage: React.FC<Props> = (props: Props) => {
                     <GemDropdown
                         gemList={props.gemList}
                         gearList={props.gearList}
-                        onSelect={(gem: Gem) => props.onGemSelect(2, gem)}
+                        onSelect={(gem: Gem | null) =>
+                            props.onGemSelect(2, gem)
+                        }
                         placeholder="Select a legendary gem..."
                         savedGem={props.savedGems[2]}
                         buildGems={props.savedGems}
@@ -160,7 +166,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gearList={cubeWeaponList}
-                        onSelect={(item: Gear) =>
+                        onSelect={(item: Gear | null) =>
                             props.onCubeSelect("weapon", item)
                         }
                         placeholder="Select a weapon item..."
@@ -172,7 +178,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gearList={cubeArmorList}
-                        onSelect={(item: Gear) =>
+                        onSelect={(item: Gear | null) =>
                             props.onCubeSelect("armor", item)
                         }
                         placeholder="Select an armor item..."
@@ -184,7 +190,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                 <div className={styles["gear-dropdown"]}>
                     <GearDropdown
                         gearList={cubeJewelryList}
-                        onSelect={(item: Gear) =>
+                        onSelect={(item: Gear | null) =>
                             props.onCubeSelect("jewelry", item)
                         }
                         placeholder="Select a jewelry item..."

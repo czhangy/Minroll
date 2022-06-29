@@ -34,6 +34,7 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
                 userId: null,
             })
         );
+        localStorage.setItem("bid", build.id!);
         router.push({ pathname: "/planner", query: { id: build.id } });
     };
 

@@ -13,7 +13,7 @@ type Props = {
     gemList: Gem[];
     gearList: Gear[];
     placeholder: string;
-    onSelect: (gem: Gem) => void;
+    onSelect: (gem: Gem | null) => void;
     savedGem: Gem | null | undefined;
     buildGems: (Gem | null)[];
 };
@@ -32,9 +32,9 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
     const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
     // Handle gem selection => called on dropdown option select
-    const selectGem = (gem: Gem) => {
+    const selectGem = (gem: Gem | null) => {
         // Set dropdown value
-        setSearchedGem(gem.name);
+        setSearchedGem(gem ? gem.name : "");
         // Pass to parent
         props.onSelect(gem);
     };
@@ -113,6 +113,21 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
                     );
                 })}
             </ul>
+            {searchedGem.length > 0 ? (
+                <button
+                    className={styles["clear-button"]}
+                    onClick={() => selectGem(null)}
+                >
+                    <Image
+                        src="/icons/x.svg"
+                        alt="Clear field"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </button>
+            ) : (
+                ""
+            )}
         </div>
     );
 };

@@ -11,7 +11,7 @@ import Image from "next/image";
 type Props = {
     runeList: Rune[];
     placeholder: string;
-    onSelect: (rune: Rune) => void;
+    onSelect: (rune: Rune | null) => void;
     savedRune: Rune | null | undefined;
 };
 
@@ -28,14 +28,14 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
     const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
     // Selected rune state modifier => called on dropdown option select
-    const selectRune = (rune: Rune) => {
+    const selectRune = (rune: Rune | null) => {
         // Set dropdown value
         setSelectedRune(rune);
         // Pass to parent
         props.onSelect(rune);
     };
 
-    // Clear selection on class/page change
+    // Persist selection on class/page change
     useEffect(() => {
         setSelectedRune(props.savedRune ? props.savedRune : null);
     }, [props.runeList]);
@@ -110,6 +110,21 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
                     );
                 })}
             </ul>
+            {selectedRune ? (
+                <button
+                    className={styles["clear-button"]}
+                    onClick={() => selectRune(null)}
+                >
+                    <Image
+                        src="/icons/x.svg"
+                        alt="Clear field"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </button>
+            ) : (
+                ""
+            )}
         </div>
     );
 };

@@ -11,7 +11,7 @@ import Image from "next/image";
 type Props = {
     skillList: Skill[];
     placeholder: string;
-    onSelect: (item: Skill) => void;
+    onSelect: (item: Skill | null) => void;
     savedSkill: string | undefined;
     buildSkills: (Skill | null)[];
     inverted?: boolean;
@@ -31,9 +31,9 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
     // Handle skill selection => called on dropdown option select
-    const selectSkill = (skill: Skill) => {
+    const selectSkill = (skill: Skill | null) => {
         // Set dropdown value
-        setSearchedSkill(skill.name);
+        setSearchedSkill(skill ? skill.name : "");
         // Pass to parent
         props.onSelect(skill);
     };
@@ -124,6 +124,21 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
                     );
                 })}
             </ul>
+            {searchedSkill.length > 0 ? (
+                <button
+                    className={styles["clear-button"]}
+                    onClick={() => selectSkill(null)}
+                >
+                    <Image
+                        src="/icons/x.svg"
+                        alt="Clear field"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </button>
+            ) : (
+                ""
+            )}
         </div>
     );
 };
