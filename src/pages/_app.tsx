@@ -14,7 +14,7 @@ function App({ Component, pageProps }: AppProps) {
     let user: CurrentUser | null = null;
 
     // Sync element focus with window focus
-    if (window !== undefined)
+    if (typeof window !== "undefined")
         window.onblur = () =>
             (document.activeElement as HTMLInputElement | null)?.blur();
 
