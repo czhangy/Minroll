@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// IMPORTS
-// -----------------------------------------------------------------------------
-
 // Stylesheet
 import styles from "@/styles/Planner/Planner.module.scss";
 // TS
@@ -33,17 +29,11 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const Planner: NextPage = () => {
-    // -------------------------------------------------------------------------
-    // HOOKS
-    // -------------------------------------------------------------------------
-
+    // Hooks
     const { user } = useAuth() as AuthContext;
     const router = useRouter();
 
-    // -------------------------------------------------------------------------
-    // CONSTANTS
-    // -------------------------------------------------------------------------
-
+    // Constants
     const defaultBuild: Build = {
         name: "",
         class: "",
@@ -83,10 +73,7 @@ const Planner: NextPage = () => {
         "wizard",
     ];
 
-    // -------------------------------------------------------------------------
-    // COMPONENT STATE
-    // -------------------------------------------------------------------------
-
+    // Component state
     const [build, setBuild] = useState<Build>(defaultBuild);
     const [gearList, setGearList] = useState<Gear[]>([]);
     const [skillList, setSkillList] = useState<Skill[]>([]);
@@ -95,10 +82,6 @@ const Planner: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(0);
     const [error, setError] = useState<boolean>(false);
-
-    // -------------------------------------------------------------------------
-    // METHODS
-    // -------------------------------------------------------------------------
 
     // Build state modifiers => called from dropdowns/input fields
     const selectClass = (newClass: string) => {
@@ -197,6 +180,7 @@ const Planner: NextPage = () => {
             description: newDescription,
         });
     };
+
     // Fetch class data => called on class selection
     const fetchData = (className: string) => {
         setIsLoading(true);
@@ -218,16 +202,7 @@ const Planner: NextPage = () => {
         // Loading complete
         Promise.all([gear, skills, passives]).then(() => setIsLoading(false));
     };
-    // Reset planner to default state => called on reset button confirm
-    const resetPlanner = () => {
-        // Reset state
-        setBuild(defaultBuild);
-        setGearList([]);
-        setSkillList([]);
-        setPassiveList([]);
-        // Reset local storage
-        localStorage.setItem("build", JSON.stringify(defaultBuild));
-    };
+
     // Page navigation handler => render component based on page #
     const renderPage = () => {
         if (page === 0)
@@ -263,6 +238,7 @@ const Planner: NextPage = () => {
                 />
             );
     };
+
     // Submission handler => called on save button press
     const saveBuild = () => {
         // Redirect to login page if not logged in
@@ -310,9 +286,16 @@ const Planner: NextPage = () => {
         return Object.values(newErrors).every((error) => !error);
     };
 
-    // -------------------------------------------------------------------------
-    // LISTENERS
-    // -------------------------------------------------------------------------
+    // Reset planner to default state => called on reset button confirm
+    const resetPlanner = () => {
+        // Reset state
+        setBuild(defaultBuild);
+        setGearList([]);
+        setSkillList([]);
+        setPassiveList([]);
+        // Reset local storage
+        localStorage.setItem("build", JSON.stringify(defaultBuild));
+    };
 
     // Check local storage for a previous/redirected build
     useEffect(() => {
@@ -337,26 +320,18 @@ const Planner: NextPage = () => {
             localStorage.setItem("build", JSON.stringify(build));
     }, [build]);
 
-    // -------------------------------------------------------------------------
-    // MARKUP
-    // -------------------------------------------------------------------------
-
     return (
         <div id={styles.planner}>
-            {/* Metadata */}
             <Head>
                 <title>Build Planner | Minroll</title>
             </Head>
-            {/* Mobile display placeholder */}
             <p id={styles["planner-error"]}>
                 Sorry!
                 <br />
                 <br />
                 This page must be viewed on a larger screen.
             </p>
-            {/* Main page display */}
             <div id={styles["planner-build"]}>
-                {/* Class selector */}
                 <Dropdown
                     content={classNames}
                     placeholder="Select a class..."
@@ -366,7 +341,6 @@ const Planner: NextPage = () => {
                     onReset={resetPlanner}
                     isLoading={isLoading}
                 />
-                {/* Build display */}
                 <BuildPanel
                     gear={build.gear as BuildGear}
                     cube={build.cube as BuildCube}
@@ -375,19 +349,16 @@ const Planner: NextPage = () => {
                     gems={build.gems as Gem[]}
                 />
                 <div id={styles["build-footer"]}>
-                    {/* Build name input field */}
                     <input
                         id={styles["build-name"]}
                         placeholder="Name your build!"
                         value={build.name}
                         onChange={updateName}
                     />
-                    {/* Save button */}
                     <button id={styles["save-button"]} onClick={saveBuild}>
                         SAVE
                     </button>
                 </div>
-                {/* Universal error text for invalid builds */}
                 <p
                     id={styles["build-error"]}
                     className={error ? "" : styles.hidden}
@@ -395,9 +366,7 @@ const Planner: NextPage = () => {
                     Please make sure you select a class and name your build.
                 </p>
             </div>
-            {/* Current page display */}
             <div id={styles["planner-content"]}>
-                {/* Page navigation */}
                 <nav id={styles["content-nav"]}>
                     {pageNames.map((name, i) => {
                         return (
@@ -413,7 +382,6 @@ const Planner: NextPage = () => {
                         );
                     })}
                 </nav>
-                {/* Page contents */}
                 {renderPage()}
             </div>
         </div>

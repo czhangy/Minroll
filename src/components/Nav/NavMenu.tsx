@@ -10,20 +10,18 @@ import { useAuth } from "@/contexts/AuthContext";
 import AuthContext from "@/models/AuthContext";
 
 const NavMenu: React.FC = () => {
-    // Get user
+    // Hook
     const { user } = useAuth() as AuthContext;
 
-    // Menu state
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const openMenu = () => setIsOpen(true);
-    const closeMenu = () => setIsOpen(false);
+    // Component state
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     return (
         <>
             <button
                 id={styles["menu-button"]}
                 data-testid="menu-button"
-                onClick={openMenu}
+                onClick={() => setMenuOpen(true)}
             >
                 <hr className={styles["menu-icon-line"]} />
                 <hr className={styles["menu-icon-line"]} />
@@ -31,8 +29,8 @@ const NavMenu: React.FC = () => {
             </button>
             <div
                 id={styles["nav-menu-overlay"]}
-                className={`${isOpen ? styles.open : ""}`}
-                onClick={closeMenu}
+                className={`${menuOpen ? styles.open : ""}`}
+                onClick={() => setMenuOpen(false)}
             >
                 <nav id={styles["nav-menu"]}>
                     <Link href="/builds">

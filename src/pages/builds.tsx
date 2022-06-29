@@ -18,21 +18,18 @@ import prisma from "@/lib/prisma";
 import { useState, useEffect } from "react";
 
 type Props = {
-    builds: Build[];
+    builds: Build[]; // Official builds, fetched from DB
 };
 
 const Builds: NextPage<Props> = ({ builds }: Props) => {
-    // List display state
+    // Component state
     const [page, setPage] = useState<number>(1);
     const [currentList, setCurrentList] = useState<Build[]>([]);
     const [filteredList, setFilteredList] = useState<Build[]>([]);
-
-    // Scroll to top on page change
-    useEffect(() => window.scrollTo(0, 0), [page]);
-
-    // Filter menu state
     const [filterMenuOpen, setFilterMenuOpen] = useState<boolean>(false);
     const [filterOption, setFilterOption] = useState<string>("");
+
+    // Filter menu state modifiers
     const openFilterMenu = (event: SyntheticEvent) => {
         // Safari focus workaround
         (event.target as HTMLButtonElement).focus();
@@ -43,7 +40,7 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
         setTimeout(() => setFilterMenuOpen(false), 100);
     };
 
-    // Capitalize words and remove spaces from class name
+    // Capitalize words and remove spaces from class name => called for display
     const formatClassName = (name: string) => {
         const words = name.replace(/-/g, " ").split(" ");
         return words
@@ -51,14 +48,15 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
             .join(" ");
     };
 
-    // Filter master builds list
+    // Jump to top on page change
+    useEffect(() => window.scrollTo(0, 0), [page]);
+    // Filter master builds list => change when filter changes or when builds changes
     useEffect(() => {
         setFilteredList(
             builds.filter((build: Build) => build.class.includes(filterOption))
         );
     }, [builds, filterOption]);
-
-    // Update build list on page change + filtered list change
+    // Set visible builds => change on page change or filter change
     useEffect(() => {
         // Handle case where deleting a build causes page overflow
         if (page > Math.ceil(filteredList.length / 5) && page !== 1)
@@ -141,8 +139,10 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
     );
 };
 
+// Fetch builds from DB
 export async function getStaticProps() {
     try {
+        // Fetch all builds created by admin, sorted from newest to oldest
         let builds: Build[] = await prisma.build.findMany({
             where: {
                 userId: "cl3l5sriy0002ccwcskro6jwd",
@@ -162,6 +162,7 @@ export async function getStaticProps() {
                 cube: buildData.cube,
                 gems: buildData.gems,
             };
+            // Delete excess fields
             delete builds[i].data;
             delete builds[i].timestamp;
         }

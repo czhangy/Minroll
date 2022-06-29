@@ -23,10 +23,10 @@ type Props = {
 };
 
 const BuildDisplay: NextPage<Props> = ({ build, user }: Props) => {
-    // Init router
+    // Hook
     const router = useRouter();
 
-    // Copy build to /planner
+    // "Copy" build by storing to local storage and redirecting
     const copyBuild = () => {
         localStorage.setItem(
             "build",
@@ -90,7 +90,7 @@ const BuildDisplay: NextPage<Props> = ({ build, user }: Props) => {
     );
 };
 
-// Fetch post
+// Fetch post from query
 export const getServerSideProps: GetServerSideProps = async (context) => {
     // Get build ID from route
     const { bid } = context.query;
@@ -109,7 +109,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 userId: true,
             },
         });
-        // Parse build data
+        // Parse build data + flatten JSON
         const buildData = JSON.parse(build!.data as string);
         build = {
             ...build!,

@@ -18,20 +18,19 @@ type Props = {
 };
 
 const SkillDropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown control
+    // Component state
     const [open, setOpen] = useState<boolean>(false);
+    const [searchedSkill, setSearchedSkill] = useState<string>("");
+    const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);
+
+    // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
         setOpen(true);
     };
-    const closeDropdown = () => {
-        setTimeout(() => {
-            setOpen(false);
-        }, 120);
-    };
+    const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
-    // Search bar display state
-    const [searchedSkill, setSearchedSkill] = useState<string>("");
+    // Handle skill selection => called on dropdown option select
     const selectSkill = (skill: Skill) => {
         // Set dropdown value
         setSearchedSkill(skill.name);
@@ -39,8 +38,21 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
         props.onSelect(skill);
     };
 
-    // Filter skills by search
-    const [filteredSkills, setFilteredSkills] = useState<Skill[]>([]);
+    // Highlight matching substring in options
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedSkill.toLowerCase());
+        return (
+            <p className={styles["skill-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedSkill.length)}
+                </span>
+                {name.substring(split + searchedSkill.length)}
+            </p>
+        );
+    };
+
+    // Filter skills by search => change on skill select, planner reset, and filter change
     useEffect(() => {
         // Get names of equipped skills
         const names = props.buildSkills
@@ -62,20 +74,6 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         setSearchedSkill(props.savedSkill ? props.savedSkill : "");
     }, [props.skillList]);
-
-    // Match highlighting on option list
-    const highlightMatch = (name: string) => {
-        const split = name.toLowerCase().indexOf(searchedSkill.toLowerCase());
-        return (
-            <p className={styles["skill-name"]}>
-                {name.substring(0, split)}
-                <span className={styles.highlight}>
-                    {name.substring(split, split + searchedSkill.length)}
-                </span>
-                {name.substring(split + searchedSkill.length)}
-            </p>
-        );
-    };
 
     return (
         <div className={styles["skill-dropdown"]}>

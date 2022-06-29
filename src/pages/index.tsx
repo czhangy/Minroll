@@ -10,6 +10,7 @@ import styles from "@/styles/Home/Home.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Home: NextPage = () => {
+    // Hook
     const { user } = useAuth() as AuthContext;
 
     return (

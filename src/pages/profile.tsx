@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import AuthContext from "@/models/AuthContext";
 import CurrentUser from "@/models/CurrentUser";
 import Build from "@/models/Build";
+import { SyntheticEvent } from "react";
 // React Context
 import { useAuth } from "@/contexts/AuthContext";
 // Next
@@ -13,7 +14,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 // React
-import { useState, useEffect, SyntheticEvent } from "react";
+import { useState, useEffect } from "react";
 // Axios
 import axios from "axios";
 // Global components
@@ -24,23 +25,25 @@ import DeleteModal from "@/components/Profile/DeleteModal";
 import SortMenu from "@/components/Profile/SortMenu";
 
 const Profile: NextPage = () => {
-    // Grab user
+    // Hooks
     const { user, logoutUser } = useAuth() as AuthContext;
-    // Set up router for redirect
     const router = useRouter();
 
-    // Handle log out
-    const onLogout = () => {
-        router.push("/");
-        logoutUser();
-    };
-
-    // Loading state
+    // Component state
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [buildList, setBuildList] = useState<Build[]>([]);
+    const [currentList, setCurrentList] = useState<Build[]>([]);
+    const [page, setPage] = useState<number>(1);
+    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+    const [buildToDelete, setBuildToDelete] = useState<Build | null>(null);
+    const [sortMenuOpen, setSortMenuOpen] = useState<boolean>(false);
+    const [sortOption, setSortOption] = useState<string>("Most Recent");
 
-    // Fetch user's builds
+    // Fetch user's builds => called on page load
     const fetchBuilds = () => {
+        // Set loading state
         setIsLoading(true);
+        // Fetch from DB using user ID
         axios
             .get("/api/builds", { params: { id: user!.id } })
             .then((response) => {
@@ -50,17 +53,41 @@ const Profile: NextPage = () => {
             .catch((err) => console.log(err));
     };
 
-    // Build list state
-    const [buildList, setBuildList] = useState<Build[]>([]);
+    // Delete the selected build => called from delete modal confirm
+    const deleteBuild = () => {
+        // Close delete modal
+        setDeleteModalOpen(false);
+        // Send DELETE request with build's ID
+        axios
+            .delete("/api/builds", { params: { id: buildToDelete!.id } })
+            // Refetch the master list to refresh displayed builds
+            .then(() => fetchBuilds())
+            .catch((err) => console.log(err));
+    };
+
+    // Sort menu state modifiers
+    const openSortMenu = (event: SyntheticEvent) => {
+        // Safari focus workaround
+        (event.target as HTMLButtonElement).focus();
+        setSortMenuOpen(true);
+    };
+    const closeSortMenu = () => {
+        // Allow buttons to be clicked before menu close
+        setTimeout(() => setSortMenuOpen(false), 100);
+    };
+
+    // Handle log out => called on logout button press
+    const onLogout = () => {
+        router.push("/");
+        logoutUser();
+    };
+
+    // Fetch current user's builds on page start
     useEffect(() => {
         if (user) fetchBuilds();
     }, [user]);
 
-    // List display state
-    const [page, setPage] = useState<number>(1);
-    const [currentList, setCurrentList] = useState<Build[]>([]);
-
-    // Scroll to top on page change
+    // Jump to top on page change
     useEffect(() => {
         document.getElementById(styles["header-container"])!.scrollIntoView();
     }, [page]);
@@ -73,35 +100,7 @@ const Profile: NextPage = () => {
         setCurrentList(buildList.slice((page - 1) * 5, page * 5));
     }, [page, buildList]);
 
-    // Delete modal display state
-    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
-    const [buildToDelete, setBuildToDelete] = useState<Build | null>(null);
-
-    // Delete the build identified by buildToDelete from the DB
-    const deleteBuild = () => {
-        // Close delete modal
-        setDeleteModalOpen(false);
-        axios
-            .delete("/api/builds", { params: { id: buildToDelete!.id } })
-            // Refetch the master list
-            .then(() => fetchBuilds())
-            .catch((err) => console.log(err));
-    };
-
-    // Sort menu display state
-    const [sortMenuOpen, setSortMenuOpen] = useState<boolean>(false);
-    const [sortOption, setSortOption] = useState<string>("Most Recent");
-    const openSortMenu = (event: SyntheticEvent) => {
-        // Safari focus workaround
-        (event.target as HTMLButtonElement).focus();
-        setSortMenuOpen(true);
-    };
-    const closeSortMenu = () => {
-        // Allow nav links to be clicked before menu close
-        setTimeout(() => setSortMenuOpen(false), 100);
-    };
-
-    // Sort builds by selection
+    // Sort builds by selected sort option
     useEffect(() => {
         let newList: Build[] = [...buildList];
         if (sortOption === "Most Recent")

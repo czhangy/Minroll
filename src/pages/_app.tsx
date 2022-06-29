@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// IMPORTS
-// -----------------------------------------------------------------------------
-
 // Stylesheet
 import "@/styles/globals.scss";
 // TS
@@ -14,22 +10,13 @@ import Footer from "@/components/Nav/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 function App({ Component, pageProps }: AppProps) {
-    // -------------------------------------------------------------------------
-    // AUTH
-    // -------------------------------------------------------------------------
-
+    // Hold current user data => set by hooks
     let user: CurrentUser | null = null;
 
-    // -------------------------------------------------------------------------
-    // MARKUP
-    // -------------------------------------------------------------------------
-
     return (
-        // Context wrapper
         <AuthProvider value={user}>
             <div id="app">
                 <Navbar />
-                {/* Current page */}
                 <Component {...pageProps} />
                 <Footer />
             </div>

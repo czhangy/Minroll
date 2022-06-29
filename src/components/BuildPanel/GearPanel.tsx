@@ -19,47 +19,39 @@ type Props = {
     cube?: boolean;
 };
 
-const GearPanel: React.FC<Props> = ({
-    gear,
-    gem,
-    inverted,
-    show,
-    cube,
-}: Props) => {
-    // Gearset state
+const GearPanel: React.FC<Props> = (props: Props) => {
+    // Component state
     const [set, setSet] = useState<Set | null>(null);
 
-    // Refetch set on change
-    useEffect(() => {
-        if (!gear) setSet(null);
-        // Only refetch on set items in gear
-        if (!cube && gear?.setId)
-            axios
-                .get("/api/set", { params: { setId: gear.setId } })
-                .then((response) => setSet(response.data))
-                .catch((err) => console.log(err));
-    }, [gear]);
-
     // Format slug => remove hyphens
-    const formatSlug = (slug: string) => {
-        return slug.replace(/-/g, " ");
-    };
-
+    const formatSlug = (slug: string) => slug.replace(/-/g, " ");
     // Format descriptions => add period if necessary
     const formatText = (text: string) => {
         return text.slice(-1) === "." ? text : text + ".";
     };
 
+    // Refetch set on gear change
+    useEffect(() => {
+        // Handle gear clear case
+        if (!props.gear) setSet(null);
+        // Only refetch on set items in gear
+        if (!props.cube && props.gear?.setId)
+            axios
+                .get("/api/set", { params: { setId: props.gear.setId } })
+                .then((response) => setSet(response.data))
+                .catch((err) => console.log(err));
+    }, [props.gear]);
+
     return (
         <div
             className={`${styles["gear-panel"]} ${
-                show && gear ? "" : styles.hidden
-            } ${inverted ? styles.inverted : ""}`}
+                props.show && props.gear ? "" : styles.hidden
+            } ${props.inverted ? styles.inverted : ""}`}
         >
-            {gear ? (
+            {props.gear ? (
                 <div
                     className={`${styles["gear-panel-container"]} ${
-                        gear.rarity === "legendary"
+                        props.gear.rarity === "legendary"
                             ? styles.legendary
                             : styles.set
                     }`}
@@ -67,31 +59,33 @@ const GearPanel: React.FC<Props> = ({
                     <div className={styles["gear-header"]}>
                         <div className={styles["gear-icon"]}>
                             <Image
-                                src={gear.src}
+                                src={props.gear.src}
                                 alt=""
                                 layout="fill"
                                 objectFit="contain"
                             />
                         </div>
                         <div className={styles["gear-content"]}>
-                            <h6 className={styles["gear-name"]}>{gear.name}</h6>
+                            <h6 className={styles["gear-name"]}>
+                                {props.gear.name}
+                            </h6>
                             <p className={styles["gear-type"]}>
-                                {gear.rarity} {formatSlug(gear.category)}
+                                {props.gear.rarity}{" "}
+                                {formatSlug(props.gear.category)}
                             </p>
                         </div>
                     </div>
-
-                    {gear.effect ? (
+                    {props.gear.effect ? (
                         <>
                             <hr
                                 className={`${styles.separator} ${
-                                    gear.rarity === "legendary"
+                                    props.gear.rarity === "legendary"
                                         ? styles.legendary
                                         : styles.set
                                 }`}
                             />
                             <p className={styles["gear-effect"]}>
-                                {formatText(gear.effect)}
+                                {formatText(props.gear.effect)}
                             </p>
                         </>
                     ) : (
@@ -193,11 +187,11 @@ const GearPanel: React.FC<Props> = ({
                     ) : (
                         ""
                     )}
-                    {gem ? (
+                    {props.gem ? (
                         <div className={styles["gear-gem"]}>
                             <hr
                                 className={`${styles.separator} ${
-                                    gear.rarity === "legendary"
+                                    props.gear.rarity === "legendary"
                                         ? styles.legendary
                                         : styles.set
                                 }`}
@@ -205,25 +199,29 @@ const GearPanel: React.FC<Props> = ({
                             <div className={styles["gem-header"]}>
                                 <div className={styles["gem-icon"]}>
                                     <Image
-                                        src={gem.src}
+                                        src={props.gem.src}
                                         alt=""
                                         layout="fill"
                                         objectFit="contain"
                                     />
                                 </div>
-                                <p className={styles["gem-name"]}>{gem.name}</p>
+                                <p className={styles["gem-name"]}>
+                                    {props.gem.name}
+                                </p>
                             </div>
                             <ul className={styles["gem-effects"]}>
-                                {gem.effect.map((effect: string, i: number) => {
-                                    return (
-                                        <li
-                                            className={styles["gem-effect"]}
-                                            key={i}
-                                        >
-                                            {effect}
-                                        </li>
-                                    );
-                                })}
+                                {props.gem.effect.map(
+                                    (effect: string, i: number) => {
+                                        return (
+                                            <li
+                                                className={styles["gem-effect"]}
+                                                key={i}
+                                            >
+                                                {effect}
+                                            </li>
+                                        );
+                                    }
+                                )}
                             </ul>
                         </div>
                     ) : (
@@ -231,13 +229,13 @@ const GearPanel: React.FC<Props> = ({
                     )}
                     <hr
                         className={`${styles.separator} ${
-                            gear.rarity === "legendary"
+                            props.gear.rarity === "legendary"
                                 ? styles.legendary
                                 : styles.set
                         }`}
                     />
                     <em className={styles["gear-description"]}>
-                        {gear.description}
+                        {props.gear.description}
                     </em>
                 </div>
             ) : (

@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
                         <Image
                             src="/images/profile.jpeg"
                             alt=""
-                            height={80}
-                            width={80}
+                            layout="fill"
+                            objectFit="contain"
                         />
                     </div>
                     <p id={styles["credits-text"]}>
@@ -31,8 +31,8 @@ const Footer: React.FC = () => {
                             <Image
                                 src="/icons/github.svg"
                                 alt="GitHub"
-                                height={40}
-                                width={40}
+                                layout="fill"
+                                objectFit="contain"
                             />
                         </a>
                     </Link>
@@ -41,21 +41,18 @@ const Footer: React.FC = () => {
                             <Image
                                 src="/icons/linkedin.svg"
                                 alt="LinkedIn"
-                                height={40}
-                                width={40}
+                                layout="fill"
+                                objectFit="contain"
                             />
                         </a>
                     </Link>
                     <Link href="https://twitter.com/czhangy_">
-                        <a
-                            className={styles["social-link"]}
-                            style={{ height: "30px" }}
-                        >
+                        <a className={styles["social-link"]}>
                             <Image
                                 src="/icons/twitter.svg"
                                 alt="LinkedIn"
-                                height={30}
-                                width={40}
+                                layout="fill"
+                                objectFit="contain"
                             />
                         </a>
                     </Link>

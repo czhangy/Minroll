@@ -10,39 +10,32 @@ type Props = {
     onClose: () => void;
 };
 
-const DeleteModal: React.FC<Props> = ({
-    open,
-    buildName,
-    onConfirm,
-    onClose,
-}: Props) => {
+const DeleteModal: React.FC<Props> = (props: Props) => {
     // Stops click on content from closing modal
-    const contentClick = (e: SyntheticEvent) => {
-        e.stopPropagation();
-    };
+    const contentClick = (e: SyntheticEvent) => e.stopPropagation();
 
     return (
         <div
             id={styles["delete-modal"]}
-            className={open ? styles["show-overlay"] : ""}
-            onClick={onClose}
+            className={props.open ? styles["show-overlay"] : ""}
+            onClick={props.onClose}
         >
             <div id={styles["delete-modal-content"]} onClick={contentClick}>
                 <h2 id={styles["delete-header"]}>
                     Are you sure you want to delete
                     <br />
-                    {buildName ? buildName : "this build"}?
+                    {props.buildName ? props.buildName : "this build"}?
                 </h2>
                 <div id={styles["delete-buttons"]}>
                     <button
                         className={styles["delete-button"]}
-                        onClick={onClose}
+                        onClick={props.onClose}
                     >
                         No
                     </button>
                     <button
                         className={styles["delete-button"]}
-                        onClick={onConfirm}
+                        onClick={props.onConfirm}
                     >
                         Yes
                     </button>

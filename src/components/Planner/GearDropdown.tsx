@@ -17,20 +17,19 @@ type Props = {
 };
 
 const GearDropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown control
+    // Component state
     const [open, setOpen] = useState<boolean>(false);
+    const [searchedItem, setSearchedItem] = useState<string>("");
+    const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
+
+    // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
         setOpen(true);
     };
-    const closeDropdown = () => {
-        setTimeout(() => {
-            setOpen(false);
-        }, 120);
-    };
+    const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
-    // Search bar display state
-    const [searchedItem, setSearchedItem] = useState<string>("");
+    // Handle gear selection => called on input field change
     const selectItem = (item: Gear) => {
         // Set dropdown value
         setSearchedItem(item.name);
@@ -38,8 +37,21 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
         props.onSelect(item);
     };
 
-    // Filter content by search
-    const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
+    // Highlight matching substrings in list
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedItem.toLowerCase());
+        return (
+            <p className={styles["gear-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedItem.length)}
+                </span>
+                {name.substring(split + searchedItem.length)}
+            </p>
+        );
+    };
+
+    // Filter gear list by search => change when filter or gear list changes
     useEffect(() => {
         // Get names of equipped gear
         const names = props.buildGear
@@ -61,20 +73,6 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         setSearchedItem(props.savedItem ? props.savedItem : "");
     }, [props.gearList]);
-
-    // Match highlighting on option list
-    const highlightMatch = (name: string) => {
-        const split = name.toLowerCase().indexOf(searchedItem.toLowerCase());
-        return (
-            <p className={styles["gear-name"]}>
-                {name.substring(0, split)}
-                <span className={styles.highlight}>
-                    {name.substring(split, split + searchedItem.length)}
-                </span>
-                {name.substring(split + searchedItem.length)}
-            </p>
-        );
-    };
 
     return (
         <div className={styles["gear-dropdown"]}>

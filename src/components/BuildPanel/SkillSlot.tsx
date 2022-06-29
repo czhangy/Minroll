@@ -14,7 +14,7 @@ type Props = {
 };
 
 const SkillSlot: React.FC<Props> = ({ skill }: Props) => {
-    // Hover state
+    // Component state
     const [hover, setHover] = useState<boolean>(false);
 
     return (

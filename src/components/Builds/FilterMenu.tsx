@@ -8,7 +8,7 @@ type Props = {
 };
 
 const FilterMenu: React.FC<Props> = ({ open, selected, onSelect }: Props) => {
-    // All classes
+    // Constant
     const classNames: string[] = [
         "barbarian",
         "crusader",

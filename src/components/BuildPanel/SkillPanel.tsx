@@ -11,7 +11,7 @@ type Props = {
 };
 
 const SkillPanel: React.FC<Props> = ({ skill, show }: Props) => {
-    // Line break workaround
+    // Format line breaks
     const parseDescription = () => (skill as Skill).description.split("\n");
 
     return (

@@ -14,16 +14,25 @@ import NewUser from "@/models/NewUser";
 import AuthErrors from "@/models/AuthErrors";
 
 const Register: NextPage = () => {
-    // Init router for reroute on register
+    // Hook
     const router = useRouter();
 
-    // Form state
+    // Component state
     const [formData, setFormData] = useState<NewUser>({
         email: "",
         username: "",
         password: "",
         confirmPassword: "",
     });
+    const [formErrors, setFormErrors] = useState<AuthErrors>({
+        email: false,
+        username: false,
+        password: false,
+        confirmPassword: false,
+        form: false,
+    });
+
+    // Form state modifier => called on input field change
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue: string = e.target.value;
         const field: string = e.target.name;
@@ -33,23 +42,14 @@ const Register: NextPage = () => {
         });
     };
 
-    // Error state
-    const [formErrors, setFormErrors] = useState<AuthErrors>({
-        email: false,
-        username: false,
-        password: false,
-        confirmPassword: false,
-        form: false,
-    });
+    // Error state modifiers => called on received error code
     const updateError = (field: string, value: string) => {
         setFormErrors({
             ...formErrors,
             [field]: value,
         });
     };
-    const updateErrors = (errors: AuthErrors) => {
-        setFormErrors(errors);
-    };
+    const updateErrors = (errors: AuthErrors) => setFormErrors(errors);
     const clearErrors = () => {
         setFormErrors({
             email: false,
@@ -60,35 +60,7 @@ const Register: NextPage = () => {
         });
     };
 
-    // Form validator
-    const validateForm: () => boolean = () => {
-        // Reset errors
-        clearErrors();
-        let errors: AuthErrors = {
-            email: false,
-            username: false,
-            password: false,
-            confirmPassword: false,
-            form: false,
-        };
-        // Email length
-        if ((formData.email as string).length === 0)
-            errors.email = "Email must be valid";
-        // Username length
-        if (formData.username.length > 16 || formData.username.length < 4)
-            errors.username = "Usernames must be 4 to 16 characters long";
-        // Password length
-        if ((formData.password as string).length < 8)
-            errors.password = "Passwords must be at least 8 characters long";
-        // Confirm password consistency
-        if (formData.password !== formData.confirmPassword)
-            errors.confirmPassword = "Passwords do not match";
-        updateErrors(errors);
-        // Check that no errors exist
-        return Object.values(errors).every((error) => !error);
-    };
-
-    // Submit register form handler
+    // Form submission handler => called on submit button click
     const submitRegister = (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent page refresh on click
         e.preventDefault();
@@ -114,6 +86,32 @@ const Register: NextPage = () => {
                     }
                     console.error(error);
                 });
+    };
+    const validateForm: () => boolean = () => {
+        // Reset errors
+        clearErrors();
+        let errors: AuthErrors = {
+            email: false,
+            username: false,
+            password: false,
+            confirmPassword: false,
+            form: false,
+        };
+        // Email length
+        if ((formData.email as string).length === 0)
+            errors.email = "Email must be valid";
+        // Username length
+        if (formData.username.length > 16 || formData.username.length < 4)
+            errors.username = "Usernames must be 4 to 16 characters long";
+        // Password length
+        if ((formData.password as string).length < 8)
+            errors.password = "Passwords must be at least 8 characters long";
+        // Confirm password consistency
+        if (formData.password !== formData.confirmPassword)
+            errors.confirmPassword = "Passwords do not match";
+        updateErrors(errors);
+        // Check that no errors exist
+        return Object.values(errors).every((error) => !error);
     };
 
     return (

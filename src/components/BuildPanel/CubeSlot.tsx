@@ -14,7 +14,7 @@ type Props = {
 };
 
 const CubeSlot: React.FC<Props> = ({ gear }: Props) => {
-    // Hover state
+    // Component state
     const [hover, setHover] = useState<boolean>(false);
 
     return (
