@@ -166,6 +166,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         placeholder="Select a weapon item..."
                         savedItem={props.savedCube["weapon"]?.name}
                         buildGear={Object.values(props.savedCube)}
+                        inverted={true}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -177,6 +178,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         placeholder="Select an armor item..."
                         savedItem={props.savedCube["armor"]?.name}
                         buildGear={Object.values(props.savedCube)}
+                        inverted={true}
                     />
                 </div>
                 <div className={styles["gear-dropdown"]}>
@@ -188,6 +190,7 @@ const GearPage: React.FC<Props> = (props: Props) => {
                         placeholder="Select a jewelry item..."
                         savedItem={props.savedCube["jewelry"]?.name}
                         buildGear={Object.values(props.savedCube)}
+                        inverted={true}
                     />
                 </div>
             </div>

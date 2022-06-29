@@ -14,6 +14,7 @@ type Props = {
     onSelect: (item: Gear) => void;
     savedItem: string | null | undefined;
     buildGear: Array<Gear | null>;
+    inverted?: boolean;
 };
 
 const GearDropdown: React.FC<Props> = (props: Props) => {
@@ -101,7 +102,7 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
             <ul
                 className={`${styles["gear-options"]} ${
                     open ? styles.show : ""
-                }`}
+                } ${props.inverted ? styles.inverted : ""}`}
             >
                 {filteredGear.map((item, i) => {
                     return (
