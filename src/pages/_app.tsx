@@ -1,3 +1,7 @@
+// -----------------------------------------------------------------------------
+// IMPORTS
+// -----------------------------------------------------------------------------
+
 // Stylesheet
 import "@/styles/globals.scss";
 // TS
@@ -9,13 +13,23 @@ import Footer from "@/components/Nav/Footer";
 // React Context
 import { AuthProvider } from "@/contexts/AuthContext";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
+    // -------------------------------------------------------------------------
+    // AUTH
+    // -------------------------------------------------------------------------
+
     let user: CurrentUser | null = null;
 
+    // -------------------------------------------------------------------------
+    // MARKUP
+    // -------------------------------------------------------------------------
+
     return (
+        // Context wrapper
         <AuthProvider value={user}>
             <div id="app">
                 <Navbar />
+                {/* Current page */}
                 <Component {...pageProps} />
                 <Footer />
             </div>
@@ -23,4 +37,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
 }
 
-export default MyApp;
+export default App;

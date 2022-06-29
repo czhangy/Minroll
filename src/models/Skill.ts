@@ -7,4 +7,5 @@ export default interface Skill {
     icon: string;
     description: string;
     rune: Rune | null;
+    runeList: Rune[] | null;
 }
