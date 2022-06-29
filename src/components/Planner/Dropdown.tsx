@@ -20,8 +20,12 @@ type Props = {
 };
 
 const Dropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown control
+    // Component state
     const [open, setOpen] = useState<boolean>(false);
+    const [selectedValue, setSelectedValue] = useState<string | null>(null);
+    const [resetModalOpen, setResetModalOpen] = useState<boolean>(false);
+
+    // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
         setOpen(true);
@@ -30,22 +34,17 @@ const Dropdown: React.FC<Props> = (props: Props) => {
         setTimeout(() => setOpen(false), 120);
     };
 
-    // Dropdown selected value state
-    const [selectedValue, setSelectedValue] = useState<string | null>(null);
+    // Dropdown value state modifiers => called on dropdown option select
     const selectValue: (value: string) => void = (value: string) => {
         // Set dropdown value
         setSelectedValue(value as string);
         // Pass to parent
         props.onSelect(value);
     };
-    // Get saved value
-    useEffect(() => {
-        if (props.savedValue) selectValue(props.savedValue);
-    }, [props.savedValue]);
 
-    // Reset build
-    const [resetModalOpen, setResetModalOpen] = useState<boolean>(false);
+    // Reset build => called on reset modal confirm
     const resetBuild = () => {
+        // Reset component state
         setResetModalOpen(false);
         setSelectedValue(null);
         (props.onReset as () => void)();
@@ -58,6 +57,11 @@ const Dropdown: React.FC<Props> = (props: Props) => {
             .map((word) => word[0].toUpperCase() + word.substring(1))
             .join(" ");
     };
+
+    // Get current value of dropdown from build
+    useEffect(() => {
+        if (props.savedValue) selectValue(props.savedValue);
+    }, [props.savedValue]);
 
     return (
         <>

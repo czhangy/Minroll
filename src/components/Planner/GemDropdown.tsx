@@ -19,20 +19,19 @@ type Props = {
 };
 
 const GemDropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown control
+    // Component state
     const [open, setOpen] = useState<boolean>(false);
+    const [searchedGem, setSearchedGem] = useState<string>("");
+    const [filteredGems, setFilteredGems] = useState<Gem[]>([]);
+
+    // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
         setOpen(true);
     };
-    const closeDropdown = () => {
-        setTimeout(() => {
-            setOpen(false);
-        }, 120);
-    };
+    const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
-    // Search bar display state
-    const [searchedGem, setSearchedGem] = useState<string>("");
+    // Handle gem selection => called on dropdown option select
     const selectGem = (gem: Gem) => {
         // Set dropdown value
         setSearchedGem(gem.name);
@@ -40,8 +39,21 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
         props.onSelect(gem);
     };
 
-    // Filter gems by search
-    const [filteredGems, setFilteredGems] = useState<Gem[]>([]);
+    // Highlight matching substrings in options
+    const highlightMatch = (name: string) => {
+        const split = name.toLowerCase().indexOf(searchedGem.toLowerCase());
+        return (
+            <p className={styles["gem-name"]}>
+                {name.substring(0, split)}
+                <span className={styles.highlight}>
+                    {name.substring(split, split + searchedGem.length)}
+                </span>
+                {name.substring(split + searchedGem.length)}
+            </p>
+        );
+    };
+
+    // Build list of gem options => change on gem equip, planner reset, and filter change
     useEffect(() => {
         // Get names of equipped gems
         const names = props.buildGems
@@ -63,20 +75,6 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         setSearchedGem(props.savedGem ? props.savedGem.name : "");
     }, [props.gearList]);
-
-    // Match highlighting on option list
-    const highlightMatch = (name: string) => {
-        const split = name.toLowerCase().indexOf(searchedGem.toLowerCase());
-        return (
-            <p className={styles["gem-name"]}>
-                {name.substring(0, split)}
-                <span className={styles.highlight}>
-                    {name.substring(split, split + searchedGem.length)}
-                </span>
-                {name.substring(split + searchedGem.length)}
-            </p>
-        );
-    };
 
     return (
         <div className={styles["gem-dropdown"]}>

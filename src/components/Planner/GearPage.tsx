@@ -24,16 +24,43 @@ type Props = {
 };
 
 const GearPage: React.FC<Props> = (props: Props) => {
-    // Hold gear slot state
+    // Component state
     const [slot, setSlot] = useState<string | null>(null);
-    // Hold build gear state => gear that goes in slots
     const [filteredGearList, setFilteredGearList] = useState<Gear[]>([]);
-    // Hold cube gear state
     const [cubeWeaponList, setCubeWeaponList] = useState<Gear[]>([]);
     const [cubeArmorList, setCubeArmorList] = useState<Gear[]>([]);
     const [cubeJewelryList, setCubeJewelryList] = useState<Gear[]>([]);
 
-    // Filter gear by slot
+    // Constants
+    const weaponCategories = ["one-hand", "two-hand", "off-hand"];
+    const armorCategories = [
+        "head",
+        "shoulders",
+        "torso",
+        "hands",
+        "wrists",
+        "waist",
+        "legs",
+        "feet",
+    ];
+    const jewelryCategories = ["neck", "finger"];
+    const slots = [
+        "head",
+        "shoulders",
+        "torso",
+        "hands",
+        "wrists",
+        "waist",
+        "legs",
+        "feet",
+        "neck",
+        "left-finger",
+        "right-finger",
+        "main-hand",
+        "off-hand",
+    ];
+
+    // Filter gear by slot => change on slot or class change
     useEffect(() => {
         if (slot)
             setFilteredGearList(
@@ -51,21 +78,9 @@ const GearPage: React.FC<Props> = (props: Props) => {
             );
     }, [slot, props.gearList]);
 
-    // Update cube lists on master list change
+    // Update cube lists with new gear => change on class change
     useEffect(() => {
         const cubeGearList = props.gearList.filter((item) => item.effect);
-        const weaponCategories = ["one-hand", "two-hand", "off-hand"];
-        const armorCategories = [
-            "head",
-            "shoulders",
-            "torso",
-            "hands",
-            "wrists",
-            "waist",
-            "legs",
-            "feet",
-        ];
-        const jewelryCategories = ["neck", "finger"];
         setCubeWeaponList(
             cubeGearList.filter((item) => weaponCategories.includes(item.slot))
         );
@@ -76,23 +91,6 @@ const GearPage: React.FC<Props> = (props: Props) => {
             cubeGearList.filter((item) => jewelryCategories.includes(item.slot))
         );
     }, [props.gearList]);
-
-    // All slots
-    const slots = [
-        "head",
-        "shoulders",
-        "torso",
-        "hands",
-        "wrists",
-        "waist",
-        "legs",
-        "feet",
-        "neck",
-        "left-finger",
-        "right-finger",
-        "main-hand",
-        "off-hand",
-    ];
 
     return (
         <div id={styles["gear-page"]}>

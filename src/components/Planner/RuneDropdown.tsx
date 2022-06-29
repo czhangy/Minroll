@@ -16,20 +16,18 @@ type Props = {
 };
 
 const RuneDropdown: React.FC<Props> = (props: Props) => {
-    // Dropdown control
+    // Component state
     const [open, setOpen] = useState<boolean>(false);
+    const [selectedRune, setSelectedRune] = useState<Rune | null>(null);
+
+    // Dropdown state modifiers
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
         setOpen(true);
     };
-    const closeDropdown = () => {
-        setTimeout(() => {
-            setOpen(false);
-        }, 120);
-    };
+    const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
-    // Dropdown selected value state
-    const [selectedRune, setSelectedRune] = useState<Rune | null>(null);
+    // Selected rune state modifier => called on dropdown option select
     const selectRune = (rune: Rune) => {
         // Set dropdown value
         setSelectedRune(rune);
@@ -37,7 +35,7 @@ const RuneDropdown: React.FC<Props> = (props: Props) => {
         props.onSelect(rune);
     };
 
-    // Clear input on class/page change
+    // Clear selection on class/page change
     useEffect(() => {
         setSelectedRune(props.savedRune ? props.savedRune : null);
     }, [props.runeList]);

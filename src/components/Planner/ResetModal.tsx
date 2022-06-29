@@ -11,9 +11,7 @@ type Props = {
 
 const ResetModal: React.FC<Props> = ({ open, onConfirm, onClose }: Props) => {
     // Stops click on content from closing modal
-    const contentClick = (e: SyntheticEvent) => {
-        e.stopPropagation();
-    };
+    const contentClick = (e: SyntheticEvent) => e.stopPropagation();
 
     return (
         <div

@@ -16,7 +16,7 @@ const DescriptionPage: React.FC<Props> = ({ value, onChange }: Props) => {
                 placeholder="Describe your build here..."
                 value={value}
                 onChange={onChange}
-            ></textarea>
+            />
         </div>
     );
 };
