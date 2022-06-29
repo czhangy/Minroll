@@ -10,18 +10,13 @@ type Props = {
     onNext: () => void;
 };
 
-const Pagination: React.FC<Props> = ({
-    page,
-    maxPage,
-    onPrev,
-    onNext,
-}: Props) => {
+const Pagination: React.FC<Props> = (props: Props) => {
     return (
         <div className={styles.pagination}>
-            {page > 1 ? (
+            {props.page > 1 ? (
                 <button
                     className={`${styles["arrow"]} ${styles["left"]}`}
-                    onClick={onPrev}
+                    onClick={props.onPrev}
                 >
                     <Image
                         src="/icons/chevron.svg"
@@ -33,13 +28,13 @@ const Pagination: React.FC<Props> = ({
             ) : (
                 ""
             )}
-            <p className={styles["page-num"]}>{page}</p>
+            <p className={styles["page-num"]}>{props.page}</p>
             <p className={styles.slash}>/</p>
-            <p className={styles["page-num"]}>{maxPage}</p>
-            {page !== maxPage ? (
+            <p className={styles["page-num"]}>{props.maxPage}</p>
+            {props.page !== props.maxPage ? (
                 <button
                     className={`${styles["arrow"]} ${styles["right"]}`}
-                    onClick={onNext}
+                    onClick={props.onNext}
                 >
                     <Image
                         src="/icons/chevron.svg"

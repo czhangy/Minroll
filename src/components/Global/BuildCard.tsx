@@ -13,7 +13,7 @@ type Props = {
 };
 
 const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
-    // Init router
+    // Hook
     const router = useRouter();
 
     // Capitalize words and remove spaces from class name
@@ -24,7 +24,7 @@ const BuildCard: React.FC<Props> = ({ build, onDelete }: Props) => {
             .join(" ");
     };
 
-    // Prep build for edit on /planner
+    // Prep build for edit on /planner by saving in local storage and pushing in edit mode
     const editBuild = () => {
         localStorage.setItem(
             "build",
