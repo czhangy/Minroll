@@ -22,9 +22,6 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     const [searchedItem, setSearchedItem] = useState<string>("");
     const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
 
-    window.onblur = () =>
-        (document.activeElement as HTMLInputElement | null)?.blur();
-
     // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();

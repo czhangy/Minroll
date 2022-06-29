@@ -13,6 +13,10 @@ function App({ Component, pageProps }: AppProps) {
     // Hold current user data => set by hooks
     let user: CurrentUser | null = null;
 
+    // Sync element focus with window focus
+    window.onblur = () =>
+        (document.activeElement as HTMLInputElement | null)?.blur();
+
     return (
         <AuthProvider value={user}>
             <div id="app">
