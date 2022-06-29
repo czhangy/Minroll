@@ -12,9 +12,9 @@ type Props = {
     passiveList: Skill[];
     savedSkills: Array<Skill | null>;
     savedPassives: Array<Skill | null>;
-    onSkillSelect: (ind: number, skill: Skill) => void;
-    onRuneSelect: (ind: number, rune: Rune) => void;
-    onPassiveSelect: (ind: number, passive: Skill) => void;
+    onSkillSelect: (ind: number, skill: Skill | null) => void;
+    onRuneSelect: (ind: number, rune: Rune | null) => void;
+    onPassiveSelect: (ind: number, passive: Skill | null) => void;
 };
 
 const SkillsPage: React.FC<Props> = (props: Props) => {
@@ -29,7 +29,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                 <SkillDropdown
                                     skillList={props.skillList}
                                     placeholder="Select a skill..."
-                                    onSelect={(skill: Skill) =>
+                                    onSelect={(skill: Skill | null) =>
                                         props.onSkillSelect(i, skill)
                                     }
                                     savedSkill={skill?.name}
@@ -61,7 +61,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                 <SkillDropdown
                                     skillList={props.passiveList}
                                     placeholder="Select a passive..."
-                                    onSelect={(passive: Skill) =>
+                                    onSelect={(passive: Skill | null) =>
                                         props.onPassiveSelect(i, passive)
                                     }
                                     savedSkill={props.savedPassives[i]?.name}

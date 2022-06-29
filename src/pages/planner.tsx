@@ -130,6 +130,18 @@ const Planner: NextPage = () => {
                         skills: newSkills as (Skill | null)[],
                     });
                 });
+        else {
+            // Clear rune list
+            const newSkills = [
+                ...build.skills!.slice(0, ind),
+                null,
+                ...build.skills!.slice(ind + 1, 6),
+            ];
+            setBuild({
+                ...build,
+                skills: newSkills as (Skill | null)[],
+            });
+        }
     };
     const selectRune = (ind: number, rune: Rune | null) => {
         let newSkill: Skill = build!.skills![ind] as Skill;
