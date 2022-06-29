@@ -63,6 +63,12 @@
         }
     }
 
+    .inverted {
+        transform: translateY(10px);
+        top: auto;
+        bottom: 50px;
+    }
+
     .show {
         opacity: 1;
         transform: translateY(0);
