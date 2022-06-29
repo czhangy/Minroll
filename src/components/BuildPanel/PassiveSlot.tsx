@@ -14,7 +14,7 @@ type Props = {
 };
 
 const PassiveSlot: React.FC<Props> = ({ passive }: Props) => {
-    // Hover state
+    // Component state
     const [hover, setHover] = useState<boolean>(false);
 
     return (

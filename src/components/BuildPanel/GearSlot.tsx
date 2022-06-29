@@ -18,10 +18,10 @@ type Props = {
 };
 
 const GearSlot: React.FC<Props> = ({ type, gear, gem }: Props) => {
-    // Hover state
+    // Component state
     const [hover, setHover] = useState<boolean>(false);
 
-    // Define slot attributes
+    // Constants
     const sockets: String[] = ["left-finger", "right-finger", "neck"];
     const inverted: String[] = ["feet", "main-hand", "off-hand"];
 

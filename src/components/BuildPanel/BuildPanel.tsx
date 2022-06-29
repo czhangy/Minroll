@@ -19,19 +19,13 @@ type Props = {
     gems: Array<Gem | null>;
 };
 
-const BuildPanel: React.FC<Props> = ({
-    gear,
-    skills,
-    passives,
-    cube,
-    gems,
-}: Props) => {
+const BuildPanel: React.FC<Props> = (props: Props) => {
     return (
         <div id={styles["build-panel"]}>
-            <Gear gear={gear} gems={gems} />
-            <Skills skills={skills} />
-            <Passives passives={passives} />
-            <Cube cube={cube} />
+            <Gear gear={props.gear} gems={props.gems} />
+            <Skills skills={props.skills} />
+            <Passives passives={props.passives} />
+            <Cube cube={props.cube} />
         </div>
     );
 };
