@@ -88,14 +88,11 @@ const Login: NextPage = () => {
 
     return (
         <div id={styles.auth}>
-            {/* Metadata */}
             <Head>
                 <title>Login | Minroll</title>
             </Head>
             <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
-                {/* Header */}
                 <h2 id={styles["form-header"]}>LOGIN</h2>
-                {/* Username field */}
                 <input
                     className={`${styles["form-input"]} ${
                         formErrors.username ? styles["error-input"] : ""
@@ -106,7 +103,6 @@ const Login: NextPage = () => {
                     onChange={updateForm}
                     autoComplete="username"
                 />
-                {/* Username field error */}
                 {formErrors.username ? (
                     <p className={styles["error-text"]}>
                         {formErrors.username}
@@ -114,7 +110,6 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
-                {/* Password field */}
                 <input
                     className={`${styles["form-input"]} ${
                         formErrors.password ? styles["error-input"] : ""
@@ -126,7 +121,6 @@ const Login: NextPage = () => {
                     onChange={updateForm}
                     autoComplete="current-password"
                 />
-                {/* Password field error */}
                 {formErrors.password ? (
                     <p className={styles["error-text"]}>
                         {formErrors.password}
@@ -134,14 +128,12 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
-                {/* Submit button */}
                 <input
                     id={styles["submit-button"]}
                     type="submit"
                     value="LOGIN"
                     className={styles.active}
                 />
-                {/* Unknown form error */}
                 {formErrors.form ? (
                     <p
                         className={styles["error-text"]}
@@ -152,7 +144,6 @@ const Login: NextPage = () => {
                 ) : (
                     ""
                 )}
-                {/* Redirect to register link */}
                 <div id={styles["nav-links"]}>
                     <Link href="/register">
                         <a className={styles["nav-link"]}>

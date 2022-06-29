@@ -14,7 +14,7 @@ import NewUser from "@/models/NewUser";
 import AuthErrors from "@/models/AuthErrors";
 
 const Register: NextPage = () => {
-    // Init router for reroute on register
+    // Hook
     const router = useRouter();
 
     // Form state

@@ -322,20 +322,16 @@ const Planner: NextPage = () => {
 
     return (
         <div id={styles.planner}>
-            {/* Metadata */}
             <Head>
                 <title>Build Planner | Minroll</title>
             </Head>
-            {/* Mobile display placeholder */}
             <p id={styles["planner-error"]}>
                 Sorry!
                 <br />
                 <br />
                 This page must be viewed on a larger screen.
             </p>
-            {/* Main page display */}
             <div id={styles["planner-build"]}>
-                {/* Class selector */}
                 <Dropdown
                     content={classNames}
                     placeholder="Select a class..."
@@ -345,7 +341,6 @@ const Planner: NextPage = () => {
                     onReset={resetPlanner}
                     isLoading={isLoading}
                 />
-                {/* Build display */}
                 <BuildPanel
                     gear={build.gear as BuildGear}
                     cube={build.cube as BuildCube}
@@ -354,19 +349,16 @@ const Planner: NextPage = () => {
                     gems={build.gems as Gem[]}
                 />
                 <div id={styles["build-footer"]}>
-                    {/* Build name input field */}
                     <input
                         id={styles["build-name"]}
                         placeholder="Name your build!"
                         value={build.name}
                         onChange={updateName}
                     />
-                    {/* Save button */}
                     <button id={styles["save-button"]} onClick={saveBuild}>
                         SAVE
                     </button>
                 </div>
-                {/* Universal error text for invalid builds */}
                 <p
                     id={styles["build-error"]}
                     className={error ? "" : styles.hidden}
@@ -374,9 +366,7 @@ const Planner: NextPage = () => {
                     Please make sure you select a class and name your build.
                 </p>
             </div>
-            {/* Current page display */}
             <div id={styles["planner-content"]}>
-                {/* Page navigation */}
                 <nav id={styles["content-nav"]}>
                     {pageNames.map((name, i) => {
                         return (
@@ -392,7 +382,6 @@ const Planner: NextPage = () => {
                         );
                     })}
                 </nav>
-                {/* Page contents */}
                 {renderPage()}
             </div>
         </div>

@@ -14,11 +14,9 @@ function App({ Component, pageProps }: AppProps) {
     let user: CurrentUser | null = null;
 
     return (
-        // Context wrapper
         <AuthProvider value={user}>
             <div id="app">
                 <Navbar />
-                {/* Current page */}
                 <Component {...pageProps} />
                 <Footer />
             </div>

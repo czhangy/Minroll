@@ -120,11 +120,9 @@ const Profile: NextPage = () => {
 
     return (
         <div id={styles.profile}>
-            {/* Metadata */}
             <Head>
                 <title>My Profile | Minroll</title>
             </Head>
-            {/* Delete modal component */}
             <DeleteModal
                 open={deleteModalOpen}
                 buildName={buildToDelete?.name}
@@ -133,26 +131,20 @@ const Profile: NextPage = () => {
             />
             <div id={styles["profile-header"]}>
                 <div id={styles["header-container"]}>
-                    {/* User's username */}
                     <h2 id={styles.username}>
                         {(user as CurrentUser)?.username}
                     </h2>
-                    {/* Logout button */}
                     <button id={styles["logout-button"]} onClick={onLogout}>
                         Log Out
                     </button>
                 </div>
             </div>
-            {/* Lower container */}
             <div id={styles["profile-content"]}>
-                {/* Inner container */}
                 <div id={styles["content-container"]}>
                     <div id={styles["content-header"]}>
                         <div id={styles["header-left"]}>
-                            {/* Header */}
                             <h3 id={styles["content-text"]}>Your Builds</h3>
                             {isLoading ? (
-                                // Loading animation
                                 <div id={styles["loading-icon"]}>
                                     <Image
                                         src="/icons/loading.gif"
@@ -162,9 +154,7 @@ const Profile: NextPage = () => {
                                     />
                                 </div>
                             ) : (
-                                // Sort menu
                                 <div id={styles["menu-container"]}>
-                                    {/* Menu button */}
                                     <button
                                         id={styles["menu-button"]}
                                         onClick={(event: SyntheticEvent) =>
@@ -184,7 +174,6 @@ const Profile: NextPage = () => {
                                             />
                                         </div>
                                     </button>
-                                    {/* Sort menu component */}
                                     <SortMenu
                                         open={sortMenuOpen}
                                         selected={sortOption}
@@ -195,7 +184,6 @@ const Profile: NextPage = () => {
                                 </div>
                             )}
                         </div>
-                        {/* Link to make new build */}
                         <Link href="/planner">
                             <a id={styles["planner-link"]}>
                                 <div id={styles["link-icon"]}>
@@ -210,7 +198,6 @@ const Profile: NextPage = () => {
                             </a>
                         </Link>
                     </div>
-                    {/* List of user's builds */}
                     {buildList.length > 0 ? (
                         <ul id={styles["builds-list"]}>
                             {currentList.map((build: Build, i: number) => {
@@ -228,12 +215,10 @@ const Profile: NextPage = () => {
                             })}
                         </ul>
                     ) : (
-                        // Alternate text for users with no builds
                         <p id={styles["alt-text"]}>
                             You haven&apos;t saved any builds yet!
                         </p>
                     )}
-                    {/* Pagination component for users with > 5 builds */}
                     {buildList.length > 5 ? (
                         <Pagination
                             page={page}

@@ -66,18 +66,13 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
 
     return (
         <div id={styles.builds}>
-            {/* Metadata */}
             <Head>
                 <title>Official Builds | Minroll</title>
             </Head>
-            {/* Inner container */}
             <div id={styles["builds-container"]}>
                 <div id={styles["builds-header"]}>
-                    {/* Header */}
                     <h2 id={styles["header-text"]}>Official Builds</h2>
-                    {/* Filter menu */}
                     <div id={styles["menu-container"]}>
-                        {/* Clear filter button */}
                         {filterOption !== "" ? (
                             <button
                                 id={styles["x-icon"]}
@@ -93,7 +88,6 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                         ) : (
                             ""
                         )}
-                        {/* Main filter button */}
                         <button
                             id={styles["menu-button"]}
                             onClick={(event: SyntheticEvent) =>
@@ -115,7 +109,6 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                                 />
                             </div>
                         </button>
-                        {/* Menu component */}
                         <FilterMenu
                             open={filterMenuOpen}
                             selected={filterOption}
@@ -126,7 +119,6 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                     </div>
                 </div>
                 <hr className={styles.separator} />
-                {/* Current page's builds */}
                 <ul id={styles["builds-list"]}>
                     {currentList.map((build: Build, i: number) => {
                         return (
@@ -136,7 +128,6 @@ const Builds: NextPage<Props> = ({ builds }: Props) => {
                         );
                     })}
                 </ul>
-                {/* Pagination component */}
                 <Pagination
                     page={page}
                     maxPage={Math.ceil(filteredList.length / 5)}

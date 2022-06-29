@@ -9,16 +9,12 @@ import Link from "next/link";
 const About: NextPage = () => {
     return (
         <div id={styles.about}>
-            {/* Metadata */}
             <Head>
                 <title>About | Minroll</title>
             </Head>
-            {/* Inner container */}
             <div id={styles["about-container"]}>
-                {/* Header */}
                 <h2 id={styles["about-header"]}>About Minroll</h2>
                 <hr className={styles.separator} />
-                {/* Project description */}
                 <h4 className={styles["about-subheader"]}>The Project</h4>
                 <div className={styles["about-content"]}>
                     <p className={styles["about-paragraph"]}>
@@ -51,7 +47,6 @@ const About: NextPage = () => {
                         that stumble across it!
                     </p>
                 </div>
-                {/* Biography */}
                 <h4 className={styles["about-subheader"]}>The Developer</h4>
                 <div className={styles["about-content"]}>
                     <p className={styles["about-paragraph"]}>
