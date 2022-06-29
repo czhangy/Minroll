@@ -59,10 +59,26 @@
         transform: translateY(0);
         pointer-events: auto;
     }
+
+    .clear-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 12px;
+        height: 25px;
+        width: 25px;
+        filter: constants.$svg-color;
+    }
 }
 
 @media (hover: hover) {
-    .gem-dropdown > .gem-options > .gem-option:hover {
-        background: constants.$main-color-hover;
+    .gem-dropdown {
+        .gem-options > .gem-option:hover {
+            background: constants.$main-color-hover;
+        }
+
+        .clear-button:hover {
+            filter: constants.$svg-color-hover;
+        }
     }
 }
