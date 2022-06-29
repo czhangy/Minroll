@@ -273,6 +273,7 @@ const Planner: NextPage = () => {
                     saveButton.innerHTML = "SAVED!";
                     // Set planner to edit mode with recently saved build
                     router.replace({ query: { id: response.data.id } });
+                    localStorage.setItem("bid", response.data.id);
                 })
                 .catch((err) => console.log(err));
         } else setError(true);
@@ -304,7 +305,9 @@ const Planner: NextPage = () => {
     // Check local storage for a previous/redirected build
     useEffect(() => {
         const savedBuild: string | null = localStorage.getItem("build");
+        const savedBID: string | null = localStorage.getItem("bid");
         if (savedBuild) setBuild(JSON.parse(savedBuild));
+        if (savedBID) router.replace({ query: { id: savedBID } });
     }, []);
     // Fetch gem list at mount
     useEffect(() => {
