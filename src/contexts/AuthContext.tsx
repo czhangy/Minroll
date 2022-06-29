@@ -15,8 +15,10 @@ type Props = {
 };
 
 export const AuthProvider: React.FC<Props> = ({ value, children }) => {
-    // Define global state
+    // Context state
     const [user, setUser] = useState<CurrentUser | null>(value);
+
+    // Auth state modifiers => called on login/logout
     const loginUser = (user: CurrentUser) => {
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user));
@@ -39,6 +41,7 @@ export const AuthProvider: React.FC<Props> = ({ value, children }) => {
     );
 };
 
+// Export hook
 export const useAuth = () => useContext(AuthContext);
 
 export default AuthProvider;
