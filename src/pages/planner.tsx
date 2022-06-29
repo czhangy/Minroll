@@ -300,6 +300,9 @@ const Planner: NextPage = () => {
         setPassiveList([]);
         // Reset local storage
         localStorage.setItem("build", JSON.stringify(defaultBuild));
+        localStorage.removeItem("bid");
+        // Reset route
+        router.replace({ query: null });
     };
 
     // Check local storage for a previous/redirected build
