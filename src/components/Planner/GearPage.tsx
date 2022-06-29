@@ -18,9 +18,9 @@ type Props = {
     savedGear: BuildGear;
     savedCube: BuildCube;
     savedGems: Array<Gem | null>;
-    onGearSelect: (slot: string, item: Gear) => void;
-    onCubeSelect: (slot: string, item: Gear) => void;
-    onGemSelect: (ind: number, gem: Gem) => void;
+    onGearSelect: (slot: string, item: Gear | null) => void;
+    onCubeSelect: (slot: string, item: Gear | null) => void;
+    onGemSelect: (ind: number, gem: Gem | null) => void;
 };
 
 const GearPage: React.FC<Props> = (props: Props) => {

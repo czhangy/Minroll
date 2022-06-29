@@ -92,7 +92,7 @@ const Planner: NextPage = () => {
         // Fetch all relevant data based on selected class
         fetchData(newClass);
     };
-    const selectGear = (slot: string, item: Gear) => {
+    const selectGear = (slot: string, item: Gear | null) => {
         setBuild({
             ...build,
             gear: {
@@ -101,7 +101,7 @@ const Planner: NextPage = () => {
             },
         });
     };
-    const selectCube = (slot: string, item: Gear) => {
+    const selectCube = (slot: string, item: Gear | null) => {
         setBuild({
             ...build,
             cube: {
@@ -110,27 +110,28 @@ const Planner: NextPage = () => {
             },
         });
     };
-    const selectSkill = (ind: number, skill: Skill) => {
+    const selectSkill = (ind: number, skill: Skill | null) => {
         // Fetch runes and save with skill
-        axios
-            .get("/api/skills", {
-                params: { className: build.class, skillName: skill.slug },
-            })
-            .then((response) => {
-                skill.runeList = response.data;
-                // Set state of skills
-                const newSkills = [
-                    ...build.skills!.slice(0, ind),
-                    skill,
-                    ...build.skills!.slice(ind + 1, 6),
-                ];
-                setBuild({
-                    ...build,
-                    skills: newSkills as (Skill | null)[],
+        if (skill)
+            axios
+                .get("/api/skills", {
+                    params: { className: build.class, skillName: skill.slug },
+                })
+                .then((response) => {
+                    skill.runeList = response.data;
+                    // Set state of skills
+                    const newSkills = [
+                        ...build.skills!.slice(0, ind),
+                        skill,
+                        ...build.skills!.slice(ind + 1, 6),
+                    ];
+                    setBuild({
+                        ...build,
+                        skills: newSkills as (Skill | null)[],
+                    });
                 });
-            });
     };
-    const selectRune = (ind: number, rune: Rune) => {
+    const selectRune = (ind: number, rune: Rune | null) => {
         let newSkill: Skill = build!.skills![ind] as Skill;
         newSkill.rune = rune;
         const newSkills = [
@@ -143,7 +144,7 @@ const Planner: NextPage = () => {
             skills: newSkills as (Skill | null)[],
         });
     };
-    const selectPassive = (ind: number, passive: Skill) => {
+    const selectPassive = (ind: number, passive: Skill | null) => {
         // Set state of passives
         const newPassives = [
             ...build.passives!.slice(0, ind),
@@ -155,7 +156,7 @@ const Planner: NextPage = () => {
             passives: newPassives as (Skill | null)[],
         });
     };
-    const selectGem = (ind: number, gem: Gem) => {
+    const selectGem = (ind: number, gem: Gem | null) => {
         // Set state of gems
         const newGems = [
             ...build.gems!.slice(0, ind),

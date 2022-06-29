@@ -11,7 +11,7 @@ import Image from "next/image";
 type Props = {
     gearList: Gear[];
     placeholder: string;
-    onSelect: (item: Gear) => void;
+    onSelect: (item: Gear | null) => void;
     savedItem: string | null | undefined;
     buildGear: Array<Gear | null>;
     inverted?: boolean;
@@ -31,9 +31,9 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     const closeDropdown = () => setTimeout(() => setOpen(false), 120);
 
     // Handle gear selection => called on input field change
-    const selectItem = (item: Gear) => {
+    const selectItem = (item: Gear | null) => {
         // Set dropdown value
-        setSearchedItem(item.name);
+        setSearchedItem(item ? item.name : "");
         // Pass to parent
         props.onSelect(item);
     };
@@ -124,6 +124,21 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
                     );
                 })}
             </ul>
+            {searchedItem.length > 0 ? (
+                <button
+                    className={styles["clear-button"]}
+                    onClick={() => selectItem(null)}
+                >
+                    <Image
+                        src="/icons/x.svg"
+                        alt="Clear field"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </button>
+            ) : (
+                ""
+            )}
         </div>
     );
 };
