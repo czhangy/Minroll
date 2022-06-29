@@ -42,7 +42,7 @@ const SkillsPage: React.FC<Props> = (props: Props) => {
                                         skill?.runeList ? skill.runeList : []
                                     }
                                     placeholder="Select a rune..."
-                                    onSelect={(rune: Rune) =>
+                                    onSelect={(rune: Rune | null) =>
                                         props.onRuneSelect(i, rune)
                                     }
                                     savedRune={skill?.rune}
