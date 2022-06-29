@@ -269,7 +269,11 @@ const Planner: NextPage = () => {
                     id: router.query.id,
                 },
             })
-                .then(() => (saveButton.innerHTML = "SAVED!"))
+                .then((response) => {
+                    saveButton.innerHTML = "SAVED!";
+                    // Set planner to edit mode with recently saved build
+                    router.replace({ query: { id: response.data.id } });
+                })
                 .catch((err) => console.log(err));
         } else setError(true);
     };
