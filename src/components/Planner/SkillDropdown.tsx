@@ -61,10 +61,10 @@ const SkillDropdown: React.FC<Props> = (props: Props) => {
         setFilteredSkills(
             props.skillList.filter(
                 (skill: Skill) =>
-                    skill.name === props.savedSkill ||
-                    (skill.name
+                    skill.name
                         .toLowerCase()
                         .includes(searchedSkill.toLowerCase()) &&
+                    (skill.name === props.savedSkill ||
                         !names.includes(skill.name))
             )
         );

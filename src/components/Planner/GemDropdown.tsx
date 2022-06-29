@@ -62,10 +62,10 @@ const GemDropdown: React.FC<Props> = (props: Props) => {
         setFilteredGems(
             props.gemList.filter(
                 (gem: Gem) =>
-                    (props.savedGem && gem.name === props.savedGem.name) ||
-                    (gem.name
+                    gem.name
                         .toLowerCase()
                         .includes(searchedGem.toLowerCase()) &&
+                    (gem.name === props.savedGem?.name ||
                         !names.includes(gem.name))
             )
         );

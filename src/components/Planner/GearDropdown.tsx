@@ -22,6 +22,9 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
     const [searchedItem, setSearchedItem] = useState<string>("");
     const [filteredGear, setFilteredGear] = useState<Gear[]>([]);
 
+    window.onblur = () =>
+        (document.activeElement as HTMLInputElement | null)?.blur();
+
     // Dropdown state modifiers => called on dropdown click
     const openDropdown = (e: SyntheticEvent) => {
         (e.target as HTMLButtonElement).focus();
@@ -60,10 +63,10 @@ const GearDropdown: React.FC<Props> = (props: Props) => {
         setFilteredGear(
             props.gearList.filter(
                 (item: Gear) =>
-                    item.name === props.savedItem ||
-                    (item.name
+                    item.name
                         .toLowerCase()
                         .includes(searchedItem.toLowerCase()) &&
+                    (item.name === props.savedItem ||
                         !names.includes(item.name))
             )
         );
