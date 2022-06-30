@@ -10,8 +10,7 @@ import Image from "next/image";
 // Global components
 import BuildCard from "@/components/Global/BuildCard";
 import Pagination from "@/components/Global/Pagination";
-// Local component
-import FilterMenu from "@/components/Builds/FilterMenu";
+import FilterMenu from "@/components/Global/FilterMenu";
 // Prisma
 import prisma from "@/lib/prisma";
 // React

@@ -1,0 +1,84 @@
+@use "@/styles/constants";
+
+#tiers {
+    padding: 32px;
+    background: constants.$bg-color;
+    min-height: calc(100vh - constants.$navbar-height);
+
+    #tiers-container {
+        max-width: constants.$max-container;
+        margin: 0 auto;
+        background: constants.$main-color;
+        padding: 32px 64px;
+        box-shadow: constants.$outline;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #tiers-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            #header-text {
+                font-weight: bold;
+                font-family: constants.$header-font;
+                font-size: 2rem;
+                letter-spacing: 2px;
+                color: constants.$accent-color;
+            }
+
+            #menu-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                #x-icon {
+                    position: relative;
+                    height: 30px;
+                    width: 30px;
+                    margin-right: 12px;
+                    filter: constants.$svg-color;
+                }
+
+                #menu-button {
+                    font-size: 1.2rem;
+                    font-family: constants.$header-font;
+                    color: white;
+                    background: constants.$accent-color;
+                    padding: 4px 16px;
+                    display: flex;
+                    align-items: center;
+
+                    #filter-option {
+                        width: 140px;
+                        text-align: center;
+                    }
+
+                    #filter-icon {
+                        height: 24px;
+                        width: 24px;
+                        position: relative;
+                        margin-left: 8px;
+                    }
+                }
+            }
+        }
+
+        .separator {
+            height: 3px;
+            width: 100%;
+            background: constants.$accent-color;
+        }
+
+        #tier-list {
+            margin-top: 1.5rem;
+            width: 100%;
+
+            .tier {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
