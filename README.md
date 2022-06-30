@@ -196,9 +196,10 @@ Start the application
         -   [x] Copyable into planner
         -   [ ] Mobile display
 
--   [ ] Build Tiers Page
+-   [x] Build Tiers Page
 
-    -   [ ] List with links to individual builds
+    -   [x] List with links to individual builds
+    -   [x] Filterable by class
 
 -   [x] Build Planner Page
 
@@ -208,7 +209,7 @@ Start the application
     -   [x] Passives selection
     -   [x] Cube selection
     -   [x] Legendary Gem selection
-    -   [ ] Clearable dropdowns
+    -   [x] Clearable dropdowns
     -   [x] Changes display on build
     -   [x] Save functionality
     -   [x] Local storage

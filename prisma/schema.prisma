@@ -25,6 +25,7 @@ model Build {
     data        String
     userId      String
     timestamp   DateTime
+    tier        String?
 }
 
 model Set {

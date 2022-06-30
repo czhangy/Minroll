@@ -1,0 +1,121 @@
+@use "@/styles/constants";
+
+.tier {
+    width: 100%;
+    background: constants.$bg-color;
+    display: flex;
+    align-items: center;
+    padding: 32px 64px;
+
+    .tier-name {
+        font-size: 8rem;
+        line-height: 8rem;
+        font-family: constants.$title-font;
+        color: constants.$accent-color;
+        width: 100px;
+        margin-right: 64px;
+
+        .mobile-text {
+            display: none;
+        }
+    }
+
+    .build-lists {
+        height: 100%;
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-evenly;
+
+        .build-list-container {
+            height: 100%;
+            width: 30%;
+            display: flex;
+            align-items: center;
+
+            .build-list {
+                margin: 0 auto;
+
+                .build {
+                    margin-bottom: 0.4rem;
+                    display: flex;
+                    align-items: center;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    .build-class-icon {
+                        height: 25px;
+                        width: 25px;
+                        position: relative;
+                        margin-right: 8px;
+                    }
+
+                    .build-name {
+                        width: 250px;
+                        color: white;
+                        font-family: constants.$main-font;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .disabled {
+                    pointer-events: none;
+
+                    .build-class-icon {
+                        filter: brightness(10%);
+                    }
+
+                    .build-name {
+                        color: constants.$main-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    .tier
+        > .build-lists
+        > .build-list-container
+        > .build-list
+        > .build
+        > .build-name:hover {
+        color: constants.$accent-color;
+    }
+}
+
+@media screen and (max-width: constants.$tablet) {
+    .tier > .build-lists {
+        flex-direction: column;
+        justify-content: center;
+
+        .build-list-container {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    .tier {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px;
+
+        .tier-name {
+            margin: 0 auto;
+            font-size: 2rem;
+            line-height: 2rem;
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid constants.$accent-color;
+            width: auto;
+
+            .mobile-text {
+                display: block;
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}

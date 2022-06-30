@@ -1,5 +1,5 @@
 // Stylesheet
-import styles from "@/styles/Builds/FilterMenu.module.scss";
+import styles from "@/styles/Global/FilterMenu.module.scss";
 
 type Props = {
     open: boolean;
