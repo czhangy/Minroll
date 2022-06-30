@@ -147,25 +147,15 @@ export async function getStaticProps() {
             where: {
                 userId: "cl3l5sriy0002ccwcskro6jwd",
             },
+            select: {
+                name: true,
+                class: true,
+                id: true,
+            },
             orderBy: {
                 timestamp: "desc",
             },
         });
-        // Flatten JSON
-        for (let i = 0; i < builds.length; i++) {
-            const buildData = JSON.parse(builds[i].data as string);
-            builds[i] = {
-                ...builds[i],
-                gear: buildData.gear,
-                skills: buildData.skills,
-                passives: buildData.passives,
-                cube: buildData.cube,
-                gems: buildData.gems,
-            };
-            // Delete excess fields
-            delete builds[i].data;
-            delete builds[i].timestamp;
-        }
         return {
             props: { builds },
         };
