@@ -14,6 +14,10 @@
         color: constants.$accent-color;
         width: 100px;
         margin-right: 64px;
+
+        .mobile-text {
+            display: none;
+        }
     }
 
     .build-lists {
@@ -71,13 +75,34 @@
 }
 
 @media screen and (max-width: constants.$tablet) {
-    .tier {
-        .build-lists {
-            flex-direction: column;
-            justify-content: center;
+    .tier > .build-lists {
+        flex-direction: column;
+        justify-content: center;
 
-            .build-list-container {
-                width: 100%;
+        .build-list-container {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    .tier {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px;
+
+        .tier-name {
+            margin: 0 auto;
+            font-size: 2rem;
+            line-height: 2rem;
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid constants.$accent-color;
+            width: auto;
+
+            .mobile-text {
+                display: block;
+                margin-left: 0.5rem;
             }
         }
     }

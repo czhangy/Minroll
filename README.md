@@ -198,7 +198,8 @@ Start the application
 
 -   [ ] Build Tiers Page
 
-    -   [ ] List with links to individual builds
+    -   [x] List with links to individual builds
+    -   [ ] Filterable by class
 
 -   [x] Build Planner Page
 

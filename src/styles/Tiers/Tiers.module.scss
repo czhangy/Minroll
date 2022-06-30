@@ -82,3 +82,30 @@
         }
     }
 }
+
+@media (hover: hover) {
+    #tiers > #tiers-container > #tiers-header > #menu-container {
+        #x-icon:hover {
+            filter: constants.$svg-color-hover;
+        }
+
+        #menu-button:hover {
+            background: constants.$accent-color-hover;
+        }
+    }
+}
+
+@media screen and (max-width: constants.$mobile) {
+    #tiers > #tiers-container {
+        padding: 32px;
+
+        #tiers-header {
+            flex-direction: column;
+
+            #header-text,
+            #menu-container {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

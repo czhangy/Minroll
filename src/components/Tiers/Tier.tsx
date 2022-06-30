@@ -23,7 +23,9 @@ const Tier: React.FC<Props> = ({ tier, builds }: Props) => {
 
     return (
         <div className={styles.tier}>
-            <h4 className={styles["tier-name"]}>{tier}</h4>
+            <h4 className={styles["tier-name"]}>
+                {tier} <p className={styles["mobile-text"]}>TIER</p>
+            </h4>
             <div className={styles["build-lists"]}>
                 <div className={styles["build-list-container"]}>
                     <ul className={styles["build-list"]}>
