@@ -9,12 +9,12 @@ import Image from "next/image";
 type Props = {
     tier: string;
     builds: Build[];
+    filter: string;
 };
 
-const Tier: React.FC<Props> = ({ tier, builds }: Props) => {
+const Tier: React.FC<Props> = ({ tier, builds, filter }: Props) => {
     // Get halves of list
     const splitList = (leftList: boolean) => {
-        if (tier === "D") console.log(builds);
         const mid = Math.ceil(builds.length / 2);
         return leftList
             ? builds.slice(0, mid)
@@ -31,7 +31,14 @@ const Tier: React.FC<Props> = ({ tier, builds }: Props) => {
                     <ul className={styles["build-list"]}>
                         {splitList(true).map((build: Build, i: number) => {
                             return (
-                                <li className={styles.build} key={i}>
+                                <li
+                                    className={`${styles.build} ${
+                                        build.class.includes(filter)
+                                            ? ""
+                                            : styles.disabled
+                                    }`}
+                                    key={i}
+                                >
                                     <div className={styles["build-class-icon"]}>
                                         <Image
                                             src={`/icons/${build.class}.webp`}
@@ -55,7 +62,14 @@ const Tier: React.FC<Props> = ({ tier, builds }: Props) => {
                         <ul className={styles["build-list"]}>
                             {splitList(false).map((build: Build, i: number) => {
                                 return (
-                                    <li className={styles.build} key={i}>
+                                    <li
+                                        className={`${styles.build} ${
+                                            build.class.includes(filter)
+                                                ? ""
+                                                : styles.disabled
+                                        }`}
+                                        key={i}
+                                    >
                                         <div
                                             className={
                                                 styles["build-class-icon"]

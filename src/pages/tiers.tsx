@@ -110,6 +110,7 @@ const Tiers: NextPage<Props> = ({ tierList }: Props) => {
                                             tier as keyof typeof tierList
                                         ] as unknown as Build[]
                                     }
+                                    filter={filterOption}
                                 ></Tier>
                             </li>
                         );

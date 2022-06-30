@@ -196,10 +196,10 @@ Start the application
         -   [x] Copyable into planner
         -   [ ] Mobile display
 
--   [ ] Build Tiers Page
+-   [x] Build Tiers Page
 
     -   [x] List with links to individual builds
-    -   [ ] Filterable by class
+    -   [x] Filterable by class
 
 -   [x] Build Planner Page
 

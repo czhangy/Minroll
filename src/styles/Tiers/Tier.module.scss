@@ -58,6 +58,18 @@
                         font-size: 1.2rem;
                     }
                 }
+
+                .disabled {
+                    pointer-events: none;
+
+                    .build-class-icon {
+                        filter: brightness(10%);
+                    }
+
+                    .build-name {
+                        color: constants.$main-color;
+                    }
+                }
             }
         }
     }
