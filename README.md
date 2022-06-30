@@ -208,7 +208,7 @@ Start the application
     -   [x] Passives selection
     -   [x] Cube selection
     -   [x] Legendary Gem selection
-    -   [ ] Clearable dropdowns
+    -   [x] Clearable dropdowns
     -   [x] Changes display on build
     -   [x] Save functionality
     -   [x] Local storage
