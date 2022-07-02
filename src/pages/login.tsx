@@ -32,7 +32,6 @@ const Login: NextPage = () => {
         password: false,
         form: false,
     });
-    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Form state modifier => called on input field change
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,9 +88,7 @@ const Login: NextPage = () => {
 
     // Redirect to /profile if logged in => client-side
     useEffect(() => {
-        setIsLoading(true);
         if (user) router.push("/profile");
-        setIsLoading(false);
     }, [user]);
 
     return (
@@ -99,71 +96,67 @@ const Login: NextPage = () => {
             <Head>
                 <title>Login | Minroll</title>
             </Head>
-            {isLoading ? (
-                <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
-                    <h2 id={styles["form-header"]}>LOGIN</h2>
-                    <input
-                        className={`${styles["form-input"]} ${
-                            formErrors.username ? styles["error-input"] : ""
-                        }`}
-                        placeholder="Username"
-                        name="username"
-                        value={formData.username}
-                        onChange={updateForm}
-                        autoComplete="username"
-                    />
-                    {formErrors.username ? (
-                        <p className={styles["error-text"]}>
-                            {formErrors.username}
-                        </p>
-                    ) : (
-                        ""
-                    )}
-                    <input
-                        className={`${styles["form-input"]} ${
-                            formErrors.password ? styles["error-input"] : ""
-                        }`}
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={updateForm}
-                        autoComplete="current-password"
-                    />
-                    {formErrors.password ? (
-                        <p className={styles["error-text"]}>
-                            {formErrors.password}
-                        </p>
-                    ) : (
-                        ""
-                    )}
-                    <input
-                        id={styles["submit-button"]}
-                        type="submit"
-                        value="LOGIN"
-                        className={styles.active}
-                    />
-                    {formErrors.form ? (
-                        <p
-                            className={styles["error-text"]}
-                            style={{ textAlign: "center" }}
-                        >
-                            {formErrors.form}
-                        </p>
-                    ) : (
-                        ""
-                    )}
-                    <div id={styles["nav-links"]}>
-                        <Link href="/register">
-                            <a className={styles["nav-link"]}>
-                                REGISTER FOR AN ACCOUNT
-                            </a>
-                        </Link>
-                    </div>
-                </form>
-            ) : (
-                ""
-            )}
+            <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
+                <h2 id={styles["form-header"]}>LOGIN</h2>
+                <input
+                    className={`${styles["form-input"]} ${
+                        formErrors.username ? styles["error-input"] : ""
+                    }`}
+                    placeholder="Username"
+                    name="username"
+                    value={formData.username}
+                    onChange={updateForm}
+                    autoComplete="username"
+                />
+                {formErrors.username ? (
+                    <p className={styles["error-text"]}>
+                        {formErrors.username}
+                    </p>
+                ) : (
+                    ""
+                )}
+                <input
+                    className={`${styles["form-input"]} ${
+                        formErrors.password ? styles["error-input"] : ""
+                    }`}
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={updateForm}
+                    autoComplete="current-password"
+                />
+                {formErrors.password ? (
+                    <p className={styles["error-text"]}>
+                        {formErrors.password}
+                    </p>
+                ) : (
+                    ""
+                )}
+                <input
+                    id={styles["submit-button"]}
+                    type="submit"
+                    value="LOGIN"
+                    className={styles.active}
+                />
+                {formErrors.form ? (
+                    <p
+                        className={styles["error-text"]}
+                        style={{ textAlign: "center" }}
+                    >
+                        {formErrors.form}
+                    </p>
+                ) : (
+                    ""
+                )}
+                <div id={styles["nav-links"]}>
+                    <Link href="/register">
+                        <a className={styles["nav-link"]}>
+                            REGISTER FOR AN ACCOUNT
+                        </a>
+                    </Link>
+                </div>
+            </form>
         </div>
     );
 };
