@@ -183,7 +183,7 @@ Start the application
     -   [x] Fetch passives by class
     -   [x] Fetch gems
 
--   [ ] Build Builds Page
+-   [x] Build Builds Page
 
     -   [x] Main page with list of official builds
 
@@ -194,7 +194,7 @@ Start the application
 
         -   [x] Build sheet displaying build contents
         -   [x] Copyable into planner
-        -   [ ] Mobile display
+        -   [x] Mobile display
 
 -   [x] Build Tiers Page
 
@@ -214,7 +214,7 @@ Start the application
     -   [x] Save functionality
     -   [x] Local storage
     -   [ ] Comprehensive edge case checks
-    -   [ ] Responsive
+    -   [x] Responsive
 
 -   [x] Build Auth Pages
 
@@ -235,7 +235,7 @@ Start the application
         -   [x] Alternate text
 
     -   [ ] Redirect on unauthorized
-    -   [ ] Mobile display
+    -   [x] Mobile display
 
 -   [x] Build other API routes
 
@@ -245,6 +245,8 @@ Start the application
     -   [x] DELETE route for builds
 
 -   [x] Build About Page
+
+-   [ ] Unit testing
 
 ## License
 

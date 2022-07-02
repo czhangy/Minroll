@@ -96,15 +96,19 @@
 }
 
 @media screen and (max-width: constants.$mobile) {
-    #tiers > #tiers-container {
-        padding: 32px;
+    #tiers {
+        padding: 16px;
 
-        #tiers-header {
-            flex-direction: column;
+        #tiers-container {
+            padding: 32px;
 
-            #header-text,
-            #menu-container {
-                margin-bottom: 16px;
+            #tiers-header {
+                flex-direction: column;
+
+                #header-text,
+                #menu-container {
+                    margin-bottom: 16px;
+                }
             }
         }
     }

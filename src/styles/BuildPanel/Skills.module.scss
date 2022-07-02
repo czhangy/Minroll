@@ -1,9 +1,10 @@
 @use "@/styles/constants";
 
 #skills {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: 16px 0;
+    margin: 1rem 0;
 
     .skill-slot {
         height: 55px;

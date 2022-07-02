@@ -2,36 +2,24 @@
 
 #planner {
     display: flex;
-    justify-content: center;
     height: 955px;
-    max-width: constants.$max-container;
-    padding: 32px;
+    padding: 2rem;
     margin: 0 auto;
-    width: 100%;
-
-    #planner-error {
-        display: none;
-        font-family: constants.$header-font;
-        font-size: 2rem;
-        color: constants.$accent-color;
-        font-weight: bold;
-        text-align: center;
-    }
+    overflow: scroll;
 
     #planner-build {
         height: 100%;
-        margin-right: 8px;
-        min-width: 414px;
+        margin-right: 0.5rem;
         width: 414px;
 
         #build-footer {
-            margin-top: 8px;
+            margin-top: 0.5rem;
             display: flex;
 
             #build-name {
                 background: constants.$main-color;
                 font-size: 1.3rem;
-                margin-right: 8px;
+                margin-right: 0.5rem;
                 width: 70%;
 
                 &:focus {
@@ -45,7 +33,7 @@
                 letter-spacing: 2px;
                 color: white;
                 background: constants.$accent-color;
-                width: calc(30% - 8px);
+                width: calc(30% - 0.5rem);
                 font-size: 1.1rem;
 
                 &:disabled {
@@ -58,7 +46,7 @@
             color: red;
             font-family: constants.$main-font;
             text-align: center;
-            margin-top: 4px;
+            margin-top: 0.25rem;
         }
 
         .hidden {
@@ -70,21 +58,23 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        min-width: 800px;
         width: calc(100% - 414px);
+        overflow-y: scroll;
 
         #content-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
 
             .nav-button {
-                width: calc((100% - 16px) / 3);
+                width: calc((100% - 1rem) / 3);
                 background: constants.$main-color;
                 color: white;
                 font-size: 1.17rem;
                 font-family: constants.$header-font;
-                padding: 8px 16px;
+                padding: 0.5rem 1rem;
             }
 
             .active {
@@ -92,6 +82,16 @@
                 cursor: auto;
             }
         }
+    }
+
+    &::-webkit-scrollbar:horizontal {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb:horizontal {
+        display: none;
     }
 }
 
@@ -115,18 +115,6 @@
 
 @media screen and (max-width: constants.$tablet) {
     #planner {
-        align-items: center;
-
-        #planner-error {
-            display: block;
-        }
-
-        #planner-build {
-            display: none;
-        }
-
-        #planner-content {
-            display: none;
-        }
+        padding: 2rem 1rem;
     }
 }

@@ -1,12 +1,16 @@
 @use "@/styles/constants";
 
 #build-panel {
-    padding: 32px;
+    padding: 2rem;
     background: constants.$main-color;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media screen and (max-width: constants.$mobile) {
+@media screen and (max-width: constants.$tablet) {
     #build-panel {
-        padding: 16px;
+        pointer-events: none;
     }
 }
