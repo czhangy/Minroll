@@ -1,9 +1,10 @@
 @use "@/styles/constants";
 
 #passives {
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
 
     .passive-slot {
         height: 55px;

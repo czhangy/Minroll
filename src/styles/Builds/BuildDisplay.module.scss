@@ -14,14 +14,14 @@
         flex-direction: column;
         max-width: constants.$max-container;
         width: 100%;
-        padding: 32px;
+        padding: 2rem;
         margin: 0 auto;
 
         #display-header {
             background: constants.$main-color;
-            padding: 32px;
+            padding: 2rem;
             width: 100%;
-            margin-bottom: 12px;
+            margin-bottom: 0.75rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -75,5 +75,34 @@
 @media (hover: hover) {
     #container > #build-display > #display-header > #copy-button:hover {
         filter: constants.$svg-color-hover;
+    }
+}
+
+@media screen and (max-width: constants.$tablet) {
+    #container > #build-display {
+        padding: 1rem;
+
+        #display-header {
+            #build-name {
+                font-size: 1.5rem;
+            }
+
+            #copy-button {
+                display: none;
+            }
+        }
+
+        #display-content {
+            flex-direction: column;
+
+            #build-desc {
+                margin-left: 0;
+                margin-top: 0.75rem;
+            }
+        }
+
+        ::-webkit-scrollbar-track {
+            background: constants.$main-color;
+        }
     }
 }
