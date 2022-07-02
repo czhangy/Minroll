@@ -52,7 +52,7 @@
 
 ### Summary
 
-Minroll is a utility web application for Diablo III. It aims to provide a minimalistic experience of the popular site Maxroll, containing only tier lists, a build planner, and community builds. Development for this project is ongoing, and major features are still under development.
+Minroll is a utility web application for Diablo III. It aims to provide a minimalistic experience of the popular site Maxroll, containing only tier lists, a build planner, and community builds. Development for this project is complete.
 
 The most up-to-date version of Minroll is currently deployed at: https://minroll.vercel.app/.
 
