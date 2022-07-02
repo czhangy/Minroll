@@ -34,6 +34,8 @@
 
             .build-list {
                 margin: 0 auto;
+                overflow-wrap: break-word;
+                width: 100%;
 
                 .build {
                     margin-bottom: 0.4rem;
@@ -52,7 +54,7 @@
                     }
 
                     .build-name {
-                        width: 250px;
+                        width: 100%;
                         color: white;
                         font-family: constants.$main-font;
                         font-size: 1.2rem;
@@ -93,6 +95,11 @@
 
         .build-list-container {
             width: 100%;
+            margin-bottom: 0.4rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }
