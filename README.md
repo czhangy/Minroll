@@ -220,9 +220,9 @@ Start the application
 
     -   [x] Login form
     -   [x] Register form
-    -   [ ] Redirect from `/login` and `/register` when logged in
+    -   [x] Redirect from `/login` and `/register` when logged in
 
--   [ ] Build Profile Page
+-   [x] Build Profile Page
 
     -   [x] Display username
     -   [x] Logout button
@@ -234,7 +234,7 @@ Start the application
         -   [x] Sort by functionality
         -   [x] Alternate text
 
-    -   [ ] Redirect on unauthorized
+    -   [x] Redirect on unauthorized
     -   [x] Mobile display
 
 -   [x] Build other API routes

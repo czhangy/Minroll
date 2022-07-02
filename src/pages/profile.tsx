@@ -78,8 +78,8 @@ const Profile: NextPage = () => {
 
     // Handle log out => called on logout button press
     const onLogout = () => {
-        router.push("/");
         logoutUser();
+        router.push("/");
     };
 
     // Fetch current user's builds on page start
@@ -118,11 +118,17 @@ const Profile: NextPage = () => {
         setBuildList(newList);
     }, [sortOption]);
 
+    // Redirect to /login if not logged in => client-side
+    useEffect(() => {
+        if (!user) router.push("/login");
+    }, [user]);
+
     return (
         <div id={styles.profile}>
             <Head>
                 <title>My Profile | Minroll</title>
             </Head>
+
             <DeleteModal
                 open={deleteModalOpen}
                 buildName={buildToDelete?.name}

@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Auth/Auth.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import { useAuth } from "@/contexts/AuthContext";
 const Login: NextPage = () => {
     // Hooks
     const router = useRouter();
-    const { loginUser } = useAuth() as AuthContext;
+    const { user, loginUser } = useAuth() as AuthContext;
 
     // Component state
     const [formData, setFormData] = useState<LoginUser>({
@@ -85,6 +85,11 @@ const Login: NextPage = () => {
                 console.log(error);
             });
     };
+
+    // Redirect to /profile if logged in => client-side
+    useEffect(() => {
+        if (user) router.push("/profile");
+    }, [user]);
 
     return (
         <div id={styles.auth}>
