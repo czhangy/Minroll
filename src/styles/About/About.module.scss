@@ -55,6 +55,16 @@
     }
 }
 
+@media (hover: hover) {
+    #about
+        > #about-container
+        > .about-content
+        > .about-paragraph
+        > .about-link:hover {
+        color: lightgrey;
+    }
+}
+
 @media screen and (max-width: constants.$mobile) {
     #about {
         padding: 16px;
