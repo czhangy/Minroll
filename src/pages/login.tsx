@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Auth/Auth.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import { useAuth } from "@/contexts/AuthContext";
 const Login: NextPage = () => {
     // Hooks
     const router = useRouter();
-    const { loginUser } = useAuth() as AuthContext;
+    const { user, loginUser } = useAuth() as AuthContext;
 
     // Component state
     const [formData, setFormData] = useState<LoginUser>({
@@ -32,6 +32,7 @@ const Login: NextPage = () => {
         password: false,
         form: false,
     });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Form state modifier => called on input field change
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,72 +87,83 @@ const Login: NextPage = () => {
             });
     };
 
+    // Redirect to /profile if logged in => client-side
+    useEffect(() => {
+        setIsLoading(true);
+        if (user) router.push("/profile");
+        setIsLoading(false);
+    }, [user]);
+
     return (
         <div id={styles.auth}>
             <Head>
                 <title>Login | Minroll</title>
             </Head>
-            <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
-                <h2 id={styles["form-header"]}>LOGIN</h2>
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.username ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Username"
-                    name="username"
-                    value={formData.username}
-                    onChange={updateForm}
-                    autoComplete="username"
-                />
-                {formErrors.username ? (
-                    <p className={styles["error-text"]}>
-                        {formErrors.username}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.password ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Password"
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={updateForm}
-                    autoComplete="current-password"
-                />
-                {formErrors.password ? (
-                    <p className={styles["error-text"]}>
-                        {formErrors.password}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <input
-                    id={styles["submit-button"]}
-                    type="submit"
-                    value="LOGIN"
-                    className={styles.active}
-                />
-                {formErrors.form ? (
-                    <p
-                        className={styles["error-text"]}
-                        style={{ textAlign: "center" }}
-                    >
-                        {formErrors.form}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <div id={styles["nav-links"]}>
-                    <Link href="/register">
-                        <a className={styles["nav-link"]}>
-                            REGISTER FOR AN ACCOUNT
-                        </a>
-                    </Link>
-                </div>
-            </form>
+            {isLoading ? (
+                <form id={styles["auth-form"]} onSubmit={(e) => submitLogin(e)}>
+                    <h2 id={styles["form-header"]}>LOGIN</h2>
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.username ? styles["error-input"] : ""
+                        }`}
+                        placeholder="Username"
+                        name="username"
+                        value={formData.username}
+                        onChange={updateForm}
+                        autoComplete="username"
+                    />
+                    {formErrors.username ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.username}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.password ? styles["error-input"] : ""
+                        }`}
+                        placeholder="Password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={updateForm}
+                        autoComplete="current-password"
+                    />
+                    {formErrors.password ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.password}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        id={styles["submit-button"]}
+                        type="submit"
+                        value="LOGIN"
+                        className={styles.active}
+                    />
+                    {formErrors.form ? (
+                        <p
+                            className={styles["error-text"]}
+                            style={{ textAlign: "center" }}
+                        >
+                            {formErrors.form}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <div id={styles["nav-links"]}>
+                        <Link href="/register">
+                            <a className={styles["nav-link"]}>
+                                REGISTER FOR AN ACCOUNT
+                            </a>
+                        </Link>
+                    </div>
+                </form>
+            ) : (
+                ""
+            )}
         </div>
     );
 };

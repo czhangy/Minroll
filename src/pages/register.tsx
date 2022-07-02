@@ -1,7 +1,7 @@
 // Stylesheet
 import styles from "@/styles/Auth/Auth.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Next
 import Head from "next/head";
 import Link from "next/link";
@@ -12,10 +12,14 @@ import axios from "axios";
 import { NextPage } from "next";
 import NewUser from "@/models/NewUser";
 import AuthErrors from "@/models/AuthErrors";
+import AuthContext from "@/models/AuthContext";
+// React Context
+import { useAuth } from "@/contexts/AuthContext";
 
 const Register: NextPage = () => {
-    // Hook
+    // Hooks
     const router = useRouter();
+    const { user } = useAuth() as AuthContext;
 
     // Component state
     const [formData, setFormData] = useState<NewUser>({
@@ -31,6 +35,7 @@ const Register: NextPage = () => {
         confirmPassword: false,
         form: false,
     });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Form state modifier => called on input field change
     const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,102 +119,120 @@ const Register: NextPage = () => {
         return Object.values(errors).every((error) => !error);
     };
 
+    // Redirect to /profile if logged in => client-side
+    useEffect(() => {
+        setIsLoading(true);
+        if (user) router.push("/profile");
+        setIsLoading(false);
+    }, [user]);
+
     return (
         <div id={styles.auth}>
             <Head>
                 <title>Register | Minroll</title>
             </Head>
-            <form id={styles["auth-form"]} onSubmit={(e) => submitRegister(e)}>
-                <h2 id={styles["form-header"]}>REGISTER</h2>
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.email ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={updateForm}
-                />
-                {formErrors.email ? (
-                    <p className={styles["error-text"]}>{formErrors.email}</p>
-                ) : (
-                    ""
-                )}
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.username ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Username"
-                    name="username"
-                    value={formData.username}
-                    onChange={updateForm}
-                    autoComplete="username"
-                />
-                {formErrors.username ? (
-                    <p className={styles["error-text"]}>
-                        {formErrors.username}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.password ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Password"
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={updateForm}
-                    autoComplete="current-password"
-                />
-                {formErrors.password ? (
-                    <p className={styles["error-text"]}>
-                        {formErrors.password}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <input
-                    className={`${styles["form-input"]} ${
-                        formErrors.confirmPassword ? styles["error-input"] : ""
-                    }`}
-                    placeholder="Confirm Password"
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={updateForm}
-                    autoComplete="current-password"
-                />
-                {formErrors.confirmPassword ? (
-                    <p className={styles["error-text"]}>
-                        {formErrors.confirmPassword}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <input
-                    id={styles["submit-button"]}
-                    className={styles.active}
-                    type="submit"
-                    value="REGISTER"
-                />
-                {formErrors.form ? (
-                    <p
-                        className={styles["error-text"]}
-                        style={{ textAlign: "center" }}
-                    >
-                        {formErrors.form}
-                    </p>
-                ) : (
-                    ""
-                )}
-                <div id={styles["nav-links"]}>
-                    <Link href="/login">
-                        <a className={styles["nav-link"]}>GO TO LOGIN</a>
-                    </Link>
-                </div>
-            </form>
+            {isLoading ? (
+                <form
+                    id={styles["auth-form"]}
+                    onSubmit={(e) => submitRegister(e)}
+                >
+                    <h2 id={styles["form-header"]}>REGISTER</h2>
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.email ? styles["error-input"] : ""
+                        }`}
+                        placeholder="Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={updateForm}
+                    />
+                    {formErrors.email ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.email}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.username ? styles["error-input"] : ""
+                        }`}
+                        placeholder="Username"
+                        name="username"
+                        value={formData.username}
+                        onChange={updateForm}
+                        autoComplete="username"
+                    />
+                    {formErrors.username ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.username}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.password ? styles["error-input"] : ""
+                        }`}
+                        placeholder="Password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={updateForm}
+                        autoComplete="current-password"
+                    />
+                    {formErrors.password ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.password}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        className={`${styles["form-input"]} ${
+                            formErrors.confirmPassword
+                                ? styles["error-input"]
+                                : ""
+                        }`}
+                        placeholder="Confirm Password"
+                        type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={updateForm}
+                        autoComplete="current-password"
+                    />
+                    {formErrors.confirmPassword ? (
+                        <p className={styles["error-text"]}>
+                            {formErrors.confirmPassword}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <input
+                        id={styles["submit-button"]}
+                        className={styles.active}
+                        type="submit"
+                        value="REGISTER"
+                    />
+                    {formErrors.form ? (
+                        <p
+                            className={styles["error-text"]}
+                            style={{ textAlign: "center" }}
+                        >
+                            {formErrors.form}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+                    <div id={styles["nav-links"]}>
+                        <Link href="/login">
+                            <a className={styles["nav-link"]}>GO TO LOGIN</a>
+                        </Link>
+                    </div>
+                </form>
+            ) : (
+                ""
+            )}
         </div>
     );
 };
