@@ -31,6 +31,7 @@
 # Table of Contents
 
 -   [About the Project](#about-the-project)
+    -   [Summary](#summary)
     -   [Tech Stack](#tech-stack)
     -   [Features](#features)
     -   [Color Reference](#color-reference)
