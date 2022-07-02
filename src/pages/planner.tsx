@@ -347,12 +347,6 @@ const Planner: NextPage = () => {
             <Head>
                 <title>Build Planner | Minroll</title>
             </Head>
-            <p id={styles["planner-error"]}>
-                Sorry!
-                <br />
-                <br />
-                This page must be viewed on a larger screen.
-            </p>
             <div id={styles["planner-build"]}>
                 <Dropdown
                     content={classNames}

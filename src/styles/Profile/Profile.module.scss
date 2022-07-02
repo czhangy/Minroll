@@ -149,6 +149,7 @@
                 font-weight: bold;
                 letter-spacing: 1px;
                 color: constants.$accent-color;
+                text-align: center;
             }
         }
     }
@@ -191,24 +192,30 @@
         #profile-content {
             padding: 1rem;
 
-            #content-container > #content-header {
-                justify-content: center;
+            #content-container {
+                #content-header {
+                    justify-content: center;
 
-                #header-left {
-                    flex-direction: column;
+                    #header-left {
+                        flex-direction: column;
 
-                    #content-text,
-                    #menu-container {
-                        margin-bottom: 1rem;
+                        #content-text,
+                        #menu-container {
+                            margin-bottom: 1rem;
+                        }
+
+                        #loading-icon {
+                            display: none;
+                        }
                     }
 
-                    #loading-icon {
+                    #planner-link {
                         display: none;
                     }
                 }
 
-                #planner-link {
-                    display: none;
+                #alt-text {
+                    font-size: 1.5rem;
                 }
             }
         }
