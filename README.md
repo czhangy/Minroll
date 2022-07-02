@@ -134,19 +134,19 @@ This project uses NPM as a package manager
 Clone the project
 
 ```bash
-  git clone https://github.com/czhangy/minroll.git
+git clone https://github.com/czhangy/minroll.git
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+npm install
 ```
 
 Start the application
 
 ```bash
-  npm run dev
+npm run dev
 ```
 
 <!-- Roadmap -->
