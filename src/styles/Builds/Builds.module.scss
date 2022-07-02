@@ -96,15 +96,19 @@
 }
 
 @media screen and (max-width: constants.$mobile) {
-    #builds > #builds-container {
-        padding: 32px;
+    #builds {
+        padding: 16px;
 
-        #builds-header {
-            flex-direction: column;
+        #builds-container {
+            padding: 32px;
 
-            #header-text,
-            #menu-container {
-                margin-bottom: 16px;
+            #builds-header {
+                flex-direction: column;
+
+                #header-text,
+                #menu-container {
+                    margin-bottom: 16px;
+                }
             }
         }
     }
