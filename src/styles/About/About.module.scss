@@ -56,17 +56,21 @@
 }
 
 @media screen and (max-width: constants.$mobile) {
-    #about > #about-container {
-        padding: 32px;
+    #about {
+        padding: 16px;
 
-        .about-subheader {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
+        #about-container {
+            padding: 32px;
 
-        .about-content > .about-paragraph {
-            font-size: 1.2rem;
+            .about-subheader {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .about-content > .about-paragraph {
+                font-size: 1.2rem;
+            }
         }
     }
 }
