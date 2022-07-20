@@ -1,15 +1,15 @@
 @use "@/styles/constants";
 
 #planner {
+    align-items: center;
     display: flex;
-    height: 955px;
+    height: calc(100vh - constants.$navbar-height);
     max-width: constants.$max-container;
-    padding: 2rem;
     margin: 0 auto;
     overflow: scroll;
 
     #planner-build {
-        height: 100%;
+        height: 900px;
         margin-right: 0.5rem;
         width: 414px;
 
@@ -58,7 +58,7 @@
     #planner-content {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: 900px;
         min-width: 800px;
         width: calc(100% - 414px);
         overflow-y: scroll;
