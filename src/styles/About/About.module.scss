@@ -3,7 +3,7 @@
 #about {
     padding: 32px;
     background: constants.$bg-color;
-    height: calc(100vh - constants.$navbar-height);
+    min-height: calc(100vh - constants.$navbar-height);
     display: flex;
     align-items: center;
 

@@ -3,10 +3,11 @@
 #planner {
     align-items: center;
     display: flex;
-    height: calc(100vh - constants.$navbar-height);
+    min-height: calc(100vh - constants.$navbar-height);
     max-width: constants.$max-container;
     margin: 0 auto;
     overflow: scroll;
+    padding: 2rem;
 
     #planner-build {
         height: 900px;
